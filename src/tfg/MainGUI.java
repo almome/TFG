@@ -35,9 +35,13 @@ public class MainGUI extends javax.swing.JFrame {
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTree1 = new javax.swing.JTree();
-        jMenuBar1 = new javax.swing.JMenuBar();
-        jMenu1 = new javax.swing.JMenu();
-        jMenu2 = new javax.swing.JMenu();
+        BarrajMenu = new javax.swing.JMenuBar();
+        archivosjMenu = new javax.swing.JMenu();
+        nuevojMenu = new javax.swing.JMenu();
+        experjMenu = new javax.swing.JMenuItem();
+        clasificajMenu = new javax.swing.JMenuItem();
+        tareajMenu = new javax.swing.JMenuItem();
+        runjMenu = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -46,15 +50,49 @@ public class MainGUI extends javax.swing.JFrame {
         jTree1.setRootVisible(false);
         jScrollPane1.setViewportView(jTree1);
 
-        jTabbedPane1.addTab("tab1", jScrollPane1);
+        jTabbedPane1.addTab("Experimentos", jScrollPane1);
 
-        jMenu1.setText("File");
-        jMenuBar1.add(jMenu1);
+        archivosjMenu.setText("Archivos");
+        archivosjMenu.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                archivosjMenuFocusGained(evt);
+            }
+        });
 
-        jMenu2.setText("Edit");
-        jMenuBar1.add(jMenu2);
+        nuevojMenu.setText("Nuevo");
 
-        setJMenuBar(jMenuBar1);
+        experjMenu.setText("Experimento");
+        experjMenu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                experjMenuActionPerformed(evt);
+            }
+        });
+        nuevojMenu.add(experjMenu);
+
+        clasificajMenu.setText("Clasificador");
+        clasificajMenu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                clasificajMenuActionPerformed(evt);
+            }
+        });
+        nuevojMenu.add(clasificajMenu);
+
+        tareajMenu.setText("Tarea");
+        tareajMenu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tareajMenuActionPerformed(evt);
+            }
+        });
+        nuevojMenu.add(tareajMenu);
+
+        archivosjMenu.add(nuevojMenu);
+
+        BarrajMenu.add(archivosjMenu);
+
+        runjMenu.setText("Run");
+        BarrajMenu.add(runjMenu);
+
+        setJMenuBar(BarrajMenu);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -75,6 +113,22 @@ public class MainGUI extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void archivosjMenuFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_archivosjMenuFocusGained
+        // TODO add your handling code here:
+    }//GEN-LAST:event_archivosjMenuFocusGained
+
+    private void experjMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_experjMenuActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_experjMenuActionPerformed
+
+    private void clasificajMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clasificajMenuActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_clasificajMenuActionPerformed
+
+    private void tareajMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tareajMenuActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tareajMenuActionPerformed
 
     /**
      * @param args the command line arguments
@@ -113,11 +167,15 @@ public class MainGUI extends javax.swing.JFrame {
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenu jMenu2;
-    private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuBar BarrajMenu;
+    private javax.swing.JMenu archivosjMenu;
+    private javax.swing.JMenuItem clasificajMenu;
+    private javax.swing.JMenuItem experjMenu;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTree jTree1;
+    private javax.swing.JMenu nuevojMenu;
+    private javax.swing.JMenu runjMenu;
+    private javax.swing.JMenuItem tareajMenu;
     // End of variables declaration//GEN-END:variables
 }
