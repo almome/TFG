@@ -119,7 +119,13 @@ public class MainGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_archivosjMenuFocusGained
 
     private void experjMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_experjMenuActionPerformed
-        // TODO add your handling code here:
+
+        /* Create and display the form */
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new CreateDirectoryGUI().setVisible(true);
+            }
+        });
     }//GEN-LAST:event_experjMenuActionPerformed
 
     private void clasificajMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clasificajMenuActionPerformed
