@@ -11,12 +11,19 @@ package tfg;
  * @author alexa
  */
 public class CreateDirectoryGUI extends javax.swing.JFrame {
-
+    public static String ruta = "";
     /**
      * Creates new form CreateDirectory
      */
     public CreateDirectoryGUI() {
         initComponents();
+        
+        NombreTextField.setText("Experimento"+ 0);
+        LocalizacionTextField.setText(ruta);
+    }
+    
+    public static void recibirRuta(String r){
+        ruta = r;
     }
 
     /**

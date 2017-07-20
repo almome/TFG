@@ -8,9 +8,6 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="Archivos"/>
           </Properties>
-          <Events>
-            <EventHandler event="focusGained" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="archivosjMenuFocusGained"/>
-          </Events>
           <SubComponents>
             <Menu class="javax.swing.JMenu" name="nuevojMenu">
               <Properties>

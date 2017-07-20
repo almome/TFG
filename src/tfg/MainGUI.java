@@ -15,7 +15,7 @@ import javax.swing.tree.DefaultTreeModel;
  * @author alexa
  */
 public class MainGUI extends javax.swing.JFrame {
-
+   
     /**
      * Creates new form MainGUI
      */
@@ -53,11 +53,6 @@ public class MainGUI extends javax.swing.JFrame {
         jTabbedPane1.addTab("Experimentos", jScrollPane1);
 
         archivosjMenu.setText("Archivos");
-        archivosjMenu.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusGained(java.awt.event.FocusEvent evt) {
-                archivosjMenuFocusGained(evt);
-            }
-        });
 
         nuevojMenu.setText("Nuevo");
 
@@ -114,10 +109,7 @@ public class MainGUI extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void archivosjMenuFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_archivosjMenuFocusGained
-        // TODO add your handling code here:
-    }//GEN-LAST:event_archivosjMenuFocusGained
-
+    /*BOTONES PRINCIPALES DE LA BARRA DE MENU*/
     private void experjMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_experjMenuActionPerformed
 
         /* Create and display the form */

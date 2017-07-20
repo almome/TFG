@@ -5,6 +5,10 @@
  */
 package tfg;
 
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
+
 /**
  *
  * @author alexa
@@ -37,7 +41,7 @@ public class EscogerArchivoGUI extends javax.swing.JFrame {
             jFileChooser1.setFileSelectionMode(javax.swing.JFileChooser.DIRECTORIES_ONLY);
             jFileChooser1.addActionListener(new java.awt.event.ActionListener() {
                 public void actionPerformed(java.awt.event.ActionEvent evt) {
-                    jFileChooser1ActionPerformed(evt);
+                    EscogerArchivoGUI.this.actionPerformed(evt);
                 }
             });
 
@@ -61,10 +65,25 @@ public class EscogerArchivoGUI extends javax.swing.JFrame {
             pack();
         }// </editor-fold>//GEN-END:initComponents
 
-    private void jFileChooser1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jFileChooser1ActionPerformed
+    private void actionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_actionPerformed
         // TODO add your handling code here:
-        
-    }//GEN-LAST:event_jFileChooser1ActionPerformed
+        int returnVal = jFileChooser1.showOpenDialog(this);
+        if (returnVal == jFileChooser1.APPROVE_OPTION) {
+            File file = jFileChooser1.getSelectedFile();
+            try {
+              // What to do with the file, e.g. display it in a TextArea
+              //CreateDirectoryGUI.LocalizacionTextField.setText.read( new FileReader( file.getAbsolutePath() ), null );
+              CreateDirectoryGUI.recibirRuta(file.getAbsolutePath());
+            } catch (Exception ex) {
+              System.out.println("problem accessing file"+file.getAbsolutePath());
+            }
+            
+        } 
+        else {
+            System.out.println("File access cancelled by user.");
+        }
+        this.setVisible(false);
+    }//GEN-LAST:event_actionPerformed
 
     /**
      * @param args the command line arguments
@@ -92,13 +111,13 @@ public class EscogerArchivoGUI extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(EscogerArchivoGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
-
+        new EscogerArchivoGUI().setVisible(true);
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
+        /*java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new EscogerArchivoGUI().setVisible(true);
             }
-        });
+        });*/
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
