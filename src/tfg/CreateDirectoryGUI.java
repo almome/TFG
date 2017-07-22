@@ -1,5 +1,7 @@
 package tfg;
 
+import java.io.File;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -138,8 +140,20 @@ public class CreateDirectoryGUI extends javax.swing.JFrame {
         }// </editor-fold>//GEN-END:initComponents
 
     private void BuscarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BuscarButtonActionPerformed
-        EscogerArchivoGUI escoger = new EscogerArchivoGUI();
-        escoger.setVisible(rootPaneCheckingEnabled);
+        
+        jFileChooser1.setFileSelectionMode(jFileChooser1.DIRECTORIES_ONLY);
+        int boton = jFileChooser1.showOpenDialog(this);
+        if (boton == jFileChooser1.APPROVE_OPTION){ //Si el usuario ha pulsado la opción Aceptar
+            File fichero = jFileChooser1.getSelectedFile(); //Guardamos en la variable fichero el archivo seleccionado
+            try {
+              // What to do with the file, e.g. display it in a TextArea
+              //CreateDirectoryGUI.LocalizacionTextField.setText.read( new FileReader( file.getAbsolutePath() ), null );
+              CreateDirectoryGUI.recibirRuta(fichero.getAbsolutePath());
+              LocalizacionTextField.setText(fichero.getAbsolutePath());
+            } catch (Exception ex) {
+              System.out.println("problem accessing file"+fichero.getAbsolutePath());
+            }
+        }
     }//GEN-LAST:event_BuscarButtonActionPerformed
 
     private void CrearButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CrearButtonActionPerformed
