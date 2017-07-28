@@ -16,8 +16,9 @@ public class TFG {
      */
     public static void main(String[] args) {
         // TODO code application logic here
-        MainGUI main = new MainGUI();
-        main.setVisible(true);
+        WindowsInstances.mainGUI = new MainGUI();
+        WindowsInstances.mainGUI.setVisible(true);
+
     }
     
 }

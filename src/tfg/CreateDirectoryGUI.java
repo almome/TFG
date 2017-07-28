@@ -1,6 +1,8 @@
 package tfg;
 
 import java.io.File;
+import javax.swing.JTree;
+import javax.swing.tree.DefaultMutableTreeNode;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -10,7 +12,7 @@ import java.io.File;
 
 /**
  *
- * @author alexa
+ * @author Alexandra Moron Mendez
  */
 public class CreateDirectoryGUI extends javax.swing.JFrame {
     public static String ruta = "";
@@ -157,7 +159,24 @@ public class CreateDirectoryGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_BuscarButtonActionPerformed
 
     private void CrearButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CrearButtonActionPerformed
-        // TODO add your handling code here:
+        //Se crea directorio del experimento
+        String sSistemaOperativo = System.getProperty("os.name");
+        if(sSistemaOperativo == "Linux"){   //Si es Linux
+            File directorio = new File(ruta+"//"+NombreTextField.getText());
+            directorio.mkdir();
+        }
+        else{   //Si es Windows
+            File directorio = new File(ruta+"\\"+NombreTextField.getText());
+            directorio.mkdir();
+        }
+        //Crea nodo experimento en el JTree
+        DefaultMutableTreeNode nodoExp = new DefaultMutableTreeNode(NombreTextField.getText());
+        JTree arbol = new JTree (nodoExp);
+        
+        WindowsInstances.mainGUI.setProyectosTree(arbol);
+        
+        dispose();
+        
     }//GEN-LAST:event_CrearButtonActionPerformed
 
     /**

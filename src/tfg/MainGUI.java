@@ -15,7 +15,7 @@ import javax.swing.tree.DefaultTreeModel;
  * @author alexa
  */
 public class MainGUI extends javax.swing.JFrame {
-   
+
     /**
      * Creates new form MainGUI
      */
@@ -34,7 +34,7 @@ public class MainGUI extends javax.swing.JFrame {
 
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTree1 = new javax.swing.JTree();
+        ProyectosTree = new javax.swing.JTree();
         BarrajMenu = new javax.swing.JMenuBar();
         archivosjMenu = new javax.swing.JMenu();
         nuevojMenu = new javax.swing.JMenu();
@@ -46,9 +46,9 @@ public class MainGUI extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         javax.swing.tree.DefaultMutableTreeNode treeNode1 = new javax.swing.tree.DefaultMutableTreeNode("root");
-        jTree1.setModel(new javax.swing.tree.DefaultTreeModel(treeNode1));
-        jTree1.setRootVisible(false);
-        jScrollPane1.setViewportView(jTree1);
+        ProyectosTree.setModel(new javax.swing.tree.DefaultTreeModel(treeNode1));
+        ProyectosTree.setRootVisible(false);
+        jScrollPane1.setViewportView(ProyectosTree);
 
         jTabbedPane1.addTab("Experimentos", jScrollPane1);
 
@@ -115,10 +115,12 @@ public class MainGUI extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new CreateDirectoryGUI().setVisible(true);
+                WindowsInstances.createDirectoryGUI = new CreateDirectoryGUI();
+                WindowsInstances.createDirectoryGUI.setVisible(true);
             }
         });
     }//GEN-LAST:event_experjMenuActionPerformed
+
 
     private void clasificajMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clasificajMenuActionPerformed
         // TODO add your handling code here:
@@ -156,22 +158,27 @@ public class MainGUI extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new MainGUI().setVisible(true);
-            }
-        });
+        
+                
+            
+
     }
-    
+
+    public JTree getProyectosTree() {
+        return ProyectosTree;
+    }
+    public void setProyectosTree(JTree ProyectosTree) {
+        this.ProyectosTree = new JTree(this.ProyectosTree.getModel());
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuBar BarrajMenu;
+    private javax.swing.JTree ProyectosTree;
     private javax.swing.JMenu archivosjMenu;
     private javax.swing.JMenuItem clasificajMenu;
     private javax.swing.JMenuItem experjMenu;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTabbedPane jTabbedPane1;
-    private javax.swing.JTree jTree1;
     private javax.swing.JMenu nuevojMenu;
     private javax.swing.JMenu runjMenu;
     private javax.swing.JMenuItem tareajMenu;
