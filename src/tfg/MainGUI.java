@@ -9,6 +9,7 @@ import javax.swing.JTabbedPane;
 import javax.swing.JTree;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeModel;
+import javax.swing.tree.TreePath;
 
 /**
  *
@@ -16,6 +17,9 @@ import javax.swing.tree.DefaultTreeModel;
  */
 public class MainGUI extends javax.swing.JFrame {
 
+    public DefaultTreeModel modelo;
+    public DefaultMutableTreeNode root;
+    
     /**
      * Creates new form MainGUI
      */
@@ -44,6 +48,11 @@ public class MainGUI extends javax.swing.JFrame {
         runjMenu = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                formWindowOpened(evt);
+            }
+        });
 
         javax.swing.tree.DefaultMutableTreeNode treeNode1 = new javax.swing.tree.DefaultMutableTreeNode("root");
         ProyectosTree.setModel(new javax.swing.tree.DefaultTreeModel(treeNode1));
@@ -121,7 +130,6 @@ public class MainGUI extends javax.swing.JFrame {
         });
     }//GEN-LAST:event_experjMenuActionPerformed
 
-
     private void clasificajMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clasificajMenuActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_clasificajMenuActionPerformed
@@ -129,6 +137,12 @@ public class MainGUI extends javax.swing.JFrame {
     private void tareajMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tareajMenuActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_tareajMenuActionPerformed
+    
+    /*ACCIONES CUANDO SE ABRA LA VENTANA*/  
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+        this.modelo = (DefaultTreeModel) this.ProyectosTree.getModel();
+        this.root = (DefaultMutableTreeNode) this.modelo.getRoot();
+    }//GEN-LAST:event_formWindowOpened
 
     /**
      * @param args the command line arguments
@@ -159,16 +173,14 @@ public class MainGUI extends javax.swing.JFrame {
 
         /* Create and display the form */
         
-                
-            
-
     }
 
     public JTree getProyectosTree() {
         return ProyectosTree;
     }
-    public void setProyectosTree(JTree ProyectosTree) {
-        this.ProyectosTree = new JTree(this.ProyectosTree.getModel());
+    public void setProyectosTree(DefaultMutableTreeNode nodo) {
+        this.root.add(nodo);
+        this.modelo.reload();
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

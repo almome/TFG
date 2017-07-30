@@ -1,6 +1,8 @@
 package tfg;
 
+import com.sun.corba.se.impl.protocol.giopmsgheaders.MessageBase;
 import java.io.File;
+import static javax.swing.JOptionPane.showMessageDialog;
 import javax.swing.JTree;
 import javax.swing.tree.DefaultMutableTreeNode;
 
@@ -16,14 +18,12 @@ import javax.swing.tree.DefaultMutableTreeNode;
  */
 public class CreateDirectoryGUI extends javax.swing.JFrame {
     public static String ruta = "";
+    public int nExp = 0;    // TRABAJO FUTURO: Hacer que lo coja de la Base de Datos
     /**
      * Creates new form CreateDirectory
      */
     public CreateDirectoryGUI() {
-        initComponents();
-        
-        NombreTextField.setText("Experimento"+ 0);
-        LocalizacionTextField.setText(ruta);
+        initComponents(); 
     }
     
     public static void recibirRuta(String r){
@@ -44,11 +44,11 @@ public class CreateDirectoryGUI extends javax.swing.JFrame {
         jSeparator1 = new javax.swing.JSeparator();
         NombreLabel = new javax.swing.JLabel();
         LocalizacionLabel = new javax.swing.JLabel();
-        NombreTextField = new javax.swing.JTextField();
         LocalizacionTextField = new javax.swing.JTextField();
         BuscarButton = new javax.swing.JButton();
         CrearButton = new javax.swing.JButton();
         CancelarButton = new javax.swing.JButton();
+        NombreTextField = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Nuevo Experimento");
@@ -62,85 +62,90 @@ public class CreateDirectoryGUI extends javax.swing.JFrame {
 
         LocalizacionLabel.setText("Localización :");
 
-        NombreTextField.setText(getTitle());
+        BuscarButton.setText("Buscar...");
+        BuscarButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BuscarButtonActionPerformed(evt);
+            }
+        });
 
-        LocalizacionTextField.setText("C:\\");
+        CrearButton.setText("Crear");
+        CrearButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CrearButtonActionPerformed(evt);
+            }
+        });
 
-            BuscarButton.setText("Buscar...");
-            BuscarButton.addActionListener(new java.awt.event.ActionListener() {
-                public void actionPerformed(java.awt.event.ActionEvent evt) {
-                    BuscarButtonActionPerformed(evt);
-                }
-            });
+        CancelarButton.setText("Cancelar");
 
-            CrearButton.setText("Crear");
-            CrearButton.addActionListener(new java.awt.event.ActionListener() {
-                public void actionPerformed(java.awt.event.ActionEvent evt) {
-                    CrearButtonActionPerformed(evt);
-                }
-            });
+        NombreTextField.setText(this.nombreExp());
 
-            CancelarButton.setText("Cancelar");
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jSeparator1))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(28, 28, 28)
+                        .addComponent(TituloLabel)
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
+            .addGroup(layout.createSequentialGroup()
+                .addGap(20, 20, 20)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(CancelarButton)
+                        .addGap(18, 18, 18)
+                        .addComponent(CrearButton))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(LocalizacionLabel)
+                            .addComponent(NombreLabel))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(LocalizacionTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 219, Short.MAX_VALUE)
+                            .addComponent(NombreTextField))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(BuscarButton)))
+                .addContainerGap(26, Short.MAX_VALUE))
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(TituloLabel)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(NombreLabel)
+                    .addComponent(NombreTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(22, 22, 22)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(LocalizacionLabel)
+                    .addComponent(LocalizacionTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(BuscarButton))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 40, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(CrearButton)
+                    .addComponent(CancelarButton))
+                .addContainerGap())
+        );
 
-            javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-            getContentPane().setLayout(layout);
-            layout.setHorizontalGroup(
-                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(layout.createSequentialGroup()
-                            .addContainerGap()
-                            .addComponent(jSeparator1))
-                        .addGroup(layout.createSequentialGroup()
-                            .addGap(28, 28, 28)
-                            .addComponent(TituloLabel)
-                            .addGap(0, 0, Short.MAX_VALUE)))
-                    .addContainerGap())
-                .addGroup(layout.createSequentialGroup()
-                    .addGap(20, 20, 20)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addGroup(layout.createSequentialGroup()
-                            .addComponent(CancelarButton)
-                            .addGap(18, 18, 18)
-                            .addComponent(CrearButton))
-                        .addGroup(layout.createSequentialGroup()
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(LocalizacionLabel)
-                                .addComponent(NombreLabel))
-                            .addGap(18, 18, 18)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(LocalizacionTextField)
-                                .addComponent(NombreTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 219, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(BuscarButton)))
-                    .addContainerGap(26, Short.MAX_VALUE))
-            );
-            layout.setVerticalGroup(
-                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addContainerGap()
-                    .addComponent(TituloLabel)
-                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                    .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(18, 18, 18)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(NombreLabel)
-                        .addComponent(NombreTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGap(22, 22, 22)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(LocalizacionLabel)
-                        .addComponent(LocalizacionTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(BuscarButton))
-                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 40, Short.MAX_VALUE)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(CrearButton)
-                        .addComponent(CancelarButton))
-                    .addContainerGap())
-            );
+        pack();
+    }// </editor-fold>//GEN-END:initComponents
 
-            pack();
-        }// </editor-fold>//GEN-END:initComponents
-
+    //METODO QUE GENERA NOMBRE POR DEFECTO PARA EL EXPERIMENTO
+    //SIEMPRE CREA UNO QUE NO SEA REPETIDO
+    public String nombreExp(){
+        return ("Experimento"+this.nExp);
+    }
+    
+    
     private void BuscarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BuscarButtonActionPerformed
         
         jFileChooser1.setFileSelectionMode(jFileChooser1.DIRECTORIES_ONLY);
@@ -161,22 +166,28 @@ public class CreateDirectoryGUI extends javax.swing.JFrame {
     private void CrearButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CrearButtonActionPerformed
         //Se crea directorio del experimento
         String sSistemaOperativo = System.getProperty("os.name");
-        if(sSistemaOperativo == "Linux"){   //Si es Linux
-            File directorio = new File(ruta+"//"+NombreTextField.getText());
-            directorio.mkdir();
+        File directorio;
+        if(sSistemaOperativo.equals("Linux")){   //Si es Linux
+            directorio = new File(ruta+"//"+NombreTextField.getText());
         }
         else{   //Si es Windows
-            File directorio = new File(ruta+"\\"+NombreTextField.getText());
-            directorio.mkdir();
+            directorio = new File(ruta+"\\"+NombreTextField.getText());
         }
-        //Crea nodo experimento en el JTree
-        DefaultMutableTreeNode nodoExp = new DefaultMutableTreeNode(NombreTextField.getText());
-        JTree arbol = new JTree (nodoExp);
+        //Comprobamos si el directorio existe
+        if(!directorio.exists()){
+            //Creamos el directorio
+            directorio.mkdir();
+             //Crea nodo experimento en el JTree
+            DefaultMutableTreeNode nodoExp = new DefaultMutableTreeNode(NombreTextField.getText());
+            this.nExp++;
+            WindowsInstances.mainGUI.setProyectosTree(nodoExp);
         
-        WindowsInstances.mainGUI.setProyectosTree(arbol);
-        
-        dispose();
-        
+            dispose();
+        }
+        else{
+            showMessageDialog(null, "El nombre del experimento ya existe.");
+        }
+       
     }//GEN-LAST:event_CrearButtonActionPerformed
 
     /**

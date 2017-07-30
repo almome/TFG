@@ -57,8 +57,8 @@
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Component id="LocalizacionTextField" max="32767" attributes="0"/>
-                          <Component id="NombreTextField" min="-2" pref="219" max="-2" attributes="0"/>
+                          <Component id="LocalizacionTextField" pref="219" max="32767" attributes="0"/>
+                          <Component id="NombreTextField" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="BuscarButton" min="-2" max="-2" attributes="0"/>
@@ -120,17 +120,7 @@
         <Property name="text" type="java.lang.String" value="Localizaci&#xf3;n :"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="NombreTextField">
-      <Properties>
-        <Property name="text" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-          <Connection component="Form" name="getTitle" type="method"/>
-        </Property>
-      </Properties>
-    </Component>
     <Component class="javax.swing.JTextField" name="LocalizacionTextField">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="C:\u005c" containsInvalidXMLChars="true"/>
-      </Properties>
     </Component>
     <Component class="javax.swing.JButton" name="BuscarButton">
       <Properties>
@@ -151,6 +141,13 @@
     <Component class="javax.swing.JButton" name="CancelarButton">
       <Properties>
         <Property name="text" type="java.lang.String" value="Cancelar"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="NombreTextField">
+      <Properties>
+        <Property name="text" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+          <Connection code="this.nombreExp()" type="code"/>
+        </Property>
       </Properties>
     </Component>
   </SubComponents>
