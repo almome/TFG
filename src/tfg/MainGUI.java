@@ -187,22 +187,23 @@ public class MainGUI extends javax.swing.JFrame {
     public JTree getProyectosTree() {
         return ProyectosTree;
     }
-    public void setProyectosTree(DefaultMutableTreeNode nodo, int nivel, String PadreNodo) {
+    public void setProyectosTree(DefaultMutableTreeNode nodo, int nivel, Object PadreNodo) {
         if(nivel == 0){
             this.root.add(nodo);    //Añade EXperimento
         }
         else{
             if(nivel == 1){ //Añade Clasificador. Falta indicar cual experimento es el padre.
-                
+                int i = 0;
                 Enumeration<DefaultMutableTreeNode> e = this.root.depthFirstEnumeration();
                 while (e.hasMoreElements()) {
-                DefaultMutableTreeNode node = e.nextElement();
-                    if (node.toString().equalsIgnoreCase(PadreNodo)) {
+                    DefaultMutableTreeNode node = e.nextElement();
+                    if (node.toString().equalsIgnoreCase(PadreNodo.toString())) {
                          //TreePath(node.getPath());
+                         i = root.getIndex(node);
                     }
                 }
                 
-                DefaultMutableTreeNode c = (DefaultMutableTreeNode) this.root.getChildAt(PadreNodo);
+                DefaultMutableTreeNode c = (DefaultMutableTreeNode) this.root.getChildAt(i);
                 c.add(nodo);
                 this.root.add(c);
             }
