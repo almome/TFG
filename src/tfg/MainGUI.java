@@ -6,6 +6,7 @@
 package tfg;
 
 import java.util.ArrayList;
+import java.util.Enumeration;
 import javax.swing.JTabbedPane;
 import javax.swing.JTree;
 import javax.swing.tree.DefaultMutableTreeNode;
@@ -136,7 +137,7 @@ public class MainGUI extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                WindowsInstances.createClasificadorGUI = new CreateClasificadorGUI();
+                //WindowsInstances.createClasificadorGUI = new CreateClasificadorGUI();
                 WindowsInstances.createClasificadorGUI.setVisible(true);
             }
         });
@@ -186,13 +187,22 @@ public class MainGUI extends javax.swing.JFrame {
     public JTree getProyectosTree() {
         return ProyectosTree;
     }
-    public void setProyectosTree(DefaultMutableTreeNode nodo, int nivel) {
+    public void setProyectosTree(DefaultMutableTreeNode nodo, int nivel, String PadreNodo) {
         if(nivel == 0){
             this.root.add(nodo);    //Añade EXperimento
         }
         else{
             if(nivel == 1){ //Añade Clasificador. Falta indicar cual experimento es el padre.
-                DefaultMutableTreeNode c = (DefaultMutableTreeNode) this.root.getChildAt(0);
+                
+                Enumeration<DefaultMutableTreeNode> e = this.root.depthFirstEnumeration();
+                while (e.hasMoreElements()) {
+                DefaultMutableTreeNode node = e.nextElement();
+                    if (node.toString().equalsIgnoreCase(PadreNodo)) {
+                         //TreePath(node.getPath());
+                    }
+                }
+                
+                DefaultMutableTreeNode c = (DefaultMutableTreeNode) this.root.getChildAt(PadreNodo);
                 c.add(nodo);
                 this.root.add(c);
             }
