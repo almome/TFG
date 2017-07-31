@@ -77,6 +77,11 @@ public class CreateDirectoryGUI extends javax.swing.JFrame {
         });
 
         CancelarButton.setText("Cancelar");
+        CancelarButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CancelarButtonActionPerformed(evt);
+            }
+        });
 
         NombreTextField.setText(this.nombreExp());
 
@@ -179,9 +184,9 @@ public class CreateDirectoryGUI extends javax.swing.JFrame {
             directorio.mkdir();
              //Crea nodo experimento en el JTree
             DefaultMutableTreeNode nodoExp = new DefaultMutableTreeNode(NombreTextField.getText());
-            this.nExp++;
             WindowsInstances.mainGUI.setProyectosTree(nodoExp);
-        
+            String nombrenodo = nodoExp.getUserObject().toString();
+            WindowsInstances.createClasificadorGUI.setCombo("nombrenodo");
             dispose();
         }
         else{
@@ -189,6 +194,11 @@ public class CreateDirectoryGUI extends javax.swing.JFrame {
         }
        
     }//GEN-LAST:event_CrearButtonActionPerformed
+
+    private void CancelarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CancelarButtonActionPerformed
+        // TODO add your handling code here:
+        dispose();
+    }//GEN-LAST:event_CancelarButtonActionPerformed
 
     /**
      * @param args the command line arguments

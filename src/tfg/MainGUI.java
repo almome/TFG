@@ -5,10 +5,12 @@
  */
 package tfg;
 
+import java.util.ArrayList;
 import javax.swing.JTabbedPane;
 import javax.swing.JTree;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeModel;
+import javax.swing.tree.TreeNode;
 import javax.swing.tree.TreePath;
 
 /**
@@ -16,7 +18,7 @@ import javax.swing.tree.TreePath;
  * @author alexa
  */
 public class MainGUI extends javax.swing.JFrame {
-
+    public ArrayList<TreeNode> experimentos;
     public DefaultTreeModel modelo;
     public DefaultMutableTreeNode root;
     
@@ -131,7 +133,13 @@ public class MainGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_experjMenuActionPerformed
 
     private void clasificajMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clasificajMenuActionPerformed
-        // TODO add your handling code here:
+        /* Create and display the form */
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                WindowsInstances.createClasificadorGUI = new CreateClasificadorGUI();
+                WindowsInstances.createClasificadorGUI.setVisible(true);
+            }
+        });
     }//GEN-LAST:event_clasificajMenuActionPerformed
 
     private void tareajMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tareajMenuActionPerformed
