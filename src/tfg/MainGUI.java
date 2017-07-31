@@ -15,7 +15,7 @@ import javax.swing.tree.TreePath;
 
 /**
  *
- * @author alexa
+ * @author Alexandra Morón Méndez
  */
 public class MainGUI extends javax.swing.JFrame {
     public ArrayList<TreeNode> experimentos;
@@ -186,8 +186,18 @@ public class MainGUI extends javax.swing.JFrame {
     public JTree getProyectosTree() {
         return ProyectosTree;
     }
-    public void setProyectosTree(DefaultMutableTreeNode nodo) {
-        this.root.add(nodo);
+    public void setProyectosTree(DefaultMutableTreeNode nodo, int nivel) {
+        if(nivel == 0){
+            this.root.add(nodo);    //Añade EXperimento
+        }
+        else{
+            if(nivel == 1){ //Añade Clasificador. Falta indicar cual experimento es el padre.
+                DefaultMutableTreeNode c = (DefaultMutableTreeNode) this.root.getChildAt(0);
+                c.add(nodo);
+                this.root.add(c);
+            }
+        }
+        
         this.modelo.reload();
     }
 

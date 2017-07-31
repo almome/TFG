@@ -184,9 +184,9 @@ public class CreateDirectoryGUI extends javax.swing.JFrame {
             directorio.mkdir();
              //Crea nodo experimento en el JTree
             DefaultMutableTreeNode nodoExp = new DefaultMutableTreeNode(NombreTextField.getText());
-            WindowsInstances.mainGUI.setProyectosTree(nodoExp);
+            WindowsInstances.mainGUI.setProyectosTree(nodoExp, 0);
             String nombrenodo = nodoExp.getUserObject().toString();
-            WindowsInstances.createClasificadorGUI.setCombo("nombrenodo");
+            //WindowsInstances.createClasificadorGUI.setCombo("nombrenodo");  //NullPointerException
             dispose();
         }
         else{
@@ -229,11 +229,11 @@ public class CreateDirectoryGUI extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
+        /*java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new CreateDirectoryGUI().setVisible(true);
             }
-        });
+        });*/
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
