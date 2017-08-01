@@ -5,13 +5,14 @@
  */
 package tfg;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Enumeration;
-import javax.swing.JTree;
+
+import java.io.File;
+import javax.swing.JFrame;
+import javax.swing.JInternalFrame;
+import javax.swing.JOptionPane;
+import static javax.swing.JOptionPane.showMessageDialog;
 import javax.swing.tree.DefaultMutableTreeNode;
-import javax.swing.tree.DefaultTreeModel;
-import javax.swing.tree.TreeNode;
+import static tfg.CreateDirectoryGUI.ruta;
 
 /**
  *
@@ -34,36 +35,43 @@ public class CreateClasificadorGUI extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
+        TituloLabel = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        ExperimentoLabel = new javax.swing.JLabel();
+        NombreLabel = new javax.swing.JLabel();
+        TipoLabel = new javax.swing.JLabel();
+        CrearButton = new javax.swing.JButton();
+        CancelarButton = new javax.swing.JButton();
         ExperimentosComboBox = new javax.swing.JComboBox<>();
         NombreTextField = new javax.swing.JTextField();
         TipoComboBox = new javax.swing.JComboBox<>();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Nuevo Clasificador");
 
-        jLabel1.setText("Crear nuevo clasificador");
+        TituloLabel.setText("Crear nuevo clasificador");
 
-        jLabel2.setText("Experimento :");
+        ExperimentoLabel.setText("Experimento :");
 
-        jLabel3.setText("Nombre :");
+        NombreLabel.setText("Nombre :");
 
-        jLabel4.setText("Tipo:");
+        TipoLabel.setText("Tipo:");
 
-        jButton1.setText("Crear");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        CrearButton.setText("Crear");
+        CrearButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                CrearButtonActionPerformed(evt);
             }
         });
 
-        jButton2.setText("Cancelar");
+        CancelarButton.setText("Cancelar");
+        CancelarButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CancelarButtonActionPerformed(evt);
+            }
+        });
+
+        NombreTextField.setText("Inserte nombre del clasificador...");
 
         TipoComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Estandar", "Pre-Tareas", "Post-Tareas" }));
 
@@ -75,26 +83,25 @@ public class CreateClasificadorGUI extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                        .addComponent(jLabel1)
+                        .addComponent(TituloLabel)
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addComponent(jSeparator1, javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jButton2)
+                        .addComponent(CancelarButton)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton1))
+                        .addComponent(CrearButton))
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                         .addGap(33, 33, 33)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel2)
+                                .addComponent(ExperimentoLabel)
                                 .addGap(0, 0, Short.MAX_VALUE))
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(0, 27, Short.MAX_VALUE)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.TRAILING))
-                                .addGap(30, 30, 30)
+                                    .addComponent(NombreLabel)
+                                    .addComponent(TipoLabel))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 57, Short.MAX_VALUE)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(NombreTextField, javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addComponent(ExperimentosComboBox, javax.swing.GroupLayout.Alignment.TRAILING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -105,35 +112,69 @@ public class CreateClasificadorGUI extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel1)
+                .addComponent(TituloLabel)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(ExperimentosComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2))
+                    .addComponent(ExperimentoLabel))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
+                    .addComponent(NombreLabel)
                     .addComponent(NombreTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(9, 9, 9)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4)
+                    .addComponent(TipoLabel)
                     .addComponent(TipoComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton2)
-                    .addComponent(jButton1))
+                    .addComponent(CancelarButton)
+                    .addComponent(CrearButton))
                 .addContainerGap(31, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        WindowsInstances.mainGUI.setProyectosTree(new DefaultMutableTreeNode("HIJO"), 1, ExperimentosComboBox.getSelectedItem());
+    private void CrearButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CrearButtonActionPerformed
+        File cladir;
+        String sSistemaOperativo = System.getProperty("os.name");
+        if(NombreTextField.getText() == null){
+            showMessageDialog(new JFrame(), "No se puede crear un clasificador sin nombre.","Error", JOptionPane.ERROR_MESSAGE);
+        }
+        if(ExperimentosComboBox.getSelectedItem() != null){
+            WindowsInstances.mainGUI.setProyectosTree(new DefaultMutableTreeNode(NombreTextField.getText()), 1, ExperimentosComboBox.getSelectedItem());
+            WindowsInstances.createTareaGUI.setClaCombo(NombreTextField.getText());
+            if(TipoComboBox.getSelectedItem().toString() == "Pre-Tareas"){
+                if(sSistemaOperativo.equals("Linux")){
+                    cladir = new File(ruta+"//"+ExperimentosComboBox.getSelectedItem()+"//pre");
+                }
+                else{
+                    cladir = new File(ruta+"\\"+ExperimentosComboBox.getSelectedItem()+"\\pre");
+                }
+            }
+            else{
+                if(sSistemaOperativo.equals("Linux")){
+                    cladir = new File(ruta+"//"+ExperimentosComboBox.getSelectedItem()+"//classifiers//"+NombreTextField.getText());
+                }
+                else{
+                    cladir = new File(ruta+"\\"+ExperimentosComboBox.getSelectedItem()+"\\classifiers\\"+NombreTextField.getText());
+                }
+            }
+            
+            cladir.mkdirs();
+            dispose();
+        }
+        else{
+            showMessageDialog(new JFrame(), "No se ha seleccionado experimento.\nEl clasificador debe crearse dentro de un experimento.","Error", JOptionPane.ERROR_MESSAGE);
+        }
+        
+    }//GEN-LAST:event_CrearButtonActionPerformed
+
+    private void CancelarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CancelarButtonActionPerformed
         dispose();
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_CancelarButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -176,15 +217,15 @@ public class CreateClasificadorGUI extends javax.swing.JFrame {
    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton CancelarButton;
+    private javax.swing.JButton CrearButton;
+    private javax.swing.JLabel ExperimentoLabel;
     private javax.swing.JComboBox<String> ExperimentosComboBox;
+    private javax.swing.JLabel NombreLabel;
     private javax.swing.JTextField NombreTextField;
     private javax.swing.JComboBox<String> TipoComboBox;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel TipoLabel;
+    private javax.swing.JLabel TituloLabel;
     private javax.swing.JSeparator jSeparator1;
     // End of variables declaration//GEN-END:variables
 }

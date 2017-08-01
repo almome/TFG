@@ -50,7 +50,7 @@ public class CreateDirectoryGUI extends javax.swing.JFrame {
         CancelarButton = new javax.swing.JButton();
         NombreTextField = new javax.swing.JTextField();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Nuevo Experimento");
 
         TituloLabel.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
@@ -107,7 +107,7 @@ public class CreateDirectoryGUI extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addComponent(CrearButton))
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(LocalizacionLabel)
                             .addComponent(NombreLabel))
                         .addGap(18, 18, 18)
@@ -170,23 +170,35 @@ public class CreateDirectoryGUI extends javax.swing.JFrame {
 
     private void CrearButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CrearButtonActionPerformed
         //Se crea directorio del experimento
+        nExp++;
         String sSistemaOperativo = System.getProperty("os.name");
         File directorio;
+        File clasificadoresdir;
+        File outputsdir;
         if(sSistemaOperativo.equals("Linux")){   //Si es Linux
             directorio = new File(ruta+"//"+NombreTextField.getText());
+            clasificadoresdir = new File(ruta+"//"+NombreTextField.getText()+"//classifiers");
+            outputsdir = new File(ruta+"//"+NombreTextField.getText()+"//output");
         }
         else{   //Si es Windows
             directorio = new File(ruta+"\\"+NombreTextField.getText());
+            clasificadoresdir = new File(ruta+"\\"+NombreTextField.getText()+"\\classifiers");
+            outputsdir = new File(ruta+"\\"+NombreTextField.getText()+"\\output");
         }
         //Comprobamos si el directorio existe
         if(!directorio.exists()){
             //Creamos el directorio
             directorio.mkdir();
+            //Creamos estructura interna carpeta
+            clasificadoresdir.mkdir();
+            outputsdir.mkdir();
              //Crea nodo experimento en el JTree
             DefaultMutableTreeNode nodoExp = new DefaultMutableTreeNode(NombreTextField.getText());
             WindowsInstances.mainGUI.setProyectosTree(nodoExp, 0, null);
             String nombrenodo = nodoExp.getUserObject().toString();
-            WindowsInstances.createClasificadorGUI.setCombo(nombrenodo);  //NullPointerException
+            WindowsInstances.createClasificadorGUI.setCombo(nombrenodo);
+            WindowsInstances.createTareaGUI.setExpCombo(nombrenodo);  //NullPointerException
+            NombreTextField.setText("Experimento"+this.nExp);
             dispose();
         }
         else{

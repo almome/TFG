@@ -7,6 +7,8 @@ package tfg;
 
 import java.util.ArrayList;
 import java.util.Enumeration;
+import javax.swing.JMenuItem;
+import javax.swing.JPopupMenu;
 import javax.swing.JTabbedPane;
 import javax.swing.JTree;
 import javax.swing.tree.DefaultMutableTreeNode;
@@ -122,29 +124,41 @@ public class MainGUI extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     /*BOTONES PRINCIPALES DE LA BARRA DE MENU*/
+    /**
+     * Método que llama a la ventana de crear experimento.
+     * @param evt 
+     */
     private void experjMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_experjMenuActionPerformed
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                WindowsInstances.createDirectoryGUI = new CreateDirectoryGUI();
                 WindowsInstances.createDirectoryGUI.setVisible(true);
             }
         });
     }//GEN-LAST:event_experjMenuActionPerformed
-
+    /**
+     * Método que llama a la ventana de crear clasificador
+     * @param evt 
+     */
     private void clasificajMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clasificajMenuActionPerformed
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                //WindowsInstances.createClasificadorGUI = new CreateClasificadorGUI();
                 WindowsInstances.createClasificadorGUI.setVisible(true);
             }
         });
     }//GEN-LAST:event_clasificajMenuActionPerformed
-
+    /**
+     * Método que llama a la ventana de crear tarea
+     * @param evt 
+     */
     private void tareajMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tareajMenuActionPerformed
-        // TODO add your handling code here:
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                WindowsInstances.createTareaGUI.setVisible(true);
+            }
+        });
     }//GEN-LAST:event_tareajMenuActionPerformed
     
     /*ACCIONES CUANDO SE ABRA LA VENTANA*/  
@@ -153,6 +167,7 @@ public class MainGUI extends javax.swing.JFrame {
         this.root = (DefaultMutableTreeNode) this.modelo.getRoot();
     }//GEN-LAST:event_formWindowOpened
 
+    
     /**
      * @param args the command line arguments
      */
@@ -192,7 +207,7 @@ public class MainGUI extends javax.swing.JFrame {
             this.root.add(nodo);    //Añade EXperimento
         }
         else{
-            if(nivel == 1){ //Añade Clasificador. Falta indicar cual experimento es el padre.
+            if(nivel == 1 || nivel == 2){ //Añade Clasificador. Falta indicar cual experimento es el padre.
                 int i = 0;
                 Enumeration<DefaultMutableTreeNode> e = this.root.depthFirstEnumeration();
                 while (e.hasMoreElements()) {
@@ -204,9 +219,22 @@ public class MainGUI extends javax.swing.JFrame {
                 }
                 
                 DefaultMutableTreeNode c = (DefaultMutableTreeNode) this.root.getChildAt(i);
+                /*
+                if(nivel == 2){
+                    i = 0;
+                    Enumeration<DefaultMutableTreeNode> a = c.depthFirstEnumeration();
+                    while (a.hasMoreElements()) {
+                        DefaultMutableTreeNode node = a.nextElement();
+                        if (node.toString().equalsIgnoreCase(PadreNodo.toString())) {
+                             //TreePath(node.getPath());
+                             i = root.getIndex(node);
+                        }
+                    }
+                }*/
                 c.add(nodo);
                 this.root.add(c);
             }
+            
         }
         
         this.modelo.reload();
