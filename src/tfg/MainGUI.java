@@ -207,7 +207,7 @@ public class MainGUI extends javax.swing.JFrame {
             this.root.add(nodo);    //Añade EXperimento
         }
         else{
-            if(nivel == 1 || nivel == 2){ //Añade Clasificador. Falta indicar cual experimento es el padre.
+            if(nivel == 1){ //Añade Clasificador. Falta indicar cual experimento es el padre.
                 int i = 0;
                 Enumeration<DefaultMutableTreeNode> e = this.root.depthFirstEnumeration();
                 while (e.hasMoreElements()) {
@@ -219,20 +219,25 @@ public class MainGUI extends javax.swing.JFrame {
                 }
                 
                 DefaultMutableTreeNode c = (DefaultMutableTreeNode) this.root.getChildAt(i);
-                /*
-                if(nivel == 2){
-                    i = 0;
-                    Enumeration<DefaultMutableTreeNode> a = c.depthFirstEnumeration();
-                    while (a.hasMoreElements()) {
-                        DefaultMutableTreeNode node = a.nextElement();
-                        if (node.toString().equalsIgnoreCase(PadreNodo.toString())) {
-                             //TreePath(node.getPath());
-                             i = root.getIndex(node);
-                        }
-                    }
-                }*/
                 c.add(nodo);
                 this.root.add(c);
+            }
+                
+            if(nivel == 2){
+                int i = 0;
+                Enumeration<DefaultMutableTreeNode> e = this.root.depthFirstEnumeration();
+                while (e.hasMoreElements()) {
+                    DefaultMutableTreeNode node = (DefaultMutableTreeNode) this.root.getChildAt(i);
+                    Enumeration<DefaultMutableTreeNode> a = node.depthFirstEnumeration();
+                    while (a.hasMoreElements()) {
+                        DefaultMutableTreeNode nodec = a.nextElement();
+                        if (nodec.toString().equalsIgnoreCase(PadreNodo.toString())) {
+                         //TreePath(node.getPath());
+                         i = root.getIndex(node);
+                        }
+                    }
+                }
+
             }
             
         }
