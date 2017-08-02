@@ -157,7 +157,8 @@ public class CreateTareaGUI extends javax.swing.JFrame {
             showMessageDialog(new JFrame(), "No se puede crear un clasificador sin nombre.","Error", JOptionPane.ERROR_MESSAGE);
         }
         if(ExperimentosComboBox.getSelectedItem() != null && ClasificadorComboBox.getSelectedItem() != null){
-            WindowsInstances.mainGUI.setProyectosTree(new DefaultMutableTreeNode(NombreTextField.getText()), 2, ClasificadorComboBox.getSelectedItem());
+            WindowsInstances.mainGUI.setProyectosTree(new DefaultMutableTreeNode(NombreTextField.getText()), ClasificadorComboBox.getSelectedItem(), ExperimentosComboBox.getSelectedItem());
+            NombreTextField.setText("Introduzca el nombre de la tarea");
             dispose();
         }
         else{

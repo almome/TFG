@@ -144,7 +144,7 @@ public class CreateClasificadorGUI extends javax.swing.JFrame {
             showMessageDialog(new JFrame(), "No se puede crear un clasificador sin nombre.","Error", JOptionPane.ERROR_MESSAGE);
         }
         if(ExperimentosComboBox.getSelectedItem() != null){
-            WindowsInstances.mainGUI.setProyectosTree(new DefaultMutableTreeNode(NombreTextField.getText()), 1, ExperimentosComboBox.getSelectedItem());
+            WindowsInstances.mainGUI.setProyectosTree(new DefaultMutableTreeNode(NombreTextField.getText()), ExperimentosComboBox.getSelectedItem());
             WindowsInstances.createTareaGUI.setClaCombo(NombreTextField.getText());
             if(TipoComboBox.getSelectedItem().toString() == "Pre-Tareas"){
                 if(sSistemaOperativo.equals("Linux")){
@@ -162,7 +162,7 @@ public class CreateClasificadorGUI extends javax.swing.JFrame {
                     cladir = new File(ruta+"\\"+ExperimentosComboBox.getSelectedItem()+"\\classifiers\\"+NombreTextField.getText());
                 }
             }
-            
+            NombreTextField.setText("Introduzca el nombre del clasificador...");
             cladir.mkdirs();
             dispose();
         }

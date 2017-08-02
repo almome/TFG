@@ -202,46 +202,43 @@ public class MainGUI extends javax.swing.JFrame {
     public JTree getProyectosTree() {
         return ProyectosTree;
     }
-    public void setProyectosTree(DefaultMutableTreeNode nodo, int nivel, Object PadreNodo) {
-        if(nivel == 0){
-            this.root.add(nodo);    //Añade EXperimento
-        }
-        else{
-            if(nivel == 1){ //Añade Clasificador. Falta indicar cual experimento es el padre.
-                int i = 0;
-                Enumeration<DefaultMutableTreeNode> e = this.root.depthFirstEnumeration();
-                while (e.hasMoreElements()) {
-                    DefaultMutableTreeNode node = e.nextElement();
-                    if (node.toString().equalsIgnoreCase(PadreNodo.toString())) {
-                         //TreePath(node.getPath());
-                         i = root.getIndex(node);
-                    }
-                }
-                
-                DefaultMutableTreeNode c = (DefaultMutableTreeNode) this.root.getChildAt(i);
-                c.add(nodo);
-                this.root.add(c);
+    
+    public void setProyectosTree(DefaultMutableTreeNode nodo){
+        this.root.add(nodo);    //Añade EXperimento
+        this.modelo.reload();
+    }
+    
+    public void setProyectosTree(DefaultMutableTreeNode nodo, Object PadreNodo) {
+        int i = 0;
+        Enumeration<DefaultMutableTreeNode> e = this.root.depthFirstEnumeration();
+        while (e.hasMoreElements()) {
+            DefaultMutableTreeNode node = e.nextElement();
+            if (node.toString().equalsIgnoreCase(PadreNodo.toString())) {
+                 i = root.getIndex(node);
             }
-                
-            if(nivel == 2){
-                int i = 0;
-                Enumeration<DefaultMutableTreeNode> e = this.root.depthFirstEnumeration();
-                while (e.hasMoreElements()) {
-                    DefaultMutableTreeNode node = (DefaultMutableTreeNode) this.root.getChildAt(i);
-                    Enumeration<DefaultMutableTreeNode> a = node.depthFirstEnumeration();
-                    while (a.hasMoreElements()) {
-                        DefaultMutableTreeNode nodec = a.nextElement();
-                        if (nodec.toString().equalsIgnoreCase(PadreNodo.toString())) {
-                         //TreePath(node.getPath());
-                         i = root.getIndex(node);
-                        }
-                    }
-                }
+        }
 
+        DefaultMutableTreeNode c = (DefaultMutableTreeNode) this.root.getChildAt(i);
+        c.add(nodo);
+        this.root.add(c);
+        this.modelo.reload();
+    }
+    
+    public void setProyectosTree(DefaultMutableTreeNode nodo, Object PadreNodo, Object AbueloNodo) {
+        Boolean flag = false;
+        int i = 0;
+        DefaultMutableTreeNode nodec = new DefaultMutableTreeNode();
+        Enumeration<DefaultMutableTreeNode> e = this.root.depthFirstEnumeration();
+        while (e.hasMoreElements() && flag != true) {
+            nodec = e.nextElement();
+            if (nodec.toString().equalsIgnoreCase(PadreNodo.toString())) {
+                i = root.getIndex(nodec);
+                flag = true;
             }
-            
         }
-        
+        if(nodec.getParent().toString().equals(AbueloNodo.toString())){
+            nodec.add(nodo);
+        }
         this.modelo.reload();
     }
 
