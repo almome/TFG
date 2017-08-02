@@ -198,16 +198,27 @@ public class MainGUI extends javax.swing.JFrame {
         /* Create and display the form */
         
     }
-
+    /*METODOS DE GESTIÓN DEL ARBOL DE PROYECTOS*/
+    /**
+     * Set del arbol del proyectos.
+     * @return 
+     */
     public JTree getProyectosTree() {
         return ProyectosTree;
     }
-    
+    /**
+     * Introduce un nodo experimento
+     * @param nodo 
+     */
     public void setProyectosTree(DefaultMutableTreeNode nodo){
-        this.root.add(nodo);    //Añade EXperimento
+        this.root.add(nodo);    
         this.modelo.reload();
     }
-    
+    /**
+     * Introduce un nodo clasificador
+     * @param nodo
+     * @param PadreNodo 
+     */
     public void setProyectosTree(DefaultMutableTreeNode nodo, Object PadreNodo) {
         int i = 0;
         Enumeration<DefaultMutableTreeNode> e = this.root.depthFirstEnumeration();
@@ -217,13 +228,17 @@ public class MainGUI extends javax.swing.JFrame {
                  i = root.getIndex(node);
             }
         }
-
         DefaultMutableTreeNode c = (DefaultMutableTreeNode) this.root.getChildAt(i);
         c.add(nodo);
         this.root.add(c);
         this.modelo.reload();
     }
-    
+    /**
+     * Introduce un nodo tarea
+     * @param nodo
+     * @param PadreNodo
+     * @param AbueloNodo 
+     */
     public void setProyectosTree(DefaultMutableTreeNode nodo, Object PadreNodo, Object AbueloNodo) {
         Boolean flag = false;
         int i = 0;
@@ -231,14 +246,12 @@ public class MainGUI extends javax.swing.JFrame {
         Enumeration<DefaultMutableTreeNode> e = this.root.depthFirstEnumeration();
         while (e.hasMoreElements() && flag != true) {
             nodec = e.nextElement();
-            if (nodec.toString().equalsIgnoreCase(PadreNodo.toString())) {
+            if (nodec.toString().equalsIgnoreCase(PadreNodo.toString()) && nodec.getParent().toString().equals(AbueloNodo.toString())) {
                 i = root.getIndex(nodec);
                 flag = true;
             }
         }
-        if(nodec.getParent().toString().equals(AbueloNodo.toString())){
-            nodec.add(nodo);
-        }
+        nodec.add(nodo);
         this.modelo.reload();
     }
 

@@ -7,6 +7,7 @@ package tfg;
 
 
 import java.io.File;
+import java.util.ArrayList;
 import javax.swing.JFrame;
 import javax.swing.JInternalFrame;
 import javax.swing.JOptionPane;
@@ -16,9 +17,12 @@ import static tfg.CreateDirectoryGUI.ruta;
 
 /**
  *
- * @author alexa
+ * @author Alexandra Morón Méndez
  */
 public class CreateClasificadorGUI extends javax.swing.JFrame {
+    
+    ArrayList<ParClasificador> paresExCL = new ArrayList<ParClasificador>();
+    
     /**
      * Creates new form CreateClasificadorGUI
      */
@@ -145,7 +149,7 @@ public class CreateClasificadorGUI extends javax.swing.JFrame {
         }
         if(ExperimentosComboBox.getSelectedItem() != null){
             WindowsInstances.mainGUI.setProyectosTree(new DefaultMutableTreeNode(NombreTextField.getText()), ExperimentosComboBox.getSelectedItem());
-            WindowsInstances.createTareaGUI.setClaCombo(NombreTextField.getText());
+            //WindowsInstances.createTareaGUI.setClaCombo(NombreTextField.getText());
             if(TipoComboBox.getSelectedItem().toString() == "Pre-Tareas"){
                 if(sSistemaOperativo.equals("Linux")){
                     cladir = new File(ruta+"//"+ExperimentosComboBox.getSelectedItem()+"//pre");
@@ -162,6 +166,8 @@ public class CreateClasificadorGUI extends javax.swing.JFrame {
                     cladir = new File(ruta+"\\"+ExperimentosComboBox.getSelectedItem()+"\\classifiers\\"+NombreTextField.getText());
                 }
             }
+            ParClasificador par = new ParClasificador(ExperimentosComboBox.getSelectedItem().toString(), NombreTextField.getText());
+            paresExCL.add(par);
             NombreTextField.setText("Introduzca el nombre del clasificador...");
             cladir.mkdirs();
             dispose();

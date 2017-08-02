@@ -6,6 +6,9 @@
 package tfg;
 
 import java.io.File;
+import java.util.ArrayList;
+import javax.swing.ComboBoxModel;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import static javax.swing.JOptionPane.showMessageDialog;
@@ -62,6 +65,12 @@ public class CreateTareaGUI extends javax.swing.JFrame {
         NombreLabel.setText("Nombre :");
 
         PlantillaLabel.setText("Plantilla :");
+
+        ExperimentosComboBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ExperimentosComboBoxActionPerformed(evt);
+            }
+        });
 
         NombreTextField.setText("Introduzca el nombre de la tarea");
 
@@ -165,6 +174,17 @@ public class CreateTareaGUI extends javax.swing.JFrame {
             showMessageDialog(new JFrame(), "No se ha seleccionado experimento.\nEl clasificador debe crearse dentro de un experimento.","Error", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_CrearButtonActionPerformed
+
+    private void ExperimentosComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ExperimentosComboBoxActionPerformed
+        ArrayList<String> clasificadoresExp = new ArrayList<String>();
+        for(int i = 0; i < WindowsInstances.createClasificadorGUI.paresExCL.size(); i++){
+            if(WindowsInstances.createClasificadorGUI.paresExCL.get(i).Experimento == ExperimentosComboBox.getSelectedItem()){
+                clasificadoresExp.add(WindowsInstances.createClasificadorGUI.paresExCL.get(i).Clasificador);
+            }
+        }
+        ComboBoxModel modelo = new DefaultComboBoxModel(clasificadoresExp.toArray());
+        ClasificadorComboBox.setModel(modelo);
+    }//GEN-LAST:event_ExperimentosComboBoxActionPerformed
 
     /**
      * @param args the command line arguments
