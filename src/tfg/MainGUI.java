@@ -220,17 +220,17 @@ public class MainGUI extends javax.swing.JFrame {
      * @param PadreNodo 
      */
     public void setProyectosTree(DefaultMutableTreeNode nodo, Object PadreNodo) {
-        int i = 0;
+        Boolean flag = false;
+        DefaultMutableTreeNode nodec = new DefaultMutableTreeNode();
         Enumeration<DefaultMutableTreeNode> e = this.root.depthFirstEnumeration();
-        while (e.hasMoreElements()) {
-            DefaultMutableTreeNode node = e.nextElement();
-            if (node.toString().equalsIgnoreCase(PadreNodo.toString())) {
-                 i = root.getIndex(node);
+        while (e.hasMoreElements()&& flag != true) {
+            nodec = e.nextElement();
+            if (nodec.toString().equalsIgnoreCase(PadreNodo.toString()) ) {
+                 flag = true;
             }
         }
-        DefaultMutableTreeNode c = (DefaultMutableTreeNode) this.root.getChildAt(i);
-        c.add(nodo);
-        this.root.add(c);
+        
+        nodec.add(nodo);
         this.modelo.reload();
     }
     /**

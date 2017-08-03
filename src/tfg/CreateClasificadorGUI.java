@@ -142,34 +142,20 @@ public class CreateClasificadorGUI extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void CrearButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CrearButtonActionPerformed
-        File cladir;
-        String sSistemaOperativo = System.getProperty("os.name");
+
         if(NombreTextField.getText() == null){
             showMessageDialog(new JFrame(), "No se puede crear un clasificador sin nombre.","Error", JOptionPane.ERROR_MESSAGE);
         }
         if(ExperimentosComboBox.getSelectedItem() != null){
             WindowsInstances.mainGUI.setProyectosTree(new DefaultMutableTreeNode(NombreTextField.getText()), ExperimentosComboBox.getSelectedItem());
             //WindowsInstances.createTareaGUI.setClaCombo(NombreTextField.getText());
-            if(TipoComboBox.getSelectedItem().toString() == "Pre-Tareas"){
-                if(sSistemaOperativo.equals("Linux")){
-                    cladir = new File(ruta+"//"+ExperimentosComboBox.getSelectedItem()+"//pre");
-                }
-                else{
-                    cladir = new File(ruta+"\\"+ExperimentosComboBox.getSelectedItem()+"\\pre");
-                }
-            }
-            else{
-                if(sSistemaOperativo.equals("Linux")){
-                    cladir = new File(ruta+"//"+ExperimentosComboBox.getSelectedItem()+"//classifiers//"+NombreTextField.getText());
-                }
-                else{
-                    cladir = new File(ruta+"\\"+ExperimentosComboBox.getSelectedItem()+"\\classifiers\\"+NombreTextField.getText());
-                }
-            }
+            //PENDIENTE DE AÑADIR CAMBIO:
+            //CUANDO UN CLASIFICADOR SE METE EN OTRO CLASIFICADOR ESTE NO ES UN EXPERIMENTO, SIGUE SIENDO CLASIFICADOR
             ParClasificador par = new ParClasificador(ExperimentosComboBox.getSelectedItem().toString(), NombreTextField.getText());
             paresExCL.add(par);
+            WindowsInstances.createClasificadorGUI.setCombo(NombreTextField.getText());
+            WindowsInstances.createTareaGUI.setExpCombo(NombreTextField.getText()); 
             NombreTextField.setText("Introduzca el nombre del clasificador...");
-            cladir.mkdirs();
             dispose();
         }
         else{
