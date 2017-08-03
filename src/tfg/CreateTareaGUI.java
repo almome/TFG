@@ -166,7 +166,7 @@ public class CreateTareaGUI extends javax.swing.JFrame {
             showMessageDialog(new JFrame(), "No se puede crear un clasificador sin nombre.","Error", JOptionPane.ERROR_MESSAGE);
         }
         if(ExperimentosComboBox.getSelectedItem() != null && ClasificadorComboBox.getSelectedItem() != null){
-            WindowsInstances.mainGUI.setProyectosTree(new DefaultMutableTreeNode(NombreTextField.getText()), ClasificadorComboBox.getSelectedItem(), ExperimentosComboBox.getSelectedItem());
+            WindowsInstances.mainGUI.setProyectosTree(new DefaultMutableTreeNode(NombreTextField.getText()), ClasificadorComboBox.getSelectedItem());
             NombreTextField.setText("Introduzca el nombre de la tarea");
             dispose();
         }
@@ -220,9 +220,18 @@ public class CreateTareaGUI extends javax.swing.JFrame {
             }
         });
     }
-
+    
     public void setExpCombo (String nodo){
-        ExperimentosComboBox.addItem(nodo);
+        int i = 0;
+        Boolean estaRepetido =  false;
+        for(i = 0; i < ExperimentosComboBox.getItemCount(); i++){
+            if(ExperimentosComboBox.getItemAt(i).toString().equals(nodo)){
+                estaRepetido = true;
+            }
+        }
+        if(estaRepetido == false){
+            ExperimentosComboBox.addItem(nodo);
+        }
     }
     public void setClaCombo (String nodo){
         ClasificadorComboBox.addItem(nodo);

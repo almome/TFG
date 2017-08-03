@@ -49,13 +49,14 @@ public class CreateClasificadorGUI extends javax.swing.JFrame {
         ExperimentosComboBox = new javax.swing.JComboBox<>();
         NombreTextField = new javax.swing.JTextField();
         TipoComboBox = new javax.swing.JComboBox<>();
+        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Nuevo Clasificador");
 
         TituloLabel.setText("Crear nuevo clasificador");
 
-        ExperimentoLabel.setText("Experimento :");
+        ExperimentoLabel.setText("Experimento");
 
         NombreLabel.setText("Nombre :");
 
@@ -79,6 +80,8 @@ public class CreateClasificadorGUI extends javax.swing.JFrame {
 
         TipoComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Estandar", "Pre-Tareas", "Post-Tareas" }));
 
+        jLabel1.setText("o Clasificador");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -98,18 +101,16 @@ public class CreateClasificadorGUI extends javax.swing.JFrame {
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                         .addGap(33, 33, 33)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(ExperimentoLabel)
-                                .addGap(0, 0, Short.MAX_VALUE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(NombreLabel)
-                                    .addComponent(TipoLabel))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 57, Short.MAX_VALUE)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(NombreTextField, javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(ExperimentosComboBox, javax.swing.GroupLayout.Alignment.TRAILING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(TipoComboBox, 0, 265, Short.MAX_VALUE))))))
+                            .addComponent(NombreLabel)
+                            .addComponent(TipoLabel)
+                            .addComponent(jLabel1)
+                            .addComponent(ExperimentoLabel))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(ExperimentosComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 265, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(NombreTextField, javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(TipoComboBox, 0, 265, Short.MAX_VALUE)))))
                 .addGap(32, 32, 32))
         );
         layout.setVerticalGroup(
@@ -119,11 +120,16 @@ public class CreateClasificadorGUI extends javax.swing.JFrame {
                 .addComponent(TituloLabel)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(ExperimentosComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(ExperimentoLabel))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(28, 28, 28)
+                        .addComponent(ExperimentosComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addComponent(ExperimentoLabel)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel1)))
+                .addGap(26, 26, 26)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(NombreLabel)
                     .addComponent(NombreTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -135,7 +141,7 @@ public class CreateClasificadorGUI extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(CancelarButton)
                     .addComponent(CrearButton))
-                .addContainerGap(31, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -147,14 +153,20 @@ public class CreateClasificadorGUI extends javax.swing.JFrame {
             showMessageDialog(new JFrame(), "No se puede crear un clasificador sin nombre.","Error", JOptionPane.ERROR_MESSAGE);
         }
         if(ExperimentosComboBox.getSelectedItem() != null){
-            WindowsInstances.mainGUI.setProyectosTree(new DefaultMutableTreeNode(NombreTextField.getText()), ExperimentosComboBox.getSelectedItem());
+            DefaultMutableTreeNode nodo = new DefaultMutableTreeNode(NombreTextField.getText());
+            WindowsInstances.mainGUI.setProyectosTree(nodo, ExperimentosComboBox.getSelectedItem());
             //WindowsInstances.createTareaGUI.setClaCombo(NombreTextField.getText());
-            //PENDIENTE DE AÑADIR CAMBIO:
-            //CUANDO UN CLASIFICADOR SE METE EN OTRO CLASIFICADOR ESTE NO ES UN EXPERIMENTO, SIGUE SIENDO CLASIFICADOR
-            ParClasificador par = new ParClasificador(ExperimentosComboBox.getSelectedItem().toString(), NombreTextField.getText());
+
+            DefaultMutableTreeNode exp = new DefaultMutableTreeNode();
+            exp = (DefaultMutableTreeNode) nodo.getParent();
+            while(exp.getParent() != WindowsInstances.mainGUI.root){
+                exp = (DefaultMutableTreeNode) exp.getParent();
+            }
+            
+            ParClasificador par = new ParClasificador(exp.toString(), NombreTextField.getText());
             paresExCL.add(par);
             WindowsInstances.createClasificadorGUI.setCombo(NombreTextField.getText());
-            WindowsInstances.createTareaGUI.setExpCombo(NombreTextField.getText()); 
+            WindowsInstances.createTareaGUI.setExpCombo(exp.toString());
             NombreTextField.setText("Introduzca el nombre del clasificador...");
             dispose();
         }
@@ -218,6 +230,7 @@ public class CreateClasificadorGUI extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> TipoComboBox;
     private javax.swing.JLabel TipoLabel;
     private javax.swing.JLabel TituloLabel;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JSeparator jSeparator1;
     // End of variables declaration//GEN-END:variables
 }
