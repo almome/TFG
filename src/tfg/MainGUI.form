@@ -119,6 +119,9 @@
                 </Property>
                 <Property name="rootVisible" type="boolean" value="false"/>
               </Properties>
+              <Events>
+                <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="ProyectosTreeMousePressed"/>
+              </Events>
             </Component>
           </SubComponents>
         </Container>

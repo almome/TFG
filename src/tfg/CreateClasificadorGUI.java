@@ -6,14 +6,10 @@
 package tfg;
 
 
-import java.io.File;
 import java.util.ArrayList;
 import javax.swing.JFrame;
-import javax.swing.JInternalFrame;
 import javax.swing.JOptionPane;
 import static javax.swing.JOptionPane.showMessageDialog;
-import javax.swing.tree.DefaultMutableTreeNode;
-import static tfg.CreateDirectoryGUI.ruta;
 
 /**
  *
@@ -153,14 +149,14 @@ public class CreateClasificadorGUI extends javax.swing.JFrame {
             showMessageDialog(new JFrame(), "No se puede crear un clasificador sin nombre.","Error", JOptionPane.ERROR_MESSAGE);
         }
         if(ExperimentosComboBox.getSelectedItem() != null){
-            DefaultMutableTreeNode nodo = new DefaultMutableTreeNode(NombreTextField.getText());
+            CustomMutableTreeNode nodo = new CustomMutableTreeNode(NombreTextField.getText());
             WindowsInstances.mainGUI.setProyectosTree(nodo, ExperimentosComboBox.getSelectedItem());
             //WindowsInstances.createTareaGUI.setClaCombo(NombreTextField.getText());
 
-            DefaultMutableTreeNode exp = new DefaultMutableTreeNode();
-            exp = (DefaultMutableTreeNode) nodo.getParent();
+            CustomMutableTreeNode exp = new CustomMutableTreeNode();
+            exp = (CustomMutableTreeNode) nodo.getParent();
             while(exp.getParent() != WindowsInstances.mainGUI.root){
-                exp = (DefaultMutableTreeNode) exp.getParent();
+                exp = (CustomMutableTreeNode) exp.getParent();
             }
             
             ParClasificador par = new ParClasificador(exp.toString(), NombreTextField.getText());

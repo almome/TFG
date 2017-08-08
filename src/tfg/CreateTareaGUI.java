@@ -5,15 +5,12 @@
  */
 package tfg;
 
-import java.io.File;
 import java.util.ArrayList;
 import javax.swing.ComboBoxModel;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import static javax.swing.JOptionPane.showMessageDialog;
-import javax.swing.tree.DefaultMutableTreeNode;
-import static tfg.CreateDirectoryGUI.ruta;
 
 /**
  *
@@ -166,7 +163,7 @@ public class CreateTareaGUI extends javax.swing.JFrame {
             showMessageDialog(new JFrame(), "No se puede crear un clasificador sin nombre.","Error", JOptionPane.ERROR_MESSAGE);
         }
         if(ExperimentosComboBox.getSelectedItem() != null && ClasificadorComboBox.getSelectedItem() != null){
-            WindowsInstances.mainGUI.setProyectosTree(new DefaultMutableTreeNode(NombreTextField.getText()), ClasificadorComboBox.getSelectedItem());
+            WindowsInstances.mainGUI.setProyectosTree(new CustomMutableTreeNode(NombreTextField.getText()), ClasificadorComboBox.getSelectedItem());
             NombreTextField.setText("Introduzca el nombre de la tarea");
             dispose();
         }

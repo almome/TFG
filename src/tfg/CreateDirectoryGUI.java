@@ -1,10 +1,7 @@
 package tfg;
 
-import com.sun.corba.se.impl.protocol.giopmsgheaders.MessageBase;
 import java.io.File;
 import static javax.swing.JOptionPane.showMessageDialog;
-import javax.swing.JTree;
-import javax.swing.tree.DefaultMutableTreeNode;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -177,23 +174,18 @@ public class CreateDirectoryGUI extends javax.swing.JFrame {
         File outputsdir;
         if(sSistemaOperativo.equals("Linux")){   //Si es Linux
             directorio = new File(ruta+"//"+NombreTextField.getText());
-            clasificadoresdir = new File(ruta+"//"+NombreTextField.getText()+"//classifiers");
-            outputsdir = new File(ruta+"//"+NombreTextField.getText()+"//output");
+            
         }
         else{   //Si es Windows
             directorio = new File(ruta+"\\"+NombreTextField.getText());
-            clasificadoresdir = new File(ruta+"\\"+NombreTextField.getText()+"\\classifiers");
-            outputsdir = new File(ruta+"\\"+NombreTextField.getText()+"\\output");
+            
         }
         //Comprobamos si el directorio existe
         if(!directorio.exists()){
             //Creamos el directorio
             directorio.mkdir();
-            //Creamos estructura interna carpeta
-            clasificadoresdir.mkdir();
-            outputsdir.mkdir();
              //Crea nodo experimento en el JTree
-            DefaultMutableTreeNode nodoExp = new DefaultMutableTreeNode(NombreTextField.getText());
+            CustomMutableTreeNode nodoExp = new CustomMutableTreeNode(NombreTextField.getText());
             WindowsInstances.mainGUI.setProyectosTree(nodoExp);
             String nombrenodo = nodoExp.getUserObject().toString();
             WindowsInstances.createClasificadorGUI.setCombo(nombrenodo);

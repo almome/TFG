@@ -5,12 +5,14 @@
  */
 package tfg;
 
+import java.awt.MouseInfo;
+import java.awt.Rectangle;
 import java.util.ArrayList;
 import java.util.Enumeration;
 import javax.swing.JMenuItem;
 import javax.swing.JPopupMenu;
-import javax.swing.JTabbedPane;
 import javax.swing.JTree;
+import javax.swing.SwingUtilities;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeModel;
 import javax.swing.tree.TreeNode;
@@ -62,6 +64,11 @@ public class MainGUI extends javax.swing.JFrame {
         javax.swing.tree.DefaultMutableTreeNode treeNode1 = new javax.swing.tree.DefaultMutableTreeNode("root");
         ProyectosTree.setModel(new javax.swing.tree.DefaultTreeModel(treeNode1));
         ProyectosTree.setRootVisible(false);
+        ProyectosTree.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                ProyectosTreeMousePressed(evt);
+            }
+        });
         jScrollPane1.setViewportView(ProyectosTree);
 
         jTabbedPane1.addTab("Experimentos", jScrollPane1);
@@ -167,6 +174,22 @@ public class MainGUI extends javax.swing.JFrame {
         this.root = (DefaultMutableTreeNode) this.modelo.getRoot();
     }//GEN-LAST:event_formWindowOpened
 
+    private void ProyectosTreeMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ProyectosTreeMousePressed
+        if(SwingUtilities.isRightMouseButton(evt))
+        {
+            TreePath path = ProyectosTree.getPathForLocation(evt.getX(), evt.getY());
+            Rectangle pathBounds = ProyectosTree.getUI().getPathBounds(ProyectosTree, path);
+            if(pathBounds != null && pathBounds.contains(evt.getX (), evt.getY ()))
+            {
+                JPopupMenu menu = new JPopupMenu();
+                menu.add ( new JMenuItem ( "Test" ) );
+                int mouseX = MouseInfo.getPointerInfo().getLocation().x;
+                int mouseY = MouseInfo.getPointerInfo().getLocation().y;
+                menu.show (MainGUI.this, mouseX, mouseY);
+            }
+        }
+    }//GEN-LAST:event_ProyectosTreeMousePressed
+
     
     /**
      * @param args the command line arguments
@@ -210,7 +233,7 @@ public class MainGUI extends javax.swing.JFrame {
      * Introduce un nodo experimento
      * @param nodo 
      */
-    public void setProyectosTree(DefaultMutableTreeNode nodo){
+    public void setProyectosTree(CustomMutableTreeNode nodo){
         this.root.add(nodo);    
         this.modelo.reload();
     }
@@ -219,19 +242,22 @@ public class MainGUI extends javax.swing.JFrame {
      * @param nodo
      * @param PadreNodo 
      */
-    public void setProyectosTree(DefaultMutableTreeNode nodo, Object PadreNodo) {
+    public void setProyectosTree(CustomMutableTreeNode nodo, Object PadreNodo) {
         Boolean flag = false;
-        DefaultMutableTreeNode nodec = new DefaultMutableTreeNode();
-        Enumeration<DefaultMutableTreeNode> e = this.root.depthFirstEnumeration();
+        CustomMutableTreeNode nodec = new CustomMutableTreeNode();
+        Enumeration<CustomMutableTreeNode> e = this.root.depthFirstEnumeration();
         while (e.hasMoreElements()&& flag != true) {
-            nodec = e.nextElement();
+            nodec = (CustomMutableTreeNode)e.nextElement();
             if (nodec.toString().equalsIgnoreCase(PadreNodo.toString()) ) {
                  flag = true;
             }
         }
         
+        nodo.setTipo(3);
         nodec.add(nodo);
         this.modelo.reload();
+        CustomMutableTreeNode nhijo = (CustomMutableTreeNode) nodec.getChildAt(0);
+        System.out.println(nhijo.getTipo());
     }
     /**
      * Introduce un nodo tarea
@@ -239,11 +265,11 @@ public class MainGUI extends javax.swing.JFrame {
      * @param PadreNodo
      * @param AbueloNodo 
      */
-    public void setProyectosTree(DefaultMutableTreeNode nodo, Object PadreNodo, Object AbueloNodo) {
+    /*public void setProyectosTree(NodoT nodo, Object PadreNodo, Object AbueloNodo) {
         Boolean flag = false;
         int i = 0;
-        DefaultMutableTreeNode nodec = new DefaultMutableTreeNode();
-        Enumeration<DefaultMutableTreeNode> e = this.root.depthFirstEnumeration();
+        NodoT nodec = new NodoT();
+        Enumeration<NodoT> e = this.root.depthFirstEnumeration();
         while (e.hasMoreElements() && flag != true) {
             nodec = e.nextElement();
             if (nodec.toString().equalsIgnoreCase(PadreNodo.toString()) && nodec.getParent().toString().equals(AbueloNodo.toString())) {
@@ -253,7 +279,7 @@ public class MainGUI extends javax.swing.JFrame {
         }
         nodec.add(nodo);
         this.modelo.reload();
-    }
+    }*/
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuBar BarrajMenu;
