@@ -16,7 +16,7 @@ import static javax.swing.JOptionPane.showMessageDialog;
  * @author Alexandra Morón Méndez
  */
 public class CreateClasificadorGUI extends javax.swing.JFrame {
-    
+    String Padre;
     ArrayList<ParClasificador> paresExCL = new ArrayList<ParClasificador>();
     
     /**
@@ -25,6 +25,18 @@ public class CreateClasificadorGUI extends javax.swing.JFrame {
     public CreateClasificadorGUI() {
         initComponents();
     }
+    
+    /**
+     * Creates new form CreateClasificadorGUI
+     */
+    public CreateClasificadorGUI(Object padre) {
+        initComponents();
+        ExperimentosComboBox.setVisible(false);
+        ExperimentoLabel.setVisible(false);
+        jLabel1.setVisible(false);
+        Padre = padre.toString();
+    }
+
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -167,7 +179,27 @@ public class CreateClasificadorGUI extends javax.swing.JFrame {
             dispose();
         }
         else{
-            showMessageDialog(new JFrame(), "No se ha seleccionado experimento.\nEl clasificador debe crearse dentro de un experimento.","Error", JOptionPane.ERROR_MESSAGE);
+            if(Padre != null){
+                CustomMutableTreeNode nodo = new CustomMutableTreeNode(NombreTextField.getText());
+                WindowsInstances.mainGUI.setProyectosTree(nodo, Padre);
+                //WindowsInstances.createTareaGUI.setClaCombo(NombreTextField.getText());
+
+                CustomMutableTreeNode exp = new CustomMutableTreeNode();
+                exp = (CustomMutableTreeNode) nodo.getParent();
+                while(exp.getParent() != WindowsInstances.mainGUI.root){
+                    exp = (CustomMutableTreeNode) exp.getParent();
+                }
+
+                ParClasificador par = new ParClasificador(exp.toString(), NombreTextField.getText());
+                paresExCL.add(par);
+                WindowsInstances.createClasificadorGUI.setCombo(NombreTextField.getText());
+                WindowsInstances.createTareaGUI.setExpCombo(exp.toString());
+                NombreTextField.setText("Introduzca el nombre del clasificador...");
+                dispose();
+            }
+            else{
+                showMessageDialog(new JFrame(), "No se ha seleccionado experimento.\nEl clasificador debe crearse dentro de un experimento.","Error", JOptionPane.ERROR_MESSAGE);
+            }
         }
         
     }//GEN-LAST:event_CrearButtonActionPerformed

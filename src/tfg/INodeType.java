@@ -17,4 +17,6 @@ public interface INodeType {
     
     public void eliminar();
     
+    public void popupMenu();
+    
 }

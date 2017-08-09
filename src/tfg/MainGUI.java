@@ -184,27 +184,7 @@ public class MainGUI extends javax.swing.JFrame {
             if(pathBounds != null && pathBounds.contains(evt.getX (), evt.getY ()))
             {
                 CustomMutableTreeNode hijo = (CustomMutableTreeNode) path.getLastPathComponent();
-                //i = modelo.getIndexOfChild(padre, hijo);
-                //CustomMutableTreeNode pulsado = (CustomMutableTreeNode) modelo.getChild(path.getPathComponent(0), i);
-                
-                JPopupMenu menu = new JPopupMenu();
-                JMenuItem jMenuItemAux;
-                
-                jMenuItemAux = new JMenuItem("Crear Clasificador");
-                jMenuItemAux.addActionListener(new ActionListener() {
-                    @Override
-                    public void actionPerformed(ActionEvent ev) {
-                        System.out.println("Le he dado al botón");
-                        System.exit(0);
-                    }
-                });
-                menu.add (jMenuItemAux); //Crear los jmenus individualmente y llamar a los respectivos métodos
-                menu.add ( new JMenuItem ( "Ejecutar..." ) );
-                menu.add ( new JMenuItem ( "Eliminar" ) );
-                
-                int mouseX = MouseInfo.getPointerInfo().getLocation().x;
-                int mouseY = MouseInfo.getPointerInfo().getLocation().y;
-                menu.show (MainGUI.this, mouseX, mouseY);
+                hijo.getNodeType().popupMenu();
             }
         }
     }//GEN-LAST:event_ProyectosTreeMousePressed
