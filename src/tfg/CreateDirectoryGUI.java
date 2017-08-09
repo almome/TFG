@@ -15,7 +15,7 @@ import static javax.swing.JOptionPane.showMessageDialog;
  */
 public class CreateDirectoryGUI extends javax.swing.JFrame {
     public static String ruta = "";
-    public int nExp = 0;    // TRABAJO FUTURO: Hacer que lo coja de la Base de Datos
+    public int nExp = 0;    
     /**
      * Creates new form CreateDirectory
      */
@@ -170,8 +170,6 @@ public class CreateDirectoryGUI extends javax.swing.JFrame {
         nExp++;
         String sSistemaOperativo = System.getProperty("os.name");
         File directorio;
-        File clasificadoresdir;
-        File outputsdir;
         if(sSistemaOperativo.equals("Linux")){   //Si es Linux
             directorio = new File(ruta+"//"+NombreTextField.getText());
             
@@ -185,9 +183,11 @@ public class CreateDirectoryGUI extends javax.swing.JFrame {
             //Creamos el directorio
             directorio.mkdir();
              //Crea nodo experimento en el JTree
-            CustomMutableTreeNode nodoExp = new CustomMutableTreeNode(NombreTextField.getText());
-            WindowsInstances.mainGUI.setProyectosTree(nodoExp);
-            String nombrenodo = nodoExp.getUserObject().toString();
+            INodeType nodoExp = new ExperimentNode();   
+            CustomMutableTreeNode CnodoExp = new CustomMutableTreeNode(NombreTextField.getText());
+            CnodoExp.setNodeType(nodoExp);
+            WindowsInstances.mainGUI.setProyectosTree(CnodoExp);
+            String nombrenodo = CnodoExp.getUserObject().toString();
             WindowsInstances.createClasificadorGUI.setCombo(nombrenodo);
             WindowsInstances.createTareaGUI.setExpCombo(nombrenodo);  
             NombreTextField.setText("Experimento"+this.nExp);

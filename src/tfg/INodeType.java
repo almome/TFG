@@ -10,5 +10,11 @@ package tfg;
  * @author sandra
  */
 public interface INodeType {
-    public void BuildWindow();
+    
+    public void crearHijo();
+    
+    public void ejecutar();
+    
+    public void eliminar();
+    
 }

@@ -3,15 +3,11 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/home/sandra/NetBeansProjects/TFG/src/tfg/CreateTareaGUI.java</file>
-            <file>file:/home/sandra/NetBeansProjects/TFG/src/tfg/WindowsInstances.java</file>
-            <file>file:/home/sandra/NetBeansProjects/TFG/src/tfg/CreateDirectoryGUI.java</file>
-            <file>file:/home/sandra/NetBeansProjects/TFG/src/tfg/TFG.java</file>
-            <file>file:/home/sandra/NetBeansProjects/TFG/src/tfg/MainGUI.java</file>
-            <file>file:/home/sandra/NetBeansProjects/TFG/src/tfg/ExperimentNode.java</file>
-            <file>file:/home/sandra/NetBeansProjects/TFG/src/tfg/CreateClasificadorGUI.java</file>
-            <file>file:/home/sandra/NetBeansProjects/TFG/src/tfg/INodeType.java</file>
-            <file>file:/home/sandra/NetBeansProjects/TFG/src/tfg/CustomMutableTreeNode.java</file>
+            <file>file:/C:/Users/alexa/Documents/NetBeansProjects/TFG/src/tfg/CreateDirectoryGUI.java</file>
+            <file>file:/C:/Users/alexa/Documents/NetBeansProjects/TFG/src/tfg/MainGUI.java</file>
+            <file>file:/C:/Users/alexa/Documents/NetBeansProjects/TFG/src/tfg/ExperimentNode.java</file>
+            <file>file:/C:/Users/alexa/Documents/NetBeansProjects/TFG/src/tfg/INodeType.java</file>
+            <file>file:/C:/Users/alexa/Documents/NetBeansProjects/TFG/src/tfg/CustomMutableTreeNode.java</file>
         </group>
     </open-files>
 </project-private>

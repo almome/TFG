@@ -11,9 +11,25 @@ package tfg;
  */
 public class ExperimentNode implements INodeType {
 
+    /**
+     * Crear Clasificador
+     */
     @Override
-    public void BuildWindow() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void crearHijo(){
+        
+    }
+    
+    /**
+     * Ejecutar todas las tareas del experimento
+     */
+    @Override
+    public void ejecutar(){
+        System.out.println("EJECUCIOOOOON");
+    }
+
+    @Override
+    public void eliminar() {
+
     }
     
 }

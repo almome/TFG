@@ -12,23 +12,18 @@ import javax.swing.tree.DefaultMutableTreeNode;
  * @author sandra
  */
 public class CustomMutableTreeNode extends DefaultMutableTreeNode {
-    private int tipo = 1;
+   
     private INodeType nodeType;
 
-    CustomMutableTreeNode() {
-
+    public INodeType getNodeType() {
+        return nodeType;
     }
+
+    public void setNodeType(INodeType nodeType) {
+        this.nodeType = nodeType;
+    }
+
+    CustomMutableTreeNode() {}
     
-    CustomMutableTreeNode(String text) {
-        super(text);
-    }
-
-    public int getTipo() {
-        return tipo;
-    }
-
-    public void setTipo(int tipo) {
-        this.tipo = tipo;
-    }
-    
+    CustomMutableTreeNode(String text) {super(text);}
 }

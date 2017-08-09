@@ -181,8 +181,15 @@ public class MainGUI extends javax.swing.JFrame {
             Rectangle pathBounds = ProyectosTree.getUI().getPathBounds(ProyectosTree, path);
             if(pathBounds != null && pathBounds.contains(evt.getX (), evt.getY ()))
             {
+                CustomMutableTreeNode hijo = (CustomMutableTreeNode) path.getLastPathComponent();
+                //i = modelo.getIndexOfChild(padre, hijo);
+                //CustomMutableTreeNode pulsado = (CustomMutableTreeNode) modelo.getChild(path.getPathComponent(0), i);
+                
                 JPopupMenu menu = new JPopupMenu();
-                menu.add ( new JMenuItem ( "Test" ) );
+                menu.add ( new JMenuItem("Crear Clasificador") ); //Crear los jmenus individualmente y llamar a los respectivos métodos
+                menu.add ( new JMenuItem ( "Ejecutar..." ) );
+                menu.add ( new JMenuItem ( "Eliminar" ) );
+                
                 int mouseX = MouseInfo.getPointerInfo().getLocation().x;
                 int mouseY = MouseInfo.getPointerInfo().getLocation().y;
                 menu.show (MainGUI.this, mouseX, mouseY);
@@ -238,7 +245,7 @@ public class MainGUI extends javax.swing.JFrame {
         this.modelo.reload();
     }
     /**
-     * Introduce un nodo clasificador
+     * Introduce un nodo clasificador o tarea
      * @param nodo
      * @param PadreNodo 
      */
@@ -253,33 +260,9 @@ public class MainGUI extends javax.swing.JFrame {
             }
         }
         
-        nodo.setTipo(3);
         nodec.add(nodo);
         this.modelo.reload();
-        CustomMutableTreeNode nhijo = (CustomMutableTreeNode) nodec.getChildAt(0);
-        System.out.println(nhijo.getTipo());
     }
-    /**
-     * Introduce un nodo tarea
-     * @param nodo
-     * @param PadreNodo
-     * @param AbueloNodo 
-     */
-    /*public void setProyectosTree(NodoT nodo, Object PadreNodo, Object AbueloNodo) {
-        Boolean flag = false;
-        int i = 0;
-        NodoT nodec = new NodoT();
-        Enumeration<NodoT> e = this.root.depthFirstEnumeration();
-        while (e.hasMoreElements() && flag != true) {
-            nodec = e.nextElement();
-            if (nodec.toString().equalsIgnoreCase(PadreNodo.toString()) && nodec.getParent().toString().equals(AbueloNodo.toString())) {
-                i = root.getIndex(nodec);
-                flag = true;
-            }
-        }
-        nodec.add(nodo);
-        this.modelo.reload();
-    }*/
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuBar BarrajMenu;
