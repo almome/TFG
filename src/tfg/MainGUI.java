@@ -7,6 +7,8 @@ package tfg;
 
 import java.awt.MouseInfo;
 import java.awt.Rectangle;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.Enumeration;
 import javax.swing.JMenuItem;
@@ -186,7 +188,17 @@ public class MainGUI extends javax.swing.JFrame {
                 //CustomMutableTreeNode pulsado = (CustomMutableTreeNode) modelo.getChild(path.getPathComponent(0), i);
                 
                 JPopupMenu menu = new JPopupMenu();
-                menu.add ( new JMenuItem("Crear Clasificador") ); //Crear los jmenus individualmente y llamar a los respectivos métodos
+                JMenuItem jMenuItemAux;
+                
+                jMenuItemAux = new JMenuItem("Crear Clasificador");
+                jMenuItemAux.addActionListener(new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent ev) {
+                        System.out.println("Le he dado al botón");
+                        System.exit(0);
+                    }
+                });
+                menu.add (jMenuItemAux); //Crear los jmenus individualmente y llamar a los respectivos métodos
                 menu.add ( new JMenuItem ( "Ejecutar..." ) );
                 menu.add ( new JMenuItem ( "Eliminar" ) );
                 
