@@ -184,7 +184,7 @@ public class MainGUI extends javax.swing.JFrame {
             if(pathBounds != null && pathBounds.contains(evt.getX (), evt.getY ()))
             {
                 CustomMutableTreeNode hijo = (CustomMutableTreeNode) path.getLastPathComponent();
-                hijo.getNodeType().popupMenu();
+                hijo.getNodeType().popupMenu(hijo);
             }
         }
     }//GEN-LAST:event_ProyectosTreeMousePressed

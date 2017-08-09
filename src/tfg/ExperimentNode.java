@@ -22,8 +22,8 @@ public class ExperimentNode implements INodeType {
      * Crear Clasificador
      */
     @Override
-    public void crearHijo(){
-        CreateClasificadorGUI creador = new CreateClasificadorGUI(this); //NECESITO METER EL NODO PADRE
+    public void crearHijo(CustomMutableTreeNode padre){
+        CreateClasificadorGUI creador = new CreateClasificadorGUI(padre); //NECESITO METER EL NODO PADRE
         creador.setVisible(true);
     }
     
@@ -39,15 +39,19 @@ public class ExperimentNode implements INodeType {
      * Elimina Experimento
      */
     @Override
-    public void eliminar() {
-
+    public void eliminar(CustomMutableTreeNode padre) {
+        padre.removeFromParent();                   //Hay que eliminar el nodo de la lista
+                                                    //Dar opción de eliminar la carpeta
+        int i = WindowsInstances.createClasificadorGUI.paresExCL.indexOf(padre.toString());
+        WindowsInstances.createClasificadorGUI.paresExCL.remove(i);
+        WindowsInstances.mainGUI.modelo.reload();
     }
     
     /**
      * Menu PopUp de Experimento
      */
     @Override
-    public void popupMenu() {
+    public void popupMenu(CustomMutableTreeNode padre) {
         JPopupMenu menu = new JPopupMenu();
                 
         JMenuItem jMenuItemCreaClasificador;
@@ -58,7 +62,7 @@ public class ExperimentNode implements INodeType {
         jMenuItemCreaClasificador.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ev) {
-                crearHijo();
+                crearHijo(padre);
             }
         });
         
@@ -74,7 +78,7 @@ public class ExperimentNode implements INodeType {
         jMenuItemEliminar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ev) {
-                eliminar();
+                eliminar(padre);
             }
         });
         

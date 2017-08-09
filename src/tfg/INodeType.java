@@ -11,12 +11,12 @@ package tfg;
  */
 public interface INodeType {
     
-    public void crearHijo();
+    public void crearHijo(CustomMutableTreeNode padre);
     
     public void ejecutar();
     
-    public void eliminar();
+    public void eliminar(CustomMutableTreeNode padre);
     
-    public void popupMenu();
+    public void popupMenu(CustomMutableTreeNode padre);
     
 }
