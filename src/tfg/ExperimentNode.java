@@ -8,6 +8,8 @@ package tfg;
 import java.awt.MouseInfo;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Enumeration;
 import javax.swing.JMenuItem;
 import javax.swing.JPopupMenu;
@@ -23,7 +25,7 @@ public class ExperimentNode implements INodeType {
      */
     @Override
     public void crearHijo(CustomMutableTreeNode padre){
-        CreateClasificadorGUI creador = new CreateClasificadorGUI(padre); //NECESITO METER EL NODO PADRE
+        CreateClasificadorGUI creador = new CreateClasificadorGUI(padre); 
         creador.setVisible(true);
     }
     
@@ -37,13 +39,25 @@ public class ExperimentNode implements INodeType {
     
     /**
      * Elimina Experimento
+     * @param padre
      */
     @Override
     public void eliminar(CustomMutableTreeNode padre) {
-        padre.removeFromParent();                   //Hay que eliminar el nodo de la lista
-                                                    //Dar opción de eliminar la carpeta
-        int i = WindowsInstances.createClasificadorGUI.paresExCL.indexOf(padre.toString());
-        WindowsInstances.createClasificadorGUI.paresExCL.remove(i);
+        int i = 0;
+        if(!WindowsInstances.createClasificadorGUI.paresExCL.isEmpty()){    //Puede haber en los pares experimentos repetidos
+            while(!WindowsInstances.createClasificadorGUI.paresExCL.get(i).Experimento.equals(padre.toString())){
+                i++;
+            }
+            WindowsInstances.createClasificadorGUI.paresExCL.remove(i);
+        }
+        //Hay que aliminar loe los combobox
+        if(!padre.isLeaf()){
+            elimHijos(padre);
+        }
+        WindowsInstances.createClasificadorGUI.eliminarExpYCla(padre.toString());
+        padre.removeAllChildren();  //Elimino los hijos del nodo padre
+        WindowsInstances.mainGUI.modelo.nodeStructureChanged(padre); //Se debe notificar al arbol
+        WindowsInstances.mainGUI.modelo.removeNodeFromParent(padre); //Se elimina el nodo padre
         WindowsInstances.mainGUI.modelo.reload();
     }
     
@@ -89,6 +103,28 @@ public class ExperimentNode implements INodeType {
         int mouseX = MouseInfo.getPointerInfo().getLocation().x;
         int mouseY = MouseInfo.getPointerInfo().getLocation().y;
         menu.show (WindowsInstances.mainGUI, mouseX, mouseY);
+    }
+    
+    public void elimHijos(CustomMutableTreeNode padre){
+        int i = 0;
+        ArrayList<CustomMutableTreeNode> hijos = Collections.list(padre.children());
+        for(i = 0; i < hijos.size(); i++){
+            if(hijos.get(i).isLeaf()){
+                WindowsInstances.createClasificadorGUI.eliminarExpYCla(hijos.get(i).toString());
+                if(i+1 == hijos.size() ){
+                    padre.removeAllChildren();
+                    //WindowsInstances.mainGUI.modelo.removeNodeFromParent(padre);
+                    //elimHijos(padre);   //Si es el ultimo hijo que se va a eliminar volvemos al padre para talarlo
+                    
+                }
+            }
+            else{
+                elimHijos(hijos.get(i));
+                WindowsInstances.createClasificadorGUI.eliminarExpYCla(hijos.get(i).toString());
+            }    
+        }
+        
+        
     }
     
 }

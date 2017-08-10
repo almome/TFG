@@ -246,6 +246,10 @@ public class CreateClasificadorGUI extends javax.swing.JFrame {
     public void setCombo (String nodo){
         ExperimentosComboBox.addItem(nodo);
     }
+    
+    public void eliminarExpYCla(String nodo){
+        ExperimentosComboBox.removeItem(nodo);
+    }
    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
