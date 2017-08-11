@@ -25,7 +25,7 @@ public class ExperimentNode implements INodeType {
      */
     @Override
     public void crearHijo(CustomMutableTreeNode padre){
-        CreateClasificadorGUI creador = new CreateClasificadorGUI(padre); 
+        CreateClassifierGUI creador = new CreateClassifierGUI(padre); 
         creador.setVisible(true);
     }
     
@@ -44,17 +44,21 @@ public class ExperimentNode implements INodeType {
     @Override
     public void eliminar(CustomMutableTreeNode padre) {
         int i = 0;
-        if(!WindowsInstances.createClasificadorGUI.paresExCL.isEmpty()){    //Puede haber en los pares experimentos repetidos
-            while(!WindowsInstances.createClasificadorGUI.paresExCL.get(i).Experimento.equals(padre.toString())){
+        //Eliminar de la tabla de pares
+        if(!WindowsInstances.createClasificadorGUI.paresExCL.isEmpty()){
+            while(i < WindowsInstances.createClasificadorGUI.paresExCL.size()){
+                if(WindowsInstances.createClasificadorGUI.paresExCL.get(i).Experimento.equals(padre.toString())){
+                    WindowsInstances.createClasificadorGUI.paresExCL.remove(i);
+                }
                 i++;
             }
-            WindowsInstances.createClasificadorGUI.paresExCL.remove(i);
         }
         //Hay que aliminar loe los combobox
         if(!padre.isLeaf()){
             elimHijos(padre);
         }
         WindowsInstances.createClasificadorGUI.eliminarExpYCla(padre.toString());
+        //Eliminar del arbol
         padre.removeAllChildren();  //Elimino los hijos del nodo padre
         WindowsInstances.mainGUI.modelo.nodeStructureChanged(padre); //Se debe notificar al arbol
         WindowsInstances.mainGUI.modelo.removeNodeFromParent(padre); //Se elimina el nodo padre

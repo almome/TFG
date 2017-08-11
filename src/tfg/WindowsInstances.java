@@ -12,6 +12,6 @@ package tfg;
 public final class WindowsInstances {
     public static MainGUI mainGUI = new MainGUI();
     public static CreateDirectoryGUI createDirectoryGUI = new CreateDirectoryGUI();
-    public static CreateClasificadorGUI createClasificadorGUI = new CreateClasificadorGUI();
-    public static CreateTareaGUI createTareaGUI = new CreateTareaGUI();
+    public static CreateClassifierGUI createClasificadorGUI = new CreateClassifierGUI();
+    public static CreateTaskGUI createTareaGUI = new CreateTaskGUI();
 }
