@@ -11,7 +11,7 @@ package tfg;
  */
 public interface INodeType {
     
-    public void crearHijo(CustomMutableTreeNode padre);
+    public void crearHijo(CustomMutableTreeNode padre, int i);
     
     public void ejecutar();
     

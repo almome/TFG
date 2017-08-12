@@ -24,9 +24,10 @@ public class ExperimentNode implements INodeType {
      * Crear Clasificador
      */
     @Override
-    public void crearHijo(CustomMutableTreeNode padre){
+    public void crearHijo(CustomMutableTreeNode padre , int i){
         CreateClassifierGUI creador = new CreateClassifierGUI(padre); 
         creador.setVisible(true);
+        WindowsInstances.mainGUI.expandAllNodes(WindowsInstances.mainGUI.getProyectosTree(),  0, WindowsInstances.mainGUI.getProyectosTree().getRowCount());
     }
     
     /**
@@ -63,6 +64,7 @@ public class ExperimentNode implements INodeType {
         WindowsInstances.mainGUI.modelo.nodeStructureChanged(padre); //Se debe notificar al arbol
         WindowsInstances.mainGUI.modelo.removeNodeFromParent(padre); //Se elimina el nodo padre
         WindowsInstances.mainGUI.modelo.reload();
+        WindowsInstances.mainGUI.expandAllNodes(WindowsInstances.mainGUI.getProyectosTree(),  0, WindowsInstances.mainGUI.getProyectosTree().getRowCount());
     }
     
     /**
@@ -80,7 +82,7 @@ public class ExperimentNode implements INodeType {
         jMenuItemCreaClasificador.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ev) {
-                crearHijo(padre);
+                crearHijo(padre, 0);
             }
         });
         

@@ -255,6 +255,16 @@ public class MainGUI extends javax.swing.JFrame {
         nodec.add(nodo);
         this.modelo.reload();
     }
+    
+    public void expandAllNodes(JTree tree, int startingIndex, int rowCount){
+    for(int i=startingIndex;i<rowCount;++i){
+        tree.expandRow(i);
+    }
+
+    if(tree.getRowCount()!=rowCount){
+        expandAllNodes(tree, rowCount, tree.getRowCount());
+    }
+}
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuBar BarrajMenu;

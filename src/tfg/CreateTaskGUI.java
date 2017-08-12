@@ -17,12 +17,21 @@ import static javax.swing.JOptionPane.showMessageDialog;
  * @author alexa
  */
 public class CreateTaskGUI extends javax.swing.JFrame {
-
+    String Padre;
     /**
      * Creates new form CreateTareaGUI
      */
     public CreateTaskGUI() {
         initComponents();
+    }
+    
+    public CreateTaskGUI(Object padre) {
+        initComponents();
+        ExperimentosComboBox.setVisible(false);
+        ExperimentoLabel.setVisible(false);
+        ClasificadorComboBox.setVisible(false);
+        ClasificadorLabel.setVisible(false);
+        Padre = padre.toString();
     }
 
     /**
@@ -158,17 +167,33 @@ public class CreateTaskGUI extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void CrearButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CrearButtonActionPerformed
-        String sSistemaOperativo = System.getProperty("os.name");
+
         if(NombreTextField.getText() == null){
-            showMessageDialog(new JFrame(), "No se puede crear un clasificador sin nombre.","Error", JOptionPane.ERROR_MESSAGE);
+            showMessageDialog(new JFrame(), "No se puede crear una tarea sin nombre.","Error", JOptionPane.ERROR_MESSAGE);
         }
         if(ExperimentosComboBox.getSelectedItem() != null && ClasificadorComboBox.getSelectedItem() != null){
+            CustomMutableTreeNode nodo = new CustomMutableTreeNode(NombreTextField.getText());
+            INodeType nodoExp = new TaskNode();
+            nodo.setNodeType(nodoExp);
             WindowsInstances.mainGUI.setProyectosTree(new CustomMutableTreeNode(NombreTextField.getText()), ClasificadorComboBox.getSelectedItem());
             NombreTextField.setText("Introduzca el nombre de la tarea");
+            WindowsInstances.mainGUI.expandAllNodes(WindowsInstances.mainGUI.getProyectosTree(),  0, WindowsInstances.mainGUI.getProyectosTree().getRowCount());
             dispose();
         }
         else{
-            showMessageDialog(new JFrame(), "No se ha seleccionado experimento.\nEl clasificador debe crearse dentro de un experimento.","Error", JOptionPane.ERROR_MESSAGE);
+            if(Padre != null){
+                INodeType nodoExp = new TaskNode();   
+                CustomMutableTreeNode nodo = new CustomMutableTreeNode(NombreTextField.getText());
+                nodo.setNodeType(nodoExp);
+                WindowsInstances.mainGUI.setProyectosTree(nodo, Padre);
+                NombreTextField.setText("Introduzca el nombre de la tarea");
+                WindowsInstances.mainGUI.expandAllNodes(WindowsInstances.mainGUI.getProyectosTree(),  0, WindowsInstances.mainGUI.getProyectosTree().getRowCount());
+                dispose();
+            }
+            else{
+                showMessageDialog(new JFrame(), "No se ha seleccionado experimento.\nEl clasificador debe crearse dentro de un experimento.","Error", JOptionPane.ERROR_MESSAGE);
+
+            }
         }
     }//GEN-LAST:event_CrearButtonActionPerformed
 
