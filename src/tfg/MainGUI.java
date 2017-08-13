@@ -154,7 +154,9 @@ public class MainGUI extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
+                WindowsInstances.createClasificadorGUI.mostrarCampos();
                 WindowsInstances.createClasificadorGUI.setVisible(true);
+                
             }
         });
     }//GEN-LAST:event_clasificajMenuActionPerformed

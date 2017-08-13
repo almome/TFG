@@ -20,7 +20,13 @@ import static javax.swing.JOptionPane.showMessageDialog;
 public class CreateClassifierGUI extends javax.swing.JFrame {
     String Padre;
     ArrayList<ParClasificador> paresExCL = new ArrayList<ParClasificador>();
-    
+    public String getPadre() {
+        return Padre;
+    }
+
+    public void setPadre(String Padre) {
+        this.Padre = Padre;
+    }
     /**
      * Creates new form CreateClasificadorGUI
      */
@@ -31,13 +37,17 @@ public class CreateClassifierGUI extends javax.swing.JFrame {
     /**
      * Creates new form CreateClasificadorGUI
      */
-    public CreateClassifierGUI(Object padre) {
-        initComponents();
+    public void ocultarCampos () {
         ExperimentosComboBox.setVisible(false);
         ExperimentoLabel.setVisible(false);
         ClasificadorComboBox.setVisible(false);
         jLabel1.setVisible(false);
-        Padre = padre.toString();
+    }
+    public void mostrarCampos () {
+        ExperimentosComboBox.setVisible(true);
+        ExperimentoLabel.setVisible(true);
+        ClasificadorComboBox.setVisible(true);
+        jLabel1.setVisible(true);
     }
 
 

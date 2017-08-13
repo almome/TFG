@@ -21,16 +21,10 @@ public class ClassifierNode implements INodeType{
 
     @Override
     public void crearHijo(CustomMutableTreeNode padre, int i) {
-        if(i == 0){
-            CreateClassifierGUI creador = new CreateClassifierGUI(padre); 
-            creador.setVisible(true);
-        }
-        else{
-            CreateTaskGUI creador = new CreateTaskGUI(padre); 
-            creador.setVisible(true);
-        }
+        WindowsInstances.createClasificadorGUI.setPadre(padre.toString());
+        WindowsInstances.createClasificadorGUI.setVisible(true);
         WindowsInstances.mainGUI.expandAllNodes(WindowsInstances.mainGUI.getProyectosTree(),  0, WindowsInstances.mainGUI.getProyectosTree().getRowCount());
-        
+        WindowsInstances.createClasificadorGUI.mostrarCampos();
     }
 
     @Override

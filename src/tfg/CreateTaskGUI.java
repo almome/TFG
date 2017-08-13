@@ -18,6 +18,14 @@ import static javax.swing.JOptionPane.showMessageDialog;
  */
 public class CreateTaskGUI extends javax.swing.JFrame {
     String Padre;
+
+    public String getPadre() {
+        return Padre;
+    }
+
+    public void setPadre(String Padre) {
+        this.Padre = Padre;
+    }
     /**
      * Creates new form CreateTareaGUI
      */
@@ -25,13 +33,17 @@ public class CreateTaskGUI extends javax.swing.JFrame {
         initComponents();
     }
     
-    public CreateTaskGUI(Object padre) {
-        initComponents();
+    public void ocultarCampos () {
         ExperimentosComboBox.setVisible(false);
         ExperimentoLabel.setVisible(false);
         ClasificadorComboBox.setVisible(false);
         ClasificadorLabel.setVisible(false);
-        Padre = padre.toString();
+    }
+    public void mostrarCampos () {
+        ExperimentosComboBox.setVisible(true);
+        ExperimentoLabel.setVisible(true);
+        ClasificadorComboBox.setVisible(true);
+        ClasificadorLabel.setVisible(true);
     }
 
     /**
@@ -243,6 +255,8 @@ public class CreateTaskGUI extends javax.swing.JFrame {
             }
         });
     }
+    
+    
     
     public void setExpCombo (String nodo){
         int i = 0;
