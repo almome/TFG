@@ -18,13 +18,31 @@ import javax.swing.JPopupMenu;
  * @author alexa
  */
 public class ClassifierNode implements INodeType{
+    String rutaCarpeta;
 
+    public String getRutaCarpeta() {
+        return rutaCarpeta;
+    }
+
+    public void setRutaCarpeta(String rutaCarpeta) {
+        this.rutaCarpeta = rutaCarpeta;
+    }
     @Override
     public void crearHijo(CustomMutableTreeNode padre, int i) {
-        WindowsInstances.createClasificadorGUI.setPadre(padre.toString());
-        WindowsInstances.createClasificadorGUI.setVisible(true);
-        WindowsInstances.mainGUI.expandAllNodes(WindowsInstances.mainGUI.getProyectosTree(),  0, WindowsInstances.mainGUI.getProyectosTree().getRowCount());
-        WindowsInstances.createClasificadorGUI.mostrarCampos();
+        if(i == 0){
+            WindowsInstances.createClasificadorGUI.setPadre(padre.toString());
+            WindowsInstances.createClasificadorGUI.setVisible(true);
+            WindowsInstances.createClasificadorGUI.ocultarCampos();
+            WindowsInstances.mainGUI.expandAllNodes(WindowsInstances.mainGUI.getProyectosTree(),  0, WindowsInstances.mainGUI.getProyectosTree().getRowCount());
+        }
+        else{
+             
+            WindowsInstances.createTareaGUI.setPadre(padre.toString());
+            WindowsInstances.createTareaGUI.setVisible(true);
+            WindowsInstances.createTareaGUI.ocultarCampos();
+            WindowsInstances.mainGUI.expandAllNodes(WindowsInstances.mainGUI.getProyectosTree(),  0, WindowsInstances.mainGUI.getProyectosTree().getRowCount());
+        }
+        
     }
 
     @Override

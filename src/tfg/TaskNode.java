@@ -10,13 +10,41 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JMenuItem;
 import javax.swing.JPopupMenu;
+import javax.swing.text.Document;
 
 /**
  *
  * @author alexa
  */
 public class TaskNode implements INodeType{
+    String rutaPlantilla;
+    String rutaDatos;
+    Document docXML;
 
+    public String getRutaPlantilla() {
+        return rutaPlantilla;
+    }
+
+    public void setRutaPlantilla(String rutaPlantilla) {
+        this.rutaPlantilla = rutaPlantilla;
+    }
+
+    public String getRutaDatos() {
+        return rutaDatos;
+    }
+
+    public void setRutaDatos(String rutaDatos) {
+        this.rutaDatos = rutaDatos;
+    }
+
+    public Document getDocXML() {
+        return docXML;
+    }
+
+    public void setDocXML(Document docXML) {
+        this.docXML = docXML;
+    }
+    
     @Override
     public void crearHijo(CustomMutableTreeNode padre, int i) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.

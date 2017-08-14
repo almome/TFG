@@ -1,6 +1,8 @@
 package tfg;
 
 import java.io.File;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import static javax.swing.JOptionPane.showMessageDialog;
 
 /*
@@ -186,6 +188,8 @@ public class CreateDirectoryGUI extends javax.swing.JFrame {
             INodeType nodoExp = new ExperimentNode();   
             CustomMutableTreeNode CnodoExp = new CustomMutableTreeNode(NombreTextField.getText());
             CnodoExp.setNodeType(nodoExp);
+            ExperimentNode n = (ExperimentNode) CnodoExp.getNodeType();
+            n.setRutaCarpeta(directorio.getPath());
             WindowsInstances.mainGUI.setProyectosTree(CnodoExp);
             String nombrenodo = CnodoExp.getUserObject().toString();
             WindowsInstances.createClasificadorGUI.setCombo(nombrenodo);
@@ -194,7 +198,7 @@ public class CreateDirectoryGUI extends javax.swing.JFrame {
             dispose();
         }
         else{
-            showMessageDialog(null, "El nombre del experimento ya existe.");
+            showMessageDialog(new JFrame(), "El experimento ya existe.","Error", JOptionPane.ERROR_MESSAGE);
         }
        
     }//GEN-LAST:event_CrearButtonActionPerformed

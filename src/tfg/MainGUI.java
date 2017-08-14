@@ -48,6 +48,7 @@ public class MainGUI extends javax.swing.JFrame {
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jScrollPane1 = new javax.swing.JScrollPane();
         ProyectosTree = new javax.swing.JTree();
+        DatosLayeredPane = new javax.swing.JLayeredPane();
         BarrajMenu = new javax.swing.JMenuBar();
         archivosjMenu = new javax.swing.JMenu();
         nuevojMenu = new javax.swing.JMenu();
@@ -74,6 +75,10 @@ public class MainGUI extends javax.swing.JFrame {
         jScrollPane1.setViewportView(ProyectosTree);
 
         jTabbedPane1.addTab("Experimentos", jScrollPane1);
+
+        java.awt.GridBagLayout jLayeredPane1Layout = new java.awt.GridBagLayout();
+        jLayeredPane1Layout.columnWidths = new int[] {2};
+        DatosLayeredPane.setLayout(jLayeredPane1Layout);
 
         archivosjMenu.setText("Archivos");
 
@@ -119,13 +124,20 @@ public class MainGUI extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(870, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(DatosLayeredPane, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(819, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(42, 42, 42)
-                .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 623, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(42, 42, 42)
+                        .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 623, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(68, 68, 68)
+                        .addComponent(DatosLayeredPane)))
                 .addContainerGap())
         );
 
@@ -167,6 +179,7 @@ public class MainGUI extends javax.swing.JFrame {
     private void tareajMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tareajMenuActionPerformed
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
+                WindowsInstances.createTareaGUI.mostrarCampos();
                 WindowsInstances.createTareaGUI.setVisible(true);
             }
         });
@@ -177,7 +190,10 @@ public class MainGUI extends javax.swing.JFrame {
         this.modelo = (DefaultTreeModel) this.ProyectosTree.getModel();
         this.root = (DefaultMutableTreeNode) this.modelo.getRoot();
     }//GEN-LAST:event_formWindowOpened
-
+    /**
+     * Método de acción cuando se hace click con el botón derecho del ratón en un nodo del arbol
+     * @param evt 
+     */
     private void ProyectosTreeMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ProyectosTreeMousePressed
         if(SwingUtilities.isRightMouseButton(evt))
         {
@@ -187,6 +203,12 @@ public class MainGUI extends javax.swing.JFrame {
             {
                 CustomMutableTreeNode hijo = (CustomMutableTreeNode) path.getLastPathComponent();
                 hijo.getNodeType().popupMenu(hijo);
+            }
+        }
+        else{
+            if(SwingUtilities.isLeftMouseButton(evt)){
+                DatosLayeredPane.removeAll();
+                DatosLayeredPane.repaint();
             }
         }
     }//GEN-LAST:event_ProyectosTreeMousePressed
@@ -270,6 +292,7 @@ public class MainGUI extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuBar BarrajMenu;
+    private javax.swing.JLayeredPane DatosLayeredPane;
     private javax.swing.JTree ProyectosTree;
     private javax.swing.JMenu archivosjMenu;
     private javax.swing.JMenuItem clasificajMenu;

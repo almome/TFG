@@ -19,6 +19,7 @@ import static javax.swing.JOptionPane.showMessageDialog;
  */
 public class CreateClassifierGUI extends javax.swing.JFrame {
     String Padre;
+    String ruta = "";
     ArrayList<ParClasificador> paresExCL = new ArrayList<ParClasificador>();
     public String getPadre() {
         return Padre;
@@ -172,12 +173,15 @@ public class CreateClassifierGUI extends javax.swing.JFrame {
             CustomMutableTreeNode nodo = new CustomMutableTreeNode(NombreTextField.getText());
             INodeType nodoExp = new ClassifierNode();
             nodo.setNodeType(nodoExp);
-                if(ClasificadorComboBox.getSelectedItem()!= "NINGUNO"){
-                    WindowsInstances.mainGUI.setProyectosTree(nodo, ClasificadorComboBox.getSelectedItem());
-                }
-                else{
-                         WindowsInstances.mainGUI.setProyectosTree(nodo, ExperimentosComboBox.getSelectedItem());
-                }
+            ClassifierNode n = (ClassifierNode) nodo.getNodeType();
+            
+            System.out.println(n.getRutaCarpeta());
+            if(ClasificadorComboBox.getSelectedItem()!= "NINGUNO"){
+                WindowsInstances.mainGUI.setProyectosTree(nodo, ClasificadorComboBox.getSelectedItem());
+            }
+            else{
+                     WindowsInstances.mainGUI.setProyectosTree(nodo, ExperimentosComboBox.getSelectedItem());
+            }
             
            
             //WindowsInstances.createTareaGUI.setClaCombo(NombreTextField.getText());
@@ -192,6 +196,15 @@ public class CreateClassifierGUI extends javax.swing.JFrame {
             paresExCL.add(par);
             WindowsInstances.createClasificadorGUI.setClasCombo(NombreTextField.getText());
             WindowsInstances.createTareaGUI.setExpCombo(exp.toString());
+            if(ClasificadorComboBox.getSelectedItem() == "NINGUNO"){
+                ExperimentNode en = (ExperimentNode) exp.getNodeType();
+                n.setRutaCarpeta(en.getRutaCarpeta());
+            }
+            else{
+                CustomMutableTreeNode cm = (CustomMutableTreeNode) nodo.getParent();
+                ClassifierNode cn = (ClassifierNode) cm.getNodeType();
+                n.setRutaCarpeta(cn.getRutaCarpeta());
+            }
             NombreTextField.setText("Introduzca el nombre del clasificador...");
             WindowsInstances.mainGUI.expandAllNodes(WindowsInstances.mainGUI.getProyectosTree(),  0, WindowsInstances.mainGUI.getProyectosTree().getRowCount());
             dispose();
@@ -201,6 +214,7 @@ public class CreateClassifierGUI extends javax.swing.JFrame {
                 INodeType nodoExp = new ClassifierNode();   
                 CustomMutableTreeNode nodo = new CustomMutableTreeNode(NombreTextField.getText());
                 nodo.setNodeType(nodoExp);
+                ClassifierNode n = (ClassifierNode) nodo.getNodeType();
                 WindowsInstances.mainGUI.setProyectosTree(nodo, Padre);
                 //WindowsInstances.createTareaGUI.setClaCombo(NombreTextField.getText());
 
@@ -214,6 +228,15 @@ public class CreateClassifierGUI extends javax.swing.JFrame {
                 paresExCL.add(par);
                 WindowsInstances.createClasificadorGUI.setCombo(NombreTextField.getText());
                 WindowsInstances.createTareaGUI.setExpCombo(exp.toString());
+                if(ClasificadorComboBox.getSelectedItem() == "NINGUNO"){
+                    ExperimentNode en = (ExperimentNode) exp.getNodeType();
+                    n.setRutaCarpeta(en.getRutaCarpeta());
+                }
+                else{
+                    CustomMutableTreeNode cm = (CustomMutableTreeNode) nodo.getParent();
+                    ClassifierNode cn = (ClassifierNode) cm.getNodeType();
+                    n.setRutaCarpeta(cn.getRutaCarpeta());
+                }
                 NombreTextField.setText("Introduzca el nombre del clasificador...");
                 WindowsInstances.mainGUI.expandAllNodes(WindowsInstances.mainGUI.getProyectosTree(),  0, WindowsInstances.mainGUI.getProyectosTree().getRowCount());
                 dispose();

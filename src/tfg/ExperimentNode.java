@@ -19,7 +19,15 @@ import javax.swing.JPopupMenu;
  * @author sandra
  */
 public class ExperimentNode implements INodeType {
+    String rutaCarpeta;
 
+    public String getRutaCarpeta() {
+        return rutaCarpeta;
+    }
+
+    public void setRutaCarpeta(String rutaCarpeta) {
+        this.rutaCarpeta = rutaCarpeta;
+    }
     /**
      * Crear Clasificador
      */

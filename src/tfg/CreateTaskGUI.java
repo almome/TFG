@@ -187,17 +187,42 @@ public class CreateTaskGUI extends javax.swing.JFrame {
             CustomMutableTreeNode nodo = new CustomMutableTreeNode(NombreTextField.getText());
             INodeType nodoExp = new TaskNode();
             nodo.setNodeType(nodoExp);
-            WindowsInstances.mainGUI.setProyectosTree(new CustomMutableTreeNode(NombreTextField.getText()), ClasificadorComboBox.getSelectedItem());
+            TaskNode n = (TaskNode) nodo.getNodeType();
+            n.setRutaPlantilla(PlantillaTextField.getText());
+            //Aqui se debe asignar el archivo XML
+            WindowsInstances.mainGUI.setProyectosTree(nodo, ClasificadorComboBox.getSelectedItem());
+            if(ClasificadorComboBox.getSelectedItem() == "NINGUNO"){
+                CustomMutableTreeNode cn = (CustomMutableTreeNode) nodo.getParent();
+                ExperimentNode en = (ExperimentNode) cn.getNodeType();
+                n.setRutaDatos(en.getRutaCarpeta());
+            }
+            else{
+                CustomMutableTreeNode cn = (CustomMutableTreeNode) nodo.getParent();
+                ClassifierNode cln = (ClassifierNode) cn.getNodeType();
+                n.setRutaDatos(cln.getRutaCarpeta());
+            }
             NombreTextField.setText("Introduzca el nombre de la tarea");
             WindowsInstances.mainGUI.expandAllNodes(WindowsInstances.mainGUI.getProyectosTree(),  0, WindowsInstances.mainGUI.getProyectosTree().getRowCount());
             dispose();
         }
         else{
             if(Padre != null){
-                INodeType nodoExp = new TaskNode();   
                 CustomMutableTreeNode nodo = new CustomMutableTreeNode(NombreTextField.getText());
+                INodeType nodoExp = new TaskNode();   
                 nodo.setNodeType(nodoExp);
+                TaskNode n = (TaskNode) nodo.getNodeType();
+                n.setRutaPlantilla(PlantillaTextField.getText());
                 WindowsInstances.mainGUI.setProyectosTree(nodo, Padre);
+                if(ClasificadorComboBox.getSelectedItem() == "NINGUNO"){
+                    CustomMutableTreeNode cn = (CustomMutableTreeNode) nodo.getParent();
+                    ExperimentNode en = (ExperimentNode) cn.getNodeType();
+                    n.setRutaDatos(en.getRutaCarpeta());
+                }
+                else{
+                    CustomMutableTreeNode cn = (CustomMutableTreeNode) nodo.getParent();
+                    ClassifierNode cln = (ClassifierNode) cn.getNodeType();
+                    n.setRutaDatos(cln.getRutaCarpeta());
+                }
                 NombreTextField.setText("Introduzca el nombre de la tarea");
                 WindowsInstances.mainGUI.expandAllNodes(WindowsInstances.mainGUI.getProyectosTree(),  0, WindowsInstances.mainGUI.getProyectosTree().getRowCount());
                 dispose();
