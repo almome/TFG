@@ -5,12 +5,15 @@
  */
 package tfg;
 
+import java.io.File;
 import java.util.ArrayList;
 import javax.swing.ComboBoxModel;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import static javax.swing.JOptionPane.showMessageDialog;
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
 
 /**
  *
@@ -183,13 +186,15 @@ public class CreateTaskGUI extends javax.swing.JFrame {
         if(NombreTextField.getText() == null){
             showMessageDialog(new JFrame(), "No se puede crear una tarea sin nombre.","Error", JOptionPane.ERROR_MESSAGE);
         }
+        if(PlantillaTextField.getText() == null){
+            showMessageDialog(new JFrame(), "Debe asignar una plantilla a la tarea.","Error", JOptionPane.ERROR_MESSAGE);
+        }
         if(ExperimentosComboBox.getSelectedItem() != null && ClasificadorComboBox.getSelectedItem() != null){
             CustomMutableTreeNode nodo = new CustomMutableTreeNode(NombreTextField.getText());
             INodeType nodoExp = new TaskNode();
             nodo.setNodeType(nodoExp);
             TaskNode n = (TaskNode) nodo.getNodeType();
             n.setRutaPlantilla(PlantillaTextField.getText());
-            //Aqui se debe asignar el archivo XML
             WindowsInstances.mainGUI.setProyectosTree(nodo, ClasificadorComboBox.getSelectedItem());
             if(ClasificadorComboBox.getSelectedItem() == "NINGUNO"){
                 CustomMutableTreeNode cn = (CustomMutableTreeNode) nodo.getParent();
@@ -201,6 +206,12 @@ public class CreateTaskGUI extends javax.swing.JFrame {
                 ClassifierNode cln = (ClassifierNode) cn.getNodeType();
                 n.setRutaDatos(cln.getRutaCarpeta());
             }
+            //SOLUCIONAR ASIGNAR DOCUMENTO XML
+            DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
+            dbf.setValidating(false);
+            DocumentBuilder db = dbf.newDocumentBuilder();
+            File directorio = new File(n.getRutaDatos());
+            n.setDocXML(db.parse(directorio));
             NombreTextField.setText("Introduzca el nombre de la tarea");
             WindowsInstances.mainGUI.expandAllNodes(WindowsInstances.mainGUI.getProyectosTree(),  0, WindowsInstances.mainGUI.getProyectosTree().getRowCount());
             dispose();
@@ -228,7 +239,7 @@ public class CreateTaskGUI extends javax.swing.JFrame {
                 dispose();
             }
             else{
-                showMessageDialog(new JFrame(), "No se ha seleccionado experimento.\nEl clasificador debe crearse dentro de un experimento.","Error", JOptionPane.ERROR_MESSAGE);
+                showMessageDialog(new JFrame(), "No se ha seleccionado correctamente el lugar de creación de la tarea.","Error", JOptionPane.ERROR_MESSAGE);
 
             }
         }

@@ -242,7 +242,7 @@ public class CreateClassifierGUI extends javax.swing.JFrame {
                 dispose();
             }
             else{
-                showMessageDialog(new JFrame(), "No se ha seleccionado experimento.\nEl clasificador debe crearse dentro de un experimento.","Error", JOptionPane.ERROR_MESSAGE);
+                showMessageDialog(new JFrame(), "No se ha seleccionado correctamente el lugar de creación del clasificador.","Error", JOptionPane.ERROR_MESSAGE);
             }
         }
         
