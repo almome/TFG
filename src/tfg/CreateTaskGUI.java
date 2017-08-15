@@ -6,14 +6,19 @@
 package tfg;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import javax.swing.ComboBoxModel;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import static javax.swing.JOptionPane.showMessageDialog;
+import javax.swing.filechooser.FileNameExtensionFilter;
+import javax.swing.text.Document;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
+import org.xml.sax.SAXException;
 
 /**
  *
@@ -59,6 +64,7 @@ public class CreateTaskGUI extends javax.swing.JFrame {
     private void initComponents() {
 
         jButton1 = new javax.swing.JButton();
+        jFileChooser1 = new javax.swing.JFileChooser();
         TituloLabel = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
         ExperimentoLabel = new javax.swing.JLabel();
@@ -96,6 +102,11 @@ public class CreateTaskGUI extends javax.swing.JFrame {
         NombreTextField.setText("Introduzca el nombre de la tarea");
 
         BuscarButton.setText("Buscar");
+        BuscarButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BuscarButtonActionPerformed(evt);
+            }
+        });
 
         CrearButton.setText("Crear");
         CrearButton.addActionListener(new java.awt.event.ActionListener() {
@@ -207,11 +218,20 @@ public class CreateTaskGUI extends javax.swing.JFrame {
                 n.setRutaDatos(cln.getRutaCarpeta());
             }
             //SOLUCIONAR ASIGNAR DOCUMENTO XML
+            Document xmlFile = null;
             DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
             dbf.setValidating(false);
-            DocumentBuilder db = dbf.newDocumentBuilder();
-            File directorio = new File(n.getRutaDatos());
-            n.setDocXML(db.parse(directorio));
+            try{
+                DocumentBuilder db = dbf.newDocumentBuilder();
+                File directorio = new File(n.getRutaPlantilla());   //AQUI SALTA
+                xmlFile = (Document) db.parse(directorio);
+                n.setDocXML(xmlFile);
+            }
+            catch(IOException | ParserConfigurationException | SAXException ex){
+                
+            }
+            
+            ////////////////////////////////////////
             NombreTextField.setText("Introduzca el nombre de la tarea");
             WindowsInstances.mainGUI.expandAllNodes(WindowsInstances.mainGUI.getProyectosTree(),  0, WindowsInstances.mainGUI.getProyectosTree().getRowCount());
             dispose();
@@ -255,6 +275,23 @@ public class CreateTaskGUI extends javax.swing.JFrame {
         ComboBoxModel modelo = new DefaultComboBoxModel(clasificadoresExp.toArray());
         ClasificadorComboBox.setModel(modelo);
     }//GEN-LAST:event_ExperimentosComboBoxActionPerformed
+
+    private void BuscarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BuscarButtonActionPerformed
+        jFileChooser1.setFileSelectionMode(jFileChooser1.FILES_ONLY);
+        jFileChooser1.setFileFilter(new FileNameExtensionFilter("XML files (*.xml)", "xml"));
+        int boton = jFileChooser1.showOpenDialog(this);
+        if (boton == jFileChooser1.APPROVE_OPTION){ //Si el usuario ha pulsado la opción Aceptar
+            File fichero = jFileChooser1.getSelectedFile(); //Guardamos en la variable fichero el archivo seleccionado
+            try {
+              // What to do with the file, e.g. display it in a TextArea
+              //CreateDirectoryGUI.LocalizacionTextField.setText.read( new FileReader( file.getAbsolutePath() ), null );
+              //ruta = fichero.getAbsolutePath();
+              PlantillaTextField.setText(fichero.getAbsolutePath());
+            } catch (Exception ex) {
+              System.out.println("Hubo un problema al intentar acceder al fichero "+fichero.getAbsolutePath());
+            }
+        }
+    }//GEN-LAST:event_BuscarButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -324,6 +361,7 @@ public class CreateTaskGUI extends javax.swing.JFrame {
     private javax.swing.JTextField PlantillaTextField;
     private javax.swing.JLabel TituloLabel;
     private javax.swing.JButton jButton1;
+    private javax.swing.JFileChooser jFileChooser1;
     private javax.swing.JSeparator jSeparator1;
     // End of variables declaration//GEN-END:variables
 }

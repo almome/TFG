@@ -56,7 +56,14 @@ public class ClassifierNode implements INodeType{
         //Eliminar de la tabla de pares
         if(!WindowsInstances.createClasificadorGUI.paresExCL.isEmpty()){
             while(i < WindowsInstances.createClasificadorGUI.paresExCL.size()){
-                if(WindowsInstances.createClasificadorGUI.paresExCL.get(i).Experimento.equals(padre.toString())){
+                ParClasificador parAux = WindowsInstances.createClasificadorGUI.paresExCL.get(i);
+                CustomMutableTreeNode experimentoN = (CustomMutableTreeNode) padre.getParent();
+                CustomMutableTreeNode nAux = (CustomMutableTreeNode) padre.getParent();
+                while(nAux != WindowsInstances.mainGUI.root){
+                    experimentoN = nAux;
+                    nAux = (CustomMutableTreeNode) nAux.getParent();
+                }
+                if(parAux.Experimento.equals(experimentoN.toString()) && parAux.Clasificador.equals(padre.toString())){
                     WindowsInstances.createClasificadorGUI.paresExCL.remove(i);
                 }
                 i++;

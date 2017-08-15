@@ -169,7 +169,7 @@ public class CreateClassifierGUI extends javax.swing.JFrame {
         if(NombreTextField.getText() == null){
             showMessageDialog(new JFrame(), "No se puede crear un clasificador sin nombre.","Error", JOptionPane.ERROR_MESSAGE);
         }
-        if(ExperimentosComboBox.getSelectedItem() != null){
+        if(Padre == null){
             CustomMutableTreeNode nodo = new CustomMutableTreeNode(NombreTextField.getText());
             INodeType nodoExp = new ClassifierNode();
             nodo.setNodeType(nodoExp);
