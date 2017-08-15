@@ -9,6 +9,8 @@ package tfg;
 import java.util.ArrayList;
 import javax.swing.ComboBoxModel;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import static javax.swing.JOptionPane.showMessageDialog;
@@ -18,6 +20,11 @@ import static javax.swing.JOptionPane.showMessageDialog;
  * @author Alexandra Morón Méndez
  */
 public class CreateClassifierGUI extends javax.swing.JFrame {
+    Icon icono = new ImageIcon("ClassifIcon.png");  //No pilla la imagen
+
+    public Icon getIcono() {
+        return icono;
+    }
     String Padre;
     String ruta = "";
     ArrayList<ParClasificador> paresExCL = new ArrayList<ParClasificador>();

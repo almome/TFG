@@ -10,6 +10,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import javax.swing.ComboBoxModel;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import static javax.swing.JOptionPane.showMessageDialog;
@@ -25,6 +27,7 @@ import org.xml.sax.SAXException;
  * @author alexa
  */
 public class CreateTaskGUI extends javax.swing.JFrame {
+    Icon icono = new ImageIcon("recursos/TaskIcon.png");
     String Padre;
 
     public String getPadre() {
@@ -218,7 +221,7 @@ public class CreateTaskGUI extends javax.swing.JFrame {
                 n.setRutaDatos(cln.getRutaCarpeta());
             }
             //SOLUCIONAR ASIGNAR DOCUMENTO XML
-            Document xmlFile = null;
+            /*Document xmlFile = null;
             DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
             dbf.setValidating(false);
             try{
@@ -231,7 +234,7 @@ public class CreateTaskGUI extends javax.swing.JFrame {
                 
             }
             
-            ////////////////////////////////////////
+            ////////////////////////////////////////*/
             NombreTextField.setText("Introduzca el nombre de la tarea");
             WindowsInstances.mainGUI.expandAllNodes(WindowsInstances.mainGUI.getProyectosTree(),  0, WindowsInstances.mainGUI.getProyectosTree().getRowCount());
             dispose();
@@ -345,6 +348,9 @@ public class CreateTaskGUI extends javax.swing.JFrame {
     }
     public void setClaCombo (String nodo){
         ClasificadorComboBox.addItem(nodo);
+    }
+    public void eliminarExpYCla(String nodo){
+        ExperimentosComboBox.removeItem(nodo);
     }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables

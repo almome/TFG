@@ -127,6 +127,7 @@ public class ExperimentNode implements INodeType {
         for(i = 0; i < hijos.size(); i++){
             if(hijos.get(i).isLeaf()){
                 WindowsInstances.createClasificadorGUI.eliminarExpYCla(hijos.get(i).toString());
+                WindowsInstances.createTareaGUI.eliminarExpYCla(padre.toString()); //NUEVO
                 if(i+1 == hijos.size() ){
                     padre.removeAllChildren();
                     //WindowsInstances.mainGUI.modelo.removeNodeFromParent(padre);

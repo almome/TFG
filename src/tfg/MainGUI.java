@@ -5,6 +5,7 @@
  */
 package tfg;
 
+import java.awt.Component;
 import java.awt.MouseInfo;
 import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
@@ -16,6 +17,7 @@ import javax.swing.JPopupMenu;
 import javax.swing.JTree;
 import javax.swing.SwingUtilities;
 import javax.swing.tree.DefaultMutableTreeNode;
+import javax.swing.tree.DefaultTreeCellRenderer;
 import javax.swing.tree.DefaultTreeModel;
 import javax.swing.tree.TreeNode;
 import javax.swing.tree.TreePath;
@@ -275,7 +277,21 @@ public class MainGUI extends javax.swing.JFrame {
                  flag = true;
             }
         }
-        
+        //PARA PONER ICONO EN CASA NODO
+        /////////////////////////////////////////////////////////////////////////////
+        ProyectosTree.setCellRenderer(new DefaultTreeCellRenderer() {
+            
+            @Override
+            public Component getTreeCellRendererComponent(JTree tree,
+                    Object value, boolean selected, boolean expanded,
+                    boolean isLeaf, int row, boolean focused) {
+                Component c = super.getTreeCellRendererComponent(tree, value,
+                        selected, expanded, isLeaf, row, focused);
+                setIcon(WindowsInstances.createClasificadorGUI.getIcono());
+                return c;
+            }
+        });
+        ///////////////////////////////////////////////////////////////////////////////
         nodec.add(nodo);
         this.modelo.reload();
     }
