@@ -226,7 +226,7 @@ public class CreateClassifierGUI extends javax.swing.JFrame {
 
                 ParClasificador par = new ParClasificador(exp.toString(), NombreTextField.getText());
                 paresExCL.add(par);
-                WindowsInstances.createClasificadorGUI.setCombo(NombreTextField.getText());
+                //WindowsInstances.createClasificadorGUI.setCombo(NombreTextField.getText()); //CAMBIO PARA SIEMPRE!!
                 WindowsInstances.createTareaGUI.setExpCombo(exp.toString());
                 if(ClasificadorComboBox.getSelectedItem() == "NINGUNO"){
                     ExperimentNode en = (ExperimentNode) exp.getNodeType();

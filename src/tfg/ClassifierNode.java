@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import javax.swing.JMenuItem;
 import javax.swing.JPopupMenu;
+import javax.swing.tree.DefaultMutableTreeNode;
 
 /**
  *
@@ -58,10 +59,10 @@ public class ClassifierNode implements INodeType{
             while(i < WindowsInstances.createClasificadorGUI.paresExCL.size()){
                 ParClasificador parAux = WindowsInstances.createClasificadorGUI.paresExCL.get(i);
                 CustomMutableTreeNode experimentoN = (CustomMutableTreeNode) padre.getParent();
-                CustomMutableTreeNode nAux = (CustomMutableTreeNode) padre.getParent();
+                DefaultMutableTreeNode nAux = (DefaultMutableTreeNode) padre.getParent();
                 while(nAux != WindowsInstances.mainGUI.root){
-                    experimentoN = nAux;
-                    nAux = (CustomMutableTreeNode) nAux.getParent();
+                    experimentoN = (CustomMutableTreeNode) nAux;
+                    nAux = (DefaultMutableTreeNode) nAux.getParent();
                 }
                 if(parAux.Experimento.equals(experimentoN.toString()) && parAux.Clasificador.equals(padre.toString())){
                     WindowsInstances.createClasificadorGUI.paresExCL.remove(i);
