@@ -20,11 +20,7 @@ import static javax.swing.JOptionPane.showMessageDialog;
  * @author Alexandra Morón Méndez
  */
 public class CreateClassifierGUI extends javax.swing.JFrame {
-    Icon icono = new ImageIcon("src/recursos/ClassifIcon.png");  //No pilla la imagen
-
-    public Icon getIcono() {
-        return icono;
-    }
+    
     String Padre;
     String ruta = "";
     ArrayList<ParClasificador> paresExCL = new ArrayList<ParClasificador>();

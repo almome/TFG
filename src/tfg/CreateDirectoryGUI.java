@@ -18,7 +18,6 @@ import static javax.swing.JOptionPane.showMessageDialog;
  * @author Alexandra Moron Mendez
  */
 public class CreateDirectoryGUI extends javax.swing.JFrame {
-    Icon icono = new ImageIcon("recursos/ExperimIcon.png");
     public static String ruta = "";
     public int nExp = 0;    
     /**

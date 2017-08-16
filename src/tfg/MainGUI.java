@@ -30,12 +30,14 @@ public class MainGUI extends javax.swing.JFrame {
     public ArrayList<TreeNode> experimentos;
     public DefaultTreeModel modelo;
     public DefaultMutableTreeNode root;
+    DefaultTreeCellRenderer renderer;
     
     /**
      * Creates new form MainGUI
      */
     public MainGUI() {
         initComponents();
+        renderer = (DefaultTreeCellRenderer) ProyectosTree.getCellRenderer();
     }
 
     /**
@@ -259,6 +261,7 @@ public class MainGUI extends javax.swing.JFrame {
      * @param nodo 
      */
     public void setProyectosTree(CustomMutableTreeNode nodo){
+        renderer.setLeafIcon(nodo.getNodeType().getIcon());
         this.root.add(nodo);    
         this.modelo.reload();
     }
@@ -283,7 +286,7 @@ public class MainGUI extends javax.swing.JFrame {
         //DefaultTreeCellRenderer renderer = (DefaultTreeCellRenderer) ProyectosTree.getCellRenderer();
         //renderer.setLeafIcon(WindowsInstances.createClasificadorGUI.getIcono());
         
-        ProyectosTree.setCellRenderer(new DefaultTreeCellRenderer() {
+        /*ProyectosTree.setCellRenderer(new DefaultTreeCellRenderer() {
             
             @Override
             public Component getTreeCellRendererComponent(JTree tree,
@@ -294,10 +297,12 @@ public class MainGUI extends javax.swing.JFrame {
                 setIcon(WindowsInstances.createClasificadorGUI.getIcono());
                 return c;
             }
-        });
+        });*/
         
-        DefaultTreeCellRenderer renderer = (DefaultTreeCellRenderer) ProyectosTree.getCellRenderer();
-        renderer.setLeafIcon(WindowsInstances.createClasificadorGUI.getIcono());
+        
+        renderer.setLeafIcon(nodo.getNodeType().getIcon());
+        
+        
         ///////////////////////////////////////////////////////////////////////////////
         nodec.add(nodo);
         this.modelo.reload();

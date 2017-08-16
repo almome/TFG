@@ -5,6 +5,8 @@
  */
 package tfg;
 
+import javax.swing.Icon;
+
 /**
  *
  * @author sandra
@@ -18,5 +20,7 @@ public interface INodeType {
     public void eliminar(CustomMutableTreeNode padre);
     
     public void popupMenu(CustomMutableTreeNode padre);
+    
+    public Icon getIcon();
     
 }

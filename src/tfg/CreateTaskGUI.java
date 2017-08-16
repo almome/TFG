@@ -27,7 +27,7 @@ import org.xml.sax.SAXException;
  * @author alexa
  */
 public class CreateTaskGUI extends javax.swing.JFrame {
-    Icon icono = new ImageIcon("recursos/TaskIcon.png");
+    
     String Padre;
 
     public String getPadre() {

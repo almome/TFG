@@ -10,6 +10,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.Collections;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
 import javax.swing.JMenuItem;
 import javax.swing.JPopupMenu;
 import javax.swing.tree.DefaultMutableTreeNode;
@@ -20,6 +22,9 @@ import javax.swing.tree.DefaultMutableTreeNode;
  */
 public class ClassifierNode implements INodeType{
     String rutaCarpeta;
+    Icon icono = new ImageIcon("src/recursos/ClassifIcon.png");  //No pilla la imagen
+
+    
 
     public String getRutaCarpeta() {
         return rutaCarpeta;
@@ -152,5 +157,10 @@ public class ClassifierNode implements INodeType{
                 WindowsInstances.createClasificadorGUI.eliminarExpYCla(hijos.get(i).toString());
             }    
         }
+    }
+
+    @Override
+    public Icon getIcon() {
+        return icono;
     }
 }

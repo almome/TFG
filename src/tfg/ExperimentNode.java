@@ -11,6 +11,8 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Enumeration;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
 import javax.swing.JMenuItem;
 import javax.swing.JPopupMenu;
 
@@ -19,6 +21,7 @@ import javax.swing.JPopupMenu;
  * @author sandra
  */
 public class ExperimentNode implements INodeType {
+    Icon icono = new ImageIcon("src/recursos/ExperimIcon.png");
     String rutaCarpeta;
 
     public String getRutaCarpeta() {
@@ -142,6 +145,11 @@ public class ExperimentNode implements INodeType {
         }
         
         
+    }
+
+    @Override
+    public Icon getIcon() {
+        return icono;
     }
     
 }

@@ -8,6 +8,8 @@ package tfg;
 import java.awt.MouseInfo;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
 import javax.swing.JMenuItem;
 import javax.swing.JPopupMenu;
 import javax.swing.text.Document;
@@ -17,6 +19,7 @@ import javax.swing.text.Document;
  * @author alexa
  */
 public class TaskNode implements INodeType{
+    Icon icono = new ImageIcon("src/recursos/TaskIcon.png");
     String rutaPlantilla;
     String rutaDatos;
     Document docXML;
@@ -95,6 +98,11 @@ public class TaskNode implements INodeType{
         int mouseX = MouseInfo.getPointerInfo().getLocation().x;
         int mouseY = MouseInfo.getPointerInfo().getLocation().y;
         menu.show (WindowsInstances.mainGUI, mouseX, mouseY);
+    }
+
+    @Override
+    public Icon getIcon() {
+        return icono;
     }
     
 }
