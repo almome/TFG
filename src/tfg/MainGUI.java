@@ -279,6 +279,10 @@ public class MainGUI extends javax.swing.JFrame {
         }
         //PARA PONER ICONO EN CASA NODO
         /////////////////////////////////////////////////////////////////////////////
+        
+        //DefaultTreeCellRenderer renderer = (DefaultTreeCellRenderer) ProyectosTree.getCellRenderer();
+        //renderer.setLeafIcon(WindowsInstances.createClasificadorGUI.getIcono());
+        
         ProyectosTree.setCellRenderer(new DefaultTreeCellRenderer() {
             
             @Override
@@ -291,6 +295,9 @@ public class MainGUI extends javax.swing.JFrame {
                 return c;
             }
         });
+        
+        DefaultTreeCellRenderer renderer = (DefaultTreeCellRenderer) ProyectosTree.getCellRenderer();
+        renderer.setLeafIcon(WindowsInstances.createClasificadorGUI.getIcono());
         ///////////////////////////////////////////////////////////////////////////////
         nodec.add(nodo);
         this.modelo.reload();
