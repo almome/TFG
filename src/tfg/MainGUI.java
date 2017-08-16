@@ -286,7 +286,7 @@ public class MainGUI extends javax.swing.JFrame {
         //DefaultTreeCellRenderer renderer = (DefaultTreeCellRenderer) ProyectosTree.getCellRenderer();
         //renderer.setLeafIcon(WindowsInstances.createClasificadorGUI.getIcono());
         
-        /*ProyectosTree.setCellRenderer(new DefaultTreeCellRenderer() {
+        ProyectosTree.setCellRenderer(new DefaultTreeCellRenderer() {
             
             @Override
             public Component getTreeCellRendererComponent(JTree tree,
@@ -294,13 +294,18 @@ public class MainGUI extends javax.swing.JFrame {
                     boolean isLeaf, int row, boolean focused) {
                 Component c = super.getTreeCellRendererComponent(tree, value,
                         selected, expanded, isLeaf, row, focused);
-                setIcon(WindowsInstances.createClasificadorGUI.getIcono());
-                return c;
+
+                    setIcon(nodo.getNodeType().getIcon());
+                
+                return this;
+   
             }
-        });*/
+        });
         
         
-        renderer.setLeafIcon(nodo.getNodeType().getIcon());
+        //renderer.setLeafIcon(nodo.getNodeType().getIcon());
+        //renderer.setClosedIcon(nodo.getNodeType().getIcon());
+        //renderer.setOpenIcon(nodo.getNodeType().getIcon());
         
         
         ///////////////////////////////////////////////////////////////////////////////
