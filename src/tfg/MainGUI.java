@@ -295,7 +295,10 @@ public class MainGUI extends javax.swing.JFrame {
                 Component c = super.getTreeCellRendererComponent(tree, value,
                         selected, expanded, isLeaf, row, focused);
 
+                    if (value instanceof CustomMutableTreeNode) {
+                    CustomMutableTreeNode nodo = (CustomMutableTreeNode) value;
                     setIcon(nodo.getNodeType().getIcon());
+                }
                 
                 return this;
    
