@@ -6,21 +6,26 @@
 package tfg;
 
 import java.awt.Component;
-import java.awt.MouseInfo;
 import java.awt.Rectangle;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.io.File;
+import java.io.FileInputStream;
 import java.util.ArrayList;
 import java.util.Enumeration;
-import javax.swing.JMenuItem;
-import javax.swing.JPopupMenu;
 import javax.swing.JTree;
 import javax.swing.SwingUtilities;
+//import javax.swing.text.Document;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeCellRenderer;
 import javax.swing.tree.DefaultTreeModel;
 import javax.swing.tree.TreeNode;
 import javax.swing.tree.TreePath;
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import org.w3c.dom.Document;
+import org.w3c.dom.Node;
+
+
+
 
 /**
  *
@@ -211,6 +216,28 @@ public class MainGUI extends javax.swing.JFrame {
         }
         else{
             if(SwingUtilities.isLeftMouseButton(evt)){
+                String xmlRuta = "/home/sandra/Escritorio/AsignaturasGIIUCA.xml";
+                Document xmlFile;
+                try{
+                    
+                
+                DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
+                dbf.setValidating(false);
+                DocumentBuilder dBu  = dbf.newDocumentBuilder();
+                File f = new File(xmlRuta);
+                FileInputStream fis = new FileInputStream(f);
+                xmlFile = dBu.parse(fis);
+                
+                //xmlFile = dBu.parse(new FileInputStream());
+                
+                //Leer
+                String aux = xmlFile.getElementsByTagName("conf").item(0).getAttributes().getNamedItem("name").getNodeValue();
+                
+                System.out.println(aux);
+                
+                
+                }catch(Exception ex){}
+                
                 DatosLayeredPane.removeAll();
                 DatosLayeredPane.repaint();
             }
