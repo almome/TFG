@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
+import javax.swing.JLayeredPane;
 import javax.swing.JMenuItem;
 import javax.swing.JPopupMenu;
 import javax.swing.tree.DefaultMutableTreeNode;
@@ -165,7 +166,14 @@ public class ClassifierNode implements INodeType{
     }
 
     @Override
-    public void mostrar() {
+    public JLayeredPane mostrar() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+
+    @Override
+    public String getTipo() {
+         return "Clasificador";
+    }
+
+    
 }

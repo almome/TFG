@@ -216,16 +216,18 @@ public class MainGUI extends javax.swing.JFrame {
         }
         else{
             if(SwingUtilities.isLeftMouseButton(evt)){  //Si es nodo tarea muestra la ventana principal con los campos del xml
+
+                DatosLayeredPane.removeAll();
                 
                 TreePath path = ProyectosTree.getPathForLocation(evt.getX(), evt.getY());
                 Rectangle pathBounds = ProyectosTree.getUI().getPathBounds(ProyectosTree, path);
                 if(pathBounds != null && pathBounds.contains(evt.getX (), evt.getY ()))
                 {
                     CustomMutableTreeNode hijo = (CustomMutableTreeNode) path.getLastPathComponent();
-                    hijo.getNodeType().mostrar();
+                    if(hijo.getNodeType().getTipo() == "Tarea"){
+                        
+                    }
                 }
-                
-                DatosLayeredPane.removeAll();
                 DatosLayeredPane.repaint();
             }
         }

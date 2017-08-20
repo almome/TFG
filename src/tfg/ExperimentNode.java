@@ -13,6 +13,7 @@ import java.util.Collections;
 import java.util.Enumeration;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
+import javax.swing.JLayeredPane;
 import javax.swing.JMenuItem;
 import javax.swing.JPopupMenu;
 
@@ -153,8 +154,15 @@ public class ExperimentNode implements INodeType {
     }
 
     @Override
-    public void mostrar() {
+    public JLayeredPane mostrar() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+
+    @Override
+    public String getTipo() {
+         return "Experimento";
+    }
+
+   
     
 }

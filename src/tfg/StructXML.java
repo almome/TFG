@@ -7,6 +7,8 @@ package tfg;
 
 import java.io.File;
 import java.io.FileInputStream;
+import javax.swing.JLabel;
+import javax.swing.JLayeredPane;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import org.w3c.dom.Document;
@@ -41,8 +43,11 @@ public class StructXML {
         return xmlFile;
     }
     
-    public void MostrarCamposPlatilla(){
-        
+    public JLayeredPane MostrarCamposPlatilla(Document plantilla){
+        JLayeredPane aux = new JLayeredPane();
+        JLabel label1 = new JLabel("Hola");
+        aux.add(label1);
+        return aux;
     }
     
 }
