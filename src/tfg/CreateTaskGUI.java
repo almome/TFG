@@ -16,11 +16,13 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import static javax.swing.JOptionPane.showMessageDialog;
 import javax.swing.filechooser.FileNameExtensionFilter;
-import javax.swing.text.Document;
+
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 import org.xml.sax.SAXException;
+
+import org.w3c.dom.Document;
 
 /**
  *
@@ -205,7 +207,12 @@ public class CreateTaskGUI extends javax.swing.JFrame {
         }
         if(ExperimentosComboBox.getSelectedItem() != null && ClasificadorComboBox.getSelectedItem() != null){
             CustomMutableTreeNode nodo = new CustomMutableTreeNode(NombreTextField.getText());
-            INodeType nodoExp = new TaskNode();
+            //Cargar Plantilla
+            Document plantilla = null;
+            StructXML cargar = new StructXML();
+            plantilla = cargar.CargarPlantillaXML(PlantillaTextField.getText());
+            
+            INodeType nodoExp = new TaskNode(PlantillaTextField.getText(), plantilla);
             nodo.setNodeType(nodoExp);
             TaskNode n = (TaskNode) nodo.getNodeType();
             n.setRutaPlantilla(PlantillaTextField.getText());
@@ -242,7 +249,12 @@ public class CreateTaskGUI extends javax.swing.JFrame {
         else{
             if(Padre != null){
                 CustomMutableTreeNode nodo = new CustomMutableTreeNode(NombreTextField.getText());
-                INodeType nodoExp = new TaskNode();   
+                //Cargar Plantilla
+                Document plantilla = null;
+                StructXML cargar = new StructXML();
+                plantilla = cargar.CargarPlantillaXML(PlantillaTextField.getText());
+                
+                INodeType nodoExp = new TaskNode(PlantillaTextField.getText(), plantilla);   
                 nodo.setNodeType(nodoExp);
                 TaskNode n = (TaskNode) nodo.getNodeType();
                 n.setRutaPlantilla(PlantillaTextField.getText());

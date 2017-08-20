@@ -215,28 +215,15 @@ public class MainGUI extends javax.swing.JFrame {
             }
         }
         else{
-            if(SwingUtilities.isLeftMouseButton(evt)){
-                String xmlRuta = "/home/sandra/Escritorio/AsignaturasGIIUCA.xml";
-                Document xmlFile;
-                try{
-                    
+            if(SwingUtilities.isLeftMouseButton(evt)){  //Si es nodo tarea muestra la ventana principal con los campos del xml
                 
-                DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
-                dbf.setValidating(false);
-                DocumentBuilder dBu  = dbf.newDocumentBuilder();
-                File f = new File(xmlRuta);
-                FileInputStream fis = new FileInputStream(f);
-                xmlFile = dBu.parse(fis);
-                
-                //xmlFile = dBu.parse(new FileInputStream());
-                
-                //Leer
-                String aux = xmlFile.getElementsByTagName("conf").item(0).getAttributes().getNamedItem("name").getNodeValue();
-                
-                System.out.println(aux);
-                
-                
-                }catch(Exception ex){}
+                TreePath path = ProyectosTree.getPathForLocation(evt.getX(), evt.getY());
+                Rectangle pathBounds = ProyectosTree.getUI().getPathBounds(ProyectosTree, path);
+                if(pathBounds != null && pathBounds.contains(evt.getX (), evt.getY ()))
+                {
+                    CustomMutableTreeNode hijo = (CustomMutableTreeNode) path.getLastPathComponent();
+                    hijo.getNodeType().mostrar();
+                }
                 
                 DatosLayeredPane.removeAll();
                 DatosLayeredPane.repaint();
@@ -307,12 +294,7 @@ public class MainGUI extends javax.swing.JFrame {
                  flag = true;
             }
         }
-        //PARA PONER ICONO EN CASA NODO
-        /////////////////////////////////////////////////////////////////////////////
-        
-        //DefaultTreeCellRenderer renderer = (DefaultTreeCellRenderer) ProyectosTree.getCellRenderer();
-        //renderer.setLeafIcon(WindowsInstances.createClasificadorGUI.getIcono());
-        
+        //Se crea el icono
         ProyectosTree.setCellRenderer(new DefaultTreeCellRenderer() {
             
             @Override
@@ -332,13 +314,6 @@ public class MainGUI extends javax.swing.JFrame {
             }
         });
         
-        
-        //renderer.setLeafIcon(nodo.getNodeType().getIcon());
-        //renderer.setClosedIcon(nodo.getNodeType().getIcon());
-        //renderer.setOpenIcon(nodo.getNodeType().getIcon());
-        
-        
-        ///////////////////////////////////////////////////////////////////////////////
         nodec.add(nodo);
         this.modelo.reload();
     }

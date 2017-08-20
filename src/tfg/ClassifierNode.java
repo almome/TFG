@@ -163,4 +163,9 @@ public class ClassifierNode implements INodeType{
     public Icon getIcon() {
         return icono;
     }
+
+    @Override
+    public void mostrar() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }

@@ -8,11 +8,18 @@ package tfg;
 import java.awt.MouseInfo;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
+import java.io.FileInputStream;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
+import javax.swing.JLayeredPane;
 import javax.swing.JMenuItem;
 import javax.swing.JPopupMenu;
-import javax.swing.text.Document;
+
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+
+import org.w3c.dom.Document;
 
 /**
  *
@@ -22,7 +29,21 @@ public class TaskNode implements INodeType{
     Icon icono = new ImageIcon("src/recursos/TaskIcon.png");
     String rutaPlantilla;
     String rutaDatos;
+    Document plantXML;
     Document docXML;
+    
+    public TaskNode (String rutaPlantilla, Document plantXML){
+        this.plantXML = plantXML;
+        this.rutaPlantilla = rutaPlantilla;
+    }
+    
+    public Document getPlantXML() {
+        return plantXML;
+    }
+
+    public void setPlantXML(Document plantXML) {
+        this.plantXML = plantXML;
+    }
 
     public String getRutaPlantilla() {
         return rutaPlantilla;
@@ -103,6 +124,11 @@ public class TaskNode implements INodeType{
     @Override
     public Icon getIcon() {
         return icono;
+    }
+
+    @Override
+    public void mostrar() {
+        
     }
     
 }

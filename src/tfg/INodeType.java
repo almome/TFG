@@ -6,6 +6,7 @@
 package tfg;
 
 import javax.swing.Icon;
+import javax.swing.JLayeredPane;
 
 /**
  *
@@ -23,4 +24,5 @@ public interface INodeType {
     
     public Icon getIcon();
     
+    public void mostrar();
 }
