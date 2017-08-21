@@ -25,6 +25,5 @@ public interface INodeType {
     public Icon getIcon();
     
     public String getTipo();
-    
-    public JLayeredPane mostrar();
+
 }

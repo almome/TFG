@@ -165,10 +165,7 @@ public class ClassifierNode implements INodeType{
         return icono;
     }
 
-    @Override
-    public JLayeredPane mostrar() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+    
 
     @Override
     public String getTipo() {

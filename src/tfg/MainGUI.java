@@ -6,11 +6,14 @@
 package tfg;
 
 import java.awt.Component;
+import java.awt.GridBagConstraints;
 import java.awt.Rectangle;
 import java.io.File;
 import java.io.FileInputStream;
 import java.util.ArrayList;
 import java.util.Enumeration;
+import javax.swing.JLabel;
+import javax.swing.JTextField;
 import javax.swing.JTree;
 import javax.swing.SwingUtilities;
 //import javax.swing.text.Document;
@@ -32,6 +35,8 @@ import org.w3c.dom.Node;
  * @author Alexandra Morón Méndez
  */
 public class MainGUI extends javax.swing.JFrame {
+    public ArrayList<String> etiquetas; //Provisional
+    public ArrayList<Boolean> obligatorio; //Provisional
     public ArrayList<TreeNode> experimentos;
     public DefaultTreeModel modelo;
     public DefaultMutableTreeNode root;
@@ -134,8 +139,8 @@ public class MainGUI extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(DatosLayeredPane, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(819, Short.MAX_VALUE))
+                .addComponent(DatosLayeredPane, javax.swing.GroupLayout.PREFERRED_SIZE, 832, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(20, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -225,6 +230,44 @@ public class MainGUI extends javax.swing.JFrame {
                 {
                     CustomMutableTreeNode hijo = (CustomMutableTreeNode) path.getLastPathComponent();
                     if(hijo.getNodeType().getTipo() == "Tarea"){
+                        StructXML xmlRead = new StructXML();
+                        xmlRead.leerEtiquetas(etiquetas, obligatorio);
+                        
+                        GridBagConstraints c = new GridBagConstraints();
+                        c.fill = GridBagConstraints.HORIZONTAL;
+                        JLabel etiqueta = new JLabel();
+                        etiqueta.setText("hola");
+                        JTextField textcampo = new JTextField();
+                        JLabel etiqueta2 = new JLabel();
+                        JTextField textcampo2 = new JTextField();
+                        etiqueta2.setText("adios");
+
+                        c.fill = GridBagConstraints.HORIZONTAL;
+                        c.gridx = 0;
+                        c.gridy = 0;
+                        DatosLayeredPane.add(etiqueta, c);
+
+                        c.fill = GridBagConstraints.HORIZONTAL;
+                        c.gridx = 1;
+                        c.gridy = 0;
+                        DatosLayeredPane.add(textcampo, c);
+
+                         c.fill = GridBagConstraints.HORIZONTAL;
+                        c.gridx = 0;
+                        c.gridy = 1;
+                        DatosLayeredPane.add(etiqueta2, c);
+
+                        c.fill = GridBagConstraints.HORIZONTAL;
+                        c.gridx = 1;
+                        c.gridy = 1;
+                        DatosLayeredPane.add(textcampo2, c);
+
+
+                        //jLayeredPane1.add(etiqueta);
+                        //jLayeredPane1.add(textcampo);
+                        DatosLayeredPane.validate();
+                        DatosLayeredPane.repaint();
+                        
                         
                     }
                 }

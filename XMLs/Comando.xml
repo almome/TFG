@@ -1,7 +1,11 @@
 <?xml version="1.0"?>
-  <cabecera></cabecera>
+  <comando>apt-get</comando>
   <parametros>
-    <parametro>
-      <nombre>
-      <tipo>
-      <obligatorio>
+    <opciones>
+      <opcion nombre="-h" tipo="opcion" obligatorio="no"></opcion>
+    </opciones>
+    <argumentos>
+      <argumento nombre="install" tipo="cadena" obligatorio="no"></argumento>
+      <argumento nombre="update" tipo="" obligatorio="no"></argumento>
+      <argumento nombre="upgrade" tipo="" obligatorio="no"></argumento>
+    <argumentos>

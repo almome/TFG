@@ -7,6 +7,7 @@ package tfg;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.util.ArrayList;
 import javax.swing.JLabel;
 import javax.swing.JLayeredPane;
 import javax.xml.parsers.DocumentBuilder;
@@ -43,11 +44,12 @@ public class StructXML {
         return xmlFile;
     }
     
-    public JLayeredPane MostrarCamposPlatilla(Document plantilla){
-        JLayeredPane aux = new JLayeredPane();
-        JLabel label1 = new JLabel("Hola");
-        aux.add(label1);
-        return aux;
+    public void leerOpciones(ArrayList<String> opciones){
+        
+    }
+    
+    public void leerEtiquetas(ArrayList<String> etiquetas, ArrayList<Boolean> obligatorios){
+        
     }
     
 }

@@ -80,8 +80,8 @@
               <EmptySpace max="-2" attributes="0"/>
               <Component id="jTabbedPane1" min="-2" pref="208" max="-2" attributes="0"/>
               <EmptySpace type="separate" max="-2" attributes="0"/>
-              <Component id="DatosLayeredPane" min="-2" pref="33" max="-2" attributes="0"/>
-              <EmptySpace pref="819" max="32767" attributes="0"/>
+              <Component id="DatosLayeredPane" min="-2" pref="832" max="-2" attributes="0"/>
+              <EmptySpace pref="20" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>

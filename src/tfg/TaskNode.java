@@ -126,10 +126,6 @@ public class TaskNode implements INodeType{
         return icono;
     }
 
-    @Override
-    public JLayeredPane mostrar() {
-        return new StructXML().MostrarCamposPlatilla(plantXML);
-    }
 
     @Override
     public String getTipo() {
