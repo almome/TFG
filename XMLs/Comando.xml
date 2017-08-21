@@ -1,11 +1,11 @@
 <?xml version="1.0"?>
-  <comando>apt-get</comando>
+<tarea nombre="EjemploXML">
+  <comando>java</comando>
   <parametros>
-    <opciones>
-      <opcion nombre="-h" tipo="opcion" obligatorio="no"></opcion>
-    </opciones>
-    <argumentos>
-      <argumento nombre="install" tipo="cadena" obligatorio="no"></argumento>
-      <argumento nombre="update" tipo="" obligatorio="no"></argumento>
-      <argumento nombre="upgrade" tipo="" obligatorio="no"></argumento>
-    <argumentos>
+      <parametro nombre="-jar" tipo="fichero" obligatorio="si"></parametro>
+      <parametro nombre="-i" tipo="fichero" obligatorio="si"></parametro>
+      <parametro nombre="-o" tipo="fichero" obligatorio="si"></parametro>
+      <parametro nombre="--binarize" tipo="cadena" obligatorio="si"></parametro>
+      <parametro nombre="-C" tipo="decimal" obligatorio="no"></parametro>
+  </parametros>
+</tarea>

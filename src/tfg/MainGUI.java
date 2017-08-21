@@ -37,6 +37,7 @@ import org.w3c.dom.Node;
 public class MainGUI extends javax.swing.JFrame {
     public ArrayList<String> etiquetas; //Provisional
     public ArrayList<Boolean> obligatorio; //Provisional
+    public ArrayList<String> tipo; //Provisional
     public ArrayList<TreeNode> experimentos;
     public DefaultTreeModel modelo;
     public DefaultMutableTreeNode root;
@@ -229,9 +230,10 @@ public class MainGUI extends javax.swing.JFrame {
                 if(pathBounds != null && pathBounds.contains(evt.getX (), evt.getY ()))
                 {
                     CustomMutableTreeNode hijo = (CustomMutableTreeNode) path.getLastPathComponent();
-                    if(hijo.getNodeType().getTipo() == "Tarea"){
+                    if(hijo instanceof CustomMutableTreeNode){
+                        TaskNode taskNode = (TaskNode) hijo.getNodeType();
                         StructXML xmlRead = new StructXML();
-                        xmlRead.leerEtiquetas(etiquetas, obligatorio);
+                        xmlRead.leerEtiquetas(taskNode.getPlantXML(), etiquetas, tipo, obligatorio);
                         
                         GridBagConstraints c = new GridBagConstraints();
                         c.fill = GridBagConstraints.HORIZONTAL;

@@ -48,8 +48,9 @@ public class StructXML {
         
     }
     
-    public void leerEtiquetas(ArrayList<String> etiquetas, ArrayList<Boolean> obligatorios){
-        
+    public void leerEtiquetas(Document plantilla, ArrayList<String> etiquetas, ArrayList<String> tipo, ArrayList<Boolean> obligatorios){
+        //String nombreComando = xmlFile.getElementsByTagName("conf").item(0).getAttributes().getNamedItem("name").getNodeValue();
+	//confFile_array.add(confFileAtt1);
     }
     
 }
