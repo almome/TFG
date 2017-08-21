@@ -53,21 +53,30 @@ public class StructXML {
     
     public void leerEtiquetas(Document plantilla, ArrayList<String> etiquetas, ArrayList<String> tipo, ArrayList<Boolean> obligatorios){
         String nombretarea = plantilla.getElementsByTagName("tarea").item(0).getAttributes().getNamedItem("nombre").getNodeValue();
-        String nombrecomando = plantilla.getElementsByTagName("comando").item(0).getNodeValue();
+        
+        String nombrecomando = plantilla.getElementsByTagName("comando").item(0).getTextContent();
         
         NodeList listaParametros = plantilla.getElementsByTagName("parametros");
         
-        for(int i = 0; i < listaParametros.getLength(); i++){
+        for(int i = 0; i < listaParametros.getLength(); i++){   //FALLA AQUI!!!
             Node nodoParametro = listaParametros.item(i);
             Element parametro = (Element)nodoParametro;
             
-            String mainEntitySize = xmlFile.getElementsByTagName("main_entity").item(0).getAttributes().getNamedItem("size").getNodeValue();
-            mainEntity_array.add(mainEntitySize);
-            xmlContent_array.add("Size: "+mainEntitySize);
-            String mainEntityUrlType = xmlFile.getElementsByTagName("main_entity").item(0).getAttributes().getNamedItem("url").getNodeValue();
-            mainEntity_array.add(mainEntityUrlType);
-            xmlContent_array.add("Url type: "+mainEntityUrlType);
+            //Node paramN = parametro.getElementsByTagName("parametro").item(0);
+            //Element parametroElm = (Element)paramN;
             
+            String nombreParam = parametro.getElementsByTagName("parametro").item(0).getAttributes().getNamedItem("nombre").getNodeValue();
+            etiquetas.add(nombreParam);
+            String tipoParam = parametro.getElementsByTagName("parametro").item(0).getAttributes().getNamedItem("tipo").getNodeValue();
+            tipo.add(tipoParam);
+            String obligParam = parametro.getElementsByTagName("parametro").item(0).getAttributes().getNamedItem("obligatorio").getNodeValue();
+            if(obligParam == "no"){
+                obligatorios.add(false);
+            }
+            else{
+                obligatorios.add(true);
+            }
+              
         } 
 	
     }

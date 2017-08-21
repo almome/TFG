@@ -236,6 +236,25 @@ public class MainGUI extends javax.swing.JFrame {
                         xmlRead.leerEtiquetas(taskNode.getPlantXML(), etiquetas, tipo, obligatorio);
                         
                         GridBagConstraints c = new GridBagConstraints();
+                        ArrayList<JTextField> textCampos = new ArrayList<JTextField>();
+                        ArrayList<JLabel> textLabel = new ArrayList<JLabel>();
+                        for(int i = 0; i < etiquetas.size(); i++){
+                            c.fill = GridBagConstraints.HORIZONTAL;
+                            textLabel.add(new JLabel(etiquetas.get(i)));
+                            textCampos.add(new JTextField());
+                            
+                            c.fill = GridBagConstraints.HORIZONTAL;
+                            c.gridx = 0;
+                            c.gridy = i;
+                            DatosLayeredPane.add(textLabel.get(i), c);
+
+                            c.fill = GridBagConstraints.HORIZONTAL;
+                            c.gridx = i;
+                            c.gridy = 0;
+                            DatosLayeredPane.add(textCampos.get(i), c);
+                        }
+                        
+                        /*GridBagConstraints c = new GridBagConstraints();
                         c.fill = GridBagConstraints.HORIZONTAL;
                         JLabel etiqueta = new JLabel();
                         etiqueta.setText("hola");
@@ -262,7 +281,7 @@ public class MainGUI extends javax.swing.JFrame {
                         c.fill = GridBagConstraints.HORIZONTAL;
                         c.gridx = 1;
                         c.gridy = 1;
-                        DatosLayeredPane.add(textcampo2, c);
+                        DatosLayeredPane.add(textcampo2, c);*/
 
 
                         //jLayeredPane1.add(etiqueta);
