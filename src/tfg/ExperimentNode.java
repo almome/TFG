@@ -22,7 +22,7 @@ import javax.swing.JPopupMenu;
  * @author sandra
  */
 public class ExperimentNode implements INodeType {
-    Icon icono = new ImageIcon("src/recursos/ExperimIcon.png");
+    Icon icono = new ImageIcon("recursos/ExperimIcon.png");
     String rutaCarpeta;
 
     public String getRutaCarpeta() {
