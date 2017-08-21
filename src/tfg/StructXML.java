@@ -13,6 +13,9 @@ import javax.swing.JLayeredPane;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
 
 /**
  *
@@ -49,8 +52,24 @@ public class StructXML {
     }
     
     public void leerEtiquetas(Document plantilla, ArrayList<String> etiquetas, ArrayList<String> tipo, ArrayList<Boolean> obligatorios){
-        //String nombreComando = xmlFile.getElementsByTagName("conf").item(0).getAttributes().getNamedItem("name").getNodeValue();
-	//confFile_array.add(confFileAtt1);
+        String nombretarea = plantilla.getElementsByTagName("tarea").item(0).getAttributes().getNamedItem("nombre").getNodeValue();
+        String nombrecomando = plantilla.getElementsByTagName("comando").item(0).getNodeValue();
+        
+        NodeList listaParametros = plantilla.getElementsByTagName("parametros");
+        
+        for(int i = 0; i < listaParametros.getLength(); i++){
+            Node nodoParametro = listaParametros.item(i);
+            Element parametro = (Element)nodoParametro;
+            
+            String mainEntitySize = xmlFile.getElementsByTagName("main_entity").item(0).getAttributes().getNamedItem("size").getNodeValue();
+            mainEntity_array.add(mainEntitySize);
+            xmlContent_array.add("Size: "+mainEntitySize);
+            String mainEntityUrlType = xmlFile.getElementsByTagName("main_entity").item(0).getAttributes().getNamedItem("url").getNodeValue();
+            mainEntity_array.add(mainEntityUrlType);
+            xmlContent_array.add("Url type: "+mainEntityUrlType);
+            
+        } 
+	
     }
     
 }

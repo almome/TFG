@@ -26,7 +26,7 @@ import org.w3c.dom.Document;
  * @author alexa
  */
 public class TaskNode implements INodeType{
-    Icon icono = new ImageIcon("recursos/TaskIcon.png");
+    Icon icono = new ImageIcon("resources/TaskIcon.png");
     String rutaPlantilla;
     String rutaDatos;
     Document plantXML;
