@@ -56,20 +56,18 @@ public class StructXML {
         
         String nombrecomando = plantilla.getElementsByTagName("comando").item(0).getTextContent();
         
-        NodeList listaParametros = plantilla.getElementsByTagName("parametros");
+        NodeList listaParametros = plantilla.getElementsByTagName("parametro");
         
-        for(int i = 0; i < listaParametros.getLength(); i++){   //FALLA AQUI!!!
+        for(int i = 0; i < listaParametros.getLength(); i++){   
+            
             Node nodoParametro = listaParametros.item(i);
             Element parametro = (Element)nodoParametro;
             
-            //Node paramN = parametro.getElementsByTagName("parametro").item(0);
-            //Element parametroElm = (Element)paramN;
-            
-            String nombreParam = parametro.getElementsByTagName("parametro").item(0).getAttributes().getNamedItem("nombre").getNodeValue();
+            String nombreParam = parametro.getAttribute("nombre");//getElementsByTagName("parametro").item(0).getAttributes().getNamedItem("nombre").getNodeValue();
             etiquetas.add(nombreParam);
-            String tipoParam = parametro.getElementsByTagName("parametro").item(0).getAttributes().getNamedItem("tipo").getNodeValue();
+            String tipoParam = parametro.getAttribute("tipo");
             tipo.add(tipoParam);
-            String obligParam = parametro.getElementsByTagName("parametro").item(0).getAttributes().getNamedItem("obligatorio").getNodeValue();
+            String obligParam = parametro.getAttribute("obligatorio");
             if(obligParam == "no"){
                 obligatorios.add(false);
             }

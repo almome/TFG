@@ -5,13 +5,17 @@
  */
 package tfg;
 
+import java.awt.BorderLayout;
 import java.awt.Component;
+import java.awt.FlowLayout;
 import java.awt.GridBagConstraints;
+import java.awt.GridLayout;
 import java.awt.Rectangle;
 import java.io.File;
 import java.io.FileInputStream;
 import java.util.ArrayList;
 import java.util.Enumeration;
+import javax.swing.BoxLayout;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.JTree;
@@ -63,7 +67,7 @@ public class MainGUI extends javax.swing.JFrame {
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jScrollPane1 = new javax.swing.JScrollPane();
         ProyectosTree = new javax.swing.JTree();
-        DatosLayeredPane = new javax.swing.JLayeredPane();
+        jPanelLabels = new javax.swing.JPanel();
         BarrajMenu = new javax.swing.JMenuBar();
         archivosjMenu = new javax.swing.JMenu();
         nuevojMenu = new javax.swing.JMenu();
@@ -91,9 +95,16 @@ public class MainGUI extends javax.swing.JFrame {
 
         jTabbedPane1.addTab("Experimentos", jScrollPane1);
 
-        java.awt.GridBagLayout jLayeredPane1Layout = new java.awt.GridBagLayout();
-        jLayeredPane1Layout.columnWidths = new int[] {2};
-        DatosLayeredPane.setLayout(jLayeredPane1Layout);
+        javax.swing.GroupLayout jPanelLabelsLayout = new javax.swing.GroupLayout(jPanelLabels);
+        jPanelLabels.setLayout(jPanelLabelsLayout);
+        jPanelLabelsLayout.setHorizontalGroup(
+            jPanelLabelsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 846, Short.MAX_VALUE)
+        );
+        jPanelLabelsLayout.setVerticalGroup(
+            jPanelLabelsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
 
         archivosjMenu.setText("Archivos");
 
@@ -140,19 +151,19 @@ public class MainGUI extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(DatosLayeredPane, javax.swing.GroupLayout.PREFERRED_SIZE, 832, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(20, Short.MAX_VALUE))
+                .addComponent(jPanelLabels, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                         .addGap(42, 42, 42)
                         .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 623, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(68, 68, 68)
-                        .addComponent(DatosLayeredPane)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                        .addGap(66, 66, 66)
+                        .addComponent(jPanelLabels, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addContainerGap())
         );
 
@@ -223,7 +234,7 @@ public class MainGUI extends javax.swing.JFrame {
         else{
             if(SwingUtilities.isLeftMouseButton(evt)){  //Si es nodo tarea muestra la ventana principal con los campos del xml
 
-                DatosLayeredPane.removeAll();
+                jPanelLabels.removeAll();
                 
                 TreePath path = ProyectosTree.getPathForLocation(evt.getX(), evt.getY());
                 Rectangle pathBounds = ProyectosTree.getUI().getPathBounds(ProyectosTree, path);
@@ -231,27 +242,39 @@ public class MainGUI extends javax.swing.JFrame {
                 {
                     CustomMutableTreeNode hijo = (CustomMutableTreeNode) path.getLastPathComponent();
                     if(hijo instanceof CustomMutableTreeNode){
+                        jPanelLabels.removeAll();
                         TaskNode taskNode = (TaskNode) hijo.getNodeType();
                         StructXML xmlRead = new StructXML();
+                        etiquetas = new ArrayList<>();
+                        tipo = new ArrayList<>();
+                        obligatorio = new ArrayList<>();
                         xmlRead.leerEtiquetas(taskNode.getPlantXML(), etiquetas, tipo, obligatorio);
                         
-                        GridBagConstraints c = new GridBagConstraints();
                         ArrayList<JTextField> textCampos = new ArrayList<JTextField>();
                         ArrayList<JLabel> textLabel = new ArrayList<JLabel>();
                         for(int i = 0; i < etiquetas.size(); i++){
-                            c.fill = GridBagConstraints.HORIZONTAL;
+                            
                             textLabel.add(new JLabel(etiquetas.get(i)));
                             textCampos.add(new JTextField());
+                            jPanelLabels.setLayout(null); 
                             
-                            c.fill = GridBagConstraints.HORIZONTAL;
+                            textLabel.get(i).setLocation(200, i*50);
+                            textCampos.get(i).setLocation(200, i*50);
+                            textCampos.get(i).setSize(100, 25);
+                            
+                            jPanelLabels.add(textLabel.get(i));
+                            jPanelLabels.add(textCampos.get(i));
+                            
+                            /*c.fill = GridBagConstraints.HORIZONTAL;
                             c.gridx = 0;
                             c.gridy = i;
-                            DatosLayeredPane.add(textLabel.get(i), c);
+                            jPanel1.add(textLabel.get(i), c);
 
                             c.fill = GridBagConstraints.HORIZONTAL;
-                            c.gridx = i;
-                            c.gridy = 0;
-                            DatosLayeredPane.add(textCampos.get(i), c);
+                            c.gridx = 1;
+                            c.gridy = i;
+                            textCampos.get(i).setSize(500, 100);
+                            jPanel1.add(textCampos.get(i), c);*/
                         }
                         
                         /*GridBagConstraints c = new GridBagConstraints();
@@ -286,13 +309,14 @@ public class MainGUI extends javax.swing.JFrame {
 
                         //jLayeredPane1.add(etiqueta);
                         //jLayeredPane1.add(textcampo);
-                        DatosLayeredPane.validate();
-                        DatosLayeredPane.repaint();
+                        jPanelLabels.validate();
+                        jPanelLabels.repaint();
+
                         
                         
                     }
                 }
-                DatosLayeredPane.repaint();
+                //jPanelTextBoxs.repaint();
             }
         }
     }//GEN-LAST:event_ProyectosTreeMousePressed
@@ -396,11 +420,11 @@ public class MainGUI extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuBar BarrajMenu;
-    private javax.swing.JLayeredPane DatosLayeredPane;
     private javax.swing.JTree ProyectosTree;
     private javax.swing.JMenu archivosjMenu;
     private javax.swing.JMenuItem clasificajMenu;
     private javax.swing.JMenuItem experjMenu;
+    private javax.swing.JPanel jPanelLabels;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JMenu nuevojMenu;
