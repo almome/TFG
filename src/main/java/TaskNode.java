@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package tfg;
 
 import java.awt.MouseInfo;
 import java.awt.event.ActionEvent;
@@ -26,7 +25,7 @@ import org.w3c.dom.Document;
  * @author alexa
  */
 public class TaskNode implements INodeType{
-    Icon icono = new ImageIcon("resources/TaskIcon.png");
+    Icon icono = new ImageIcon("assets/TaskIcon.png");
     String rutaPlantilla;
     String rutaDatos;
     Document plantXML;

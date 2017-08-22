@@ -3,29 +3,26 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package tfg;
 
 import java.awt.MouseInfo;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Enumeration;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JLayeredPane;
 import javax.swing.JMenuItem;
 import javax.swing.JPopupMenu;
-import javax.swing.tree.DefaultMutableTreeNode;
 
 /**
  *
- * @author alexa
+ * @author sandra
  */
-public class ClassifierNode implements INodeType{
+public class ExperimentNode implements INodeType {
+    Icon icono = new ImageIcon("assets/ExperimIcon.png");
     String rutaCarpeta;
-    Icon icono = new ImageIcon("resources/ClassifIcon.png");  //No pilla la imagen
-
-    
 
     public String getRutaCarpeta() {
         return rutaCarpeta;
@@ -34,43 +31,37 @@ public class ClassifierNode implements INodeType{
     public void setRutaCarpeta(String rutaCarpeta) {
         this.rutaCarpeta = rutaCarpeta;
     }
+    /**
+     * Crear Clasificador
+     */
     @Override
-    public void crearHijo(CustomMutableTreeNode padre, int i) {
-        if(i == 0){
-            WindowsInstances.createClasificadorGUI.setPadre(padre.toString());
-            WindowsInstances.createClasificadorGUI.setVisible(true);
-            WindowsInstances.createClasificadorGUI.ocultarCampos();
-            WindowsInstances.mainGUI.expandAllNodes(WindowsInstances.mainGUI.getProyectosTree(),  0, WindowsInstances.mainGUI.getProyectosTree().getRowCount());
-        }
-        else{
-             
-            WindowsInstances.createTareaGUI.setPadre(padre.toString());
-            WindowsInstances.createTareaGUI.setVisible(true);
-            WindowsInstances.createTareaGUI.ocultarCampos();
-            WindowsInstances.mainGUI.expandAllNodes(WindowsInstances.mainGUI.getProyectosTree(),  0, WindowsInstances.mainGUI.getProyectosTree().getRowCount());
-        }
+    public void crearHijo(CustomMutableTreeNode padre , int i){
+        WindowsInstances.createClasificadorGUI.setPadre(padre.toString());
+        WindowsInstances.createClasificadorGUI.setVisible(true);
+        WindowsInstances.createClasificadorGUI.ocultarCampos();
+        WindowsInstances.mainGUI.expandAllNodes(WindowsInstances.mainGUI.getProyectosTree(),  0, WindowsInstances.mainGUI.getProyectosTree().getRowCount());
         
     }
-
+    
+    /**
+     * Ejecutar todas las tareas del experimento
+     */
     @Override
-    public void ejecutar() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+    public void ejecutar(){
 
+    }
+    
+    /**
+     * Elimina Experimento
+     * @param padre
+     */
     @Override
     public void eliminar(CustomMutableTreeNode padre) {
         int i = 0;
         //Eliminar de la tabla de pares
         if(!WindowsInstances.createClasificadorGUI.paresExCL.isEmpty()){
             while(i < WindowsInstances.createClasificadorGUI.paresExCL.size()){
-                ParClasificador parAux = WindowsInstances.createClasificadorGUI.paresExCL.get(i);
-                CustomMutableTreeNode experimentoN = (CustomMutableTreeNode) padre.getParent();
-                DefaultMutableTreeNode nAux = (DefaultMutableTreeNode) padre.getParent();
-                while(nAux != WindowsInstances.mainGUI.root){
-                    experimentoN = (CustomMutableTreeNode) nAux;
-                    nAux = (DefaultMutableTreeNode) nAux.getParent();
-                }
-                if(parAux.Experimento.equals(experimentoN.toString()) && parAux.Clasificador.equals(padre.toString())){
+                if(WindowsInstances.createClasificadorGUI.paresExCL.get(i).Experimento.equals(padre.toString())){
                     WindowsInstances.createClasificadorGUI.paresExCL.remove(i);
                 }
                 i++;
@@ -88,13 +79,15 @@ public class ClassifierNode implements INodeType{
         WindowsInstances.mainGUI.modelo.reload();
         WindowsInstances.mainGUI.expandAllNodes(WindowsInstances.mainGUI.getProyectosTree(),  0, WindowsInstances.mainGUI.getProyectosTree().getRowCount());
     }
-
+    
+    /**
+     * Menu PopUp de Experimento
+     */
     @Override
     public void popupMenu(CustomMutableTreeNode padre) {
         JPopupMenu menu = new JPopupMenu();
                 
         JMenuItem jMenuItemCreaClasificador;
-        JMenuItem jMenuItemCreaTarea;
         JMenuItem jMenuItemEjecutar;
         JMenuItem jMenuItemEliminar;
 
@@ -106,15 +99,7 @@ public class ClassifierNode implements INodeType{
             }
         });
         
-        jMenuItemCreaTarea = new JMenuItem("Crear Tarea");
-        jMenuItemCreaTarea.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent ev) {
-                crearHijo(padre, 1);
-            }
-        });
-        
-        jMenuItemEjecutar = new JMenuItem("Ejecutar Clasificador");
+        jMenuItemEjecutar = new JMenuItem("Ejecutar Experimento");
         jMenuItemEjecutar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ev) {
@@ -131,7 +116,6 @@ public class ClassifierNode implements INodeType{
         });
         
         menu.add (jMenuItemCreaClasificador);
-        menu.add (jMenuItemCreaTarea);
         menu.add (jMenuItemEjecutar);
         menu.add (jMenuItemEliminar);
         
@@ -146,6 +130,7 @@ public class ClassifierNode implements INodeType{
         for(i = 0; i < hijos.size(); i++){
             if(hijos.get(i).isLeaf()){
                 WindowsInstances.createClasificadorGUI.eliminarExpYCla(hijos.get(i).toString());
+                WindowsInstances.createTareaGUI.eliminarExpYCla(padre.toString()); //NUEVO
                 if(i+1 == hijos.size() ){
                     padre.removeAllChildren();
                     //WindowsInstances.mainGUI.modelo.removeNodeFromParent(padre);
@@ -158,6 +143,8 @@ public class ClassifierNode implements INodeType{
                 WindowsInstances.createClasificadorGUI.eliminarExpYCla(hijos.get(i).toString());
             }    
         }
+        
+        
     }
 
     @Override
@@ -165,12 +152,13 @@ public class ClassifierNode implements INodeType{
         return icono;
     }
 
-    
+   
 
     @Override
     public String getTipo() {
-         return "Clasificador";
+         return "Experimento";
     }
 
+   
     
 }
