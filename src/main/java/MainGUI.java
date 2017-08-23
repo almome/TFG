@@ -68,12 +68,17 @@ public class MainGUI extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         ProyectosTree = new javax.swing.JTree();
         jPanelLabels = new javax.swing.JPanel();
+        jTabbedPane3 = new javax.swing.JTabbedPane();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jTextArea1 = new javax.swing.JTextArea();
         BarrajMenu = new javax.swing.JMenuBar();
         archivosjMenu = new javax.swing.JMenu();
         nuevojMenu = new javax.swing.JMenu();
         experjMenu = new javax.swing.JMenuItem();
         clasificajMenu = new javax.swing.JMenuItem();
         tareajMenu = new javax.swing.JMenuItem();
+        jMenu1 = new javax.swing.JMenu();
+        jMenu2 = new javax.swing.JMenu();
         runjMenu = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -95,16 +100,28 @@ public class MainGUI extends javax.swing.JFrame {
 
         jTabbedPane1.addTab("Experimentos", jScrollPane1);
 
+        jPanelLabels.setAutoscrolls(true);
+
         javax.swing.GroupLayout jPanelLabelsLayout = new javax.swing.GroupLayout(jPanelLabels);
         jPanelLabels.setLayout(jPanelLabelsLayout);
         jPanelLabelsLayout.setHorizontalGroup(
             jPanelLabelsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 846, Short.MAX_VALUE)
+            .addGap(0, 0, Short.MAX_VALUE)
         );
         jPanelLabelsLayout.setVerticalGroup(
             jPanelLabelsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGap(0, 339, Short.MAX_VALUE)
         );
+
+        jTextArea1.setEditable(false);
+        jTextArea1.setBackground(new java.awt.Color(51, 51, 51));
+        jTextArea1.setColumns(20);
+        jTextArea1.setFont(new java.awt.Font("Consolas", 0, 12)); // NOI18N
+        jTextArea1.setForeground(new java.awt.Color(255, 255, 255));
+        jTextArea1.setRows(5);
+        jScrollPane2.setViewportView(jTextArea1);
+
+        jTabbedPane3.addTab("Consola", jScrollPane2);
 
         archivosjMenu.setText("Archivos");
 
@@ -136,6 +153,12 @@ public class MainGUI extends javax.swing.JFrame {
 
         archivosjMenu.add(nuevojMenu);
 
+        jMenu1.setText("Ejecutar");
+        archivosjMenu.add(jMenu1);
+
+        jMenu2.setText("Guardar");
+        archivosjMenu.add(jMenu2);
+
         BarrajMenu.add(archivosjMenu);
 
         runjMenu.setText("Run");
@@ -151,20 +174,22 @@ public class MainGUI extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jPanelLabels, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jPanelLabels, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jTabbedPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 828, Short.MAX_VALUE))
+                .addContainerGap(24, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                        .addGap(42, 42, 42)
-                        .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 623, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                        .addGap(66, 66, 66)
-                        .addComponent(jPanelLabels, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addContainerGap())
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap(47, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jPanelLabels, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jTabbedPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 242, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jTabbedPane1))
+                .addGap(8, 8, 8))
         );
 
         pack();
@@ -267,55 +292,11 @@ public class MainGUI extends javax.swing.JFrame {
                             jPanelLabels.add(textLabel.get(i));
                             jPanelLabels.add(textCampos.get(i));
                             
-                            /*c.fill = GridBagConstraints.HORIZONTAL;
-                            c.gridx = 0;
-                            c.gridy = i;
-                            jPanel1.add(textLabel.get(i), c);
-
-                            c.fill = GridBagConstraints.HORIZONTAL;
-                            c.gridx = 1;
-                            c.gridy = i;
-                            textCampos.get(i).setSize(500, 100);
-                            jPanel1.add(textCampos.get(i), c);*/
                         }
-                        
-                        /*GridBagConstraints c = new GridBagConstraints();
-                        c.fill = GridBagConstraints.HORIZONTAL;
-                        JLabel etiqueta = new JLabel();
-                        etiqueta.setText("hola");
-                        JTextField textcampo = new JTextField();
-                        JLabel etiqueta2 = new JLabel();
-                        JTextField textcampo2 = new JTextField();
-                        etiqueta2.setText("adios");
-
-                        c.fill = GridBagConstraints.HORIZONTAL;
-                        c.gridx = 0;
-                        c.gridy = 0;
-                        DatosLayeredPane.add(etiqueta, c);
-
-                        c.fill = GridBagConstraints.HORIZONTAL;
-                        c.gridx = 1;
-                        c.gridy = 0;
-                        DatosLayeredPane.add(textcampo, c);
-
-                         c.fill = GridBagConstraints.HORIZONTAL;
-                        c.gridx = 0;
-                        c.gridy = 1;
-                        DatosLayeredPane.add(etiqueta2, c);
-
-                        c.fill = GridBagConstraints.HORIZONTAL;
-                        c.gridx = 1;
-                        c.gridy = 1;
-                        DatosLayeredPane.add(textcampo2, c);*/
-
-
-                        //jLayeredPane1.add(etiqueta);
-                        //jLayeredPane1.add(textcampo);
+                       
                         jPanelLabels.validate();
                         jPanelLabels.repaint();
 
-                        
-                        
                     }
                 }
                 //jPanelTextBoxs.repaint();
@@ -426,9 +407,14 @@ public class MainGUI extends javax.swing.JFrame {
     private javax.swing.JMenu archivosjMenu;
     private javax.swing.JMenuItem clasificajMenu;
     private javax.swing.JMenuItem experjMenu;
+    private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenu jMenu2;
     private javax.swing.JPanel jPanelLabels;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTabbedPane jTabbedPane1;
+    private javax.swing.JTabbedPane jTabbedPane3;
+    private javax.swing.JTextArea jTextArea1;
     private javax.swing.JMenu nuevojMenu;
     private javax.swing.JMenu runjMenu;
     private javax.swing.JMenuItem tareajMenu;
