@@ -18,6 +18,7 @@ import javax.swing.BoxLayout;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.JTree;
+import javax.swing.SpringLayout;
 import javax.swing.SwingUtilities;
 //import javax.swing.text.Document;
 import javax.swing.tree.DefaultMutableTreeNode;
@@ -248,6 +249,7 @@ public class MainGUI extends javax.swing.JFrame {
                         tipo = new ArrayList<>();
                         obligatorio = new ArrayList<>();
                         xmlRead.leerEtiquetas(taskNode.getPlantXML(), etiquetas, tipo, obligatorio);
+                        jPanelLabels.setLayout(new SpringLayout());
                         
                         ArrayList<JTextField> textCampos = new ArrayList<JTextField>();
                         ArrayList<JLabel> textLabel = new ArrayList<JLabel>();
@@ -257,8 +259,9 @@ public class MainGUI extends javax.swing.JFrame {
                             textCampos.add(new JTextField());
                             jPanelLabels.setLayout(null); 
                             
-                            textLabel.get(i).setLocation(200, i*50);
+                            textLabel.get(i).setLocation(100, i*50);
                             textCampos.get(i).setLocation(200, i*50);
+                            textLabel.get(i).setSize(100, 25);
                             textCampos.get(i).setSize(100, 25);
                             
                             jPanelLabels.add(textLabel.get(i));
