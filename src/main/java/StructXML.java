@@ -7,10 +7,22 @@
 import java.io.File;
 import java.io.FileInputStream;
 import java.util.ArrayList;
+import java.util.Enumeration;
 import javax.swing.JLabel;
 import javax.swing.JLayeredPane;
+import javax.swing.tree.DefaultMutableTreeNode;
+import javax.swing.tree.TreeModel;
+import javax.swing.tree.TreeNode;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.transform.OutputKeys;
+import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerException;
+import javax.xml.transform.TransformerFactory;
+import javax.xml.transform.dom.DOMSource;
+import javax.xml.transform.stream.StreamResult;
+import org.w3c.dom.Attr;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
@@ -76,6 +88,114 @@ public class StructXML {
               
         } 
 	
+    }
+    
+    public void guardarProyecto(TreeModel model){
+
+        try {
+
+            DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+            Document doc = factory.newDocumentBuilder().newDocument();
+            DefaultMutableTreeNode root = (DefaultMutableTreeNode) model.getRoot();
+            // Get tree root...
+            CustomMutableTreeNode exp = (CustomMutableTreeNode) root.getChildAt(0);
+            parseTreeNode(exp, doc);
+
+            // Save the document to disk...
+            Transformer tf = TransformerFactory.newInstance().newTransformer();
+            tf.setOutputProperty(OutputKeys.INDENT, "yes");
+            tf.setOutputProperty(OutputKeys.METHOD, "xml");
+            tf.setOutputProperty("{http://xml.apache.org/xslt}indent-amount", "4");
+
+            DOMSource domSource = new DOMSource(doc);
+            StreamResult sr = new StreamResult(new File("TreeModel.xml"));
+            tf.transform(domSource, sr);
+
+        } catch (ParserConfigurationException | TransformerException ex) {
+            ex.printStackTrace();
+        }
+    }
+    
+     private static void parseTreeNode(CustomMutableTreeNode treeNode, Document doc) {
+
+        //String value = treeNode.getUserObject().toString();
+        Element rootElement = doc.createElement("proyecto");
+        Attr attrName = doc.getOwnerDocument().createAttribute("nombre");   //AQUI PETA NO SE PORQUE
+        attrName.setNodeValue(treeNode.getNombre()+".xml");
+        rootElement.getAttributes().setNamedItem(attrName); 
+        doc.appendChild(rootElement);
+        
+        Element experimentElement = doc.createElement("nodo");
+        Attr attrName2 = doc.getOwnerDocument().createAttribute("nombre");
+        attrName2.setNodeValue(treeNode.getNombre());
+        experimentElement.getAttributes().setNamedItem(attrName2); 
+        Attr attrName3 = doc.getOwnerDocument().createAttribute("tipo");
+        attrName3.setNodeValue("experimento");
+        experimentElement.getAttributes().setNamedItem(attrName3); 
+        doc.appendChild(experimentElement);
+        
+        Enumeration kiddies = treeNode.children();
+        while (kiddies.hasMoreElements()) {
+            CustomMutableTreeNode child = (CustomMutableTreeNode) kiddies.nextElement();
+            parseTreeNode(child, rootElement);
+        }
+    }
+     
+      protected static void parseTreeNode(CustomMutableTreeNode treeNode, Element doc) {
+
+        
+
+        Element parentElement = null;
+        if (treeNode.getNodeType() instanceof ClassifierNode) {
+            parentElement = doc.getOwnerDocument().createElement("nodo");
+
+            CustomMutableTreeNode clasificador = (CustomMutableTreeNode) treeNode;
+            // Apply properties to root element...
+            Attr attrName = doc.getOwnerDocument().createAttribute("nombre");
+            attrName.setNodeValue(clasificador.getNombre());
+            parentElement.getAttributes().setNamedItem(attrName);
+
+            Attr attrURL = doc.getOwnerDocument().createAttribute("tipo");
+            attrURL.setNodeValue("clasificador");
+            parentElement.getAttributes().setNamedItem(attrURL);
+        } else if (treeNode.getNodeType() instanceof TaskNode) {
+            parentElement = doc.getOwnerDocument().createElement("nodo");
+
+            CustomMutableTreeNode tarea = (CustomMutableTreeNode) treeNode;
+            // Apply properties to root element...
+            Attr attrName = doc.getOwnerDocument().createAttribute("nombre");
+            attrName.setNodeValue(tarea.getNombre());
+            parentElement.getAttributes().setNamedItem(attrName);
+            
+            Attr attrURL = doc.getOwnerDocument().createAttribute("tipo");
+            attrURL.setNodeValue("tarea");
+            parentElement.getAttributes().setNamedItem(attrURL); 
+            
+            //HAY QUE METER LOS PARÁMETROS
+
+        } else if (treeNode.getNodeType() instanceof ExperimentNode) {
+            parentElement = doc.getOwnerDocument().createElement("nodo");
+
+            CustomMutableTreeNode experimento = (CustomMutableTreeNode) treeNode;
+            // Apply properties to root element...
+            Attr attrName = doc.getOwnerDocument().createAttribute("nombre");
+            attrName.setNodeValue(experimento.getNombre());
+            parentElement.getAttributes().setNamedItem(attrName);
+            
+            Attr attrURL = doc.getOwnerDocument().createAttribute("tipo");
+            attrURL.setNodeValue("experimento");
+            parentElement.getAttributes().setNamedItem(attrURL);
+            
+            
+        }
+
+        doc.appendChild(parentElement);
+
+        Enumeration kiddies = treeNode.children();
+        while (kiddies.hasMoreElements()) {
+            CustomMutableTreeNode child = (CustomMutableTreeNode) kiddies.nextElement();
+            parseTreeNode(child, parentElement);
+        }
     }
     
 }

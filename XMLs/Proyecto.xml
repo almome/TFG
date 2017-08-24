@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<proyecto nombre="" ruta="">
+  <nodo nombre="" tipo="experimento">
+    <nodos>
+        <nodo nombre="" tipo="clasificador">
+          <nodos>
+            <nodo nombre="" tipo="tarea">
+              <parametro nombre="" valor=""></parametro>
+              <parametro nombre="" valor=""></parametro>
+            </nodo>
+            <nodo nombre="" tipo="tarea">
+              <parametro nombre="" valor=""></parametro>
+            </nodo>
+          </nodos>
+        </nodo>
+    <nodos>
+  </root>
+</proyecto>

@@ -77,8 +77,7 @@ public class MainGUI extends javax.swing.JFrame {
         experjMenu = new javax.swing.JMenuItem();
         clasificajMenu = new javax.swing.JMenuItem();
         tareajMenu = new javax.swing.JMenuItem();
-        jMenu1 = new javax.swing.JMenu();
-        jMenu2 = new javax.swing.JMenu();
+        jMenuItem1 = new javax.swing.JMenuItem();
         runjMenu = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -153,11 +152,13 @@ public class MainGUI extends javax.swing.JFrame {
 
         archivosjMenu.add(nuevojMenu);
 
-        jMenu1.setText("Ejecutar");
-        archivosjMenu.add(jMenu1);
-
-        jMenu2.setText("Guardar");
-        archivosjMenu.add(jMenu2);
+        jMenuItem1.setText("jMenuItem1");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
+        archivosjMenu.add(jMenuItem1);
 
         BarrajMenu.add(archivosjMenu);
 
@@ -304,6 +305,11 @@ public class MainGUI extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_ProyectosTreeMousePressed
 
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+        StructXML proyecto = new StructXML();
+        proyecto.guardarProyecto(modelo);
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
+
     
     /**
      * @param args the command line arguments
@@ -407,8 +413,7 @@ public class MainGUI extends javax.swing.JFrame {
     private javax.swing.JMenu archivosjMenu;
     private javax.swing.JMenuItem clasificajMenu;
     private javax.swing.JMenuItem experjMenu;
-    private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenu jMenu2;
+    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JPanel jPanelLabels;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;

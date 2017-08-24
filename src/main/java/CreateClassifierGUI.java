@@ -23,6 +23,7 @@ public class CreateClassifierGUI extends javax.swing.JFrame {
     String Padre;
     String ruta = "";
     ArrayList<ParClasificador> paresExCL = new ArrayList<ParClasificador>();
+    
     public String getPadre() {
         return Padre;
     }
@@ -173,6 +174,7 @@ public class CreateClassifierGUI extends javax.swing.JFrame {
         }
         if(Padre == null){
             CustomMutableTreeNode nodo = new CustomMutableTreeNode(NombreTextField.getText());
+            nodo.setNombre(NombreTextField.getText());
             INodeType nodoExp = new ClassifierNode();
             nodo.setNodeType(nodoExp);
             ClassifierNode n = (ClassifierNode) nodo.getNodeType();
@@ -213,8 +215,10 @@ public class CreateClassifierGUI extends javax.swing.JFrame {
         }
         else{
             if(Padre != null){
+                
                 INodeType nodoExp = new ClassifierNode();   
                 CustomMutableTreeNode nodo = new CustomMutableTreeNode(NombreTextField.getText());
+                nodo.setNombre(NombreTextField.getText());
                 nodo.setNodeType(nodoExp);
                 ClassifierNode n = (ClassifierNode) nodo.getNodeType();
                 WindowsInstances.mainGUI.setProyectosTree(nodo, Padre);

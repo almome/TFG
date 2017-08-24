@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<nodo>
+    <nodo nombre="rr" tipo="clasificador">
+        <nodo nombre="" tipo="tarea"/>
+    </nodo>
+</nodo>
