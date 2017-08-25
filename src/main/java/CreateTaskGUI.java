@@ -220,12 +220,12 @@ public class CreateTaskGUI extends javax.swing.JFrame {
             if(ClasificadorComboBox.getSelectedItem() == "NINGUNO"){
                 CustomMutableTreeNode cn = (CustomMutableTreeNode) nodo.getParent();
                 ExperimentNode en = (ExperimentNode) cn.getNodeType();
-                n.setRutaDatos(en.getRutaCarpeta());
+                n.setRutaPlantilla(en.getRutaCarpeta());
             }
             else{
                 CustomMutableTreeNode cn = (CustomMutableTreeNode) nodo.getParent();
                 ClassifierNode cln = (ClassifierNode) cn.getNodeType();
-                n.setRutaDatos(cln.getRutaCarpeta());
+                n.setRutaPlantilla(cln.getRutaCarpeta());
             }
             //SOLUCIONAR ASIGNAR DOCUMENTO XML
             /*Document xmlFile = null;
@@ -263,12 +263,12 @@ public class CreateTaskGUI extends javax.swing.JFrame {
                 if(ClasificadorComboBox.getSelectedItem() == "NINGUNO"){
                     CustomMutableTreeNode cn = (CustomMutableTreeNode) nodo.getParent();
                     ExperimentNode en = (ExperimentNode) cn.getNodeType();
-                    n.setRutaDatos(en.getRutaCarpeta());
+                    n.setRutaPlantilla(en.getRutaCarpeta());
                 }
                 else{
                     CustomMutableTreeNode cn = (CustomMutableTreeNode) nodo.getParent();
                     ClassifierNode cln = (ClassifierNode) cn.getNodeType();
-                    n.setRutaDatos(cln.getRutaCarpeta());
+                    n.setRutaPlantilla(cln.getRutaCarpeta());
                 }
                 NombreTextField.setText("Introduzca el nombre de la tarea");
                 WindowsInstances.mainGUI.expandAllNodes(WindowsInstances.mainGUI.getProyectosTree(),  0, WindowsInstances.mainGUI.getProyectosTree().getRowCount());

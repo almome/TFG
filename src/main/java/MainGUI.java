@@ -16,10 +16,12 @@ import java.util.ArrayList;
 import java.util.Enumeration;
 import javax.swing.BoxLayout;
 import javax.swing.JLabel;
+import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.JTree;
 import javax.swing.SpringLayout;
 import javax.swing.SwingUtilities;
+import javax.swing.TransferHandler;
 //import javax.swing.text.Document;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeCellRenderer;
@@ -71,12 +73,21 @@ public class MainGUI extends javax.swing.JFrame {
         jTabbedPane3 = new javax.swing.JTabbedPane();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTextArea1 = new javax.swing.JTextArea();
+        jToolBar1 = new javax.swing.JToolBar();
+        jButtonLimpiar = new javax.swing.JButton();
+        jButtonGuardar = new javax.swing.JButton();
+        jSeparator1 = new javax.swing.JToolBar.Separator();
+        jButtonCambiarPlantilla = new javax.swing.JButton();
+        jTextField1 = new javax.swing.JTextField();
+        jSeparator2 = new javax.swing.JToolBar.Separator();
+        jButtonEjecutar = new javax.swing.JButton();
         BarrajMenu = new javax.swing.JMenuBar();
         archivosjMenu = new javax.swing.JMenu();
         nuevojMenu = new javax.swing.JMenu();
         experjMenu = new javax.swing.JMenuItem();
         clasificajMenu = new javax.swing.JMenuItem();
         tareajMenu = new javax.swing.JMenuItem();
+        jMenuItem2 = new javax.swing.JMenuItem();
         jMenuItem1 = new javax.swing.JMenuItem();
         runjMenu = new javax.swing.JMenu();
 
@@ -109,7 +120,7 @@ public class MainGUI extends javax.swing.JFrame {
         );
         jPanelLabelsLayout.setVerticalGroup(
             jPanelLabelsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 339, Short.MAX_VALUE)
+            .addGap(0, 316, Short.MAX_VALUE)
         );
 
         jTextArea1.setEditable(false);
@@ -121,6 +132,47 @@ public class MainGUI extends javax.swing.JFrame {
         jScrollPane2.setViewportView(jTextArea1);
 
         jTabbedPane3.addTab("Consola", jScrollPane2);
+
+        jToolBar1.setRollover(true);
+
+        jButtonLimpiar.setText("Limpiar");
+        jButtonLimpiar.setFocusable(false);
+        jButtonLimpiar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jButtonLimpiar.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jButtonLimpiar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonLimpiarActionPerformed(evt);
+            }
+        });
+        jToolBar1.add(jButtonLimpiar);
+
+        jButtonGuardar.setText("Guardar");
+        jButtonGuardar.setFocusable(false);
+        jButtonGuardar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jButtonGuardar.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jButtonGuardar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonGuardarActionPerformed(evt);
+            }
+        });
+        jToolBar1.add(jButtonGuardar);
+        jToolBar1.add(jSeparator1);
+
+        jButtonCambiarPlantilla.setText("Cambiar Plantill");
+        jButtonCambiarPlantilla.setFocusable(false);
+        jButtonCambiarPlantilla.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jButtonCambiarPlantilla.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jToolBar1.add(jButtonCambiarPlantilla);
+
+        jTextField1.setEnabled(false);
+        jToolBar1.add(jTextField1);
+        jToolBar1.add(jSeparator2);
+
+        jButtonEjecutar.setText("Ejecutar");
+        jButtonEjecutar.setFocusable(false);
+        jButtonEjecutar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jButtonEjecutar.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jToolBar1.add(jButtonEjecutar);
 
         archivosjMenu.setText("Archivos");
 
@@ -152,7 +204,10 @@ public class MainGUI extends javax.swing.JFrame {
 
         archivosjMenu.add(nuevojMenu);
 
-        jMenuItem1.setText("jMenuItem1");
+        jMenuItem2.setText("Abrir Experimento");
+        archivosjMenu.add(jMenuItem2);
+
+        jMenuItem1.setText("Guardar Todo");
         jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem1ActionPerformed(evt);
@@ -178,14 +233,17 @@ public class MainGUI extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jPanelLabels, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jTabbedPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 828, Short.MAX_VALUE))
-                .addContainerGap(24, Short.MAX_VALUE))
+                .addContainerGap(54, Short.MAX_VALUE))
+            .addComponent(jToolBar1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(47, Short.MAX_VALUE)
+                .addComponent(jToolBar1, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
+                        .addGap(23, 23, 23)
                         .addComponent(jPanelLabels, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(jTabbedPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 242, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -259,17 +317,20 @@ public class MainGUI extends javax.swing.JFrame {
         }
         else{
             if(SwingUtilities.isLeftMouseButton(evt)){  //Si es nodo tarea muestra la ventana principal con los campos del xml
-
-                jPanelLabels.removeAll();
                 
+               jPanelLabels.removeAll();
+                jTextField1.setText("");
                 TreePath path = ProyectosTree.getPathForLocation(evt.getX(), evt.getY());
                 Rectangle pathBounds = ProyectosTree.getUI().getPathBounds(ProyectosTree, path);
                 if(pathBounds != null && pathBounds.contains(evt.getX (), evt.getY ()))
                 {
                     CustomMutableTreeNode hijo = (CustomMutableTreeNode) path.getLastPathComponent();
+                    
                     if(hijo instanceof CustomMutableTreeNode){
+                        
                         jPanelLabels.removeAll();
                         TaskNode taskNode = (TaskNode) hijo.getNodeType();
+                        jTextField1.setText(taskNode.getRutaPlantilla());
                         StructXML xmlRead = new StructXML();
                         etiquetas = new ArrayList<>();
                         tipo = new ArrayList<>();
@@ -291,6 +352,9 @@ public class MainGUI extends javax.swing.JFrame {
                             textCampos.get(i).setSize(100, 25);
                             
                             jPanelLabels.add(textLabel.get(i));
+                            if(taskNode.getDatosCom().containsKey(textLabel.get(i))){
+                                textCampos.get(i).setText(taskNode.getDatosCom().get(textLabel.get(i)));
+                            }
                             jPanelLabels.add(textCampos.get(i));
                             
                         }
@@ -307,8 +371,76 @@ public class MainGUI extends javax.swing.JFrame {
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
         StructXML proyecto = new StructXML();
-        proyecto.guardarProyecto(modelo);
+        for(int i = 0; i < root.getChildCount(); i++){
+            CustomMutableTreeNode exp = (CustomMutableTreeNode) modelo.getChild(root, i);
+            proyecto.guardarProyecto(modelo, exp);
+        }
     }//GEN-LAST:event_jMenuItem1ActionPerformed
+
+    private void jButtonLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonLimpiarActionPerformed
+        jPanelLabels.removeAll();
+        CustomMutableTreeNode nodo = (CustomMutableTreeNode) ProyectosTree.getLastSelectedPathComponent();
+        TreePath path = ProyectosTree.getSelectionPath();
+        Rectangle pathBounds = ProyectosTree.getUI().getPathBounds(ProyectosTree, path);
+        if(pathBounds != null)
+        {
+            CustomMutableTreeNode hijo = (CustomMutableTreeNode) path.getLastPathComponent();
+            if(hijo instanceof CustomMutableTreeNode){
+
+                jPanelLabels.removeAll();
+                TaskNode taskNode = (TaskNode) hijo.getNodeType();
+                StructXML xmlRead = new StructXML();
+                etiquetas = new ArrayList<>();
+                tipo = new ArrayList<>();
+                obligatorio = new ArrayList<>();
+                xmlRead.leerEtiquetas(taskNode.getPlantXML(), etiquetas, tipo, obligatorio);
+                jPanelLabels.setLayout(new SpringLayout());
+
+                ArrayList<JTextField> textCampos = new ArrayList<JTextField>();
+                ArrayList<JLabel> textLabel = new ArrayList<JLabel>();
+                for(int i = 0; i < etiquetas.size(); i++){
+
+                    textLabel.add(new JLabel(etiquetas.get(i)));
+                    textCampos.add(new JTextField());
+                    jPanelLabels.setLayout(null); 
+
+                    textLabel.get(i).setLocation(100, i*50);
+                    textCampos.get(i).setLocation(200, i*50);
+                    textLabel.get(i).setSize(100, 25);
+                    textCampos.get(i).setSize(100, 25);
+
+                    jPanelLabels.add(textLabel.get(i));
+                    if(taskNode.getDatosCom().containsKey(textLabel.get(i))){
+                        textCampos.get(i).setText(taskNode.getDatosCom().get(textLabel.get(i)));
+                    }
+                    jPanelLabels.add(textCampos.get(i));
+
+                }
+
+                jPanelLabels.validate();
+                jPanelLabels.repaint();
+
+            }
+        }
+    }//GEN-LAST:event_jButtonLimpiarActionPerformed
+
+    private void jButtonGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonGuardarActionPerformed
+        StructXML guardarExp = new StructXML();
+        CustomMutableTreeNode selecionado = (CustomMutableTreeNode) ProyectosTree.getLastSelectedPathComponent();
+        CustomMutableTreeNode exp = (CustomMutableTreeNode) ProyectosTree.getLastSelectedPathComponent();
+        CustomMutableTreeNode exp_aux = (CustomMutableTreeNode) ProyectosTree.getLastSelectedPathComponent();
+        while(exp_aux != root){
+            if(exp_aux.getParent().equals(root)){
+                exp = exp_aux;
+                break;
+            }
+            else{
+                exp_aux = (CustomMutableTreeNode) exp_aux.getParent();
+            }
+            
+        }
+        guardarExp.guardarProyecto(modelo, exp);
+    }//GEN-LAST:event_jButtonGuardarActionPerformed
 
     
     /**
@@ -413,13 +545,22 @@ public class MainGUI extends javax.swing.JFrame {
     private javax.swing.JMenu archivosjMenu;
     private javax.swing.JMenuItem clasificajMenu;
     private javax.swing.JMenuItem experjMenu;
+    private javax.swing.JButton jButtonCambiarPlantilla;
+    private javax.swing.JButton jButtonEjecutar;
+    private javax.swing.JButton jButtonGuardar;
+    private javax.swing.JButton jButtonLimpiar;
     private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JPanel jPanelLabels;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JToolBar.Separator jSeparator1;
+    private javax.swing.JToolBar.Separator jSeparator2;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTabbedPane jTabbedPane3;
     private javax.swing.JTextArea jTextArea1;
+    private javax.swing.JTextField jTextField1;
+    private javax.swing.JToolBar jToolBar1;
     private javax.swing.JMenu nuevojMenu;
     private javax.swing.JMenu runjMenu;
     private javax.swing.JMenuItem tareajMenu;

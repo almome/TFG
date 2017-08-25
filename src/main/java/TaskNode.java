@@ -9,6 +9,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.FileInputStream;
+import java.util.HashMap;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JLayeredPane;
@@ -27,13 +28,21 @@ import org.w3c.dom.Document;
 public class TaskNode implements INodeType{
     Icon icono = new ImageIcon("assets/TaskIcon.png");
     String rutaPlantilla;
-    String rutaDatos;//CREO QUE ESTO NO HACE FALTA
-    Document plantXML; 
-    Document docXML;//CREO QUE ESTO NO HACE FALTA
+    Document plantXML;
+    HashMap<String, String> DatosCom;
+
+    public HashMap<String, String> getDatosCom() {
+        return DatosCom;
+    }
+
+    public void setDatosCom(HashMap<String, String> DatosCom) {
+        this.DatosCom = DatosCom;
+    }
     
     public TaskNode (String rutaPlantilla, Document plantXML){
         this.plantXML = plantXML;
         this.rutaPlantilla = rutaPlantilla;
+        DatosCom = new HashMap<>();
     }
     
     public Document getPlantXML() {
@@ -50,22 +59,6 @@ public class TaskNode implements INodeType{
 
     public void setRutaPlantilla(String rutaPlantilla) {
         this.rutaPlantilla = rutaPlantilla;
-    }
-
-    public String getRutaDatos() {
-        return rutaDatos;
-    }
-
-    public void setRutaDatos(String rutaDatos) {
-        this.rutaDatos = rutaDatos;
-    }
-
-    public Document getDocXML() {
-        return docXML;
-    }
-
-    public void setDocXML(Document docXML) {
-        this.docXML = docXML;
     }
     
     @Override

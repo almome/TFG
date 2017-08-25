@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<proyecto nombre="2.xml">
+    <nodo nombre="2" tipo="experimento">
+        <nodo nombre="cccsss" tipo="clasificador"/>
+    </nodo>
+</proyecto>

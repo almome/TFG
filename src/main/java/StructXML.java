@@ -90,7 +90,7 @@ public class StructXML {
 	
     }
     
-    public void guardarProyecto(TreeModel model){
+    public void guardarProyecto(TreeModel model, CustomMutableTreeNode exp){
 
         try {
 
@@ -98,7 +98,7 @@ public class StructXML {
             Document doc = factory.newDocumentBuilder().newDocument();
             DefaultMutableTreeNode root = (DefaultMutableTreeNode) model.getRoot();
             // Get tree root...
-            CustomMutableTreeNode exp = (CustomMutableTreeNode) root.getChildAt(0);
+            //CustomMutableTreeNode exp = (CustomMutableTreeNode) root.getChildAt(0);
             parseTreeNode(exp, doc);
 
             // Save the document to disk...
@@ -108,7 +108,8 @@ public class StructXML {
             tf.setOutputProperty("{http://xml.apache.org/xslt}indent-amount", "4");
 
             DOMSource domSource = new DOMSource(doc);
-            StreamResult sr = new StreamResult(new File("TreeModel.xml"));
+            ExperimentNode aux = (ExperimentNode) exp.getNodeType();
+            StreamResult sr = new StreamResult(new File(aux.getRutaCarpeta()+"\\"+exp.getNombre()+".xml"));
             tf.transform(domSource, sr);
 
         } catch (ParserConfigurationException | TransformerException ex) {
