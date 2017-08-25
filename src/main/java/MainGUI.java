@@ -162,6 +162,11 @@ public class MainGUI extends javax.swing.JFrame {
         jButtonCambiarPlantilla.setFocusable(false);
         jButtonCambiarPlantilla.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jButtonCambiarPlantilla.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jButtonCambiarPlantilla.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonCambiarPlantillaActionPerformed(evt);
+            }
+        });
         jToolBar1.add(jButtonCambiarPlantilla);
 
         jTextField1.setEnabled(false);
@@ -441,6 +446,10 @@ public class MainGUI extends javax.swing.JFrame {
         }
         guardarExp.guardarProyecto(modelo, exp);
     }//GEN-LAST:event_jButtonGuardarActionPerformed
+
+    private void jButtonCambiarPlantillaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCambiarPlantillaActionPerformed
+       //PENDIENTE
+    }//GEN-LAST:event_jButtonCambiarPlantillaActionPerformed
 
     
     /**
