@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<nodo>
-    <nodo nombre="rr" tipo="clasificador">
-        <nodo nombre="" tipo="tarea"/>
+<proyecto nombre="EXP.xml">
+    <nodo nombre="EXP" tipo="experimento">
+        <nodo nombre="CC" tipo="clasificador">
+            <nodo nombre="TT" tipo="tarea"/>
+            <nodo nombre="TTTT" tipo="tarea"/>
+        </nodo>
     </nodo>
-</nodo>
+</proyecto>

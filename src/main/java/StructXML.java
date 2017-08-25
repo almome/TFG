@@ -120,31 +120,29 @@ public class StructXML {
 
         //String value = treeNode.getUserObject().toString();
         Element rootElement = doc.createElement("proyecto");
-        Attr attrName = doc.getOwnerDocument().createAttribute("nombre");   //AQUI PETA NO SE PORQUE
+        doc.appendChild(rootElement);
+        Attr attrName = doc.createAttribute("nombre");   //AQUI PETA NO SE PORQUE
         attrName.setNodeValue(treeNode.getNombre()+".xml");
         rootElement.getAttributes().setNamedItem(attrName); 
-        doc.appendChild(rootElement);
+        
         
         Element experimentElement = doc.createElement("nodo");
-        Attr attrName2 = doc.getOwnerDocument().createAttribute("nombre");
+        Attr attrName2 = doc.createAttribute("nombre");
         attrName2.setNodeValue(treeNode.getNombre());
         experimentElement.getAttributes().setNamedItem(attrName2); 
-        Attr attrName3 = doc.getOwnerDocument().createAttribute("tipo");
+        Attr attrName3 = doc.createAttribute("tipo");
         attrName3.setNodeValue("experimento");
         experimentElement.getAttributes().setNamedItem(attrName3); 
-        doc.appendChild(experimentElement);
+        rootElement.appendChild(experimentElement);
         
         Enumeration kiddies = treeNode.children();
         while (kiddies.hasMoreElements()) {
             CustomMutableTreeNode child = (CustomMutableTreeNode) kiddies.nextElement();
-            parseTreeNode(child, rootElement);
+            parseTreeNode(child, experimentElement);
         }
     }
      
       protected static void parseTreeNode(CustomMutableTreeNode treeNode, Element doc) {
-
-        
-
         Element parentElement = null;
         if (treeNode.getNodeType() instanceof ClassifierNode) {
             parentElement = doc.getOwnerDocument().createElement("nodo");

@@ -213,6 +213,7 @@ public class CreateTaskGUI extends javax.swing.JFrame {
             
             INodeType nodoExp = new TaskNode(PlantillaTextField.getText(), plantilla);
             nodo.setNodeType(nodoExp);
+            nodo.setNombre(NombreTextField.getText());
             TaskNode n = (TaskNode) nodo.getNodeType();
             n.setRutaPlantilla(PlantillaTextField.getText());
             WindowsInstances.mainGUI.setProyectosTree(nodo, ClasificadorComboBox.getSelectedItem());
@@ -255,6 +256,7 @@ public class CreateTaskGUI extends javax.swing.JFrame {
                 
                 INodeType nodoExp = new TaskNode(PlantillaTextField.getText(), plantilla);   
                 nodo.setNodeType(nodoExp);
+                nodo.setNombre(NombreTextField.getText());
                 TaskNode n = (TaskNode) nodo.getNodeType();
                 n.setRutaPlantilla(PlantillaTextField.getText());
                 WindowsInstances.mainGUI.setProyectosTree(nodo, Padre);

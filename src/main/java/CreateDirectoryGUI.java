@@ -189,6 +189,7 @@ public class CreateDirectoryGUI extends javax.swing.JFrame {
             INodeType nodoExp = new ExperimentNode();   
             CustomMutableTreeNode CnodoExp = new CustomMutableTreeNode(NombreTextField.getText());
             CnodoExp.setNodeType(nodoExp);
+            CnodoExp.setNombre(NombreTextField.getText());
             ExperimentNode n = (ExperimentNode) CnodoExp.getNodeType();
             n.setRutaCarpeta(directorio.getPath());
             WindowsInstances.mainGUI.setProyectosTree(CnodoExp);
