@@ -1,15 +1,24 @@
+package Main;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
 
+import TaskParam.TaskParam;
+import java.awt.Component;
 import java.awt.MouseInfo;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JLayeredPane;
@@ -29,20 +38,29 @@ public class TaskNode implements INodeType{
     Icon icono = new ImageIcon("assets/TaskIcon.png");
     String rutaPlantilla;
     Document plantXML;
-    HashMap<String, String> DatosCom;
-
-    public HashMap<String, String> getDatosCom() {
-        return DatosCom;
+    List<TaskParam> parametros; 
+    
+    public List<Component> mostrar() {
+        List<Component> componentes = new ArrayList<Component>();
+        for(TaskParam parametro : parametros) {
+            componentes.addAll(parametro.mostrar());
+        }
+        return componentes;
     }
 
-    public void setDatosCom(HashMap<String, String> DatosCom) {
-        this.DatosCom = DatosCom;
+    public List<TaskParam> getParametros() {
+        return parametros;
     }
+
+    public void setParametros(List<TaskParam> parametros) {
+        this.parametros = parametros;
+    }
+    
     
     public TaskNode (String rutaPlantilla, Document plantXML){
         this.plantXML = plantXML;
         this.rutaPlantilla = rutaPlantilla;
-        DatosCom = new HashMap<>();
+        parametros = new ArrayList<TaskParam>();
     }
     
     public Document getPlantXML() {
@@ -68,7 +86,11 @@ public class TaskNode implements INodeType{
 
     @Override
     public void ejecutar() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        try {
+            WindowsInstances.mainGUI.ejecutar();
+        } catch (IOException ex) {
+            Logger.getLogger(TaskNode.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     @Override

@@ -1,3 +1,5 @@
+package Main;
+
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -21,18 +23,13 @@ public class Console {
         command = comando;
     }
     
-    public void ejecutarComando() throws IOException{
+    public String ejecutarComando() throws IOException{
         Process process = Runtime.getRuntime().exec(command);                    
         BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()));                                          
         String s;                                                                
         while ((s = reader.readLine()) != null) { 
-            resultado = resultado+"\n"+ s;
-            //System.out.println("Script output: " + s);  
+            resultado = resultado+"\n"+ s; 
         }
-    }
-    
-    public String mostrarConsola() throws IOException{
-        ejecutarComando();
         return resultado;
     }
     

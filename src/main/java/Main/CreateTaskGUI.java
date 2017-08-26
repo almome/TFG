@@ -1,9 +1,13 @@
+package Main;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
 
+import TaskParam.FileParam;
+import TaskParam.StringParam;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -216,6 +220,22 @@ public class CreateTaskGUI extends javax.swing.JFrame {
             nodo.setNombre(NombreTextField.getText());
             TaskNode n = (TaskNode) nodo.getNodeType();
             n.setRutaPlantilla(PlantillaTextField.getText());
+            //Metemos los parametros de la plantilla
+            StructXML xmlRead = new StructXML();
+            ArrayList<String> etiquetas = new ArrayList<>();
+            ArrayList<String> tipo = new ArrayList<>();
+            ArrayList<Boolean> obligatorio = new ArrayList<>();
+            xmlRead.leerEtiquetas(n.getPlantXML(), etiquetas, tipo, obligatorio, n);
+            for(int i = 0; i < etiquetas.size(); i++){
+                if(tipo.get(i).equals("fichero")){
+                    //FileParam parametro = new FileParam(Padre)
+                }
+                else if(tipo.get(i).equals("string")){
+                    StringParam parametro = new StringParam(etiquetas.get(i), i*50, obligatorio.get(i));
+                    n.parametros.add(parametro);
+                }
+            }
+                
             WindowsInstances.mainGUI.setProyectosTree(nodo, ClasificadorComboBox.getSelectedItem());
             if(ClasificadorComboBox.getSelectedItem() == "NINGUNO"){
                 CustomMutableTreeNode cn = (CustomMutableTreeNode) nodo.getParent();
@@ -227,21 +247,7 @@ public class CreateTaskGUI extends javax.swing.JFrame {
                 ClassifierNode cln = (ClassifierNode) cn.getNodeType();
                 n.setRutaPlantilla(cln.getRutaCarpeta());
             }
-            //SOLUCIONAR ASIGNAR DOCUMENTO XML
-            /*Document xmlFile = null;
-            DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
-            dbf.setValidating(false);
-            try{
-                DocumentBuilder db = dbf.newDocumentBuilder();
-                File directorio = new File(n.getRutaPlantilla());   //AQUI SALTA
-                xmlFile = (Document) db.parse(directorio);
-                n.setDocXML(xmlFile);
-            }
-            catch(IOException | ParserConfigurationException | SAXException ex){
-                
-            }
             
-            ////////////////////////////////////////*/
             NombreTextField.setText("Introduzca el nombre de la tarea");
             WindowsInstances.mainGUI.expandAllNodes(WindowsInstances.mainGUI.getProyectosTree(),  0, WindowsInstances.mainGUI.getProyectosTree().getRowCount());
             dispose();
@@ -259,6 +265,22 @@ public class CreateTaskGUI extends javax.swing.JFrame {
                 nodo.setNombre(NombreTextField.getText());
                 TaskNode n = (TaskNode) nodo.getNodeType();
                 n.setRutaPlantilla(PlantillaTextField.getText());
+                //Metemos los parametros de la plantilla
+                StructXML xmlRead = new StructXML();
+                ArrayList<String> etiquetas = new ArrayList<>();
+                ArrayList<String> tipo = new ArrayList<>();
+                ArrayList<Boolean> obligatorio = new ArrayList<>();
+                xmlRead.leerEtiquetas(n.getPlantXML(), etiquetas, tipo, obligatorio, n);
+                for(int i = 0; i < etiquetas.size(); i++){
+                    if(tipo.get(i).equals("fichero")){
+                        //FileParam parametro = new FileParam(Padre)
+                    }
+                    else if(tipo.get(i).equals("string")){
+                        StringParam parametro = new StringParam(etiquetas.get(i), i*50, obligatorio.get(i));
+                        n.parametros.add(parametro);
+                    }
+                }
+                
                 WindowsInstances.mainGUI.setProyectosTree(nodo, Padre);
                 if(ClasificadorComboBox.getSelectedItem() == "NINGUNO"){
                     CustomMutableTreeNode cn = (CustomMutableTreeNode) nodo.getParent();

@@ -2,15 +2,15 @@
 <tarea nombre="EjemploXML">
   <comando>java</comando>
   <parametros>
-      <parametro nombre="-jar" tipo="fichero" obligatorio="si">
+      <parametro nombre="-jar" tipo="string" obligatorio="si">
       </parametro>
-      <parametro nombre="-i" tipo="fichero" obligatorio="si">
+      <parametro nombre="-i" tipo="string" obligatorio="si">
       </parametro>
-      <parametro nombre="-o" tipo="fichero" obligatorio="si">
+      <parametro nombre="-o" tipo="string" obligatorio="si">
       </parametro>
-      <parametro nombre="--binarize" tipo="cadena" obligatorio="si">
+      <parametro nombre="--binarize" tipo="string" obligatorio="si">
       </parametro>
-      <parametro nombre="-C" tipo="decimal" obligatorio="no">
+      <parametro nombre="-C" tipo="string" obligatorio="no">
       </parametro>
   </parametros>
 </tarea>

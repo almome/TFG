@@ -1,19 +1,27 @@
+package Main;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
 
+import TaskParam.FileParam;
 import java.awt.BorderLayout;
 import java.awt.Component;
 import java.awt.FlowLayout;
 import java.awt.GridBagConstraints;
 import java.awt.GridLayout;
+import java.awt.LayoutManager;
 import java.awt.Rectangle;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Enumeration;
+import java.util.HashMap;
+import java.util.Iterator;
 import javax.swing.BoxLayout;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -22,6 +30,8 @@ import javax.swing.JTree;
 import javax.swing.SpringLayout;
 import javax.swing.SwingUtilities;
 import javax.swing.TransferHandler;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 //import javax.swing.text.Document;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeCellRenderer;
@@ -323,53 +333,34 @@ public class MainGUI extends javax.swing.JFrame {
         else{
             if(SwingUtilities.isLeftMouseButton(evt)){  //Si es nodo tarea muestra la ventana principal con los campos del xml
                 
-               jPanelLabels.removeAll();
+                jPanelLabels.removeAll();
                 jTextField1.setText("");
                 TreePath path = ProyectosTree.getPathForLocation(evt.getX(), evt.getY());
                 Rectangle pathBounds = ProyectosTree.getUI().getPathBounds(ProyectosTree, path);
                 if(pathBounds != null && pathBounds.contains(evt.getX (), evt.getY ()))
                 {
                     CustomMutableTreeNode hijo = (CustomMutableTreeNode) path.getLastPathComponent();
-                    
-                    if(hijo instanceof CustomMutableTreeNode){
-                        
-                        jPanelLabels.removeAll();
+                    jPanelLabels.setLayout(null);
+                    if(hijo.getNodeType() instanceof TaskNode){
                         TaskNode taskNode = (TaskNode) hijo.getNodeType();
-                        jTextField1.setText(taskNode.getRutaPlantilla());
-                        StructXML xmlRead = new StructXML();
-                        etiquetas = new ArrayList<>();
-                        tipo = new ArrayList<>();
-                        obligatorio = new ArrayList<>();
-                        xmlRead.leerEtiquetas(taskNode.getPlantXML(), etiquetas, tipo, obligatorio);
-                        jPanelLabels.setLayout(new SpringLayout());
-                        
-                        ArrayList<JTextField> textCampos = new ArrayList<JTextField>();
-                        ArrayList<JLabel> textLabel = new ArrayList<JLabel>();
-                        for(int i = 0; i < etiquetas.size(); i++){
-                            
-                            textLabel.add(new JLabel(etiquetas.get(i)));
-                            textCampos.add(new JTextField());
-                            jPanelLabels.setLayout(null); 
-                            
-                            textLabel.get(i).setLocation(100, i*50);
-                            textCampos.get(i).setLocation(200, i*50);
-                            textLabel.get(i).setSize(100, 25);
-                            textCampos.get(i).setSize(100, 25);
-                            
-                            jPanelLabels.add(textLabel.get(i));
-                            if(taskNode.getDatosCom().containsKey(textLabel.get(i))){
-                                textCampos.get(i).setText(taskNode.getDatosCom().get(textLabel.get(i)));
-                            }
-                            jPanelLabels.add(textCampos.get(i));
+                        for(Component param : taskNode.mostrar()){
+                            //if(param instanceof JLabel){
+                                jPanelLabels.add(param);
+                            //}
+                            //else if(param instanceof JTextField){
+                            //    jPanelLabels.add((JTextField)param);
+                            //}
                             
                         }
-                       
                         jPanelLabels.validate();
                         jPanelLabels.repaint();
-
+                    }
+                    else{
+                        jPanelLabels.removeAll();
+                        jPanelLabels.repaint();
                     }
                 }
-                //jPanelTextBoxs.repaint();
+                
             }
         }
     }//GEN-LAST:event_ProyectosTreeMousePressed
@@ -398,7 +389,7 @@ public class MainGUI extends javax.swing.JFrame {
                 etiquetas = new ArrayList<>();
                 tipo = new ArrayList<>();
                 obligatorio = new ArrayList<>();
-                xmlRead.leerEtiquetas(taskNode.getPlantXML(), etiquetas, tipo, obligatorio);
+                xmlRead.leerEtiquetas(taskNode.getPlantXML(), etiquetas, tipo, obligatorio, taskNode);
                 jPanelLabels.setLayout(new SpringLayout());
 
                 ArrayList<JTextField> textCampos = new ArrayList<JTextField>();
@@ -415,9 +406,9 @@ public class MainGUI extends javax.swing.JFrame {
                     textCampos.get(i).setSize(100, 25);
 
                     jPanelLabels.add(textLabel.get(i));
-                    if(taskNode.getDatosCom().containsKey(textLabel.get(i))){
-                        textCampos.get(i).setText(taskNode.getDatosCom().get(textLabel.get(i)));
-                    }
+                    //if(taskNode.getDatosCom().containsKey(textLabel.get(i))){
+                    //    textCampos.get(i).setText(taskNode.getDatosCom().get(textLabel.get(i)));
+                    //}
                     jPanelLabels.add(textCampos.get(i));
 
                 }
@@ -539,14 +530,38 @@ public class MainGUI extends javax.swing.JFrame {
     }
     
     public void expandAllNodes(JTree tree, int startingIndex, int rowCount){
-    for(int i=startingIndex;i<rowCount;++i){
-        tree.expandRow(i);
-    }
+        for(int i=startingIndex;i<rowCount;++i){
+            tree.expandRow(i);
+        }
 
-    if(tree.getRowCount()!=rowCount){
-        expandAllNodes(tree, rowCount, tree.getRowCount());
+        if(tree.getRowCount()!=rowCount){
+            expandAllNodes(tree, rowCount, tree.getRowCount());
+        }
     }
-}
+    
+    public void ejecutar() throws IOException{
+
+        /*for(int i = 0; i < jPanelLabels.getComponentCount(); i++){
+            JTextField campo = (JTextField) jPanelLabels.getComponent(0);
+        }
+        
+        CustomMutableTreeNode tarea = (CustomMutableTreeNode) ProyectosTree.getLastSelectedPathComponent();
+        String salida = "";
+        String comando="java ";
+        TaskNode t = (TaskNode) tarea.getNodeType();
+        //HashMap datos = t.getDatosCom();
+        Iterator it = datos.entrySet().iterator();
+        while(it.hasNext()){
+             HashMap.Entry e = (HashMap.Entry)it.next();
+             comando = comando + e.getKey() + " " + e.getValue() + " ^ ";
+        }
+        comando = comando.substring(0, comando.length()-3);
+        Console cmd = new Console(comando);
+        salida = cmd.ejecutarComando();
+        jTextArea1.setText(salida);*/
+    }
+    
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuBar BarrajMenu;

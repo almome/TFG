@@ -1,3 +1,5 @@
+package Main;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -8,6 +10,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.util.ArrayList;
 import java.util.Enumeration;
+import java.util.HashMap;
 import javax.swing.JLabel;
 import javax.swing.JLayeredPane;
 import javax.swing.tree.DefaultMutableTreeNode;
@@ -62,7 +65,7 @@ public class StructXML {
         
     }
     
-    public void leerEtiquetas(Document plantilla, ArrayList<String> etiquetas, ArrayList<String> tipo, ArrayList<Boolean> obligatorios){
+    public void leerEtiquetas(Document plantilla, ArrayList<String> etiquetas, ArrayList<String> tipo, ArrayList<Boolean> obligatorios, TaskNode taskNode){
         String nombretarea = plantilla.getElementsByTagName("tarea").item(0).getAttributes().getNamedItem("nombre").getNodeValue();
         
         String nombrecomando = plantilla.getElementsByTagName("comando").item(0).getTextContent();
@@ -76,6 +79,7 @@ public class StructXML {
             
             String nombreParam = parametro.getAttribute("nombre");//getElementsByTagName("parametro").item(0).getAttributes().getNamedItem("nombre").getNodeValue();
             etiquetas.add(nombreParam);
+
             String tipoParam = parametro.getAttribute("tipo");
             tipo.add(tipoParam);
             String obligParam = parametro.getAttribute("obligatorio");
