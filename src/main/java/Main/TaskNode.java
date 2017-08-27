@@ -11,6 +11,7 @@ import java.awt.Component;
 import java.awt.MouseInfo;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.print.PrinterException;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -87,8 +88,10 @@ public class TaskNode implements INodeType{
     @Override
     public void ejecutar() {
         try {
-            WindowsInstances.mainGUI.ejecutar();
+            WindowsInstances.mainGUI.ejecutar(this);
         } catch (IOException ex) {
+            Logger.getLogger(TaskNode.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (PrinterException ex) {
             Logger.getLogger(TaskNode.class.getName()).log(Level.SEVERE, null, ex);
         }
     }

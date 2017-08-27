@@ -8,12 +8,14 @@ package Main;
 
 import TaskParam.FileParam;
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Component;
 import java.awt.FlowLayout;
 import java.awt.GridBagConstraints;
 import java.awt.GridLayout;
 import java.awt.LayoutManager;
 import java.awt.Rectangle;
+import java.awt.print.PrinterException;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -83,7 +85,7 @@ public class MainGUI extends javax.swing.JFrame {
         jPanelLabels = new javax.swing.JPanel();
         jTabbedPane3 = new javax.swing.JTabbedPane();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
+        jTextAreaConsola = new javax.swing.JTextArea();
         jToolBar1 = new javax.swing.JToolBar();
         jButtonLimpiar = new javax.swing.JButton();
         jButtonGuardar = new javax.swing.JButton();
@@ -134,13 +136,13 @@ public class MainGUI extends javax.swing.JFrame {
             .addGap(0, 316, Short.MAX_VALUE)
         );
 
-        jTextArea1.setEditable(false);
-        jTextArea1.setBackground(new java.awt.Color(51, 51, 51));
-        jTextArea1.setColumns(20);
-        jTextArea1.setFont(new java.awt.Font("Consolas", 0, 12)); // NOI18N
-        jTextArea1.setForeground(new java.awt.Color(255, 255, 255));
-        jTextArea1.setRows(5);
-        jScrollPane2.setViewportView(jTextArea1);
+        jTextAreaConsola.setEditable(false);
+        jTextAreaConsola.setBackground(new java.awt.Color(51, 51, 51));
+        jTextAreaConsola.setColumns(20);
+        jTextAreaConsola.setFont(new java.awt.Font("Consolas", 0, 12)); // NOI18N
+        jTextAreaConsola.setForeground(new java.awt.Color(255, 255, 255));
+        jTextAreaConsola.setRows(5);
+        jScrollPane2.setViewportView(jTextAreaConsola);
 
         jTabbedPane3.addTab("Consola", jScrollPane2);
 
@@ -510,26 +512,20 @@ public class MainGUI extends javax.swing.JFrame {
         }
     }
     
-    public void ejecutar() throws IOException{
-
-        /*for(int i = 0; i < jPanelLabels.getComponentCount(); i++){
-            JTextField campo = (JTextField) jPanelLabels.getComponent(0);
+    public void ejecutar(TaskNode taskNode) throws IOException, PrinterException{
+        String comando = "java"+ taskNode.parametros.get(0).ejecutar();
+        for(int i = 1; i < taskNode.parametros.size(); i++){
+            comando = comando + taskNode.parametros.get(i).ejecutar();
         }
-        
-        CustomMutableTreeNode tarea = (CustomMutableTreeNode) ProyectosTree.getLastSelectedPathComponent();
-        String salida = "";
-        String comando="java ";
-        TaskNode t = (TaskNode) tarea.getNodeType();
-        //HashMap datos = t.getDatosCom();
-        Iterator it = datos.entrySet().iterator();
-        while(it.hasNext()){
-             HashMap.Entry e = (HashMap.Entry)it.next();
-             comando = comando + e.getKey() + " " + e.getValue() + " ^ ";
-        }
-        comando = comando.substring(0, comando.length()-3);
         Console cmd = new Console(comando);
-        salida = cmd.ejecutarComando();
-        jTextArea1.setText(salida);*/
+        jTextAreaConsola.setText(comando);
+       // jTextAreaConsola.validate();
+        //jTextAreaConsola.repaint();
+        //jTextAreaConsola.setForeground(Color.WHITE);
+        jTextAreaConsola.setText(cmd.ejecutarComando());
+        //jTextAreaConsola.validate();
+        //jTextAreaConsola.repaint();
+                
     }
     
     
@@ -553,11 +549,15 @@ public class MainGUI extends javax.swing.JFrame {
     private javax.swing.JToolBar.Separator jSeparator2;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTabbedPane jTabbedPane3;
-    private javax.swing.JTextArea jTextArea1;
+    private javax.swing.JTextArea jTextAreaConsola;
     private javax.swing.JTextField jTextFieldRutaPlantilla;
     private javax.swing.JToolBar jToolBar1;
     private javax.swing.JMenu nuevojMenu;
     private javax.swing.JMenu runjMenu;
     private javax.swing.JMenuItem tareajMenu;
     // End of variables declaration//GEN-END:variables
+
+    void ejecutar() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }

@@ -25,9 +25,13 @@ public class Console {
     
     public String ejecutarComando() throws IOException{
         Process process = Runtime.getRuntime().exec(command);                    
-        BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()));                                          
+        BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()));  
+        BufferedReader stdError = new BufferedReader(new InputStreamReader(process.getErrorStream()));
         String s;                                                                
         while ((s = reader.readLine()) != null) { 
+            resultado = resultado+"\n"+ s; 
+        }
+        while ((s = stdError.readLine()) != null) { 
             resultado = resultado+"\n"+ s; 
         }
         return resultado;

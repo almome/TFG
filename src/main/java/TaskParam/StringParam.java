@@ -44,7 +44,7 @@ public class StringParam extends TaskParam {
 
     @Override
     public String ejecutar() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return " "+jLabel.getText()+" "+jTextField.getText()+" ";
     }
 
 }
