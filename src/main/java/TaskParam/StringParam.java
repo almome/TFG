@@ -20,14 +20,17 @@ public class StringParam extends TaskParam {
     private JTextField jTextField;
     
     public StringParam(String label, int locY, Boolean obl){
+        //Estableciendo label
         jLabel = new JLabel();
-        jLabel.setLocation(100, locY);
+        jLabel.setLocation(60, locY);
         jLabel.setSize(100, 25);
         jLabel.setText(label);
+        //Estableciendo textfield
         jTextField =new JTextField();
-        jTextField.setSize(200, 25);
-        jTextField.setLocation(600, locY);
+        jTextField.setSize(300, 25);
+        jTextField.setLocation(200, locY);
         obligatorio = obl;
+        
         
     }
 

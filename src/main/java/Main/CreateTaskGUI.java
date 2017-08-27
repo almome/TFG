@@ -226,9 +226,10 @@ public class CreateTaskGUI extends javax.swing.JFrame {
             ArrayList<String> tipo = new ArrayList<>();
             ArrayList<Boolean> obligatorio = new ArrayList<>();
             xmlRead.leerEtiquetas(n.getPlantXML(), etiquetas, tipo, obligatorio, n);
-            for(int i = 0; i < etiquetas.size(); i++){
+            for(int i = 0; i < etiquetas.size(); i++){  //Creamos los objetos de la clase de parámetro 
                 if(tipo.get(i).equals("fichero")){
-                    //FileParam parametro = new FileParam(Padre)
+                    FileParam parametro = new FileParam(etiquetas.get(i), i*50, obligatorio.get(i));
+                    n.parametros.add(parametro);
                 }
                 else if(tipo.get(i).equals("string")){
                     StringParam parametro = new StringParam(etiquetas.get(i), i*50, obligatorio.get(i));
@@ -273,7 +274,8 @@ public class CreateTaskGUI extends javax.swing.JFrame {
                 xmlRead.leerEtiquetas(n.getPlantXML(), etiquetas, tipo, obligatorio, n);
                 for(int i = 0; i < etiquetas.size(); i++){
                     if(tipo.get(i).equals("fichero")){
-                        //FileParam parametro = new FileParam(Padre)
+                        FileParam parametro = new FileParam(etiquetas.get(i), i*50, obligatorio.get(i));
+                        n.parametros.add(parametro);
                     }
                     else if(tipo.get(i).equals("string")){
                         StringParam parametro = new StringParam(etiquetas.get(i), i*50, obligatorio.get(i));
@@ -285,12 +287,12 @@ public class CreateTaskGUI extends javax.swing.JFrame {
                 if(ClasificadorComboBox.getSelectedItem() == "NINGUNO"){
                     CustomMutableTreeNode cn = (CustomMutableTreeNode) nodo.getParent();
                     ExperimentNode en = (ExperimentNode) cn.getNodeType();
-                    n.setRutaPlantilla(en.getRutaCarpeta());
+                    n.setRutaPlantilla(PlantillaTextField.getText());
                 }
                 else{
                     CustomMutableTreeNode cn = (CustomMutableTreeNode) nodo.getParent();
                     ClassifierNode cln = (ClassifierNode) cn.getNodeType();
-                    n.setRutaPlantilla(cln.getRutaCarpeta());
+                    n.setRutaPlantilla(PlantillaTextField.getText());
                 }
                 NombreTextField.setText("Introduzca el nombre de la tarea");
                 WindowsInstances.mainGUI.expandAllNodes(WindowsInstances.mainGUI.getProyectosTree(),  0, WindowsInstances.mainGUI.getProyectosTree().getRowCount());

@@ -22,6 +22,7 @@ import java.util.Collection;
 import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.List;
 import javax.swing.BoxLayout;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -88,7 +89,7 @@ public class MainGUI extends javax.swing.JFrame {
         jButtonGuardar = new javax.swing.JButton();
         jSeparator1 = new javax.swing.JToolBar.Separator();
         jButtonCambiarPlantilla = new javax.swing.JButton();
-        jTextField1 = new javax.swing.JTextField();
+        jTextFieldRutaPlantilla = new javax.swing.JTextField();
         jSeparator2 = new javax.swing.JToolBar.Separator();
         jButtonEjecutar = new javax.swing.JButton();
         BarrajMenu = new javax.swing.JMenuBar();
@@ -179,8 +180,8 @@ public class MainGUI extends javax.swing.JFrame {
         });
         jToolBar1.add(jButtonCambiarPlantilla);
 
-        jTextField1.setEnabled(false);
-        jToolBar1.add(jTextField1);
+        jTextFieldRutaPlantilla.setEnabled(false);
+        jToolBar1.add(jTextFieldRutaPlantilla);
         jToolBar1.add(jSeparator2);
 
         jButtonEjecutar.setText("Ejecutar");
@@ -334,23 +335,19 @@ public class MainGUI extends javax.swing.JFrame {
             if(SwingUtilities.isLeftMouseButton(evt)){  //Si es nodo tarea muestra la ventana principal con los campos del xml
                 
                 jPanelLabels.removeAll();
-                jTextField1.setText("");
+                
                 TreePath path = ProyectosTree.getPathForLocation(evt.getX(), evt.getY());
                 Rectangle pathBounds = ProyectosTree.getUI().getPathBounds(ProyectosTree, path);
                 if(pathBounds != null && pathBounds.contains(evt.getX (), evt.getY ()))
                 {
                     CustomMutableTreeNode hijo = (CustomMutableTreeNode) path.getLastPathComponent();
                     jPanelLabels.setLayout(null);
+                    TaskNode aux = (TaskNode) hijo.getNodeType();
+                    jTextFieldRutaPlantilla.setText(aux.rutaPlantilla);
                     if(hijo.getNodeType() instanceof TaskNode){
                         TaskNode taskNode = (TaskNode) hijo.getNodeType();
                         for(Component param : taskNode.mostrar()){
-                            //if(param instanceof JLabel){
-                                jPanelLabels.add(param);
-                            //}
-                            //else if(param instanceof JTextField){
-                            //    jPanelLabels.add((JTextField)param);
-                            //}
-                            
+                            jPanelLabels.add(param);
                         }
                         jPanelLabels.validate();
                         jPanelLabels.repaint();
@@ -374,55 +371,29 @@ public class MainGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     private void jButtonLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonLimpiarActionPerformed
-        jPanelLabels.removeAll();
         CustomMutableTreeNode nodo = (CustomMutableTreeNode) ProyectosTree.getLastSelectedPathComponent();
         TreePath path = ProyectosTree.getSelectionPath();
         Rectangle pathBounds = ProyectosTree.getUI().getPathBounds(ProyectosTree, path);
         if(pathBounds != null)
         {
             CustomMutableTreeNode hijo = (CustomMutableTreeNode) path.getLastPathComponent();
-            if(hijo instanceof CustomMutableTreeNode){
-
-                jPanelLabels.removeAll();
+            if(hijo.getNodeType() instanceof TaskNode){
                 TaskNode taskNode = (TaskNode) hijo.getNodeType();
-                StructXML xmlRead = new StructXML();
-                etiquetas = new ArrayList<>();
-                tipo = new ArrayList<>();
-                obligatorio = new ArrayList<>();
-                xmlRead.leerEtiquetas(taskNode.getPlantXML(), etiquetas, tipo, obligatorio, taskNode);
-                jPanelLabels.setLayout(new SpringLayout());
-
-                ArrayList<JTextField> textCampos = new ArrayList<JTextField>();
-                ArrayList<JLabel> textLabel = new ArrayList<JLabel>();
-                for(int i = 0; i < etiquetas.size(); i++){
-
-                    textLabel.add(new JLabel(etiquetas.get(i)));
-                    textCampos.add(new JTextField());
-                    jPanelLabels.setLayout(null); 
-
-                    textLabel.get(i).setLocation(100, i*50);
-                    textCampos.get(i).setLocation(200, i*50);
-                    textLabel.get(i).setSize(100, 25);
-                    textCampos.get(i).setSize(100, 25);
-
-                    jPanelLabels.add(textLabel.get(i));
-                    //if(taskNode.getDatosCom().containsKey(textLabel.get(i))){
-                    //    textCampos.get(i).setText(taskNode.getDatosCom().get(textLabel.get(i)));
-                    //}
-                    jPanelLabels.add(textCampos.get(i));
-
+                for(int i = 0; i < taskNode.parametros.size(); i++){
+                    int compTam = taskNode.parametros.get(i).mostrar().size();
+                    for(int j = 0; j < compTam; j++){
+                        if(taskNode.parametros.get(i).mostrar().get(j) instanceof JTextField){
+                            JTextField aux = (JTextField)taskNode.parametros.get(i).mostrar().get(j);
+                            aux.setText("");
+                        }      
+                    }
                 }
-
-                jPanelLabels.validate();
-                jPanelLabels.repaint();
-
             }
         }
     }//GEN-LAST:event_jButtonLimpiarActionPerformed
 
     private void jButtonGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonGuardarActionPerformed
         StructXML guardarExp = new StructXML();
-        CustomMutableTreeNode selecionado = (CustomMutableTreeNode) ProyectosTree.getLastSelectedPathComponent();
         CustomMutableTreeNode exp = (CustomMutableTreeNode) ProyectosTree.getLastSelectedPathComponent();
         CustomMutableTreeNode exp_aux = (CustomMutableTreeNode) ProyectosTree.getLastSelectedPathComponent();
         while(exp_aux != root){
@@ -583,7 +554,7 @@ public class MainGUI extends javax.swing.JFrame {
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTabbedPane jTabbedPane3;
     private javax.swing.JTextArea jTextArea1;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JTextField jTextFieldRutaPlantilla;
     private javax.swing.JToolBar jToolBar1;
     private javax.swing.JMenu nuevojMenu;
     private javax.swing.JMenu runjMenu;

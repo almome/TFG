@@ -2,7 +2,7 @@
 <tarea nombre="EjemploXML">
   <comando>java</comando>
   <parametros>
-      <parametro nombre="-jar" tipo="string" obligatorio="si">
+      <parametro nombre="-jar" tipo="fichero" obligatorio="si">
       </parametro>
       <parametro nombre="-i" tipo="string" obligatorio="si">
       </parametro>
