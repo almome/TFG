@@ -105,7 +105,7 @@ public class ExperimentNode implements INodeType {
         jMenuItemEjecutar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ev) {
-                ejecutar();
+                ejecutar_rec(padre);
             }
         });
         
@@ -161,6 +161,20 @@ public class ExperimentNode implements INodeType {
          return "Experimento";
     }
 
-   
+   public void ejecutar_rec (CustomMutableTreeNode nodo){
+        for(int i = 0 ; i < nodo.getChildCount() ; i++)
+        {
+            CustomMutableTreeNode aux = (CustomMutableTreeNode) nodo.getChildAt(i);
+            if(aux.getNodeType() instanceof TaskNode){
+                TaskNode taskNode = (TaskNode) aux.getNodeType();
+                taskNode.ejecutar();
+
+            }
+            else{
+                ejecutar_rec(aux);
+
+            }
+        }
+    }
     
 }

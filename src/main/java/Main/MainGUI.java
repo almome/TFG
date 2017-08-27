@@ -113,6 +113,7 @@ public class MainGUI extends javax.swing.JFrame {
         jMenuItem2 = new javax.swing.JMenuItem();
         jMenuItem1 = new javax.swing.JMenuItem();
         runjMenu = new javax.swing.JMenu();
+        jMenuItem3 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -263,6 +264,15 @@ public class MainGUI extends javax.swing.JFrame {
         BarrajMenu.add(archivosjMenu);
 
         runjMenu.setText("Run");
+
+        jMenuItem3.setText("Ejecutar Todos");
+        jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem3ActionPerformed(evt);
+            }
+        });
+        runjMenu.add(jMenuItem3);
+
         BarrajMenu.add(runjMenu);
 
         setJMenuBar(BarrajMenu);
@@ -511,6 +521,14 @@ public class MainGUI extends javax.swing.JFrame {
         
     }//GEN-LAST:event_jButtonEjecutarActionPerformed
 
+    private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
+        for(int i = 0; i < root.getChildCount(); i++){
+            CustomMutableTreeNode nodo = (CustomMutableTreeNode) root.getChildAt(i);
+            ExperimentNode aux = (ExperimentNode) nodo.getNodeType();
+            aux.ejecutar_rec(nodo);
+        }
+    }//GEN-LAST:event_jMenuItem3ActionPerformed
+
     
     /**
      * @param args the command line arguments
@@ -639,6 +657,7 @@ public class MainGUI extends javax.swing.JFrame {
     private javax.swing.JButton jButtonLimpiar;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
+    private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JPanel jPanelLabels;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;

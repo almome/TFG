@@ -11,6 +11,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Enumeration;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JLayeredPane;
@@ -55,7 +56,7 @@ public class ClassifierNode implements INodeType{
 
     @Override
     public void ejecutar() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        
     }
 
     @Override
@@ -119,7 +120,7 @@ public class ClassifierNode implements INodeType{
         jMenuItemEjecutar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ev) {
-                ejecutar();
+                ejecutar_rec(padre);
             }
         });
         
@@ -171,6 +172,22 @@ public class ClassifierNode implements INodeType{
     @Override
     public String getTipo() {
          return "Clasificador";
+    }
+    
+    public void ejecutar_rec (CustomMutableTreeNode nodo){
+        for(int i = 0 ; i < nodo.getChildCount() ; i++)
+        {
+            CustomMutableTreeNode aux = (CustomMutableTreeNode) nodo.getChildAt(i);
+            if(aux.getNodeType() instanceof TaskNode){
+                TaskNode taskNode = (TaskNode) aux.getNodeType();
+                taskNode.ejecutar();
+
+            }
+            else{
+                ejecutar_rec(aux);
+
+            }
+        }
     }
 
     
