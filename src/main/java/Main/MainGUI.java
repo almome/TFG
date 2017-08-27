@@ -7,6 +7,7 @@ package Main;
  */
 
 import TaskParam.FileParam;
+import TaskParam.StringParam;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Component;
@@ -18,14 +19,19 @@ import java.awt.Rectangle;
 import java.awt.print.PrinterException;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.BoxLayout;
+import javax.swing.JFileChooser;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
@@ -35,6 +41,7 @@ import javax.swing.SwingUtilities;
 import javax.swing.TransferHandler;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
+import javax.swing.filechooser.FileNameExtensionFilter;
 //import javax.swing.text.Document;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeCellRenderer;
@@ -60,6 +67,7 @@ public class MainGUI extends javax.swing.JFrame {
     public ArrayList<TreeNode> experimentos;
     public DefaultTreeModel modelo;
     public DefaultMutableTreeNode root;
+    public String consolaText;
     DefaultTreeCellRenderer renderer;
     
     /**
@@ -94,6 +102,8 @@ public class MainGUI extends javax.swing.JFrame {
         jTextFieldRutaPlantilla = new javax.swing.JTextField();
         jSeparator2 = new javax.swing.JToolBar.Separator();
         jButtonEjecutar = new javax.swing.JButton();
+        jSeparator3 = new javax.swing.JToolBar.Separator();
+        jButton1 = new javax.swing.JButton();
         BarrajMenu = new javax.swing.JMenuBar();
         archivosjMenu = new javax.swing.JMenu();
         nuevojMenu = new javax.swing.JMenu();
@@ -190,7 +200,24 @@ public class MainGUI extends javax.swing.JFrame {
         jButtonEjecutar.setFocusable(false);
         jButtonEjecutar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jButtonEjecutar.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jButtonEjecutar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonEjecutarActionPerformed(evt);
+            }
+        });
         jToolBar1.add(jButtonEjecutar);
+        jToolBar1.add(jSeparator3);
+
+        jButton1.setText("Guardar Salida");
+        jButton1.setFocusable(false);
+        jButton1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jButton1.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        jToolBar1.add(jButton1);
 
         archivosjMenu.setText("Archivos");
 
@@ -412,8 +439,77 @@ public class MainGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonGuardarActionPerformed
 
     private void jButtonCambiarPlantillaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCambiarPlantillaActionPerformed
-       //PENDIENTE
+        jPanelLabels.removeAll();
+        String nuevaRuta = "";
+        
+        
+        CustomMutableTreeNode hijo = (CustomMutableTreeNode) ProyectosTree.getLastSelectedPathComponent();
+        if(hijo.getNodeType() instanceof TaskNode){
+            
+            JFileChooser jFileChooser1 = new JFileChooser();
+            jFileChooser1.setFileSelectionMode(jFileChooser1.FILES_ONLY);
+            jFileChooser1.setFileFilter(new FileNameExtensionFilter("XML files (*.xml)", "xml"));
+            int boton = jFileChooser1.showOpenDialog(jFileChooser1);
+            
+            if (boton == jFileChooser1.APPROVE_OPTION){ //Si el usuario ha pulsado la opción Aceptar
+                File fichero = jFileChooser1.getSelectedFile(); //Guardamos en la variable fichero el archivo seleccionado
+                try {
+                  nuevaRuta = fichero.getAbsolutePath();
+                } catch (Exception ex) {
+                  System.out.println("Hubo un problema al intentar acceder al fichero "+fichero.getAbsolutePath());
+                }
+            }
+            
+            
+            TaskNode aux = (TaskNode) hijo.getNodeType();
+            aux.setRutaPlantilla(nuevaRuta);
+            StructXML cargar = new StructXML();
+            aux.setPlantXML(cargar.CargarPlantillaXML(aux.getRutaPlantilla()));
+            //Metemos los parametros de la plantilla
+            StructXML xmlRead = new StructXML();
+            ArrayList<String> etiquetas = new ArrayList<>();
+            ArrayList<String> tipo = new ArrayList<>();
+            ArrayList<Boolean> obligatorio = new ArrayList<>();
+            xmlRead.leerEtiquetas(aux.getPlantXML(), etiquetas, tipo, obligatorio, aux);
+            for(int i = 0; i < etiquetas.size(); i++){  //Creamos los objetos de la clase de parámetro 
+                if(tipo.get(i).equals("fichero")){
+                    FileParam parametro = new FileParam(etiquetas.get(i), i*50, obligatorio.get(i));
+                    aux.parametros.add(parametro);
+                }
+                else if(tipo.get(i).equals("string")){
+                    StringParam parametro = new StringParam(etiquetas.get(i), i*50, obligatorio.get(i));
+                    aux.parametros.add(parametro);
+                }
+            }
+
+            jPanelLabels.setLayout(null);
+            jTextFieldRutaPlantilla.setText(aux.rutaPlantilla);
+            TaskNode taskNode = (TaskNode) hijo.getNodeType();
+            for(Component param : taskNode.mostrar()){
+                    jPanelLabels.add(param);
+            }
+            jPanelLabels.validate();
+            jPanelLabels.repaint();   
+        }
+        
+        
     }//GEN-LAST:event_jButtonCambiarPlantillaActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        consolaText = "  "+jTextAreaConsola.getText();
+        WindowsInstances.dialogoGuardarConsola.setVisible(true);
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButtonEjecutarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEjecutarActionPerformed
+        
+        //SOLO CUANDO ES UNA TAREA
+        CustomMutableTreeNode hijo = (CustomMutableTreeNode) ProyectosTree.getLastSelectedPathComponent();
+        if(hijo.getNodeType() instanceof TaskNode){
+            TaskNode taskNode = (TaskNode) hijo.getNodeType();
+            taskNode.ejecutar();
+        }
+        
+    }//GEN-LAST:event_jButtonEjecutarActionPerformed
 
     
     /**
@@ -536,6 +632,7 @@ public class MainGUI extends javax.swing.JFrame {
     private javax.swing.JMenu archivosjMenu;
     private javax.swing.JMenuItem clasificajMenu;
     private javax.swing.JMenuItem experjMenu;
+    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButtonCambiarPlantilla;
     private javax.swing.JButton jButtonEjecutar;
     private javax.swing.JButton jButtonGuardar;
@@ -547,6 +644,7 @@ public class MainGUI extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JToolBar.Separator jSeparator1;
     private javax.swing.JToolBar.Separator jSeparator2;
+    private javax.swing.JToolBar.Separator jSeparator3;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTabbedPane jTabbedPane3;
     private javax.swing.JTextArea jTextAreaConsola;
