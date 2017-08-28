@@ -11,6 +11,7 @@ import java.io.FileInputStream;
 import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.HashMap;
+import java.util.List;
 import javax.swing.JLabel;
 import javax.swing.JLayeredPane;
 import javax.swing.JTextField;
@@ -232,6 +233,32 @@ public class StructXML {
             CustomMutableTreeNode child = (CustomMutableTreeNode) kiddies.nextElement();
             parseTreeNode(child, parentElement);
         }
+    }
+      
+    public ArrayList<Document> CargarProyecto(String proyectoRuta){
+        ArrayList<Document> Documents = new ArrayList<>();
+        
+        Document xmlFile = null;
+        try{
+            DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
+            dbf.setValidating(false);
+            DocumentBuilder dBu  = dbf.newDocumentBuilder();
+            File f = new File(XMLRuta);
+            FileInputStream fis = new FileInputStream(f);
+            xmlFile = dBu.parse(fis);
+
+            //falta añadir comprobación con esquema
+            
+            //xmlFile = dBu.parse(new FileInputStream());
+
+            //Leer
+            //String aux = xmlFile.getElementsByTagName("conf").item(0).getAttributes().getNamedItem("name").getNodeValue();
+            //System.out.println(aux);
+            
+        }catch(Exception ex){
+            //agregar mensaje de error
+        }
+        return xmlFile;
     }
     
 }
