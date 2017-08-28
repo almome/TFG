@@ -615,17 +615,28 @@ public class MainGUI extends javax.swing.JFrame {
     }
     
     public void ejecutar(TaskNode taskNode) throws IOException, PrinterException{
-        String comando = "java"+ taskNode.parametros.get(0).ejecutar();
-        for(int i = 1; i < taskNode.parametros.size(); i++){
-            comando = comando + taskNode.parametros.get(i).ejecutar();
+        String comando = "java ";
+        String mensajeError = "";
+        for(int i = 0; i < taskNode.parametros.size(); i++){
+            JTextField jTextAux = (JTextField) taskNode.parametros.get(i).mostrar().get(1);
+            JLabel jLabelAux = (JLabel) taskNode.parametros.get(i).mostrar().get(0);
+            if(taskNode.parametros.get(i).isObligatorio() && jTextAux.getText().equals("")){
+                mensajeError = mensajeError + jLabelAux.getText() + ", ";
+            }else{
+                comando = comando + taskNode.parametros.get(i).ejecutar();
+            }
         }
-        if(comando.indexOf(taskNode.parametros.get(0).MensageError()) > -1){
-            jTextAreaConsola.setText("Hay campos obligatorios vacíos.");
-        }
-        else{
+        
+        if(mensajeError.equals("")){
             Console cmd = new Console(comando);
             jTextAreaConsola.setText(jTextAreaConsola.getText()+"\n\n > Tarea: "+taskNode.toString()+"\n "+comando +"\n " +cmd.ejecutarComando());
-        }          
+        }
+        else{
+            jTextAreaConsola.setText(jTextAreaConsola.getText()+"\n\n > Tarea: "+taskNode.toString()+"\n ERROR. Campos obligatorios vacios: "+mensajeError.substring(0, mensajeError.length()-2));
+        }
+        
+        
+                
     }
     
     

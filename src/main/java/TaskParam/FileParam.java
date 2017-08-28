@@ -76,15 +76,9 @@ public class FileParam extends TaskParam {
     
     @Override
     public String ejecutar() {
-        if(obligatorio == true && jTextField.getText().equals("")){
-            return mensage_error;
-        }
-        else if(obligatorio == false && jTextField.getText().equals("")){
-            return ""; 
-        }
-        else{
+
             return " "+jLabel.getText()+" "+jTextField.getText()+" ";
-        }
+        
         
     }
 }

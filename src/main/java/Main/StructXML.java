@@ -81,7 +81,7 @@ public class StructXML {
             String tipoParam = parametro.getAttribute("tipo");
             tipo.add(tipoParam);
             String obligParam = parametro.getAttribute("obligatorio");
-            if(obligParam == "no"){
+            if(obligParam.equals("no")){
                 obligatorios.add(false);
             }
             else{

@@ -44,7 +44,9 @@ public class StringParam extends TaskParam {
 
     @Override
     public String ejecutar() {
-        return " "+jLabel.getText()+" "+jTextField.getText()+" ";
+       
+            return " "+jLabel.getText()+" "+jTextField.getText()+" ";
+        
     }
 
 }
