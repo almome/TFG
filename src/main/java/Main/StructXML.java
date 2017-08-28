@@ -13,6 +13,7 @@ import java.util.Enumeration;
 import java.util.HashMap;
 import javax.swing.JLabel;
 import javax.swing.JLayeredPane;
+import javax.swing.JTextField;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.TreeModel;
 import javax.swing.tree.TreeNode;
@@ -61,9 +62,6 @@ public class StructXML {
         return xmlFile;
     }
     
-    public void leerOpciones(ArrayList<String> opciones){
-        
-    }
     
     public void leerEtiquetas(Document plantilla, ArrayList<String> etiquetas, ArrayList<String> tipo, ArrayList<Boolean> obligatorios, TaskNode taskNode){
         String nombretarea = plantilla.getElementsByTagName("tarea").item(0).getAttributes().getNamedItem("nombre").getNodeValue();
@@ -126,7 +124,7 @@ public class StructXML {
         //String value = treeNode.getUserObject().toString();
         Element rootElement = doc.createElement("proyecto");
         doc.appendChild(rootElement);
-        Attr attrName = doc.createAttribute("nombre");   //AQUI PETA NO SE PORQUE
+        Attr attrName = doc.createAttribute("nombre");  
         attrName.setNodeValue(treeNode.getNombre()+".xml");
         rootElement.getAttributes().setNamedItem(attrName); 
         
@@ -158,23 +156,60 @@ public class StructXML {
             attrName.setNodeValue(clasificador.getNombre());
             parentElement.getAttributes().setNamedItem(attrName);
 
-            Attr attrURL = doc.getOwnerDocument().createAttribute("tipo");
-            attrURL.setNodeValue("clasificador");
-            parentElement.getAttributes().setNamedItem(attrURL);
+            Attr attrTipo = doc.getOwnerDocument().createAttribute("tipo");
+            attrTipo.setNodeValue("clasificador");
+            parentElement.getAttributes().setNamedItem(attrTipo);
+            
+            doc.appendChild(parentElement);
+            
         } else if (treeNode.getNodeType() instanceof TaskNode) {
             parentElement = doc.getOwnerDocument().createElement("nodo");
 
             CustomMutableTreeNode tarea = (CustomMutableTreeNode) treeNode;
+            TaskNode taskNode = (TaskNode) tarea.getNodeType();
             // Apply properties to root element...
             Attr attrName = doc.getOwnerDocument().createAttribute("nombre");
             attrName.setNodeValue(tarea.getNombre());
             parentElement.getAttributes().setNamedItem(attrName);
             
-            Attr attrURL = doc.getOwnerDocument().createAttribute("tipo");
-            attrURL.setNodeValue("tarea");
-            parentElement.getAttributes().setNamedItem(attrURL); 
+            Attr attrTipo = doc.getOwnerDocument().createAttribute("tipo");
+            attrTipo.setNodeValue("tarea");
+            parentElement.getAttributes().setNamedItem(attrTipo); 
+
+            doc.appendChild(parentElement);
+            
+            Element plantillaElement = doc.getOwnerDocument().createElement("plantilla");
+            Attr attrRutaPlant = doc.getOwnerDocument().createAttribute("ruta");
+            attrRutaPlant.setNodeValue(taskNode.getRutaPlantilla());
+            plantillaElement.getAttributes().setNamedItem(attrRutaPlant);
+            parentElement.appendChild(plantillaElement);
+            
+            Element parametrosElement = doc.getOwnerDocument().createElement("parametros");
+            parentElement.appendChild(parametrosElement);
             
             //HAY QUE METER LOS PARÁMETROS
+            for(int i = 0; i < taskNode.parametros.size(); i++){
+                Element paramElement = doc.getOwnerDocument().createElement("parametro");
+                String nombre = "";
+                String valor = "";
+                for(int j = 0; j < taskNode.parametros.get(i).mostrar().size(); j++){
+                    if(taskNode.parametros.get(i).mostrar().get(j) instanceof JLabel){
+                        Attr attrNameParam = doc.getOwnerDocument().createAttribute("nombre");
+                        JLabel LabelAux = (JLabel) taskNode.parametros.get(i).mostrar().get(j);
+                        attrNameParam.setNodeValue(LabelAux.getText());
+                        paramElement.getAttributes().setNamedItem(attrNameParam);
+                    }
+                    else if(taskNode.parametros.get(i).mostrar().get(j) instanceof JTextField){
+                        Attr attrValorParam = doc.getOwnerDocument().createAttribute("valor");
+                        JTextField TextFieldAux = (JTextField) taskNode.parametros.get(i).mostrar().get(j);
+                        attrValorParam.setNodeValue(TextFieldAux.getText());
+                        paramElement.getAttributes().setNamedItem(attrValorParam);
+                    }
+                        
+                }
+                parametrosElement.appendChild(paramElement);
+            }
+            
 
         } else if (treeNode.getNodeType() instanceof ExperimentNode) {
             parentElement = doc.getOwnerDocument().createElement("nodo");
@@ -189,10 +224,11 @@ public class StructXML {
             attrURL.setNodeValue("experimento");
             parentElement.getAttributes().setNamedItem(attrURL);
             
+            doc.appendChild(parentElement);
             
         }
 
-        doc.appendChild(parentElement);
+        //doc.appendChild(parentElement);
 
         Enumeration kiddies = treeNode.children();
         while (kiddies.hasMoreElements()) {
