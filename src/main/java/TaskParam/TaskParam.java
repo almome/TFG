@@ -15,11 +15,16 @@ import java.util.List;
  */
 public abstract class TaskParam {
     protected Boolean obligatorio = false;
+    protected String mensage_error = "ERROR_CAMPO_OBLIGATORIO";
     
     public abstract List<Component> mostrar();
     public abstract String ejecutar();
 
     public Boolean isObligatorio() {
         return obligatorio;
+    }
+    
+    public String MensageError() {
+        return mensage_error;
     }
 }

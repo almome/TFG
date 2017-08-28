@@ -187,7 +187,6 @@ public class StructXML {
             Element parametrosElement = doc.getOwnerDocument().createElement("parametros");
             parentElement.appendChild(parametrosElement);
             
-            //HAY QUE METER LOS PARÁMETROS
             for(int i = 0; i < taskNode.parametros.size(); i++){
                 Element paramElement = doc.getOwnerDocument().createElement("parametro");
                 String nombre = "";
@@ -227,8 +226,6 @@ public class StructXML {
             doc.appendChild(parentElement);
             
         }
-
-        //doc.appendChild(parentElement);
 
         Enumeration kiddies = treeNode.children();
         while (kiddies.hasMoreElements()) {

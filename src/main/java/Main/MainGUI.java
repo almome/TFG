@@ -73,13 +73,12 @@ public class MainGUI extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jTabbedPane1 = new javax.swing.JTabbedPane();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        ProyectosTree = new javax.swing.JTree();
-        jPanelLabels = new javax.swing.JPanel();
         jTabbedPane3 = new javax.swing.JTabbedPane();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTextAreaConsola = new javax.swing.JTextArea();
+        jTabbedPane1 = new javax.swing.JTabbedPane();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        ProyectosTree = new javax.swing.JTree();
         jToolBar1 = new javax.swing.JToolBar();
         jButtonLimpiar = new javax.swing.JButton();
         jButtonGuardar = new javax.swing.JButton();
@@ -90,6 +89,7 @@ public class MainGUI extends javax.swing.JFrame {
         jButtonEjecutar = new javax.swing.JButton();
         jSeparator3 = new javax.swing.JToolBar.Separator();
         jButton1 = new javax.swing.JButton();
+        jPanelLabels = new javax.swing.JPanel();
         BarrajMenu = new javax.swing.JMenuBar();
         archivosjMenu = new javax.swing.JMenu();
         nuevojMenu = new javax.swing.JMenu();
@@ -102,11 +102,24 @@ public class MainGUI extends javax.swing.JFrame {
         jMenuItem3 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setModalExclusionType(null);
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowOpened(java.awt.event.WindowEvent evt) {
                 formWindowOpened(evt);
             }
         });
+
+        jTabbedPane3.setTabLayoutPolicy(javax.swing.JTabbedPane.SCROLL_TAB_LAYOUT);
+
+        jTextAreaConsola.setEditable(false);
+        jTextAreaConsola.setBackground(new java.awt.Color(51, 51, 51));
+        jTextAreaConsola.setColumns(20);
+        jTextAreaConsola.setFont(new java.awt.Font("Consolas", 0, 12)); // NOI18N
+        jTextAreaConsola.setForeground(new java.awt.Color(255, 255, 255));
+        jTextAreaConsola.setRows(5);
+        jScrollPane2.setViewportView(jTextAreaConsola);
+
+        jTabbedPane3.addTab("Consola", jScrollPane2);
 
         javax.swing.tree.DefaultMutableTreeNode treeNode1 = new javax.swing.tree.DefaultMutableTreeNode("root");
         ProyectosTree.setModel(new javax.swing.tree.DefaultTreeModel(treeNode1));
@@ -119,29 +132,6 @@ public class MainGUI extends javax.swing.JFrame {
         jScrollPane1.setViewportView(ProyectosTree);
 
         jTabbedPane1.addTab("Experimentos", jScrollPane1);
-
-        jPanelLabels.setAutoscrolls(true);
-
-        javax.swing.GroupLayout jPanelLabelsLayout = new javax.swing.GroupLayout(jPanelLabels);
-        jPanelLabels.setLayout(jPanelLabelsLayout);
-        jPanelLabelsLayout.setHorizontalGroup(
-            jPanelLabelsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
-        );
-        jPanelLabelsLayout.setVerticalGroup(
-            jPanelLabelsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 316, Short.MAX_VALUE)
-        );
-
-        jTextAreaConsola.setEditable(false);
-        jTextAreaConsola.setBackground(new java.awt.Color(51, 51, 51));
-        jTextAreaConsola.setColumns(20);
-        jTextAreaConsola.setFont(new java.awt.Font("Consolas", 0, 12)); // NOI18N
-        jTextAreaConsola.setForeground(new java.awt.Color(255, 255, 255));
-        jTextAreaConsola.setRows(5);
-        jScrollPane2.setViewportView(jTextAreaConsola);
-
-        jTabbedPane3.addTab("Consola", jScrollPane2);
 
         jToolBar1.setRollover(true);
 
@@ -205,6 +195,19 @@ public class MainGUI extends javax.swing.JFrame {
             }
         });
         jToolBar1.add(jButton1);
+
+        jPanelLabels.setAutoscrolls(true);
+
+        javax.swing.GroupLayout jPanelLabelsLayout = new javax.swing.GroupLayout(jPanelLabels);
+        jPanelLabels.setLayout(jPanelLabelsLayout);
+        jPanelLabelsLayout.setHorizontalGroup(
+            jPanelLabelsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+        jPanelLabelsLayout.setVerticalGroup(
+            jPanelLabelsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 328, Short.MAX_VALUE)
+        );
 
         archivosjMenu.setText("Archivos");
 
@@ -286,7 +289,7 @@ public class MainGUI extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(23, 23, 23)
                         .addComponent(jPanelLabels, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
+                        .addGap(27, 27, 27)
                         .addComponent(jTabbedPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 242, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jTabbedPane1))
                 .addGap(8, 8, 8))
@@ -497,7 +500,6 @@ public class MainGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButtonEjecutarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEjecutarActionPerformed
-        
         //SOLO CUANDO ES UNA TAREA
         CustomMutableTreeNode hijo = (CustomMutableTreeNode) ProyectosTree.getLastSelectedPathComponent();
         if(hijo.getNodeType() instanceof TaskNode){
@@ -617,15 +619,13 @@ public class MainGUI extends javax.swing.JFrame {
         for(int i = 1; i < taskNode.parametros.size(); i++){
             comando = comando + taskNode.parametros.get(i).ejecutar();
         }
-        Console cmd = new Console(comando);
-        jTextAreaConsola.setText(comando);
-       // jTextAreaConsola.validate();
-        //jTextAreaConsola.repaint();
-        //jTextAreaConsola.setForeground(Color.WHITE);
-        jTextAreaConsola.setText(cmd.ejecutarComando());
-        //jTextAreaConsola.validate();
-        //jTextAreaConsola.repaint();
-                
+        if(comando.indexOf(taskNode.parametros.get(0).MensageError()) > -1){
+            jTextAreaConsola.setText("Hay campos obligatorios vacíos.");
+        }
+        else{
+            Console cmd = new Console(comando);
+            jTextAreaConsola.setText(jTextAreaConsola.getText()+"\n\n > Tarea: "+taskNode.toString()+"\n "+comando +"\n " +cmd.ejecutarComando());
+        }          
     }
     
     
