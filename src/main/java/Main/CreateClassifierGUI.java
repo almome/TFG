@@ -106,7 +106,9 @@ public class CreateClassifierGUI extends javax.swing.JFrame {
             }
         });
 
+        NombreTextField.setHorizontalAlignment(javax.swing.JTextField.LEFT);
         NombreTextField.setText("Inserte nombre del clasificador...");
+        NombreTextField.setName(""); // NOI18N
 
         jLabel1.setText("Clasificador :");
 
@@ -127,14 +129,17 @@ public class CreateClassifierGUI extends javax.swing.JFrame {
                             .addComponent(ExperimentoLabel)
                             .addComponent(NombreLabel, javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(NombreTextField, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(ExperimentosComboBox, 0, 265, Short.MAX_VALUE)
-                            .addComponent(ClasificadorComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(10, 10, 10)
+                                .addComponent(NombreTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 255, Short.MAX_VALUE))
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(ExperimentosComboBox, 0, 265, Short.MAX_VALUE)
+                                .addComponent(ClasificadorComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
                 .addGap(32, 32, 32))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(266, Short.MAX_VALUE)
                 .addComponent(CancelarButton)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(CrearButton)
@@ -157,8 +162,8 @@ public class CreateClassifierGUI extends javax.swing.JFrame {
                     .addComponent(jLabel1))
                 .addGap(11, 11, 11)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(NombreTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(NombreLabel))
+                    .addComponent(NombreLabel)
+                    .addComponent(NombreTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(CancelarButton)
@@ -171,7 +176,7 @@ public class CreateClassifierGUI extends javax.swing.JFrame {
 
     private void CrearButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CrearButtonActionPerformed
 
-        if(NombreTextField.getText() == null){
+        if(NombreTextField.getText() == null || NombreTextField.getText().equals("")){
             showMessageDialog(new JFrame(), "No se puede crear un clasificador sin nombre.","Error", JOptionPane.ERROR_MESSAGE);
         }
         if(Padre == null){
@@ -257,6 +262,7 @@ public class CreateClassifierGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_CrearButtonActionPerformed
 
     private void CancelarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CancelarButtonActionPerformed
+        NombreTextField.setText("Introduzca el nombre del clasificador...");
         WindowsInstances.mainGUI.expandAllNodes(WindowsInstances.mainGUI.getProyectosTree(),  0, WindowsInstances.mainGUI.getProyectosTree().getRowCount());
         dispose();
     }//GEN-LAST:event_CancelarButtonActionPerformed

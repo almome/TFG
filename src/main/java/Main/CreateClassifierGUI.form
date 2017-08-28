@@ -39,18 +39,23 @@
                           <Component id="NombreLabel" alignment="1" min="-2" max="-2" attributes="0"/>
                           <Component id="jLabel1" alignment="1" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace pref="30" max="32767" attributes="0"/>
+                      <EmptySpace max="32767" attributes="0"/>
                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Component id="NombreTextField" alignment="1" max="32767" attributes="0"/>
-                          <Component id="ExperimentosComboBox" alignment="0" pref="265" max="32767" attributes="0"/>
-                          <Component id="ClasificadorComboBox" alignment="0" max="32767" attributes="0"/>
+                          <Group type="102" attributes="0">
+                              <EmptySpace min="10" pref="10" max="-2" attributes="0"/>
+                              <Component id="NombreTextField" pref="255" max="32767" attributes="0"/>
+                          </Group>
+                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                              <Component id="ExperimentosComboBox" alignment="0" pref="265" max="32767" attributes="0"/>
+                              <Component id="ClasificadorComboBox" alignment="0" max="32767" attributes="0"/>
+                          </Group>
                       </Group>
                   </Group>
               </Group>
               <EmptySpace min="-2" pref="32" max="-2" attributes="0"/>
           </Group>
           <Group type="102" alignment="1" attributes="0">
-              <EmptySpace max="32767" attributes="0"/>
+              <EmptySpace pref="266" max="32767" attributes="0"/>
               <Component id="CancelarButton" min="-2" max="-2" attributes="0"/>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Component id="CrearButton" min="-2" max="-2" attributes="0"/>
@@ -77,10 +82,10 @@
               </Group>
               <EmptySpace min="-2" pref="11" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="NombreTextField" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="NombreLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="NombreTextField" alignment="3" min="-2" pref="20" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="CancelarButton" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="CrearButton" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -134,7 +139,9 @@
     </Component>
     <Component class="javax.swing.JTextField" name="NombreTextField">
       <Properties>
+        <Property name="horizontalAlignment" type="int" value="2"/>
         <Property name="text" type="java.lang.String" value="Inserte nombre del clasificador..."/>
+        <Property name="name" type="java.lang.String" value="" noResource="true"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel1">

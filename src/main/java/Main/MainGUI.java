@@ -368,22 +368,29 @@ public class MainGUI extends javax.swing.JFrame {
                 Rectangle pathBounds = ProyectosTree.getUI().getPathBounds(ProyectosTree, path);
                 if(pathBounds != null && pathBounds.contains(evt.getX (), evt.getY ()))
                 {
-                    CustomMutableTreeNode hijo = (CustomMutableTreeNode) path.getLastPathComponent();
-                    jPanelLabels.setLayout(null);
-                    TaskNode aux = (TaskNode) hijo.getNodeType();
-                    jTextFieldRutaPlantilla.setText(aux.rutaPlantilla);
-                    if(hijo.getNodeType() instanceof TaskNode){
-                        TaskNode taskNode = (TaskNode) hijo.getNodeType();
-                        for(Component param : taskNode.mostrar()){
-                            jPanelLabels.add(param);
+                    try{
+                        CustomMutableTreeNode hijo = (CustomMutableTreeNode) path.getLastPathComponent();
+                        jPanelLabels.setLayout(null);
+                        TaskNode aux = (TaskNode) hijo.getNodeType();
+                        jTextFieldRutaPlantilla.setText(aux.rutaPlantilla);
+                        if(hijo.getNodeType() instanceof TaskNode){
+                            TaskNode taskNode = (TaskNode) hijo.getNodeType();
+                            for(Component param : taskNode.mostrar()){
+                                jPanelLabels.add(param);
+                            }
+                            jPanelLabels.validate();
+                            jPanelLabels.repaint();
                         }
-                        jPanelLabels.validate();
-                        jPanelLabels.repaint();
+                        else{
+                            jPanelLabels.removeAll();
+                            jPanelLabels.repaint();
+                        }
                     }
-                    else{
+                    catch(Exception ex){
                         jPanelLabels.removeAll();
                         jPanelLabels.repaint();
                     }
+                    
                 }
                 
             }
