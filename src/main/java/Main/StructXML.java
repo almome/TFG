@@ -16,6 +16,7 @@ import javax.swing.JLabel;
 import javax.swing.JLayeredPane;
 import javax.swing.JTextField;
 import javax.swing.tree.DefaultMutableTreeNode;
+import javax.swing.tree.DefaultTreeModel;
 import javax.swing.tree.TreeModel;
 import javax.swing.tree.TreeNode;
 import javax.xml.parsers.DocumentBuilder;
@@ -93,6 +94,12 @@ public class StructXML {
 	
     }
     
+    /*public DefaultTreeModel leerProyecto(Document proyecto){
+        String nombreExp = proyecto.getElementsByTagName("nodo").item(0).getAttributes().getNamedItem("nombre").getNodeValue();
+        CustomMutableTreeNode experimento = new CustomMutableTreeNode(nombreExp)
+        DefaultTreeModel subArbol = new DefaultTreeModel(root)
+    }*/
+    
     public void guardarProyecto(TreeModel model, CustomMutableTreeNode exp){
 
         try {
@@ -140,6 +147,11 @@ public class StructXML {
         rootElement.appendChild(experimentElement);
         
         Enumeration kiddies = treeNode.children();
+        if(!treeNode.isLeaf()){
+            Element nodosHijo = doc.createElement("nodos");  
+            experimentElement.appendChild(nodosHijo);
+            experimentElement = nodosHijo;
+        }
         while (kiddies.hasMoreElements()) {
             CustomMutableTreeNode child = (CustomMutableTreeNode) kiddies.nextElement();
             parseTreeNode(child, experimentElement);
@@ -229,36 +241,20 @@ public class StructXML {
         }
 
         Enumeration kiddies = treeNode.children();
+        if(!treeNode.isLeaf()){
+            Element nodosHijo = doc.getOwnerDocument().createElement("nodos");  //NO SE DONDE PONERLO PARA QUE ENGLOBE UN GRUPO DE NODOS HIJOS
+            parentElement.appendChild(nodosHijo);
+            parentElement = nodosHijo;
+        }
+
         while (kiddies.hasMoreElements()) {
             CustomMutableTreeNode child = (CustomMutableTreeNode) kiddies.nextElement();
             parseTreeNode(child, parentElement);
         }
     }
       
-    public ArrayList<Document> CargarProyecto(String proyectoRuta){
-        ArrayList<Document> Documents = new ArrayList<>();
-        
-        Document xmlFile = null;
-        try{
-            DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
-            dbf.setValidating(false);
-            DocumentBuilder dBu  = dbf.newDocumentBuilder();
-            File f = new File(XMLRuta);
-            FileInputStream fis = new FileInputStream(f);
-            xmlFile = dBu.parse(fis);
-
-            //falta añadir comprobación con esquema
-            
-            //xmlFile = dBu.parse(new FileInputStream());
-
-            //Leer
-            //String aux = xmlFile.getElementsByTagName("conf").item(0).getAttributes().getNamedItem("name").getNodeValue();
-            //System.out.println(aux);
-            
-        }catch(Exception ex){
-            //agregar mensaje de error
-        }
-        return xmlFile;
+    public Document CargarProyecto(String proyectoRuta){
+        return CargarPlantillaXML(proyectoRuta);
     }
     
 }
