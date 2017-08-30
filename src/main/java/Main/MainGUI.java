@@ -37,7 +37,9 @@ import javax.swing.tree.TreePath;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import org.w3c.dom.Document;
+import org.w3c.dom.Element;
 import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
 
 
 
@@ -240,6 +242,11 @@ public class MainGUI extends javax.swing.JFrame {
         archivosjMenu.add(nuevojMenu);
 
         jMenuItem2.setText("Abrir Experimento");
+        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem2ActionPerformed(evt);
+            }
+        });
         archivosjMenu.add(jMenuItem2);
 
         jMenuItem1.setText("Guardar Todo");
@@ -523,6 +530,78 @@ public class MainGUI extends javax.swing.JFrame {
             aux.ejecutar_rec(nodo);
         }
     }//GEN-LAST:event_jMenuItem3ActionPerformed
+
+    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+        String rutaProyecto = "";
+        JFileChooser jFileChooser1 = new JFileChooser();
+        jFileChooser1.setFileSelectionMode(jFileChooser1.FILES_ONLY);
+        int boton = jFileChooser1.showOpenDialog(this);
+        if (boton == jFileChooser1.APPROVE_OPTION){ //Si el usuario ha pulsado la opción Aceptar
+            File fichero = jFileChooser1.getSelectedFile(); //Guardamos en la variable fichero el archivo seleccionado
+            try {
+              // What to do with the file, e.g. display it in a TextArea
+              //CreateDirectoryGUI.LocalizacionTextField.setText.read( new FileReader( file.getAbsolutePath() ), null );
+              rutaProyecto = fichero.getAbsolutePath();
+            } catch (Exception ex) {
+              System.out.println("problem accessing file"+fichero.getAbsolutePath());
+            }
+        }
+        
+        StructXML proyectoXML = new StructXML();
+        Document proyecto = proyectoXML.CargarProyecto(rutaProyecto);
+        
+        metodoCrearNodos(nodo padre, )
+        
+        if(proyecto.getElementsByTagName("nodo").item(0).getAttributes().getNamedItem("tipo").getNodeValue().equals("experimento")){
+            CustomMutableTreeNode nodo = new CustomMutableTreeNode(proyecto.getElementsByTagName("nodo").item(0).getAttributes().getNamedItem("nombre").getNodeValue());
+            root.add(nodo);
+            Element nodosHijos = (Element)proyecto.getElementsByTagName("nodos").item(0);
+            NodeList listanodos = nodosHijos.getElementsByTagName("nodo");
+            for(int i = 0; i < listanodos.getLength(); i++){  {
+                Node nodoParametro = listanodos.item(i);
+                Element parametro = (Element)nodoParametro;
+                metodoCrearNodos(nodo);
+            }
+        }
+        else if(proyecto.getElementsByTagName("nodo").item(0).getAttributes().getNamedItem("tipo").getNodeValue().equals("clasificador")){
+            CustomMutableTreeNode nodo = new CustomMutableTreeNode(proyecto.getElementsByTagName("nodo").item(0).getAttributes().getNamedItem("nombre").getNodeValue());
+            root.add(nodo);
+            Element nodosHijos = (Element)proyecto.getElementsByTagName("nodos").item(0);
+            NodeList listanodos = nodosHijos.getElementsByTagName("nodo");
+            for(int i = 0; i < listanodos.getLength(); i++){  {
+                Node nodoParametro = listanodos.item(i);
+                Element parametro = (Element)nodoParametro;
+                metodoCrearNodos(nodo);
+            }
+        }
+        
+        String experimentoNodo = proyecto.getElementsByTagName("nodo").item(0).getAttributes().getNamedItem("nombre").getNodeValue();
+        
+        String nombrecomando = plantilla.getElementsByTagName("comando").item(0).getTextContent();
+        
+        NodeList listaParametros = plantilla.getElementsByTagName("parametro");
+        
+        for(int i = 0; i < listaParametros.getLength(); i++){   
+            
+            Node nodoParametro = listaParametros.item(i);
+            Element parametro = (Element)nodoParametro;
+            
+            String nombreParam = parametro.getAttribute("nombre");//getElementsByTagName("parametro").item(0).getAttributes().getNamedItem("nombre").getNodeValue();
+            etiquetas.add(nombreParam);
+
+            String tipoParam = parametro.getAttribute("tipo");
+            tipo.add(tipoParam);
+            String obligParam = parametro.getAttribute("obligatorio");
+            if(obligParam.equals("no")){
+                obligatorios.add(false);
+            }
+            else{
+                obligatorios.add(true);
+            }
+              
+        } 
+        
+    }//GEN-LAST:event_jMenuItem2ActionPerformed
 
     
     /**

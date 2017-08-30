@@ -1,18 +1,18 @@
 <?xml version="1.0"?>
-<proyecto nombre="" ruta="">
-  <nodo nombre="" tipo="experimento">
+<proyecto nombre="experimento.xml" ruta="C:....">
+  <nodo nombre="exp1" tipo="experimento">
     <nodos>
-        <nodo nombre="" tipo="clasificador">
+        <nodo nombre="cla1" tipo="clasificador">
           <nodos>
-            <nodo nombre="" tipo="tarea">
+            <nodo nombre="tar1" tipo="tarea" pantilla="ruta_de_la_plantilla">
               <parametro nombre="" valor=""></parametro>
               <parametro nombre="" valor=""></parametro>
             </nodo>
-            <nodo nombre="" tipo="tarea">
+            <nodo nombre="tar2" tipo="tarea" pantilla="ruta_de_la_plantilla">
               <parametro nombre="" valor=""></parametro>
             </nodo>
           </nodos>
         </nodo>
-    <nodos>
-  </root>
+    </nodos>
+  </nodo>
 </proyecto>
