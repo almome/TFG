@@ -535,6 +535,7 @@ public class MainGUI extends javax.swing.JFrame {
         String rutaProyecto = "";
         JFileChooser jFileChooser1 = new JFileChooser();
         jFileChooser1.setFileSelectionMode(jFileChooser1.FILES_ONLY);
+        jFileChooser1.setFileFilter(new FileNameExtensionFilter("XML files (*.xml)", "xml"));
         int boton = jFileChooser1.showOpenDialog(this);
         if (boton == jFileChooser1.APPROVE_OPTION){ //Si el usuario ha pulsado la opción Aceptar
             File fichero = jFileChooser1.getSelectedFile(); //Guardamos en la variable fichero el archivo seleccionado
@@ -546,12 +547,13 @@ public class MainGUI extends javax.swing.JFrame {
               System.out.println("problem accessing file"+fichero.getAbsolutePath());
             }
         }
-        
+ 
         StructXML proyectoXML = new StructXML();
         Document proyecto = proyectoXML.CargarProyecto(rutaProyecto);
         String rutaNueva = proyecto.getElementsByTagName("proyecto").item(0).getAttributes().getNamedItem("ruta").getNodeValue();
         
-        
+        WindowsInstances.cambiarRutaExperimento.setRuta(rutaNueva);
+        WindowsInstances.cambiarRutaExperimento.setVisible(true);
         
         Element nuevoNodo = (Element) proyecto.getElementsByTagName("nodo").item(0);
         metodoCrearNodos(root, nuevoNodo );
@@ -563,10 +565,8 @@ public class MainGUI extends javax.swing.JFrame {
         if(nuevoNodo.getAttributes().getNamedItem("tipo").getNodeValue().equals("experimento")){
             CustomMutableTreeNode nodo = new CustomMutableTreeNode(nuevoNodo.getAttributes().getNamedItem("nombre").getNodeValue());
             ExperimentNode expNod = new ExperimentNode();
-            
-            
-            expNod.setRutaCarpeta(consolaText);//AÑADIR RUTA CARPETA
-            nodo.setNodeType(new ExperimentNode());
+            expNod.setRutaCarpeta(WindowsInstances.cambiarRutaExperimento.getRuta());
+            nodo.setNodeType(expNod);
             padre.add(nodo);
             Element nodosHijos = (Element)nuevoNodo.getElementsByTagName("nodos").item(0);
             NodeList listanodos = nodosHijos.getElementsByTagName("nodo");
@@ -581,6 +581,9 @@ public class MainGUI extends javax.swing.JFrame {
         }
         else if(nuevoNodo.getAttributes().getNamedItem("tipo").getNodeValue().equals("clasificador")){
             CustomMutableTreeNode nodo = new CustomMutableTreeNode(nuevoNodo.getAttributes().getNamedItem("nombre").getNodeValue());
+            ClassifierNode Clanodo = new ClassifierNode();
+            Clanodo.setRutaCarpeta(WindowsInstances.cambiarRutaExperimento.getRuta());
+            nodo.setNodeType(Clanodo);
             padre.add(nodo);
             try{
                 Element nodosHijos = (Element)nuevoNodo.getElementsByTagName("nodos").item(0);
@@ -597,6 +600,11 @@ public class MainGUI extends javax.swing.JFrame {
         }
         else if(nuevoNodo.getAttributes().getNamedItem("tipo").getNodeValue().equals("tarea")){
             CustomMutableTreeNode nodo = new CustomMutableTreeNode(nuevoNodo.getAttributes().getNamedItem("nombre").getNodeValue());
+            String rutaPlantilla = nuevoNodo.getAttributes().getNamedItem("plantilla").getNodeValue();
+            StructXML cargarPlantilla = new StructXML();
+            Document pantillaXML = cargarPlantilla.CargarPlantillaXML(rutaPlantilla);
+            TaskNode tasknodo = new TaskNode(rutaPlantilla, pantillaXML);
+            nodo.setNodeType(tasknodo);
             padre.add(nodo);
         }
     }
