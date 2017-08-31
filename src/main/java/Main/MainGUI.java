@@ -600,7 +600,7 @@ public class MainGUI extends javax.swing.JFrame {
         }
         else if(nuevoNodo.getAttributes().getNamedItem("tipo").getNodeValue().equals("tarea")){
             CustomMutableTreeNode nodo = new CustomMutableTreeNode(nuevoNodo.getAttributes().getNamedItem("nombre").getNodeValue());
-            String rutaPlantilla = nuevoNodo.getAttributes().getNamedItem("plantilla").getNodeValue();
+            String rutaPlantilla = nuevoNodo.getElementsByTagName("plantilla").item(0).getNodeValue();
             StructXML cargarPlantilla = new StructXML();
             Document pantillaXML = cargarPlantilla.CargarPlantillaXML(rutaPlantilla);
             TaskNode tasknodo = new TaskNode(rutaPlantilla, pantillaXML);
@@ -762,7 +762,5 @@ public class MainGUI extends javax.swing.JFrame {
     private javax.swing.JMenuItem tareajMenu;
     // End of variables declaration//GEN-END:variables
 
-    void ejecutar() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+
 }
