@@ -8,8 +8,12 @@ package Main;
 
 import TaskParam.FileParam;
 import TaskParam.StringParam;
+import java.awt.BorderLayout;
 import java.awt.Component;
+import java.awt.FlowLayout;
 import java.awt.Rectangle;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.print.PrinterException;
 import java.io.File;
 import java.io.IOException;
@@ -18,14 +22,20 @@ import java.util.Enumeration;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.BoxLayout;
+import javax.swing.JButton;
+import javax.swing.JDialog;
 import javax.swing.JFileChooser;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.JTree;
 import javax.swing.SpringLayout;
 import javax.swing.SwingUtilities;
 import javax.swing.TransferHandler;
+import javax.swing.border.EmptyBorder;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import javax.swing.filechooser.FileNameExtensionFilter;
@@ -552,8 +562,10 @@ public class MainGUI extends javax.swing.JFrame {
         Document proyecto = proyectoXML.CargarProyecto(rutaProyecto);
         String rutaNueva = proyecto.getElementsByTagName("proyecto").item(0).getAttributes().getNamedItem("ruta").getNodeValue();
         
-        WindowsInstances.cambiarRutaExperimento.setRuta(rutaNueva);
-        WindowsInstances.cambiarRutaExperimento.setVisible(true);
+        CustomJDialog jDialog = new CustomJDialog();
+        
+        jDialog.setVisible(true);
+        
         
         Element nuevoNodo = (Element) proyecto.getElementsByTagName("nodo").item(0);
         metodoCrearNodos(root, nuevoNodo );
