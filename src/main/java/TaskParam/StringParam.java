@@ -33,6 +33,20 @@ public class StringParam extends TaskParam {
         
         
     }
+    public StringParam(String label, String textField, int locY, Boolean obl){
+        //Estableciendo label
+        jLabel = new JLabel();
+        jLabel.setLocation(60, locY);
+        jLabel.setSize(100, 25);
+        jLabel.setText(label);
+        //Estableciendo textfield
+        jTextField =new JTextField();
+        jTextField.setSize(300, 25);
+        jTextField.setLocation(200, locY);
+        jTextField.setText(textField);
+        obligatorio = obl;
+        
+    }
 
     @Override
     public List<Component> mostrar() {

@@ -6,6 +6,7 @@ package Main;
  * and open the template in the editor.
  */
 
+import static Main.CreateDirectoryGUI.ruta;
 import TaskParam.FileParam;
 import TaskParam.StringParam;
 import java.awt.BorderLayout;
@@ -19,6 +20,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Enumeration;
+import java.util.HashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.BoxLayout;
@@ -380,7 +382,7 @@ public class MainGUI extends javax.swing.JFrame {
             if(SwingUtilities.isLeftMouseButton(evt)){  //Si es nodo tarea muestra la ventana principal con los campos del xml
                 
                 jPanelLabels.removeAll();
-                
+                jTextFieldRutaPlantilla.setText("");
                 TreePath path = ProyectosTree.getPathForLocation(evt.getX(), evt.getY());
                 Rectangle pathBounds = ProyectosTree.getUI().getPathBounds(ProyectosTree, path);
                 if(pathBounds != null && pathBounds.contains(evt.getX (), evt.getY ()))
@@ -561,24 +563,70 @@ public class MainGUI extends javax.swing.JFrame {
         StructXML proyectoXML = new StructXML();
         Document proyecto = proyectoXML.CargarProyecto(rutaProyecto);
         String rutaNueva = proyecto.getElementsByTagName("proyecto").item(0).getAttributes().getNamedItem("ruta").getNodeValue();
+        String nombreProyecto = proyecto.getElementsByTagName("proyecto").item(0).getAttributes().getNamedItem("nombre").getNodeValue();
         
-        CustomJDialog jDialog = new CustomJDialog();
-        
+        CustomJDialog jDialog = new CustomJDialog(rutaNueva);
+        jDialog.setModal(true);
         jDialog.setVisible(true);
+        
+        File directorio = new File(jDialog.getRuta()+"\\"+nombreProyecto);
+        directorio.mkdir();
+            
+        
         
         
         Element nuevoNodo = (Element) proyecto.getElementsByTagName("nodo").item(0);
-        metodoCrearNodos(root, nuevoNodo );
+        metodoCrearNodos(root, nuevoNodo, proyecto, jDialog.getRuta()+"\\"+nombreProyecto );
         this.modelo.reload();
         
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
-    public void metodoCrearNodos(DefaultMutableTreeNode padre, Element nuevoNodo ){
+    public void metodoCrearNodos(DefaultMutableTreeNode padre, Element nuevoNodo,Document proyecto, String rutaPr ){
         if(nuevoNodo.getAttributes().getNamedItem("tipo").getNodeValue().equals("experimento")){
+            
+            INodeType nodoExp = new ExperimentNode();  
             CustomMutableTreeNode nodo = new CustomMutableTreeNode(nuevoNodo.getAttributes().getNamedItem("nombre").getNodeValue());
-            ExperimentNode expNod = new ExperimentNode();
-            expNod.setRutaCarpeta(WindowsInstances.cambiarRutaExperimento.getRuta());
+            nodo.setNodeType(nodoExp);
+            nodo.setNombre(nuevoNodo.getAttributes().getNamedItem("nombre").getNodeValue());
+            ExperimentNode n = (ExperimentNode) nodo.getNodeType();
+            n.setRutaCarpeta(rutaPr);
+            WindowsInstances.mainGUI.setProyectosTree(nodo);
+            String nombrenodo = nodo.getUserObject().toString();
+            WindowsInstances.createClasificadorGUI.setCombo(nombrenodo);
+            WindowsInstances.createTareaGUI.setExpCombo(nombrenodo);  
+            
+            Element nodosHijos = (Element)nuevoNodo.getElementsByTagName("nodos").item(0);
+            NodeList listanodos = nodosHijos.getElementsByTagName("nodo");
+            for(int i = 0; i < listanodos.getLength(); i++){  
+                if(listanodos.item(i).getAttributes().getNamedItem("tipo").getNodeValue().equals("clasificador")){
+                     Node nodoParametro = listanodos.item(i);
+                    Element parametro = (Element)nodoParametro;
+                    metodoCrearNodos((CustomMutableTreeNode)nodo, parametro, proyecto, rutaPr);
+                }
+               
+            }
+            
+            /*
+            expNod.setRutaCarpeta(rutaPr);
             nodo.setNodeType(expNod);
+             ProyectosTree.setCellRenderer(new DefaultTreeCellRenderer() {
+            
+            @Override
+            public Component getTreeCellRendererComponent(JTree tree,
+                    Object value, boolean selected, boolean expanded,
+                    boolean isLeaf, int row, boolean focused) {
+                Component c = super.getTreeCellRendererComponent(tree, value,
+                        selected, expanded, isLeaf, row, focused);
+
+                    if (value instanceof CustomMutableTreeNode) {
+                    CustomMutableTreeNode nodo = (CustomMutableTreeNode) value;
+                    setIcon(nodo.getNodeType().getIcon());
+                }
+                
+                return this;
+   
+            }
+        });
             padre.add(nodo);
             Element nodosHijos = (Element)nuevoNodo.getElementsByTagName("nodos").item(0);
             NodeList listanodos = nodosHijos.getElementsByTagName("nodo");
@@ -586,16 +634,71 @@ public class MainGUI extends javax.swing.JFrame {
                 if(listanodos.item(i).getAttributes().getNamedItem("tipo").getNodeValue().equals("clasificador")){
                      Node nodoParametro = listanodos.item(i);
                     Element parametro = (Element)nodoParametro;
-                    metodoCrearNodos((CustomMutableTreeNode)nodo, parametro);
+                    metodoCrearNodos((CustomMutableTreeNode)nodo, parametro, proyecto, rutaPr);
                 }
                
-            }
+            }*/
         }
         else if(nuevoNodo.getAttributes().getNamedItem("tipo").getNodeValue().equals("clasificador")){
+            
             CustomMutableTreeNode nodo = new CustomMutableTreeNode(nuevoNodo.getAttributes().getNamedItem("nombre").getNodeValue());
+            nodo.setNombre(nuevoNodo.getAttributes().getNamedItem("nombre").getNodeValue());
+            INodeType nodoExp = new ClassifierNode();
+            nodo.setNodeType(nodoExp);
+            ClassifierNode n = (ClassifierNode) nodo.getNodeType();
+            
+            WindowsInstances.mainGUI.setProyectosTree(nodo, (CustomMutableTreeNode)padre);
+            
+            ParClasificador par = new ParClasificador(proyecto.getElementsByTagName("nodo").item(0).getAttributes().getNamedItem("nombre").getNodeValue(), nuevoNodo.getAttributes().getNamedItem("nombre").getNodeValue());
+            WindowsInstances.createClasificadorGUI.paresExCL.add(par);
+            WindowsInstances.createClasificadorGUI.setClasCombo(nuevoNodo.getAttributes().getNamedItem("nombre").getNodeValue());
+            WindowsInstances.createTareaGUI.setExpCombo(proyecto.getElementsByTagName("nodo").item(0).getAttributes().getNamedItem("nombre").getNodeValue());
+            CustomMutableTreeNode padreCN = (CustomMutableTreeNode) padre;
+            if(padreCN.getNodeType() instanceof ExperimentNode){
+                ExperimentNode en = (ExperimentNode) padreCN.getNodeType();
+                n.setRutaCarpeta(en.getRutaCarpeta());
+            }
+            else{
+                CustomMutableTreeNode cm = (CustomMutableTreeNode) nodo.getParent();
+                ClassifierNode cn = (ClassifierNode) cm.getNodeType();
+                n.setRutaCarpeta(cn.getRutaCarpeta());
+            }
+            
+            try{
+                Element nodosHijos = (Element)nuevoNodo.getElementsByTagName("nodos").item(0);
+                NodeList listanodos = nodosHijos.getElementsByTagName("nodo");
+                for(int i = 0; i < listanodos.getLength(); i++){  
+                    Node nodoParametro = listanodos.item(i);
+                    Element parametro = (Element)nodoParametro;
+                    metodoCrearNodos((CustomMutableTreeNode)nodo, parametro, proyecto, rutaPr);
+                }
+            }
+            catch(Exception ex){
+                System.out.println(ex);
+            } 
+            
+            /*CustomMutableTreeNode nodo = new CustomMutableTreeNode(nuevoNodo.getAttributes().getNamedItem("nombre").getNodeValue());
             ClassifierNode Clanodo = new ClassifierNode();
-            Clanodo.setRutaCarpeta(WindowsInstances.cambiarRutaExperimento.getRuta());
+            Clanodo.setRutaCarpeta(rutaPr);
             nodo.setNodeType(Clanodo);
+             ProyectosTree.setCellRenderer(new DefaultTreeCellRenderer() {
+            
+            @Override
+            public Component getTreeCellRendererComponent(JTree tree,
+                    Object value, boolean selected, boolean expanded,
+                    boolean isLeaf, int row, boolean focused) {
+                Component c = super.getTreeCellRendererComponent(tree, value,
+                        selected, expanded, isLeaf, row, focused);
+
+                    if (value instanceof CustomMutableTreeNode) {
+                    CustomMutableTreeNode nodo = (CustomMutableTreeNode) value;
+                    setIcon(nodo.getNodeType().getIcon());
+                }
+                
+                return this;
+   
+            }
+        });
             padre.add(nodo);
             try{
                 Element nodosHijos = (Element)nuevoNodo.getElementsByTagName("nodos").item(0);
@@ -603,21 +706,96 @@ public class MainGUI extends javax.swing.JFrame {
                 for(int i = 0; i < listanodos.getLength(); i++){  
                     Node nodoParametro = listanodos.item(i);
                     Element parametro = (Element)nodoParametro;
-                    metodoCrearNodos((CustomMutableTreeNode)nodo, parametro);
+                    metodoCrearNodos((CustomMutableTreeNode)nodo, parametro, proyecto, rutaPr);
                 }
             }
             catch(Exception ex){
-                //Clasificador sin tareas
-            } 
+                System.out.println(ex);
+            } */
         }
         else if(nuevoNodo.getAttributes().getNamedItem("tipo").getNodeValue().equals("tarea")){
+            
             CustomMutableTreeNode nodo = new CustomMutableTreeNode(nuevoNodo.getAttributes().getNamedItem("nombre").getNodeValue());
-            String rutaPlantilla = nuevoNodo.getElementsByTagName("plantilla").item(0).getNodeValue();
+            String rutaPlantilla = nuevoNodo.getElementsByTagName("plantilla").item(0).getAttributes().getNamedItem("ruta").getNodeValue();
+                //Cargar Plantilla
+                Document plantilla = null;
+                StructXML cargar = new StructXML();
+                plantilla = cargar.CargarPlantillaXML(rutaPlantilla);
+                
+                INodeType nodoExp = new TaskNode(rutaPlantilla, plantilla);   
+                nodo.setNodeType(nodoExp);
+                nodo.setNombre(nuevoNodo.getAttributes().getNamedItem("nombre").getNodeValue());
+                TaskNode n = (TaskNode) nodo.getNodeType();
+                n.setRutaPlantilla(rutaPlantilla);
+                //Metemos los parametros de la plantilla
+                StructXML xmlRead = new StructXML();
+                ArrayList<String> etiquetas = new ArrayList<>();
+                ArrayList<String> tipo = new ArrayList<>();
+                ArrayList<Boolean> obligatorio = new ArrayList<>();
+                
+                HashMap valores = new HashMap();
+                xmlRead.leerEtiquetas(n.getPlantXML(), etiquetas, tipo, obligatorio, n);
+                Element parametros = (Element) nuevoNodo.getElementsByTagName("parametros").item(0);
+                NodeList listanodos = parametros.getElementsByTagName("parametro");
+                for(int i = 0; i < listanodos.getLength(); i++){  
+                    Node nodoParametro = listanodos.item(i);
+                    Element parametro = (Element)nodoParametro;
+                    valores.put(parametro.getAttributes().getNamedItem("nombre").getNodeValue(), parametro.getAttributes().getNamedItem("valor").getNodeValue());
+                }
+                
+                for(int i = 0; i < etiquetas.size(); i++){
+                    if(tipo.get(i).equals("fichero")){
+                        FileParam parametro = null;
+                        if(valores.containsKey(etiquetas.get(i))){
+                            String aux = valores.get(etiquetas.get(i)).toString();
+                            parametro = new FileParam(etiquetas.get(i), aux , i*50, obligatorio.get(i));
+                        }else{
+                            parametro = new FileParam(etiquetas.get(i), i*50, obligatorio.get(i));
+                        }
+                        n.parametros.add(parametro);
+                    }
+                    else if(tipo.get(i).equals("string")){
+                        StringParam parametro = null;
+                        if(valores.containsKey(etiquetas.get(i))){
+                            String aux = valores.get(etiquetas.get(i)).toString();
+                            parametro = new StringParam(etiquetas.get(i), aux , i*50, obligatorio.get(i));
+                        }else{
+                            parametro = new StringParam(etiquetas.get(i), i*50, obligatorio.get(i));
+                        }
+                        n.parametros.add(parametro);
+                    }
+                }
+                
+                WindowsInstances.mainGUI.setProyectosTree(nodo, (CustomMutableTreeNode) padre);
+                CustomMutableTreeNode cn = (CustomMutableTreeNode) nodo.getParent();
+                ClassifierNode cln = (ClassifierNode) cn.getNodeType();
+                n.setRutaPlantilla(rutaPlantilla);
+                
+            /*CustomMutableTreeNode nodo = new CustomMutableTreeNode(nuevoNodo.getAttributes().getNamedItem("nombre").getNodeValue());
+            String rutaPlantilla = nuevoNodo.getAttributes().getNamedItem("plantilla").getNodeValue();
             StructXML cargarPlantilla = new StructXML();
             Document pantillaXML = cargarPlantilla.CargarPlantillaXML(rutaPlantilla);
             TaskNode tasknodo = new TaskNode(rutaPlantilla, pantillaXML);
             nodo.setNodeType(tasknodo);
-            padre.add(nodo);
+             ProyectosTree.setCellRenderer(new DefaultTreeCellRenderer() {
+            
+            @Override
+            public Component getTreeCellRendererComponent(JTree tree,
+                    Object value, boolean selected, boolean expanded,
+                    boolean isLeaf, int row, boolean focused) {
+                Component c = super.getTreeCellRendererComponent(tree, value,
+                        selected, expanded, isLeaf, row, focused);
+
+                    if (value instanceof CustomMutableTreeNode) {
+                    CustomMutableTreeNode nodo = (CustomMutableTreeNode) value;
+                    setIcon(nodo.getNodeType().getIcon());
+                }
+                
+                return this;
+   
+            }
+        });
+            padre.add(nodo);*/
         }
     }
     

@@ -1,15 +1,12 @@
 <?xml version="1.0"?>
-<proyecto nombre="experimento.xml" ruta="C:....">
+<proyecto nombre="exp1" ruta="C:\Users\javosuher\Documents">
   <nodo nombre="exp1" tipo="experimento">
     <nodos>
         <nodo nombre="cla1" tipo="clasificador">
           <nodos>
-            <nodo nombre="tar1" tipo="tarea" pantilla="ruta_de_la_plantilla">
-              <parametro nombre="" valor=""></parametro>
-              <parametro nombre="" valor=""></parametro>
+            <nodo nombre="tar1" tipo="tarea" plantilla="D:\Git\TFG\XMLs\Comando.xml">
             </nodo>
-            <nodo nombre="tar2" tipo="tarea" pantilla="ruta_de_la_plantilla">
-              <parametro nombre="" valor=""></parametro>
+            <nodo nombre="tar2" tipo="tarea" plantilla="D:\Git\TFG\XMLs\Comando1.xml">
             </nodo>
           </nodos>
         </nodo>

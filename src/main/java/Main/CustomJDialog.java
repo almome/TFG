@@ -9,13 +9,16 @@ import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
 import javax.swing.JButton;
 import javax.swing.JDialog;
+import javax.swing.JFileChooser;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.border.EmptyBorder;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
 /**
  *
@@ -23,8 +26,17 @@ import javax.swing.border.EmptyBorder;
  */
 public class CustomJDialog extends JDialog{
     private final JPanel contentPanel = new JPanel();
-    
-    public CustomJDialog() {
+    private String ruta = "";
+
+    public String getRuta() {
+        return ruta;
+    }
+
+    public void setRuta(String ruta) {
+        this.ruta = ruta;
+    }
+    public CustomJDialog(String ruta) {
+        this.ruta = ruta;
         // evita cambio de tamaño
         setResizable(false);
         // título del diáolog
@@ -42,14 +54,13 @@ public class CustomJDialog extends JDialog{
         {
             // aquí se pone el JTextArea dentro de un JScrollPane 
             // para que tenga barras de desplazamiento
-            JScrollPane scrollPane = new JScrollPane();
-            scrollPane.setBounds(10, 11, 424, 146);
+            JPanel scrollPane = new JPanel();
+            scrollPane.setBounds(10, 11, 424, 90);
             contentPanel.add(scrollPane);
             {
                 JLabel txtrstoEsUn = new JLabel();
-                txtrstoEsUn.setText("El proyecto se guardará en la siguiente ruta: "+);
-                txtrstoEsUn.setAutoscrolls(true);
-                scrollPane.setViewportView(txtrstoEsUn);
+                txtrstoEsUn.setText("El proyecto se cargará en la siguiente ruta:\n "+ ruta);
+                scrollPane.add(txtrstoEsUn);
             }
         }
         {
@@ -59,20 +70,31 @@ public class CustomJDialog extends JDialog{
             buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
             getContentPane().add(buttonPane, BorderLayout.SOUTH);
             {
-                JButton okButton = new JButton("Vale");
+                JButton okButton = new JButton("Cambiar ruta...");
                 okButton.addActionListener(new ActionListener() {
                     public void actionPerformed(ActionEvent e) {
-                        // aquí van las acciones al hacer click en Vale
-                        // envía el diálogo al recolector de basura de Java
+                        String RutaAux = "";
+                        JFileChooser jFileChooser1 = new JFileChooser();
+                        jFileChooser1.setFileSelectionMode(jFileChooser1.DIRECTORIES_ONLY);
+                        int boton = jFileChooser1.showOpenDialog(jFileChooser1);
+                        if (boton == jFileChooser1.APPROVE_OPTION){ //Si el usuario ha pulsado la opción Aceptar
+                            File fichero = jFileChooser1.getSelectedFile(); //Guardamos en la variable fichero el archivo seleccionado
+                            try {
+                                setRuta(fichero.getAbsolutePath());
+                            } catch (Exception ex) {
+                              System.out.println("problem accessing file"+fichero.getAbsolutePath());
+                            }
+                        }
+
                         dispose();
                     }
                 });
-                okButton.setActionCommand("Vale");
+                okButton.setActionCommand("Cambiar ruta...");
                 buttonPane.add(okButton);
                 getRootPane().setDefaultButton(okButton);
             }
             {
-                JButton cancelButton = new JButton("Cancelar");
+                JButton cancelButton = new JButton("Vale");
                 cancelButton.addActionListener(new ActionListener() {
                     public void actionPerformed(ActionEvent arg0) {
                         // aquí van las acciones al hacer click en Vale

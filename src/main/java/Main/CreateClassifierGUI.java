@@ -247,7 +247,13 @@ public class CreateClassifierGUI extends javax.swing.JFrame {
                 }
                 else{
                     CustomMutableTreeNode cm = (CustomMutableTreeNode) nodo.getParent();
-                    ClassifierNode cn = (ClassifierNode) cm.getNodeType();
+                     ClassifierNode cn = null;
+                    if(cm.getNodeType() instanceof ExperimentNode){
+                        ExperimentNode en = (ExperimentNode) exp.getNodeType();
+                        n.setRutaCarpeta(en.getRutaCarpeta());
+                    }else{
+                        cn = (ClassifierNode) cm.getNodeType();
+                    }
                     n.setRutaCarpeta(cn.getRutaCarpeta());
                 }
                 NombreTextField.setText("Introduzca el nombre del clasificador...");
@@ -261,6 +267,7 @@ public class CreateClassifierGUI extends javax.swing.JFrame {
         
     }//GEN-LAST:event_CrearButtonActionPerformed
 
+    
     private void CancelarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CancelarButtonActionPerformed
         NombreTextField.setText("Introduzca el nombre del clasificador...");
         WindowsInstances.mainGUI.expandAllNodes(WindowsInstances.mainGUI.getProyectosTree(),  0, WindowsInstances.mainGUI.getProyectosTree().getRowCount());

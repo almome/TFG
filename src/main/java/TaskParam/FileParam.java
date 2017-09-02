@@ -64,6 +64,44 @@ public class FileParam extends TaskParam {
 
         
     }
+    
+    public FileParam(String label, String textField, int locY, Boolean obl){
+        //Estableciendo label
+        jLabel = new JLabel();
+        jLabel.setLocation(60, locY);
+        jLabel.setSize(100, 25);
+        jLabel.setText(label);
+        //Estableciendo textfield
+        jTextField =new JTextField();
+        jTextField.setSize(300, 25);
+        jTextField.setLocation(200, locY);
+        jTextField.setText(textField);
+        //EstablecerBoton
+        jButton = new JButton();
+        jButton.setText("Examinar");
+        jButton.setSize(90, 25);
+        jButton.setLocation(520, locY);
+
+        jButton.addActionListener(new ActionListener() { 
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JFileChooser jFileChooser1 = new JFileChooser();
+                jFileChooser1.setFileSelectionMode(jFileChooser1.FILES_AND_DIRECTORIES);
+                //jFileChooser1.setFileFilter(new FileNameExtensionFilter("XML files (*.xml)", "xml"));
+                int boton = jFileChooser1.showOpenDialog(jButton);
+                if (boton == jFileChooser1.APPROVE_OPTION){ //Si el usuario ha pulsado la opción Aceptar
+                    File fichero = jFileChooser1.getSelectedFile(); //Guardamos en la variable fichero el archivo seleccionado
+                    try {
+                      jTextField.setText(fichero.getAbsolutePath());
+                    } catch (Exception ex) {
+                      System.out.println("Hubo un problema al intentar acceder al fichero "+fichero.getAbsolutePath());
+                    }
+                }
+            }
+        } );
+        
+        obligatorio = obl;  
+    }
 
     @Override
     public List<Component> mostrar() {
