@@ -9,6 +9,8 @@ package Main;
 import TaskParam.TaskParam;
 import java.awt.Component;
 import java.awt.MouseInfo;
+import java.awt.Point;
+import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.print.PrinterException;
@@ -127,9 +129,17 @@ public class TaskNode implements INodeType{
         menu.add (jMenuItemEjecutar);
         menu.add (jMenuItemEliminar);
         
-        int mouseX = MouseInfo.getPointerInfo().getLocation().x;
+        int mouseX =  MouseInfo.getPointerInfo().getLocation().x;
         int mouseY = MouseInfo.getPointerInfo().getLocation().y;
-        menu.show (WindowsInstances.mainGUI, mouseX, mouseY);
+        
+        final Point relativeLocation = WindowsInstances.mainGUI.getLocationOnScreen();
+
+        final Rectangle currentScreenBounds = WindowsInstances.mainGUI.getGraphicsConfiguration().getBounds();
+
+        relativeLocation.x -= currentScreenBounds.x;
+        relativeLocation.y -= currentScreenBounds.y;
+        
+        menu.show (WindowsInstances.mainGUI, mouseX-relativeLocation.x, mouseY-relativeLocation.y);
     }
 
     @Override
