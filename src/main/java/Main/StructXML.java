@@ -28,6 +28,7 @@ import javax.xml.transform.TransformerException;
 import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
+import jdk.nashorn.internal.runtime.regexp.joni.constants.NodeType;
 import org.w3c.dom.Attr;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -133,8 +134,13 @@ public class StructXML {
         Element rootElement = doc.createElement("proyecto");
         doc.appendChild(rootElement);
         Attr attrName = doc.createAttribute("nombre");  
-        attrName.setNodeValue(treeNode.getNombre()+".xml");
+        attrName.setNodeValue(treeNode.getNombre());
         rootElement.getAttributes().setNamedItem(attrName); 
+        
+        Attr attrRutaPro = doc.createAttribute("ruta");  
+        ExperimentNode aux = (ExperimentNode) treeNode.getNodeType();
+        attrRutaPro.setNodeValue(aux.getRutaCarpeta());
+        rootElement.getAttributes().setNamedItem(attrRutaPro);
         
         
         Element experimentElement = doc.createElement("nodo");

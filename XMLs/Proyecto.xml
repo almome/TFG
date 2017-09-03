@@ -1,15 +1,30 @@
-<?xml version="1.0"?>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <proyecto nombre="exp1" ruta="C:\Users\javosuher\Documents">
-  <nodo nombre="exp1" tipo="experimento">
-    <nodos>
-        <nodo nombre="cla1" tipo="clasificador">
-          <nodos>
-            <nodo nombre="tar1" tipo="tarea" plantilla="D:\Git\TFG\XMLs\Comando.xml">
+    <nodo nombre="exp1" tipo="experimento">
+        <nodos>
+            <nodo nombre="cla1" tipo="clasificador">
+                <nodos>
+                    <nodo nombre="tar1" tipo="tarea">
+                        <plantilla ruta="D:\Git\TFG\XMLs\Comando.xml"/>
+                        <parametros>
+                            <parametro nombre="-jar" valor="vvv"/>
+                            <parametro nombre="-i" valor="vv"/>
+                            <parametro nombre="-o" valor="vv"/>
+                            <parametro nombre="--binarize" valor="vvv"/>
+                            <parametro nombre="-C" valor="v"/>
+                        </parametros>
+                    </nodo>
+                    <nodo nombre="tar2" tipo="tarea">
+                        <plantilla ruta="D:\Git\TFG\XMLs\Comando1.xml"/>
+                        <parametros>
+                            <parametro nombre="-jar" valor="cxv"/>
+                            <parametro nombre="-hola" valor="cvxv"/>
+                            <parametro nombre="-o" valor="cvcv"/>
+                            <parametro nombre="--binarize" valor="cvc"/>
+                        </parametros>
+                    </nodo>
+                </nodos>
             </nodo>
-            <nodo nombre="tar2" tipo="tarea" plantilla="D:\Git\TFG\XMLs\Comando1.xml">
-            </nodo>
-          </nodos>
-        </nodo>
-    </nodos>
-  </nodo>
+        </nodos>
+    </nodo>
 </proyecto>

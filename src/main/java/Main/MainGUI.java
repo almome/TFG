@@ -716,7 +716,10 @@ public class MainGUI extends javax.swing.JFrame {
         else if(nuevoNodo.getAttributes().getNamedItem("tipo").getNodeValue().equals("tarea")){
             
             CustomMutableTreeNode nodo = new CustomMutableTreeNode(nuevoNodo.getAttributes().getNamedItem("nombre").getNodeValue());
-            String rutaPlantilla = nuevoNodo.getElementsByTagName("plantilla").item(0).getAttributes().getNamedItem("ruta").getNodeValue();
+
+                String rutaPlantilla = nuevoNodo.getElementsByTagName("plantilla").item(0).getAttributes().getNamedItem("ruta").getNodeValue();
+
+            
                 //Cargar Plantilla
                 Document plantilla = null;
                 StructXML cargar = new StructXML();
