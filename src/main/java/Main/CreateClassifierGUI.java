@@ -332,6 +332,9 @@ public class CreateClassifierGUI extends javax.swing.JFrame {
         ExperimentosComboBox.addItem(nodo);
     }
     
+    public void removeCombo (String nodo){
+        ExperimentosComboBox.removeItem(nodo);
+    }
     public void setClasCombo (String nodo){
         ClasificadorComboBox.addItem(nodo);
     }

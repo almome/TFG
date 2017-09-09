@@ -396,6 +396,8 @@ public class CreateTaskGUI extends javax.swing.JFrame {
     public void setClaCombo (String nodo){
         ClasificadorComboBox.addItem(nodo);
     }
+   
+    
     public void eliminarExpYCla(String nodo){
         ExperimentosComboBox.removeItem(nodo);
     }

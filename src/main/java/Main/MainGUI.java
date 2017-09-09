@@ -15,6 +15,8 @@ import java.awt.FlowLayout;
 import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.FocusEvent;
+import java.awt.event.FocusListener;
 import java.awt.print.PrinterException;
 import java.io.File;
 import java.io.IOException;
@@ -23,12 +25,15 @@ import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
@@ -40,6 +45,10 @@ import javax.swing.TransferHandler;
 import javax.swing.border.EmptyBorder;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
+import javax.swing.event.TreeModelEvent;
+import javax.swing.event.TreeModelListener;
+import javax.swing.event.TreeSelectionEvent;
+import javax.swing.event.TreeSelectionListener;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeCellRenderer;
@@ -76,6 +85,32 @@ public class MainGUI extends javax.swing.JFrame {
     public MainGUI() {
         initComponents();
         renderer = (DefaultTreeCellRenderer) ProyectosTree.getCellRenderer();
+        ProyectosTree.addTreeSelectionListener(new TreeSelectionListener(){
+            @Override
+            public void valueChanged(TreeSelectionEvent e) {
+                if(ProyectosTree.getSelectionPath() == null){
+                    jButtonGuardar.setEnabled(false);
+                }
+                else{
+                    jButtonGuardar.setEnabled(true);
+                }
+                
+            }
+            
+        });
+
+        ProyectosTree.addFocusListener(new FocusListener(){
+            @Override
+            public void focusGained(FocusEvent e) {
+                jButtonGuardar.setEnabled(true);
+            }
+
+            @Override
+            public void focusLost(FocusEvent e) {
+                jButtonGuardar.setEnabled(false);
+            }
+        });
+        
     }
 
     /**
@@ -137,6 +172,7 @@ public class MainGUI extends javax.swing.JFrame {
 
         javax.swing.tree.DefaultMutableTreeNode treeNode1 = new javax.swing.tree.DefaultMutableTreeNode("root");
         ProyectosTree.setModel(new javax.swing.tree.DefaultTreeModel(treeNode1));
+        ProyectosTree.setEditable(true);
         ProyectosTree.setRootVisible(false);
         ProyectosTree.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
@@ -161,6 +197,7 @@ public class MainGUI extends javax.swing.JFrame {
         jToolBar1.add(jButtonLimpiar);
 
         jButtonGuardar.setText("Guardar");
+        jButtonGuardar.setEnabled(false);
         jButtonGuardar.setFocusable(false);
         jButtonGuardar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jButtonGuardar.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
@@ -361,6 +398,59 @@ public class MainGUI extends javax.swing.JFrame {
     /*ACCIONES CUANDO SE ABRA LA VENTANA*/  
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         this.modelo = (DefaultTreeModel) this.ProyectosTree.getModel();
+        modelo.addTreeModelListener(new TreeModelListener(){
+            @Override
+            public void treeNodesChanged(TreeModelEvent e) {
+                CustomMutableTreeNode aux = (CustomMutableTreeNode) ProyectosTree.getLastSelectedPathComponent();
+                String nombreAntiguo = aux.getNombre();
+                aux.setNombre(aux.getUserObject().toString());
+                if(aux.getNodeType() instanceof ExperimentNode){
+                    /*WindowsInstances.createClasificadorGUI.paresExCL.remove(nombreAntiguo);
+                    ParClasificador parAux = new ParClasificador();
+                    parAux.Experimento = aux.getNombre();
+                    WindowsInstances.createClasificadorGUI.paresExCL.add(parAux);*/
+                    WindowsInstances.createClasificadorGUI.removeCombo(nombreAntiguo);
+                     WindowsInstances.createTareaGUI.eliminarExpYCla(nombreAntiguo);
+                    WindowsInstances.createClasificadorGUI.setCombo(aux.getNombre());
+                    WindowsInstances.createTareaGUI.setExpCombo(aux.getNombre()); 
+                    ExperimentNode expAux = (ExperimentNode) aux.getNodeType();
+                    File dir = new File(expAux.getRutaCarpeta());
+                    File newDir = new File(dir.getParent() + "\\" + aux.getNombre());
+                    expAux.setRutaCarpeta(dir.getParent() + "\\" + aux.getNombre());
+                    dir.renameTo(newDir);
+                }
+                else if(aux.getNodeType() instanceof ClassifierNode){
+                    
+                    WindowsInstances.createTareaGUI.eliminarExpYCla(nombreAntiguo);
+                    ParClasificador parAux = new ParClasificador();
+                    parAux.Clasificador = aux.getNombre();
+                    while(aux.getParent()!=root){
+                        if(aux.getParent() == root){
+                            parAux.Experimento = aux.getNombre();
+                        }
+                        aux = (CustomMutableTreeNode) aux.getParent();
+                    }
+                    WindowsInstances.createClasificadorGUI.paresExCL.add(parAux);
+                }
+                
+            }
+
+            @Override
+            public void treeNodesInserted(TreeModelEvent e) {
+                
+            }
+
+            @Override
+            public void treeNodesRemoved(TreeModelEvent e) {
+                
+            }
+
+            @Override
+            public void treeStructureChanged(TreeModelEvent e) {
+                
+            }
+            
+        });
         this.root = (DefaultMutableTreeNode) this.modelo.getRoot();
     }//GEN-LAST:event_formWindowOpened
     /**
@@ -461,6 +551,8 @@ public class MainGUI extends javax.swing.JFrame {
             
         }
         guardarExp.guardarProyecto(modelo, exp);
+        JOptionPane.showMessageDialog(new JFrame(), "Experimento guardado.", "Guardado", JOptionPane.INFORMATION_MESSAGE);
+
     }//GEN-LAST:event_jButtonGuardarActionPerformed
 
     private void jButtonCambiarPlantillaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCambiarPlantillaActionPerformed
@@ -922,6 +1014,8 @@ public class MainGUI extends javax.swing.JFrame {
         
                 
     }
+    
+
     
     
 
