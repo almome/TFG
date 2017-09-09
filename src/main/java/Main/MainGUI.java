@@ -13,6 +13,7 @@ import java.awt.BorderLayout;
 import java.awt.Component;
 import java.awt.FlowLayout;
 import java.awt.Rectangle;
+import java.awt.dnd.DnDConstants;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.print.PrinterException;
@@ -72,6 +73,9 @@ public class MainGUI extends javax.swing.JFrame {
     public String consolaText;
     DefaultTreeCellRenderer renderer;
     
+    TreeDragSource treeDragSource;
+    TreeDropTarget treeDropTarget;
+    
     /**
      * Creates new form MainGUI
      */
@@ -82,8 +86,7 @@ public class MainGUI extends javax.swing.JFrame {
     }
     
     private void SetDragDrop() {
-        ProyectosTree.setDragEnabled(true);
-        ProyectosTree.setDragEnabled(true);
+        /*ProyectosTree.setDragEnabled(true);
         ProyectosTree.setDropMode(DropMode.ON_OR_INSERT);
         ProyectosTree.setTransferHandler(new TreeTransferHandler());
         ProyectosTree.getSelectionModel().setSelectionMode(TreeSelectionModel.CONTIGUOUS_TREE_SELECTION);
@@ -91,13 +94,15 @@ public class MainGUI extends javax.swing.JFrame {
         DefaultMutableTreeNode root = (DefaultMutableTreeNode) ProyectosTree.getModel().getRoot();
         Enumeration e = root.breadthFirstEnumeration();
         while(e.hasMoreElements()) {
-            DefaultMutableTreeNode node = (DefaultMutableTreeNode)e.nextElement();
+            DefaultMutableTreeNode node = (DefaultMutableTreeNode) e.nextElement();
             if(node.isLeaf()) {
                 continue;
             }
             int row = ProyectosTree.getRowForPath(new TreePath(node.getPath()));
             ProyectosTree.expandRow(row);
-        }
+        }*/
+        treeDragSource = new TreeDragSource(ProyectosTree, DnDConstants.ACTION_COPY_OR_MOVE);
+        treeDropTarget = new TreeDropTarget(ProyectosTree);
     }
 
     /**
