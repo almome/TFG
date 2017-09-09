@@ -975,7 +975,7 @@ public class MainGUI extends javax.swing.JFrame {
    
             }
         });
-        
+        ProyectosTree.setShowsRootHandles(true);
         nodec.add(nodo);
         this.modelo.reload();
     }
