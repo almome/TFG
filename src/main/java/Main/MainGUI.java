@@ -86,7 +86,7 @@ public class MainGUI extends javax.swing.JFrame {
     }
     
     private void SetDragDrop() {
-        /*ProyectosTree.setDragEnabled(true);
+        ProyectosTree.setDragEnabled(true);
         ProyectosTree.setDropMode(DropMode.ON_OR_INSERT);
         ProyectosTree.setTransferHandler(new TreeTransferHandler());
         ProyectosTree.getSelectionModel().setSelectionMode(TreeSelectionModel.CONTIGUOUS_TREE_SELECTION);
@@ -100,9 +100,9 @@ public class MainGUI extends javax.swing.JFrame {
             }
             int row = ProyectosTree.getRowForPath(new TreePath(node.getPath()));
             ProyectosTree.expandRow(row);
-        }*/
-        treeDragSource = new TreeDragSource(ProyectosTree, DnDConstants.ACTION_COPY_OR_MOVE);
-        treeDropTarget = new TreeDropTarget(ProyectosTree);
+        }
+        /*treeDragSource = new TreeDragSource(ProyectosTree, DnDConstants.ACTION_COPY_OR_MOVE);
+        treeDropTarget = new TreeDropTarget(ProyectosTree);*/
     }
 
     /**
