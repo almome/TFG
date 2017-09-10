@@ -9,6 +9,7 @@ package Main;
 import static Main.CreateDirectoryGUI.ruta;
 import TaskParam.FileParam;
 import TaskParam.StringParam;
+import com.google.common.io.Files;
 import java.awt.BorderLayout;
 import java.awt.Component;
 import java.awt.FlowLayout;
@@ -18,8 +19,16 @@ import java.awt.event.ActionListener;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 import java.awt.print.PrinterException;
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
+import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileOutputStream;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.io.OutputStreamWriter;
+import java.io.Writer;
+import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.HashMap;
@@ -85,14 +94,38 @@ public class MainGUI extends javax.swing.JFrame {
     public MainGUI() {
         initComponents();
         renderer = (DefaultTreeCellRenderer) ProyectosTree.getCellRenderer();
+       
         ProyectosTree.addTreeSelectionListener(new TreeSelectionListener(){
             @Override
             public void valueChanged(TreeSelectionEvent e) {
                 if(ProyectosTree.getSelectionPath() == null){
                     jButtonGuardar.setEnabled(false);
+                    jButtonLimpiar.setEnabled(false);
+                    jButtonCambiarPlantilla.setEnabled(false);
+                    jButtonGuardarScript.setEnabled(false);
+                    jButtonEjecutar.setEnabled(false);
+                    if(!jTextAreaConsola.getText().equals("")){
+                        jButtonGuardarSalida.setEnabled(true);
+                    }else{
+                        jButtonGuardarSalida.setEnabled(false);
+                    }
+                    
                 }
                 else{
                     jButtonGuardar.setEnabled(true);
+                    jButtonEjecutar.setEnabled(true);
+                    TreePath nodoAuxPath = ProyectosTree.getSelectionPath();
+                    CustomMutableTreeNode nodoAux = (CustomMutableTreeNode) nodoAuxPath.getLastPathComponent();
+                    if(nodoAux.getNodeType()  instanceof TaskNode){
+                        jButtonLimpiar.setEnabled(true);
+                        jButtonCambiarPlantilla.setEnabled(true);
+                        jButtonGuardarScript.setEnabled(true);
+                    }else{
+                        jButtonLimpiar.setEnabled(false);
+                        jButtonCambiarPlantilla.setEnabled(false);
+                        jButtonGuardarScript.setEnabled(false);
+                    }
+                    
                 }
                 
             }
@@ -103,11 +136,32 @@ public class MainGUI extends javax.swing.JFrame {
             @Override
             public void focusGained(FocusEvent e) {
                 jButtonGuardar.setEnabled(true);
+                
             }
 
             @Override
             public void focusLost(FocusEvent e) {
                 jButtonGuardar.setEnabled(false);
+                TreePath nodoAuxPath = ProyectosTree.getSelectionPath();
+                CustomMutableTreeNode nodoAux = (CustomMutableTreeNode) nodoAuxPath.getLastPathComponent();
+                if(nodoAux.getNodeType()  instanceof TaskNode){
+                    jButtonEjecutar.setEnabled(true);
+                    jButtonCambiarPlantilla.setEnabled(true);
+                    jButtonLimpiar.setEnabled(true);
+                    jButtonGuardarScript.setEnabled(true);
+                }
+                else{
+                    jButtonEjecutar.setEnabled(false);
+                    jButtonCambiarPlantilla.setEnabled(false);
+                    jButtonLimpiar.setEnabled(false);
+                    jButtonGuardarScript.setEnabled(false);
+                }
+                if(!jTextAreaConsola.getText().equals("")){
+                    jButtonGuardarSalida.setEnabled(true);
+                }
+                else{
+                    jButtonGuardarSalida.setEnabled(false);
+                }
             }
         });
         
@@ -136,8 +190,9 @@ public class MainGUI extends javax.swing.JFrame {
         jTextFieldRutaPlantilla = new javax.swing.JTextField();
         jSeparator2 = new javax.swing.JToolBar.Separator();
         jButtonEjecutar = new javax.swing.JButton();
+        jButtonGuardarScript = new javax.swing.JButton();
         jSeparator3 = new javax.swing.JToolBar.Separator();
-        jButton1 = new javax.swing.JButton();
+        jButtonGuardarSalida = new javax.swing.JButton();
         jPanelLabels = new javax.swing.JPanel();
         BarrajMenu = new javax.swing.JMenuBar();
         archivosjMenu = new javax.swing.JMenu();
@@ -152,6 +207,7 @@ public class MainGUI extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setModalExclusionType(null);
+        setResizable(false);
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowOpened(java.awt.event.WindowEvent evt) {
                 formWindowOpened(evt);
@@ -186,6 +242,7 @@ public class MainGUI extends javax.swing.JFrame {
         jToolBar1.setRollover(true);
 
         jButtonLimpiar.setText("Limpiar");
+        jButtonLimpiar.setEnabled(false);
         jButtonLimpiar.setFocusable(false);
         jButtonLimpiar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jButtonLimpiar.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
@@ -210,6 +267,7 @@ public class MainGUI extends javax.swing.JFrame {
         jToolBar1.add(jSeparator1);
 
         jButtonCambiarPlantilla.setText("Cambiar Plantill");
+        jButtonCambiarPlantilla.setEnabled(false);
         jButtonCambiarPlantilla.setFocusable(false);
         jButtonCambiarPlantilla.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jButtonCambiarPlantilla.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
@@ -225,6 +283,7 @@ public class MainGUI extends javax.swing.JFrame {
         jToolBar1.add(jSeparator2);
 
         jButtonEjecutar.setText("Ejecutar");
+        jButtonEjecutar.setEnabled(false);
         jButtonEjecutar.setFocusable(false);
         jButtonEjecutar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jButtonEjecutar.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
@@ -234,18 +293,31 @@ public class MainGUI extends javax.swing.JFrame {
             }
         });
         jToolBar1.add(jButtonEjecutar);
-        jToolBar1.add(jSeparator3);
 
-        jButton1.setText("Guardar Salida");
-        jButton1.setFocusable(false);
-        jButton1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jButton1.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        jButtonGuardarScript.setText("Guardar Script");
+        jButtonGuardarScript.setEnabled(false);
+        jButtonGuardarScript.setFocusable(false);
+        jButtonGuardarScript.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jButtonGuardarScript.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jButtonGuardarScript.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                jButtonGuardarScriptActionPerformed(evt);
             }
         });
-        jToolBar1.add(jButton1);
+        jToolBar1.add(jButtonGuardarScript);
+        jToolBar1.add(jSeparator3);
+
+        jButtonGuardarSalida.setText("Guardar Salida");
+        jButtonGuardarSalida.setEnabled(false);
+        jButtonGuardarSalida.setFocusable(false);
+        jButtonGuardarSalida.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jButtonGuardarSalida.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jButtonGuardarSalida.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonGuardarSalidaActionPerformed(evt);
+            }
+        });
+        jToolBar1.add(jButtonGuardarSalida);
 
         jPanelLabels.setAutoscrolls(true);
 
@@ -340,7 +412,7 @@ public class MainGUI extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jToolBar1, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(23, 23, 23)
@@ -612,10 +684,10 @@ public class MainGUI extends javax.swing.JFrame {
         
     }//GEN-LAST:event_jButtonCambiarPlantillaActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void jButtonGuardarSalidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonGuardarSalidaActionPerformed
         consolaText = "  "+jTextAreaConsola.getText();
         WindowsInstances.dialogoGuardarConsola.setVisible(true);
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_jButtonGuardarSalidaActionPerformed
 
     private void jButtonEjecutarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEjecutarActionPerformed
         //SOLO CUANDO ES UNA TAREA
@@ -623,6 +695,9 @@ public class MainGUI extends javax.swing.JFrame {
         if(hijo.getNodeType() instanceof TaskNode){
             TaskNode taskNode = (TaskNode) hijo.getNodeType();
             taskNode.ejecutar();
+            if(!jTextAreaConsola.getText().equals("")){
+                jButtonGuardarSalida.setEnabled(true);
+            }
         }
         
     }//GEN-LAST:event_jButtonEjecutarActionPerformed
@@ -672,6 +747,62 @@ public class MainGUI extends javax.swing.JFrame {
         this.modelo.reload();
         
     }//GEN-LAST:event_jMenuItem2ActionPerformed
+
+    private void jButtonGuardarScriptActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonGuardarScriptActionPerformed
+        String comando = "java ";
+        String mensajeError = "";
+        CustomMutableTreeNode TaskAux = (CustomMutableTreeNode) ProyectosTree.getLastSelectedPathComponent();
+        TaskNode taskNode = (TaskNode) TaskAux.getNodeType();
+        for(int i = 0; i < taskNode.parametros.size(); i++){
+            JTextField jTextAux = (JTextField) taskNode.parametros.get(i).mostrar().get(1);
+            JLabel jLabelAux = (JLabel) taskNode.parametros.get(i).mostrar().get(0);
+            if(taskNode.parametros.get(i).isObligatorio() && jTextAux.getText().equals("")){
+                mensajeError = mensajeError + jLabelAux.getText() + ", ";
+            }else{
+                comando = comando + taskNode.parametros.get(i).ejecutar();
+            }
+        }
+        
+        String file = "";
+        JFileChooser jFileChooser1 = new JFileChooser();
+        jFileChooser1.setFileSelectionMode(jFileChooser1.DIRECTORIES_ONLY);
+        int boton = jFileChooser1.showOpenDialog(this);
+        if (boton == jFileChooser1.APPROVE_OPTION){ //Si el usuario ha pulsado la opción Aceptar
+            File fichero = jFileChooser1.getSelectedFile(); //Guardamos en la variable fichero el archivo seleccionado
+            try {
+              // What to do with the file, e.g. display it in a TextArea
+              //CreateDirectoryGUI.LocalizacionTextField.setText.read( new FileReader( file.getAbsolutePath() ), null );
+              file = fichero.getAbsolutePath();
+            } catch (Exception ex) {
+              System.out.println("problem accessing file"+fichero.getAbsolutePath());
+            }
+        }
+        BufferedWriter bw = null;
+        FileWriter fw = null;
+        try {
+            String content = comando;
+            fw = new FileWriter(file+File.separator+TaskAux.getNombre());
+            bw = new BufferedWriter(fw);
+            bw.write(content);
+            System.out.println("Done");
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+
+            try {
+
+                if (bw != null)
+                        bw.close();
+
+                if (fw != null)
+                        fw.close();
+
+            } catch (IOException ex) {
+
+                    ex.printStackTrace();
+            }
+        }
+    }//GEN-LAST:event_jButtonGuardarScriptActionPerformed
 
     public void metodoCrearNodos(DefaultMutableTreeNode padre, Element nuevoNodo,Document proyecto, String rutaPr ){
         if(nuevoNodo.getAttributes().getNamedItem("tipo").getNodeValue().equals("experimento")){
@@ -1025,10 +1156,11 @@ public class MainGUI extends javax.swing.JFrame {
     private javax.swing.JMenu archivosjMenu;
     private javax.swing.JMenuItem clasificajMenu;
     private javax.swing.JMenuItem experjMenu;
-    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButtonCambiarPlantilla;
     private javax.swing.JButton jButtonEjecutar;
     private javax.swing.JButton jButtonGuardar;
+    private javax.swing.JButton jButtonGuardarSalida;
+    private javax.swing.JButton jButtonGuardarScript;
     private javax.swing.JButton jButtonLimpiar;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
