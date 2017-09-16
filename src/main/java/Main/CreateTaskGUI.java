@@ -230,7 +230,9 @@ public class CreateTaskGUI extends javax.swing.JFrame {
             ArrayList<String> etiquetas = new ArrayList<>();
             ArrayList<String> tipo = new ArrayList<>();
             ArrayList<Boolean> obligatorio = new ArrayList<>();
-            xmlRead.leerEtiquetas(n.getPlantXML(), etiquetas, tipo, obligatorio, n);
+            ArrayList<String> comandoPrin = new ArrayList<>();
+            xmlRead.leerEtiquetas(comandoPrin, n.getPlantXML(), etiquetas, tipo, obligatorio, n);
+            n.setComandoPrincipal(comandoPrin.get(0));
             for(int i = 0; i < etiquetas.size(); i++){  //Creamos los objetos de la clase de parámetro 
                 if(tipo.get(i).equals("fichero")){
                     FileParam parametro = new FileParam(etiquetas.get(i), i*50, obligatorio.get(i));
@@ -276,7 +278,9 @@ public class CreateTaskGUI extends javax.swing.JFrame {
                 ArrayList<String> etiquetas = new ArrayList<>();
                 ArrayList<String> tipo = new ArrayList<>();
                 ArrayList<Boolean> obligatorio = new ArrayList<>();
-                xmlRead.leerEtiquetas(n.getPlantXML(), etiquetas, tipo, obligatorio, n);
+                ArrayList<String> comandoPrin = new ArrayList<>();
+                xmlRead.leerEtiquetas(comandoPrin, n.getPlantXML(), etiquetas, tipo, obligatorio, n);
+                n.setComandoPrincipal(comandoPrin.get(0));
                 for(int i = 0; i < etiquetas.size(); i++){
                     if(tipo.get(i).equals("fichero")){
                         FileParam parametro = new FileParam(etiquetas.get(i), i*50, obligatorio.get(i));

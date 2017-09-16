@@ -66,11 +66,11 @@ public class StructXML {
     }
     
     
-    public void leerEtiquetas(Document plantilla, ArrayList<String> etiquetas, ArrayList<String> tipo, ArrayList<Boolean> obligatorios, TaskNode taskNode){
+    public void leerEtiquetas(ArrayList<String> comandoPrinci, Document plantilla, ArrayList<String> etiquetas, ArrayList<String> tipo, ArrayList<Boolean> obligatorios, TaskNode taskNode){
         String nombretarea = plantilla.getElementsByTagName("tarea").item(0).getAttributes().getNamedItem("nombre").getNodeValue();
         
         String nombrecomando = plantilla.getElementsByTagName("comando").item(0).getTextContent();
-        
+        comandoPrinci.add(nombrecomando);
         NodeList listaParametros = plantilla.getElementsByTagName("parametro");
         
         for(int i = 0; i < listaParametros.getLength(); i++){   

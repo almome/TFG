@@ -36,6 +36,15 @@ public class TaskNode implements INodeType{
     String rutaPlantilla;
     Document plantXML;
     List<TaskParam> parametros; 
+    String comandoPrincipal;
+
+    public String getComandoPrincipal() {
+        return comandoPrincipal;
+    }
+
+    public void setComandoPrincipal(String comandoPrincipal) {
+        this.comandoPrincipal = comandoPrincipal;
+    }
     
     public List<Component> mostrar() {
         List<Component> componentes = new ArrayList<Component>();

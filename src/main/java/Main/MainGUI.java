@@ -102,7 +102,7 @@ public class MainGUI extends javax.swing.JFrame {
                     jButtonGuardar.setEnabled(false);
                     jButtonLimpiar.setEnabled(false);
                     jButtonCambiarPlantilla.setEnabled(false);
-                    jButtonGuardarScript.setEnabled(false);
+                    
                     jButtonEjecutar.setEnabled(false);
                     if(!jTextAreaConsola.getText().equals("")){
                         jButtonGuardarSalida.setEnabled(true);
@@ -119,11 +119,11 @@ public class MainGUI extends javax.swing.JFrame {
                     if(nodoAux.getNodeType()  instanceof TaskNode){
                         jButtonLimpiar.setEnabled(true);
                         jButtonCambiarPlantilla.setEnabled(true);
-                        jButtonGuardarScript.setEnabled(true);
+                        
                     }else{
                         jButtonLimpiar.setEnabled(false);
                         jButtonCambiarPlantilla.setEnabled(false);
-                        jButtonGuardarScript.setEnabled(false);
+                       
                     }
                     
                 }
@@ -148,13 +148,13 @@ public class MainGUI extends javax.swing.JFrame {
                     jButtonEjecutar.setEnabled(true);
                     jButtonCambiarPlantilla.setEnabled(true);
                     jButtonLimpiar.setEnabled(true);
-                    jButtonGuardarScript.setEnabled(true);
+                    
                 }
                 else{
                     jButtonEjecutar.setEnabled(false);
                     jButtonCambiarPlantilla.setEnabled(false);
                     jButtonLimpiar.setEnabled(false);
-                    jButtonGuardarScript.setEnabled(false);
+                    
                 }
                 if(!jTextAreaConsola.getText().equals("")){
                     jButtonGuardarSalida.setEnabled(true);
@@ -193,6 +193,7 @@ public class MainGUI extends javax.swing.JFrame {
         jSeparator3 = new javax.swing.JToolBar.Separator();
         jButtonGuardarSalida = new javax.swing.JButton();
         jPanelLabels = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
         BarrajMenu = new javax.swing.JMenuBar();
         archivosjMenu = new javax.swing.JMenu();
         nuevojMenu = new javax.swing.JMenu();
@@ -323,7 +324,7 @@ public class MainGUI extends javax.swing.JFrame {
         );
         jPanelLabelsLayout.setVerticalGroup(
             jPanelLabelsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 328, Short.MAX_VALUE)
+            .addGap(0, 265, Short.MAX_VALUE)
         );
 
         archivosjMenu.setText("Archivos");
@@ -440,11 +441,13 @@ public class MainGUI extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jPanelLabels, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jTabbedPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 828, Short.MAX_VALUE))
-                .addContainerGap(54, Short.MAX_VALUE))
-            .addComponent(jToolBar1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(jPanelLabels, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jTabbedPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 828, Short.MAX_VALUE))
+                    .addComponent(jLabel1))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addComponent(jToolBar1, javax.swing.GroupLayout.DEFAULT_SIZE, 1114, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -453,7 +456,9 @@ public class MainGUI extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(23, 23, 23)
+                        .addGap(52, 52, 52)
+                        .addComponent(jLabel1)
+                        .addGap(18, 18, 18)
                         .addComponent(jPanelLabels, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(27, 27, 27)
                         .addComponent(jTabbedPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 242, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -597,8 +602,11 @@ public class MainGUI extends javax.swing.JFrame {
                             for(Component param : taskNode.mostrar()){
                                 jPanelLabels.add(param);
                             }
+                            jLabel1.setText(aux.getComandoPrincipal());
+                            jLabel1.repaint();
                             jPanelLabels.validate();
                             jPanelLabels.repaint();
+                            
                         }
                         else{
                             jPanelLabels.removeAll();
@@ -697,7 +705,9 @@ public class MainGUI extends javax.swing.JFrame {
             ArrayList<String> etiquetas = new ArrayList<>();
             ArrayList<String> tipo = new ArrayList<>();
             ArrayList<Boolean> obligatorio = new ArrayList<>();
-            xmlRead.leerEtiquetas(aux.getPlantXML(), etiquetas, tipo, obligatorio, aux);
+            ArrayList<String> comandoPrin = new ArrayList<>();
+            xmlRead.leerEtiquetas(comandoPrin, aux.getPlantXML(), etiquetas, tipo, obligatorio, aux);
+            aux.setComandoPrincipal(comandoPrin.get(0));
             for(int i = 0; i < etiquetas.size(); i++){  //Creamos los objetos de la clase de parámetro 
                 if(tipo.get(i).equals("fichero")){
                     FileParam parametro = new FileParam(etiquetas.get(i), i*50, obligatorio.get(i));
@@ -1067,7 +1077,9 @@ public class MainGUI extends javax.swing.JFrame {
                 ArrayList<Boolean> obligatorio = new ArrayList<>();
                 
                 HashMap valores = new HashMap();
-                xmlRead.leerEtiquetas(n.getPlantXML(), etiquetas, tipo, obligatorio, n);
+                ArrayList<String> comandoPrin = new ArrayList<>();
+                xmlRead.leerEtiquetas(comandoPrin, n.getPlantXML(), etiquetas, tipo, obligatorio, n);
+                n.setComandoPrincipal(comandoPrin.get(0));
                 Element parametros = (Element) nuevoNodo.getElementsByTagName("parametros").item(0);
                 NodeList listanodos = parametros.getElementsByTagName("parametro");
                 for(int i = 0; i < listanodos.getLength(); i++){  
@@ -1272,6 +1284,7 @@ public class MainGUI extends javax.swing.JFrame {
     private javax.swing.JButton jButtonGuardar;
     private javax.swing.JButton jButtonGuardarSalida;
     private javax.swing.JButton jButtonLimpiar;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
