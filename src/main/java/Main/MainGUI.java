@@ -190,7 +190,6 @@ public class MainGUI extends javax.swing.JFrame {
         jTextFieldRutaPlantilla = new javax.swing.JTextField();
         jSeparator2 = new javax.swing.JToolBar.Separator();
         jButtonEjecutar = new javax.swing.JButton();
-        jButtonGuardarScript = new javax.swing.JButton();
         jSeparator3 = new javax.swing.JToolBar.Separator();
         jButtonGuardarSalida = new javax.swing.JButton();
         jPanelLabels = new javax.swing.JPanel();
@@ -204,10 +203,13 @@ public class MainGUI extends javax.swing.JFrame {
         jMenuItem1 = new javax.swing.JMenuItem();
         runjMenu = new javax.swing.JMenu();
         jMenuItem3 = new javax.swing.JMenuItem();
-        jMenu1 = new javax.swing.JMenu();
-        jMenu2 = new javax.swing.JMenu();
-        jMenuItem4 = new javax.swing.JMenuItem();
-        jMenuItem5 = new javax.swing.JMenuItem();
+        herramientasjMenu = new javax.swing.JMenu();
+        crearScriptjMenu = new javax.swing.JMenu();
+        paraLinuxjMenuItem = new javax.swing.JMenuItem();
+        paraWindowsjMenuItem = new javax.swing.JMenuItem();
+        consolajMenu = new javax.swing.JMenu();
+        guardarSalidajMenuItem = new javax.swing.JMenuItem();
+        limpiarConsolajMenuItem = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setModalExclusionType(null);
@@ -297,18 +299,6 @@ public class MainGUI extends javax.swing.JFrame {
             }
         });
         jToolBar1.add(jButtonEjecutar);
-
-        jButtonGuardarScript.setText("Guardar Script");
-        jButtonGuardarScript.setEnabled(false);
-        jButtonGuardarScript.setFocusable(false);
-        jButtonGuardarScript.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jButtonGuardarScript.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        jButtonGuardarScript.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonGuardarScriptActionPerformed(evt);
-            }
-        });
-        jToolBar1.add(jButtonGuardarScript);
         jToolBar1.add(jSeparator3);
 
         jButtonGuardarSalida.setText("Guardar Salida");
@@ -396,28 +386,49 @@ public class MainGUI extends javax.swing.JFrame {
 
         BarrajMenu.add(runjMenu);
 
-        jMenu1.setText("Herramientas");
-        BarrajMenu.add(jMenu1);
+        herramientasjMenu.setText("Herramientas");
 
-        jMenu2.setText("Consola");
+        crearScriptjMenu.setText("Crear Script");
 
-        jMenuItem4.setText("Guardar Salida");
-        jMenuItem4.addActionListener(new java.awt.event.ActionListener() {
+        paraLinuxjMenuItem.setText("Para Linux");
+        paraLinuxjMenuItem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem4ActionPerformed(evt);
+                paraLinuxjMenuItemActionPerformed(evt);
             }
         });
-        jMenu2.add(jMenuItem4);
+        crearScriptjMenu.add(paraLinuxjMenuItem);
 
-        jMenuItem5.setText("Limpiar Consola");
-        jMenuItem5.addActionListener(new java.awt.event.ActionListener() {
+        paraWindowsjMenuItem.setText("Para Windows");
+        paraWindowsjMenuItem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem5ActionPerformed(evt);
+                paraWindowsjMenuItemActionPerformed(evt);
             }
         });
-        jMenu2.add(jMenuItem5);
+        crearScriptjMenu.add(paraWindowsjMenuItem);
 
-        BarrajMenu.add(jMenu2);
+        herramientasjMenu.add(crearScriptjMenu);
+
+        BarrajMenu.add(herramientasjMenu);
+
+        consolajMenu.setText("Consola");
+
+        guardarSalidajMenuItem.setText("Guardar Salida");
+        guardarSalidajMenuItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                guardarSalidajMenuItemActionPerformed(evt);
+            }
+        });
+        consolajMenu.add(guardarSalidajMenuItem);
+
+        limpiarConsolajMenuItem.setText("Limpiar Consola");
+        limpiarConsolajMenuItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                limpiarConsolajMenuItemActionPerformed(evt);
+            }
+        });
+        consolajMenu.add(limpiarConsolajMenuItem);
+
+        BarrajMenu.add(consolajMenu);
 
         setJMenuBar(BarrajMenu);
 
@@ -775,7 +786,76 @@ public class MainGUI extends javax.swing.JFrame {
         
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
-    private void jButtonGuardarScriptActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonGuardarScriptActionPerformed
+    private void guardarSalidajMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_guardarSalidajMenuItemActionPerformed
+        consolaText = "  "+jTextAreaConsola.getText();
+        WindowsInstances.dialogoGuardarConsola.setVisible(true);
+    }//GEN-LAST:event_guardarSalidajMenuItemActionPerformed
+
+    private void limpiarConsolajMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_limpiarConsolajMenuItemActionPerformed
+        jTextAreaConsola.setText("");
+        jTextAreaConsola.repaint();
+        consolaText = "";
+        jButtonGuardarSalida.setEnabled(false);
+        
+    }//GEN-LAST:event_limpiarConsolajMenuItemActionPerformed
+
+    private void paraLinuxjMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_paraLinuxjMenuItemActionPerformed
+        String comando = "#!/bin/bash \n java ";
+        String mensajeError = "";
+        CustomMutableTreeNode TaskAux = (CustomMutableTreeNode) ProyectosTree.getLastSelectedPathComponent();
+        TaskNode taskNode = (TaskNode) TaskAux.getNodeType();
+        for(int i = 0; i < taskNode.parametros.size(); i++){
+            JTextField jTextAux = (JTextField) taskNode.parametros.get(i).mostrar().get(1);
+            JLabel jLabelAux = (JLabel) taskNode.parametros.get(i).mostrar().get(0);
+            if(taskNode.parametros.get(i).isObligatorio() && jTextAux.getText().equals("")){
+                mensajeError = mensajeError + jLabelAux.getText() + ", ";
+            }else{
+                comando = comando + taskNode.parametros.get(i).ejecutar();
+            }
+        }
+        
+        String file = "";
+        JFileChooser jFileChooser1 = new JFileChooser();
+        jFileChooser1.setFileSelectionMode(jFileChooser1.DIRECTORIES_ONLY);
+        int boton = jFileChooser1.showOpenDialog(this);
+        if (boton == jFileChooser1.APPROVE_OPTION){ //Si el usuario ha pulsado la opción Aceptar
+            File fichero = jFileChooser1.getSelectedFile(); //Guardamos en la variable fichero el archivo seleccionado
+            try {
+              // What to do with the file, e.g. display it in a TextArea
+              //CreateDirectoryGUI.LocalizacionTextField.setText.read( new FileReader( file.getAbsolutePath() ), null );
+              file = fichero.getAbsolutePath();
+            } catch (Exception ex) {
+              System.out.println("problem accessing file"+fichero.getAbsolutePath());
+            }
+        }
+        BufferedWriter bw = null;
+        FileWriter fw = null;
+        try {
+            String content = comando;
+            fw = new FileWriter(file+File.separator+TaskAux.getNombre());
+            bw = new BufferedWriter(fw);
+            bw.write(content);
+            System.out.println("Done");
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+
+            try {
+
+                if (bw != null)
+                        bw.close();
+
+                if (fw != null)
+                        fw.close();
+
+            } catch (IOException ex) {
+
+                    ex.printStackTrace();
+            }
+        }
+    }//GEN-LAST:event_paraLinuxjMenuItemActionPerformed
+
+    private void paraWindowsjMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_paraWindowsjMenuItemActionPerformed
         String comando = "java ";
         String mensajeError = "";
         CustomMutableTreeNode TaskAux = (CustomMutableTreeNode) ProyectosTree.getLastSelectedPathComponent();
@@ -829,20 +909,7 @@ public class MainGUI extends javax.swing.JFrame {
                     ex.printStackTrace();
             }
         }
-    }//GEN-LAST:event_jButtonGuardarScriptActionPerformed
-
-    private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
-        consolaText = "  "+jTextAreaConsola.getText();
-        WindowsInstances.dialogoGuardarConsola.setVisible(true);
-    }//GEN-LAST:event_jMenuItem4ActionPerformed
-
-    private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
-        jTextAreaConsola.setText("");
-        jTextAreaConsola.repaint();
-        consolaText = "";
-        jButtonGuardarSalida.setEnabled(false);
-        
-    }//GEN-LAST:event_jMenuItem5ActionPerformed
+    }//GEN-LAST:event_paraWindowsjMenuItemActionPerformed
 
     public void metodoCrearNodos(DefaultMutableTreeNode padre, Element nuevoNodo,Document proyecto, String rutaPr ){
         if(nuevoNodo.getAttributes().getNamedItem("tipo").getNodeValue().equals("experimento")){
@@ -1195,20 +1262,19 @@ public class MainGUI extends javax.swing.JFrame {
     private javax.swing.JTree ProyectosTree;
     private javax.swing.JMenu archivosjMenu;
     private javax.swing.JMenuItem clasificajMenu;
+    private javax.swing.JMenu consolajMenu;
+    private javax.swing.JMenu crearScriptjMenu;
     private javax.swing.JMenuItem experjMenu;
+    private javax.swing.JMenuItem guardarSalidajMenuItem;
+    private javax.swing.JMenu herramientasjMenu;
     private javax.swing.JButton jButtonCambiarPlantilla;
     private javax.swing.JButton jButtonEjecutar;
     private javax.swing.JButton jButtonGuardar;
     private javax.swing.JButton jButtonGuardarSalida;
-    private javax.swing.JButton jButtonGuardarScript;
     private javax.swing.JButton jButtonLimpiar;
-    private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
-    private javax.swing.JMenuItem jMenuItem4;
-    private javax.swing.JMenuItem jMenuItem5;
     private javax.swing.JPanel jPanelLabels;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
@@ -1220,7 +1286,10 @@ public class MainGUI extends javax.swing.JFrame {
     private javax.swing.JTextArea jTextAreaConsola;
     private javax.swing.JTextField jTextFieldRutaPlantilla;
     private javax.swing.JToolBar jToolBar1;
+    private javax.swing.JMenuItem limpiarConsolajMenuItem;
     private javax.swing.JMenu nuevojMenu;
+    private javax.swing.JMenuItem paraLinuxjMenuItem;
+    private javax.swing.JMenuItem paraWindowsjMenuItem;
     private javax.swing.JMenu runjMenu;
     private javax.swing.JMenuItem tareajMenu;
     // End of variables declaration//GEN-END:variables
