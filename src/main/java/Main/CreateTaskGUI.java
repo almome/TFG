@@ -95,7 +95,7 @@ public class CreateTaskGUI extends javax.swing.JFrame {
 
         ExperimentoLabel.setText("Experimento :");
 
-        ClasificadorLabel.setText("Clasificador :");
+        ClasificadorLabel.setText("Nodo :");
 
         NombreLabel.setText("Nombre :");
 

@@ -344,7 +344,7 @@ public class MainGUI extends javax.swing.JFrame {
         });
         nuevojMenu.add(experjMenu);
 
-        clasificajMenu.setText("Clasificador");
+        clasificajMenu.setText("Nodo");
         clasificajMenu.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 clasificajMenuActionPerformed(evt);

@@ -136,7 +136,7 @@
     </Component>
     <Component class="javax.swing.JLabel" name="ClasificadorLabel">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Clasificador :"/>
+        <Property name="text" type="java.lang.String" value="Nodo :"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="NombreLabel">

@@ -96,7 +96,7 @@
   <SubComponents>
     <Component class="javax.swing.JLabel" name="TituloLabel">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Crear nuevo clasificador"/>
+        <Property name="text" type="java.lang.String" value="Crear nuevo nodo"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JSeparator" name="jSeparator1">
@@ -138,13 +138,13 @@
     <Component class="javax.swing.JTextField" name="NombreTextField">
       <Properties>
         <Property name="horizontalAlignment" type="int" value="2"/>
-        <Property name="text" type="java.lang.String" value="Inserte nombre del clasificador..."/>
+        <Property name="text" type="java.lang.String" value="Inserte nombre del nodo..."/>
         <Property name="name" type="java.lang.String" value="" noResource="true"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel1">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Clasificador :"/>
+        <Property name="text" type="java.lang.String" value="Nodo :"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JComboBox" name="ClasificadorComboBox">

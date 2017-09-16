@@ -24,7 +24,7 @@
                 </MenuItem>
                 <MenuItem class="javax.swing.JMenuItem" name="clasificajMenu">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="Clasificador"/>
+                    <Property name="text" type="java.lang.String" value="Nodo"/>
                   </Properties>
                   <Events>
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="clasificajMenuActionPerformed"/>

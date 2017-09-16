@@ -95,7 +95,7 @@ public class ExperimentNode implements INodeType {
         JMenuItem jMenuItemEjecutar;
         JMenuItem jMenuItemEliminar;
 
-        jMenuItemCreaClasificador = new JMenuItem("Crear Clasificador");
+        jMenuItemCreaClasificador = new JMenuItem("Crear Nodo");
         jMenuItemCreaClasificador.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ev) {

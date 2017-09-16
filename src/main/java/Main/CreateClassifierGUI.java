@@ -80,7 +80,7 @@ public class CreateClassifierGUI extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Nuevo Clasificador");
 
-        TituloLabel.setText("Crear nuevo clasificador");
+        TituloLabel.setText("Crear nuevo nodo");
 
         ExperimentoLabel.setText("Experimento :");
 
@@ -107,10 +107,10 @@ public class CreateClassifierGUI extends javax.swing.JFrame {
         });
 
         NombreTextField.setHorizontalAlignment(javax.swing.JTextField.LEFT);
-        NombreTextField.setText("Inserte nombre del clasificador...");
+        NombreTextField.setText("Inserte nombre del nodo...");
         NombreTextField.setName(""); // NOI18N
 
-        jLabel1.setText("Clasificador :");
+        jLabel1.setText("Nodo :");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -134,9 +134,8 @@ public class CreateClassifierGUI extends javax.swing.JFrame {
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(10, 10, 10)
                                 .addComponent(NombreTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 255, Short.MAX_VALUE))
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(ExperimentosComboBox, 0, 265, Short.MAX_VALUE)
-                                .addComponent(ClasificadorComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
+                            .addComponent(ExperimentosComboBox, 0, 265, Short.MAX_VALUE)
+                            .addComponent(ClasificadorComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addGap(32, 32, 32))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(266, Short.MAX_VALUE)
