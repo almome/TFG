@@ -24,7 +24,7 @@
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="1" attributes="0">
-              <EmptySpace pref="303" max="32767" attributes="0"/>
+              <EmptySpace pref="236" max="32767" attributes="0"/>
               <Component id="jButtonCambiar" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="41" max="-2" attributes="0"/>
               <Component id="jButtonAceptar" min="-2" max="-2" attributes="0"/>
@@ -33,7 +33,7 @@
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace min="-2" pref="49" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="jLabelruta" min="-2" max="-2" attributes="0"/>
+                  <Component id="jLabelruta" min="-2" pref="99" max="-2" attributes="0"/>
                   <Component id="jLabelmensage" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="32767" attributes="0"/>
@@ -45,9 +45,9 @@
           <Group type="102" alignment="1" attributes="0">
               <EmptySpace min="-2" pref="40" max="-2" attributes="0"/>
               <Component id="jLabelmensage" min="-2" max="-2" attributes="0"/>
-              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
               <Component id="jLabelruta" min="-2" max="-2" attributes="0"/>
-              <EmptySpace pref="66" max="32767" attributes="0"/>
+              <EmptySpace pref="44" max="32767" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="jButtonCambiar" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jButtonAceptar" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -80,6 +80,9 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabelruta">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="..."/>
+      </Properties>
     </Component>
   </SubComponents>
 </Form>

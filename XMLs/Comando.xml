@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0"?>
 <tarea nombre="EjemploXML">
-  <comando>java</comando>
+  <comando>java -jar adiosss</comando>
   <parametros>
       <parametro nombre="-jar" tipo="fichero" obligatorio="si">
       </parametro>

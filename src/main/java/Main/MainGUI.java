@@ -12,6 +12,7 @@ import TaskParam.StringParam;
 import com.google.common.io.Files;
 import java.awt.BorderLayout;
 import java.awt.Component;
+import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
@@ -192,8 +193,9 @@ public class MainGUI extends javax.swing.JFrame {
         jButtonEjecutar = new javax.swing.JButton();
         jSeparator3 = new javax.swing.JToolBar.Separator();
         jButtonGuardarSalida = new javax.swing.JButton();
-        jPanelLabels = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
+        jTabbedPane2 = new javax.swing.JTabbedPane();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        jPanel1 = new javax.swing.JPanel();
         BarrajMenu = new javax.swing.JMenuBar();
         archivosjMenu = new javax.swing.JMenu();
         nuevojMenu = new javax.swing.JMenu();
@@ -248,6 +250,7 @@ public class MainGUI extends javax.swing.JFrame {
 
         jToolBar1.setRollover(true);
 
+        jButtonLimpiar.setIcon(new javax.swing.ImageIcon("C:\\Users\\alexa\\Documents\\NetBeansProjects\\TFG\\Imagenes\\clean.png")); // NOI18N
         jButtonLimpiar.setText("Limpiar");
         jButtonLimpiar.setEnabled(false);
         jButtonLimpiar.setFocusable(false);
@@ -260,6 +263,7 @@ public class MainGUI extends javax.swing.JFrame {
         });
         jToolBar1.add(jButtonLimpiar);
 
+        jButtonGuardar.setIcon(new javax.swing.ImageIcon("C:\\Users\\alexa\\Documents\\NetBeansProjects\\TFG\\Imagenes\\save.png")); // NOI18N
         jButtonGuardar.setText("Guardar");
         jButtonGuardar.setEnabled(false);
         jButtonGuardar.setFocusable(false);
@@ -273,7 +277,8 @@ public class MainGUI extends javax.swing.JFrame {
         jToolBar1.add(jButtonGuardar);
         jToolBar1.add(jSeparator1);
 
-        jButtonCambiarPlantilla.setText("Cambiar Plantill");
+        jButtonCambiarPlantilla.setIcon(new javax.swing.ImageIcon("C:\\Users\\alexa\\Documents\\NetBeansProjects\\TFG\\Imagenes\\folder.png")); // NOI18N
+        jButtonCambiarPlantilla.setText("Cambiar Plantilla");
         jButtonCambiarPlantilla.setEnabled(false);
         jButtonCambiarPlantilla.setFocusable(false);
         jButtonCambiarPlantilla.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -289,6 +294,7 @@ public class MainGUI extends javax.swing.JFrame {
         jToolBar1.add(jTextFieldRutaPlantilla);
         jToolBar1.add(jSeparator2);
 
+        jButtonEjecutar.setIcon(new javax.swing.ImageIcon("C:\\Users\\alexa\\Documents\\NetBeansProjects\\TFG\\Imagenes\\play-button.png")); // NOI18N
         jButtonEjecutar.setText("Ejecutar");
         jButtonEjecutar.setEnabled(false);
         jButtonEjecutar.setFocusable(false);
@@ -302,6 +308,7 @@ public class MainGUI extends javax.swing.JFrame {
         jToolBar1.add(jButtonEjecutar);
         jToolBar1.add(jSeparator3);
 
+        jButtonGuardarSalida.setIcon(new javax.swing.ImageIcon("C:\\Users\\alexa\\Documents\\NetBeansProjects\\TFG\\Imagenes\\icon.png")); // NOI18N
         jButtonGuardarSalida.setText("Guardar Salida");
         jButtonGuardarSalida.setEnabled(false);
         jButtonGuardarSalida.setFocusable(false);
@@ -314,18 +321,26 @@ public class MainGUI extends javax.swing.JFrame {
         });
         jToolBar1.add(jButtonGuardarSalida);
 
-        jPanelLabels.setAutoscrolls(true);
+        jScrollPane3.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+        jScrollPane3.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+        jScrollPane3.setAutoscrolls(true);
 
-        javax.swing.GroupLayout jPanelLabelsLayout = new javax.swing.GroupLayout(jPanelLabels);
-        jPanelLabels.setLayout(jPanelLabelsLayout);
-        jPanelLabelsLayout.setHorizontalGroup(
-            jPanelLabelsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+        jPanel1.setAutoscrolls(true);
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 879, Short.MAX_VALUE)
         );
-        jPanelLabelsLayout.setVerticalGroup(
-            jPanelLabelsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 265, Short.MAX_VALUE)
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 342, Short.MAX_VALUE)
         );
+
+        jScrollPane3.setViewportView(jPanel1);
+
+        jTabbedPane2.addTab("...", jScrollPane3);
 
         archivosjMenu.setText("Archivos");
 
@@ -442,29 +457,28 @@ public class MainGUI extends javax.swing.JFrame {
                 .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(jPanelLabels, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jTabbedPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 828, Short.MAX_VALUE))
-                    .addComponent(jLabel1))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addComponent(jToolBar1, javax.swing.GroupLayout.DEFAULT_SIZE, 1114, Short.MAX_VALUE)
+                    .addComponent(jTabbedPane3)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jTabbedPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
+            .addComponent(jToolBar1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jToolBar1, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addComponent(jToolBar1, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(52, 52, 52)
-                        .addComponent(jLabel1)
-                        .addGap(18, 18, 18)
-                        .addComponent(jPanelLabels, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(27, 27, 27)
+                        .addComponent(jTabbedPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jTabbedPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 242, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jTabbedPane1))
+                    .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 604, Short.MAX_VALUE))
                 .addGap(8, 8, 8))
         );
+
+        jTabbedPane2.getAccessibleContext().setAccessibleName("");
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -585,8 +599,11 @@ public class MainGUI extends javax.swing.JFrame {
         }
         else{
             if(SwingUtilities.isLeftMouseButton(evt)){  //Si es nodo tarea muestra la ventana principal con los campos del xml
-                
-                jPanelLabels.removeAll();
+                jTabbedPane2.setTitleAt(0, "...");
+                jTabbedPane2.revalidate();
+                jTabbedPane2.repaint();
+                jScrollPane3.setPreferredSize(jPanel1.getPreferredSize());
+                jPanel1.removeAll();
                 jTextFieldRutaPlantilla.setText("");
                 TreePath path = ProyectosTree.getPathForLocation(evt.getX(), evt.getY());
                 Rectangle pathBounds = ProyectosTree.getUI().getPathBounds(ProyectosTree, path);
@@ -594,28 +611,39 @@ public class MainGUI extends javax.swing.JFrame {
                 {
                     try{
                         CustomMutableTreeNode hijo = (CustomMutableTreeNode) path.getLastPathComponent();
-                        jPanelLabels.setLayout(null);
+                        jPanel1.setPreferredSize(jPanel1.getSize());
                         TaskNode aux = (TaskNode) hijo.getNodeType();
+                        jTabbedPane2.setTitleAt(0, aux.getComandoPrincipal());
                         jTextFieldRutaPlantilla.setText(aux.rutaPlantilla);
+                        
                         if(hijo.getNodeType() instanceof TaskNode){
                             TaskNode taskNode = (TaskNode) hijo.getNodeType();
+                            /*JLabel comandoprincipal = new JLabel();
+                            comandoprincipal.setText(taskNode.getComandoPrincipal());
+                            comandoprincipal.setLocation(60, 1);
+                            comandoprincipal.setSize(100, 25);
+                            Component com = comandoprincipal;
+                            jPanel1.add(com);*/
                             for(Component param : taskNode.mostrar()){
-                                jPanelLabels.add(param);
+                                jPanel1.add(param);
                             }
-                            jLabel1.setText(aux.getComandoPrincipal());
-                            jLabel1.repaint();
-                            jPanelLabels.validate();
-                            jPanelLabels.repaint();
+                            jPanel1.revalidate();
+                            jPanel1.repaint();
+                            jTabbedPane2.revalidate();
+                            jTabbedPane2.repaint();
+                            
+                            
                             
                         }
                         else{
-                            jPanelLabels.removeAll();
-                            jPanelLabels.repaint();
+                            jPanel1.removeAll();
+                            jPanel1.repaint();
+
                         }
                     }
                     catch(Exception ex){
-                        jPanelLabels.removeAll();
-                        jPanelLabels.repaint();
+                        jPanel1.removeAll();
+                        jPanel1.repaint();
                     }
                     
                 }
@@ -674,7 +702,7 @@ public class MainGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonGuardarActionPerformed
 
     private void jButtonCambiarPlantillaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCambiarPlantillaActionPerformed
-        jPanelLabels.removeAll();
+        jPanel1.removeAll();
         String nuevaRuta = "";
         
         
@@ -710,23 +738,23 @@ public class MainGUI extends javax.swing.JFrame {
             aux.setComandoPrincipal(comandoPrin.get(0));
             for(int i = 0; i < etiquetas.size(); i++){  //Creamos los objetos de la clase de parámetro 
                 if(tipo.get(i).equals("fichero")){
-                    FileParam parametro = new FileParam(etiquetas.get(i), i*50, obligatorio.get(i));
+                    FileParam parametro = new FileParam(etiquetas.get(i), (i+1)*50, obligatorio.get(i));
                     aux.parametros.add(parametro);
                 }
                 else if(tipo.get(i).equals("string")){
-                    StringParam parametro = new StringParam(etiquetas.get(i), i*50, obligatorio.get(i));
+                    StringParam parametro = new StringParam(etiquetas.get(i), (i+1)*50, obligatorio.get(i));
                     aux.parametros.add(parametro);
                 }
             }
 
-            jPanelLabels.setLayout(null);
+            jPanel1.setLayout(null);
             jTextFieldRutaPlantilla.setText(aux.rutaPlantilla);
             TaskNode taskNode = (TaskNode) hijo.getNodeType();
             for(Component param : taskNode.mostrar()){
-                    jPanelLabels.add(param);
+                    jPanel1.add(param);
             }
-            jPanelLabels.validate();
-            jPanelLabels.repaint();   
+            jPanel1.validate();
+            jPanel1.repaint();   
         }
         
         
@@ -866,10 +894,10 @@ public class MainGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_paraLinuxjMenuItemActionPerformed
 
     private void paraWindowsjMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_paraWindowsjMenuItemActionPerformed
-        String comando = "java ";
-        String mensajeError = "";
         CustomMutableTreeNode TaskAux = (CustomMutableTreeNode) ProyectosTree.getLastSelectedPathComponent();
         TaskNode taskNode = (TaskNode) TaskAux.getNodeType();
+        String comando = taskNode.getComandoPrincipal();
+        String mensajeError = "";
         for(int i = 0; i < taskNode.parametros.size(); i++){
             JTextField jTextAux = (JTextField) taskNode.parametros.get(i).mostrar().get(1);
             JLabel jLabelAux = (JLabel) taskNode.parametros.get(i).mostrar().get(0);
@@ -1093,9 +1121,9 @@ public class MainGUI extends javax.swing.JFrame {
                         FileParam parametro = null;
                         if(valores.containsKey(etiquetas.get(i))){
                             String aux = valores.get(etiquetas.get(i)).toString();
-                            parametro = new FileParam(etiquetas.get(i), aux , i*50, obligatorio.get(i));
+                            parametro = new FileParam(etiquetas.get(i), aux , (i+1)*25, obligatorio.get(i));
                         }else{
-                            parametro = new FileParam(etiquetas.get(i), i*50, obligatorio.get(i));
+                            parametro = new FileParam(etiquetas.get(i), (i+1)*25, obligatorio.get(i));
                         }
                         n.parametros.add(parametro);
                     }
@@ -1103,9 +1131,9 @@ public class MainGUI extends javax.swing.JFrame {
                         StringParam parametro = null;
                         if(valores.containsKey(etiquetas.get(i))){
                             String aux = valores.get(etiquetas.get(i)).toString();
-                            parametro = new StringParam(etiquetas.get(i), aux , i*50, obligatorio.get(i));
+                            parametro = new StringParam(etiquetas.get(i), aux , (i+1)*25, obligatorio.get(i));
                         }else{
-                            parametro = new StringParam(etiquetas.get(i), i*50, obligatorio.get(i));
+                            parametro = new StringParam(etiquetas.get(i), (i+1)*25, obligatorio.get(i));
                         }
                         n.parametros.add(parametro);
                     }
@@ -1241,7 +1269,7 @@ public class MainGUI extends javax.swing.JFrame {
     }
     
     public void ejecutar(TaskNode taskNode) throws IOException, PrinterException{
-        String comando = "java ";
+        String comando = taskNode.getComandoPrincipal();
         String mensajeError = "";
         for(int i = 0; i < taskNode.parametros.size(); i++){
             JTextField jTextAux = (JTextField) taskNode.parametros.get(i).mostrar().get(1);
@@ -1284,17 +1312,18 @@ public class MainGUI extends javax.swing.JFrame {
     private javax.swing.JButton jButtonGuardar;
     private javax.swing.JButton jButtonGuardarSalida;
     private javax.swing.JButton jButtonLimpiar;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
-    private javax.swing.JPanel jPanelLabels;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JToolBar.Separator jSeparator1;
     private javax.swing.JToolBar.Separator jSeparator2;
     private javax.swing.JToolBar.Separator jSeparator3;
     private javax.swing.JTabbedPane jTabbedPane1;
+    private javax.swing.JTabbedPane jTabbedPane2;
     private javax.swing.JTabbedPane jTabbedPane3;
     private javax.swing.JTextArea jTextAreaConsola;
     private javax.swing.JTextField jTextFieldRutaPlantilla;
