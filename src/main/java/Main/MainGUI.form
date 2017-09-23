@@ -279,9 +279,11 @@
         <Component class="javax.swing.JButton" name="jButtonLimpiar">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="2" name="C:\Users\alexa\Documents\NetBeansProjects\TFG\Imagenes\clean.png"/>
+              <Image iconType="2" name="/home/sandra/NetBeansProjects/TFG/Imagenes/clean.png"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Limpiar"/>
+            <Property name="borderPainted" type="boolean" value="false"/>
+            <Property name="contentAreaFilled" type="boolean" value="false"/>
             <Property name="enabled" type="boolean" value="false"/>
             <Property name="focusable" type="boolean" value="false"/>
             <Property name="horizontalTextPosition" type="int" value="0"/>
@@ -294,9 +296,11 @@
         <Component class="javax.swing.JButton" name="jButtonGuardar">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="2" name="C:\Users\alexa\Documents\NetBeansProjects\TFG\Imagenes\save.png"/>
+              <Image iconType="2" name="/home/sandra/NetBeansProjects/TFG/Imagenes/save.png"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Guardar"/>
+            <Property name="borderPainted" type="boolean" value="false"/>
+            <Property name="contentAreaFilled" type="boolean" value="false"/>
             <Property name="enabled" type="boolean" value="false"/>
             <Property name="focusable" type="boolean" value="false"/>
             <Property name="horizontalTextPosition" type="int" value="0"/>
@@ -311,9 +315,11 @@
         <Component class="javax.swing.JButton" name="jButtonCambiarPlantilla">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="2" name="C:\Users\alexa\Documents\NetBeansProjects\TFG\Imagenes\folder.png"/>
+              <Image iconType="2" name="/home/sandra/NetBeansProjects/TFG/Imagenes/folder.png"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Cambiar Plantilla"/>
+            <Property name="borderPainted" type="boolean" value="false"/>
+            <Property name="contentAreaFilled" type="boolean" value="false"/>
             <Property name="enabled" type="boolean" value="false"/>
             <Property name="focusable" type="boolean" value="false"/>
             <Property name="horizontalTextPosition" type="int" value="0"/>
@@ -333,9 +339,11 @@
         <Component class="javax.swing.JButton" name="jButtonEjecutar">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="2" name="C:\Users\alexa\Documents\NetBeansProjects\TFG\Imagenes\play-button.png"/>
+              <Image iconType="2" name="/home/sandra/NetBeansProjects/TFG/Imagenes/play-button.png"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Ejecutar"/>
+            <Property name="borderPainted" type="boolean" value="false"/>
+            <Property name="contentAreaFilled" type="boolean" value="false"/>
             <Property name="enabled" type="boolean" value="false"/>
             <Property name="focusable" type="boolean" value="false"/>
             <Property name="horizontalTextPosition" type="int" value="0"/>
@@ -350,9 +358,11 @@
         <Component class="javax.swing.JButton" name="jButtonGuardarSalida">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="2" name="C:\Users\alexa\Documents\NetBeansProjects\TFG\Imagenes\icon.png"/>
+              <Image iconType="2" name="/home/sandra/NetBeansProjects/TFG/Imagenes/icon.png"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Guardar Salida"/>
+            <Property name="borderPainted" type="boolean" value="false"/>
+            <Property name="contentAreaFilled" type="boolean" value="false"/>
             <Property name="enabled" type="boolean" value="false"/>
             <Property name="focusable" type="boolean" value="false"/>
             <Property name="horizontalTextPosition" type="int" value="0"/>

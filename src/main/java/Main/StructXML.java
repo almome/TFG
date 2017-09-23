@@ -120,7 +120,8 @@ public class StructXML {
 
             DOMSource domSource = new DOMSource(doc);
             ExperimentNode aux = (ExperimentNode) exp.getNodeType();
-            StreamResult sr = new StreamResult(new File(aux.getRutaCarpeta()+"\\"+exp.getNombre()+".xml"));
+            StreamResult sr = new StreamResult(new File(aux.getRutaCarpeta() + File.separator + exp.getNombre()+".xml"));
+            
             tf.transform(domSource, sr);
 
         } catch (ParserConfigurationException | TransformerException ex) {

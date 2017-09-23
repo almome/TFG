@@ -35,8 +35,8 @@ import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Alert.AlertType;
+import java.util.regex.Matcher;
+
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JDialog;
@@ -250,8 +250,10 @@ public class MainGUI extends javax.swing.JFrame {
 
         jToolBar1.setRollover(true);
 
-        jButtonLimpiar.setIcon(new javax.swing.ImageIcon("C:\\Users\\alexa\\Documents\\NetBeansProjects\\TFG\\Imagenes\\clean.png")); // NOI18N
+        jButtonLimpiar.setIcon(new javax.swing.ImageIcon("/home/sandra/NetBeansProjects/TFG/Imagenes/clean.png")); // NOI18N
         jButtonLimpiar.setText("Limpiar");
+        jButtonLimpiar.setBorderPainted(false);
+        jButtonLimpiar.setContentAreaFilled(false);
         jButtonLimpiar.setEnabled(false);
         jButtonLimpiar.setFocusable(false);
         jButtonLimpiar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -263,8 +265,10 @@ public class MainGUI extends javax.swing.JFrame {
         });
         jToolBar1.add(jButtonLimpiar);
 
-        jButtonGuardar.setIcon(new javax.swing.ImageIcon("C:\\Users\\alexa\\Documents\\NetBeansProjects\\TFG\\Imagenes\\save.png")); // NOI18N
+        jButtonGuardar.setIcon(new javax.swing.ImageIcon("/home/sandra/NetBeansProjects/TFG/Imagenes/save.png")); // NOI18N
         jButtonGuardar.setText("Guardar");
+        jButtonGuardar.setBorderPainted(false);
+        jButtonGuardar.setContentAreaFilled(false);
         jButtonGuardar.setEnabled(false);
         jButtonGuardar.setFocusable(false);
         jButtonGuardar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -277,8 +281,10 @@ public class MainGUI extends javax.swing.JFrame {
         jToolBar1.add(jButtonGuardar);
         jToolBar1.add(jSeparator1);
 
-        jButtonCambiarPlantilla.setIcon(new javax.swing.ImageIcon("C:\\Users\\alexa\\Documents\\NetBeansProjects\\TFG\\Imagenes\\folder.png")); // NOI18N
+        jButtonCambiarPlantilla.setIcon(new javax.swing.ImageIcon("/home/sandra/NetBeansProjects/TFG/Imagenes/folder.png")); // NOI18N
         jButtonCambiarPlantilla.setText("Cambiar Plantilla");
+        jButtonCambiarPlantilla.setBorderPainted(false);
+        jButtonCambiarPlantilla.setContentAreaFilled(false);
         jButtonCambiarPlantilla.setEnabled(false);
         jButtonCambiarPlantilla.setFocusable(false);
         jButtonCambiarPlantilla.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -294,8 +300,10 @@ public class MainGUI extends javax.swing.JFrame {
         jToolBar1.add(jTextFieldRutaPlantilla);
         jToolBar1.add(jSeparator2);
 
-        jButtonEjecutar.setIcon(new javax.swing.ImageIcon("C:\\Users\\alexa\\Documents\\NetBeansProjects\\TFG\\Imagenes\\play-button.png")); // NOI18N
+        jButtonEjecutar.setIcon(new javax.swing.ImageIcon("/home/sandra/NetBeansProjects/TFG/Imagenes/play-button.png")); // NOI18N
         jButtonEjecutar.setText("Ejecutar");
+        jButtonEjecutar.setBorderPainted(false);
+        jButtonEjecutar.setContentAreaFilled(false);
         jButtonEjecutar.setEnabled(false);
         jButtonEjecutar.setFocusable(false);
         jButtonEjecutar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -308,8 +316,10 @@ public class MainGUI extends javax.swing.JFrame {
         jToolBar1.add(jButtonEjecutar);
         jToolBar1.add(jSeparator3);
 
-        jButtonGuardarSalida.setIcon(new javax.swing.ImageIcon("C:\\Users\\alexa\\Documents\\NetBeansProjects\\TFG\\Imagenes\\icon.png")); // NOI18N
+        jButtonGuardarSalida.setIcon(new javax.swing.ImageIcon("/home/sandra/NetBeansProjects/TFG/Imagenes/icon.png")); // NOI18N
         jButtonGuardarSalida.setText("Guardar Salida");
+        jButtonGuardarSalida.setBorderPainted(false);
+        jButtonGuardarSalida.setContentAreaFilled(false);
         jButtonGuardarSalida.setEnabled(false);
         jButtonGuardarSalida.setFocusable(false);
         jButtonGuardarSalida.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -544,8 +554,8 @@ public class MainGUI extends javax.swing.JFrame {
                     WindowsInstances.createTareaGUI.setExpCombo(aux.getNombre()); 
                     ExperimentNode expAux = (ExperimentNode) aux.getNodeType();
                     File dir = new File(expAux.getRutaCarpeta());
-                    File newDir = new File(dir.getParent() + "\\" + aux.getNombre());
-                    expAux.setRutaCarpeta(dir.getParent() + "\\" + aux.getNombre());
+                    File newDir = new File(dir.getParent() + File.separator + aux.getNombre());
+                    expAux.setRutaCarpeta(dir.getParent() + File.separator + aux.getNombre());
                     dir.renameTo(newDir);
                 }
                 else if(aux.getNodeType() instanceof ClassifierNode){
@@ -812,14 +822,14 @@ public class MainGUI extends javax.swing.JFrame {
         jDialog.setModal(true);
         jDialog.setVisible(true);
         
-        File directorio = new File(jDialog.getRuta()+"\\"+nombreProyecto);
+        File directorio = new File(jDialog.getRuta()+System.lineSeparator()+nombreProyecto);
         directorio.mkdir();
             
         
         
         
         Element nuevoNodo = (Element) proyecto.getElementsByTagName("nodo").item(0);
-        metodoCrearNodos(root, nuevoNodo, proyecto, jDialog.getRuta()+"\\"+nombreProyecto );
+        metodoCrearNodos(root, nuevoNodo, proyecto, jDialog.getRuta()+System.lineSeparator()+nombreProyecto );
         this.modelo.reload();
         
     }//GEN-LAST:event_jMenuItem2ActionPerformed
@@ -838,10 +848,11 @@ public class MainGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_limpiarConsolajMenuItemActionPerformed
 
     private void paraLinuxjMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_paraLinuxjMenuItemActionPerformed
-        String comando = "#!/bin/bash \n java ";
+        String comando = "#!/bin/bash \n ";
         String mensajeError = "";
         CustomMutableTreeNode TaskAux = (CustomMutableTreeNode) ProyectosTree.getLastSelectedPathComponent();
         TaskNode taskNode = (TaskNode) TaskAux.getNodeType();
+        comando = comando + taskNode.getComandoPrincipal() +" ";
         for(int i = 0; i < taskNode.parametros.size(); i++){
             JTextField jTextAux = (JTextField) taskNode.parametros.get(i).mostrar().get(1);
             JLabel jLabelAux = (JLabel) taskNode.parametros.get(i).mostrar().get(0);
@@ -868,6 +879,8 @@ public class MainGUI extends javax.swing.JFrame {
         }
         BufferedWriter bw = null;
         FileWriter fw = null;
+        String sep = "/"; // File.separator;    //SEPARADOR
+        comando = comando.replaceAll("\\", Matcher.quoteReplacement(sep));
         try {
             String content = comando;
             fw = new FileWriter(file+File.separator+TaskAux.getNombre());
@@ -924,6 +937,7 @@ public class MainGUI extends javax.swing.JFrame {
         }
         BufferedWriter bw = null;
         FileWriter fw = null;
+        comando.replace("/", "\\");
         try {
             String content = comando;
             fw = new FileWriter(file+File.separator+TaskAux.getNombre());

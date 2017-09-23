@@ -7,7 +7,6 @@
                     <nodo nombre="tar1" tipo="tarea">
                         <plantilla ruta="C:\Users\alexa\Documents\NetBeansProjects\TFG\XMLs\Comando.xml"/>
                         <parametros>
-                            <parametro nombre="-jar" valor="vvv"/>
                             <parametro nombre="-i" valor="vv"/>
                             <parametro nombre="-o" valor="vv"/>
                             <parametro nombre="--binarize" valor="vvv"/>
@@ -17,7 +16,6 @@
                     <nodo nombre="tar2" tipo="tarea">
                         <plantilla ruta="C:\Users\alexa\Documents\NetBeansProjects\TFG\XMLs\Comando1.xml"/>
                         <parametros>
-                            <parametro nombre="-jar" valor="cxv"/>
                             <parametro nombre="-hola" valor="cvxv"/>
                             <parametro nombre="-o" valor="cvcv"/>
                             <parametro nombre="--binarize" valor="cvc"/>

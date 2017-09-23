@@ -235,11 +235,11 @@ public class CreateTaskGUI extends javax.swing.JFrame {
             n.setComandoPrincipal(comandoPrin.get(0));
             for(int i = 0; i < etiquetas.size(); i++){  //Creamos los objetos de la clase de parámetro 
                 if(tipo.get(i).equals("fichero")){
-                    FileParam parametro = new FileParam(etiquetas.get(i), i*50, obligatorio.get(i));
+                    FileParam parametro = new FileParam(etiquetas.get(i), (i+1)*25, obligatorio.get(i));
                     n.parametros.add(parametro);
                 }
                 else if(tipo.get(i).equals("string")){
-                    StringParam parametro = new StringParam(etiquetas.get(i), i*50, obligatorio.get(i));
+                    StringParam parametro = new StringParam(etiquetas.get(i), (i+1)*25, obligatorio.get(i));
                     n.parametros.add(parametro);
                 }
             }
@@ -283,11 +283,11 @@ public class CreateTaskGUI extends javax.swing.JFrame {
                 n.setComandoPrincipal(comandoPrin.get(0));
                 for(int i = 0; i < etiquetas.size(); i++){
                     if(tipo.get(i).equals("fichero")){
-                        FileParam parametro = new FileParam(etiquetas.get(i), i*50, obligatorio.get(i));
+                        FileParam parametro = new FileParam(etiquetas.get(i), (i+1)*25, obligatorio.get(i));
                         n.parametros.add(parametro);
                     }
                     else if(tipo.get(i).equals("string")){
-                        StringParam parametro = new StringParam(etiquetas.get(i), i*50, obligatorio.get(i));
+                        StringParam parametro = new StringParam(etiquetas.get(i), (i+1)*25, obligatorio.get(i));
                         n.parametros.add(parametro);
                     }
                 }

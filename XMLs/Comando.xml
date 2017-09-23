@@ -2,8 +2,6 @@
 <tarea nombre="EjemploXML">
   <comando>java -jar adiosss</comando>
   <parametros>
-      <parametro nombre="-jar" tipo="fichero" obligatorio="si">
-      </parametro>
       <parametro nombre="-i" tipo="string" obligatorio="si">
       </parametro>
       <parametro nombre="-o" tipo="string" obligatorio="si">
