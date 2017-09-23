@@ -5,6 +5,7 @@
  */
 package Main;
 
+import java.awt.Component;
 import java.awt.datatransfer.DataFlavor;
 import java.awt.datatransfer.Transferable;
 import java.awt.datatransfer.UnsupportedFlavorException;
@@ -17,6 +18,7 @@ import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeModel;
 import javax.swing.tree.TreeNode;
 import javax.swing.tree.TreePath;
+import javax.swing.tree.TreeSelectionModel;
 
 class TreeTransferHandler extends TransferHandler {
 
@@ -54,19 +56,19 @@ class TreeTransferHandler extends TransferHandler {
         }
         // Do not allow MOVE-action drops if a non-leaf node is
         // selected unless all of its children are also selected.
-        int action = support.getDropAction();
+        /*int action = support.getDropAction();
         if (action == MOVE) {
             return haveCompleteNode(tree);
-        }
+        }*/
         // Do not allow a non-leaf node to be copied to a level
         // which is less than its source level.
-        TreePath dest = dl.getPath();
+        /*TreePath dest = dl.getPath();
         DefaultMutableTreeNode target = (DefaultMutableTreeNode) dest.getLastPathComponent();
         TreePath path = tree.getPathForRow(selRows[0]);
         DefaultMutableTreeNode firstNode = (DefaultMutableTreeNode) path.getLastPathComponent();
         if (firstNode.getChildCount() > 0 && target.getLevel() < firstNode.getLevel()) {
             return false;
-        }
+        }*/
         return true;
     }
 
@@ -101,10 +103,12 @@ class TreeTransferHandler extends TransferHandler {
             // Make up a node array of copies for transfer and
             // another for/of the nodes that will be removed in
             // exportDone after a successful drop.
-            List<DefaultMutableTreeNode> copies = new ArrayList<DefaultMutableTreeNode>();
+            List<TreeNodeContainer> copies = new ArrayList<TreeNodeContainer>();
             List<DefaultMutableTreeNode> toRemove = new ArrayList<DefaultMutableTreeNode>();
             DefaultMutableTreeNode node = (DefaultMutableTreeNode) paths[0].getLastPathComponent();
-            DefaultMutableTreeNode copy = copy(node);
+            int nodeDepth = 0;
+            addSelectedNodes(copies, toRemove, node, null, -1);
+            /*DefaultMutableTreeNode copy = copy(node);
             copies.add(copy);
             toRemove.add(node);
             for (int i = 1; i < paths.length; i++) {
@@ -119,12 +123,22 @@ class TreeTransferHandler extends TransferHandler {
                     copies.add(copy(next));
                     toRemove.add(next);
                 }
-            }
-            DefaultMutableTreeNode[] nodes = copies.toArray(new DefaultMutableTreeNode[copies.size()]);
+            }*/
+            TreeNodeContainer[] nodes = copies.toArray(new TreeNodeContainer[copies.size()]);
             nodesToRemove = toRemove.toArray(new DefaultMutableTreeNode[toRemove.size()]);
             return new NodesTransferable(nodes);
         }
         return null;
+    }
+    
+    private void addSelectedNodes(List<TreeNodeContainer> copies, List<DefaultMutableTreeNode> toRemove, DefaultMutableTreeNode node, DefaultMutableTreeNode parent, int nodeIndex) {
+        DefaultMutableTreeNode nodeCopied = copy(node);
+        copies.add(new TreeNodeContainer(nodeCopied, parent, nodeIndex));
+        toRemove.add(node);
+        for(int index = 0; index < node.getChildCount(); ++index) {
+            DefaultMutableTreeNode childNode = (DefaultMutableTreeNode) node.getChildAt(index);
+            addSelectedNodes(copies, toRemove, childNode, nodeCopied, index);
+        }
     }
 
     private DefaultMutableTreeNode copy(TreeNode node) {
@@ -152,10 +166,10 @@ class TreeTransferHandler extends TransferHandler {
             return false;
         }
         // Extract transfer data.
-        DefaultMutableTreeNode[] nodes = null;
+        TreeNodeContainer[] nodes = null;
         try {
             Transferable t = support.getTransferable();
-            nodes = (DefaultMutableTreeNode[]) t.getTransferData(nodesFlavor);
+            nodes = (TreeNodeContainer[]) t.getTransferData(nodesFlavor);
         } catch (UnsupportedFlavorException ufe) {
             System.out.println("UnsupportedFlavor: " + ufe.getMessage());
         } catch (java.io.IOException ioe) {
@@ -174,8 +188,18 @@ class TreeTransferHandler extends TransferHandler {
             index = parent.getChildCount();
         }
         // Add data to model.
-        for (int i = 0; i < nodes.length; i++) {
-            model.insertNodeInto(nodes[i], parent, index++);
+        // Add root node of the selection
+        if(nodes.length > 0) {
+            model.insertNodeInto(nodes[0].getNode(), parent, index);
+        }
+        // Add children
+        for (int i = 1; i < nodes.length; i++) {
+            model.insertNodeInto(nodes[i].getNode(), nodes[i].getParent(), nodes[i].getIndex());
+            //if()
+            //nodes[i].getP
+            //model.ins
+            //model.insertNodeInto(nodes[i], (DefaultMutableTreeNode) nodes[i].getParent(), ((DefaultMutableTreeNode) nodes[i].getParent()).getChildCount() + 1);
+            //model.insertNodeInto(nodes[i], parent, index++);
         }
         return true;
     }
@@ -183,12 +207,42 @@ class TreeTransferHandler extends TransferHandler {
     public String toString() {
         return getClass().getName();
     }
+    
+    public class TreeNodeContainer {
+        private DefaultMutableTreeNode node, parent;
+        private int index;
+        
+        public TreeNodeContainer(DefaultMutableTreeNode node, DefaultMutableTreeNode parent, int index) {
+            this.node = node;
+            this.parent = parent;
+            this.index = index;
+        }
+
+        public DefaultMutableTreeNode getNode() {
+            return node;
+        }
+        public void setNode(DefaultMutableTreeNode node) {
+            this.node = node;
+        }
+        public DefaultMutableTreeNode getParent() {
+            return parent;
+        }
+        public void setParent(DefaultMutableTreeNode parent) {
+            this.parent = parent;
+        }
+        public int getIndex() {
+            return index;
+        }
+        public void setIndex(int index) {
+            this.index = index;
+        }
+    }
 
     public class NodesTransferable implements Transferable {
 
-        DefaultMutableTreeNode[] nodes;
+        TreeNodeContainer[] nodes;
 
-        public NodesTransferable(DefaultMutableTreeNode[] nodes) {
+        public NodesTransferable(TreeNodeContainer[] nodes) {
             this.nodes = nodes;
         }
 

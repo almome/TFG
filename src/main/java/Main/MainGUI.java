@@ -73,9 +73,6 @@ public class MainGUI extends javax.swing.JFrame {
     public String consolaText;
     DefaultTreeCellRenderer renderer;
     
-    TreeDragSource treeDragSource;
-    TreeDropTarget treeDropTarget;
-    
     /**
      * Creates new form MainGUI
      */
@@ -101,8 +98,6 @@ public class MainGUI extends javax.swing.JFrame {
             int row = ProyectosTree.getRowForPath(new TreePath(node.getPath()));
             ProyectosTree.expandRow(row);
         }
-        /*treeDragSource = new TreeDragSource(ProyectosTree, DnDConstants.ACTION_COPY_OR_MOVE);
-        treeDropTarget = new TreeDropTarget(ProyectosTree);*/
     }
 
     /**
