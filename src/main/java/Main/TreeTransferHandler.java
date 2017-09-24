@@ -44,56 +44,62 @@ class TreeTransferHandler extends TransferHandler {
         if (!support.isDataFlavorSupported(nodesFlavor)) {
             return false;
         }
-        // Do not allow a drop on the drag source selections.
-        JTree.DropLocation dl = (JTree.DropLocation) support.getDropLocation();
+        // get target, origin node and useful data
         JTree tree = (JTree) support.getComponent();
-        int dropRow = tree.getRowForPath(dl.getPath());
+        JTree.DropLocation dl = (JTree.DropLocation) support.getDropLocation();
+        TreePath dest = dl.getPath();
+        int dropRow = tree.getRowForPath(dest);
         int[] selRows = tree.getSelectionRows();
+        DefaultMutableTreeNode target = (DefaultMutableTreeNode) dest.getLastPathComponent();
+        TreePath path = tree.getPathForRow(selRows[0]);
+        DefaultMutableTreeNode origin = (DefaultMutableTreeNode) path.getLastPathComponent();
+        // Do not allow a drop on the drag source selections.
         for (int i = 0; i < selRows.length; i++) {
             if (selRows[i] == dropRow) {
                 return false;
             }
         }
-        // Do not allow MOVE-action drops if a non-leaf node is
-        // selected unless all of its children are also selected.
-        /*int action = support.getDropAction();
-        if (action == MOVE) {
-            return haveCompleteNode(tree);
-        }*/
-        // Do not allow a non-leaf node to be copied to a level
-        // which is less than its source level.
-        /*TreePath dest = dl.getPath();
-        DefaultMutableTreeNode target = (DefaultMutableTreeNode) dest.getLastPathComponent();
-        TreePath path = tree.getPathForRow(selRows[0]);
-        DefaultMutableTreeNode firstNode = (DefaultMutableTreeNode) path.getLastPathComponent();
-        if (firstNode.getChildCount() > 0 && target.getLevel() < firstNode.getLevel()) {
-            return false;
-        }*/
-        return true;
-    }
-
-    private boolean haveCompleteNode(JTree tree) {
-        int[] selRows = tree.getSelectionRows();
-        TreePath path = tree.getPathForRow(selRows[0]);
-        DefaultMutableTreeNode first = (DefaultMutableTreeNode) path.getLastPathComponent();
-        int childCount = first.getChildCount();
-        // first has children and no children are selected.
-        if (childCount > 0 && selRows.length == 1) {
-            return false;
-        }
-        // first may have children.
-        for (int i = 1; i < selRows.length; i++) {
-            path = tree.getPathForRow(selRows[i]);
-            DefaultMutableTreeNode next = (DefaultMutableTreeNode) path.getLastPathComponent();
-            if (first.isNodeChild(next)) {
-                // Found a child of first.
-                if (childCount > selRows.length - 1) {
-                    // Not all children of first are selected.
+        // Check custom mutable tree node rectrictions
+        CustomMutableTreeNode originNode = (CustomMutableTreeNode) origin;
+        // Experiments rectrictions
+        if (originNode.getNodeType() instanceof ExperimentNode) {
+            // Experiments only can be orderer
+            if (target instanceof CustomMutableTreeNode) {
+                return false;
+            }
+        // Other custom nodes restrictions
+        } else if (target instanceof CustomMutableTreeNode) {
+            // Check if target node is inside origin node
+            if (targetInsideOrigin(target, origin) > 0) {
+                return false;
+            }
+            CustomMutableTreeNode targetNode = (CustomMutableTreeNode) target;
+            // Task restrictions
+            if (originNode.getNodeType() instanceof TaskNode) {
+                // Tasks must be child of an classifier
+                if (!(targetNode.getNodeType() instanceof ClassifierNode)) {
                     return false;
                 }
             }
+            // Target must not be a task
+            if (targetNode.getNodeType() instanceof TaskNode) {
+                return false;
+            }
+        } else {
+            return false;
         }
         return true;
+    }
+    private int targetInsideOrigin(DefaultMutableTreeNode target, DefaultMutableTreeNode descendant) {
+        if (descendant == target) {
+            return 1;
+        } else {
+            int isInside = 0;
+            for (int index = 0; index < descendant.getChildCount(); ++index) {
+                isInside += targetInsideOrigin(target, (DefaultMutableTreeNode) descendant.getChildAt(index));
+            }
+            return isInside;
+        }
     }
 
     protected Transferable createTransferable(JComponent c) {
@@ -106,31 +112,13 @@ class TreeTransferHandler extends TransferHandler {
             List<TreeNodeContainer> copies = new ArrayList<TreeNodeContainer>();
             List<DefaultMutableTreeNode> toRemove = new ArrayList<DefaultMutableTreeNode>();
             DefaultMutableTreeNode node = (DefaultMutableTreeNode) paths[0].getLastPathComponent();
-            int nodeDepth = 0;
             addSelectedNodes(copies, toRemove, node, null, -1);
-            /*DefaultMutableTreeNode copy = copy(node);
-            copies.add(copy);
-            toRemove.add(node);
-            for (int i = 1; i < paths.length; i++) {
-                DefaultMutableTreeNode next = (DefaultMutableTreeNode) paths[i].getLastPathComponent();
-                // Do not allow higher level nodes to be added to list.
-                if (next.getLevel() < node.getLevel()) {
-                    break;
-                } else if (next.getLevel() > node.getLevel()) {  // child node
-                    copy.add(copy(next));
-                    // node already contains child
-                } else {                                        // sibling
-                    copies.add(copy(next));
-                    toRemove.add(next);
-                }
-            }*/
             TreeNodeContainer[] nodes = copies.toArray(new TreeNodeContainer[copies.size()]);
             nodesToRemove = toRemove.toArray(new DefaultMutableTreeNode[toRemove.size()]);
             return new NodesTransferable(nodes);
         }
         return null;
     }
-    
     private void addSelectedNodes(List<TreeNodeContainer> copies, List<DefaultMutableTreeNode> toRemove, DefaultMutableTreeNode node, DefaultMutableTreeNode parent, int nodeIndex) {
         DefaultMutableTreeNode nodeCopied = copy(node);
         copies.add(new TreeNodeContainer(nodeCopied, parent, nodeIndex));
@@ -140,7 +128,6 @@ class TreeTransferHandler extends TransferHandler {
             addSelectedNodes(copies, toRemove, childNode, nodeCopied, index);
         }
     }
-
     private DefaultMutableTreeNode copy(TreeNode node) {
         DefaultMutableTreeNode n = (DefaultMutableTreeNode) node;
         return (DefaultMutableTreeNode) n.clone();
@@ -188,18 +175,13 @@ class TreeTransferHandler extends TransferHandler {
             index = parent.getChildCount();
         }
         // Add data to model.
-        // Add root node of the selection
+        // Add root node from the selection
         if(nodes.length > 0) {
             model.insertNodeInto(nodes[0].getNode(), parent, index);
         }
         // Add children
         for (int i = 1; i < nodes.length; i++) {
             model.insertNodeInto(nodes[i].getNode(), nodes[i].getParent(), nodes[i].getIndex());
-            //if()
-            //nodes[i].getP
-            //model.ins
-            //model.insertNodeInto(nodes[i], (DefaultMutableTreeNode) nodes[i].getParent(), ((DefaultMutableTreeNode) nodes[i].getParent()).getChildCount() + 1);
-            //model.insertNodeInto(nodes[i], parent, index++);
         }
         return true;
     }
