@@ -62,6 +62,7 @@ public class CambiarRutaExperimento extends javax.swing.JFrame {
 
         jLabelmensage.setText("El proyecto se va a crearse en la siguiente ruta:");
 
+        jLabelruta.setBackground(new java.awt.Color(0, 102, 102));
         jLabelruta.setText("...");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -86,9 +87,9 @@ public class CambiarRutaExperimento extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(40, 40, 40)
                 .addComponent(jLabelmensage)
-                .addGap(18, 18, 18)
+                .addGap(28, 28, 28)
                 .addComponent(jLabelruta)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 44, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 34, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButtonCambiar)
                     .addComponent(jButtonAceptar))

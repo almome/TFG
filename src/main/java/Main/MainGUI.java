@@ -880,7 +880,7 @@ public class MainGUI extends javax.swing.JFrame {
         BufferedWriter bw = null;
         FileWriter fw = null;
         String sep = "/"; // File.separator;    //SEPARADOR
-        comando = comando.replaceAll("\\", Matcher.quoteReplacement(sep));
+        comando = comando.replace("\\", Matcher.quoteReplacement(sep));
         try {
             String content = comando;
             fw = new FileWriter(file+File.separator+TaskAux.getNombre());
@@ -937,7 +937,8 @@ public class MainGUI extends javax.swing.JFrame {
         }
         BufferedWriter bw = null;
         FileWriter fw = null;
-        comando.replace("/", "\\");
+        String sep = "\\"; // File.separator;    //SEPARADOR
+        comando = comando.replace("/", Matcher.quoteReplacement(sep));
         try {
             String content = comando;
             fw = new FileWriter(file+File.separator+TaskAux.getNombre());

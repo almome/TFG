@@ -42,7 +42,7 @@ public class CustomJDialog extends JDialog{
         // título del diáolog
         setTitle("Cargar Proyecto");
         // dimensiones que ocupa en la pantalla
-        setBounds(100, 100, 450, 229);
+        setBounds(100, 100, 450, 150);
         // capa que contendrá todo
         getContentPane().setLayout(new BorderLayout());
         // borde de la ventan
@@ -55,12 +55,16 @@ public class CustomJDialog extends JDialog{
             // aquí se pone el JTextArea dentro de un JScrollPane 
             // para que tenga barras de desplazamiento
             JPanel scrollPane = new JPanel();
-            scrollPane.setBounds(10, 11, 424, 90);
+            scrollPane.setBounds(10, 11, 450, 90);
             contentPanel.add(scrollPane);
             {
                 JLabel txtrstoEsUn = new JLabel();
-                txtrstoEsUn.setText("El proyecto se cargará en la siguiente ruta:\n "+ ruta);
+                txtrstoEsUn.setText("El proyecto se cargará en la siguiente ruta:");
+                JLabel txtrstoEsUnI = new JLabel();
+                txtrstoEsUnI.setText(ruta);
+                //txtrstoEsUnI.setLocation(50, 50);
                 scrollPane.add(txtrstoEsUn);
+                scrollPane.add(txtrstoEsUnI);
             }
         }
         {
