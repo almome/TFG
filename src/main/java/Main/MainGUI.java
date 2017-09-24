@@ -15,6 +15,7 @@ import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Rectangle;
+import java.awt.dnd.DnDConstants;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.FocusEvent;
@@ -38,6 +39,7 @@ import java.util.logging.Logger;
 import java.util.regex.Matcher;
 
 import javax.swing.BoxLayout;
+import javax.swing.DropMode;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JFileChooser;
@@ -65,6 +67,7 @@ import javax.swing.tree.DefaultTreeCellRenderer;
 import javax.swing.tree.DefaultTreeModel;
 import javax.swing.tree.TreeNode;
 import javax.swing.tree.TreePath;
+import javax.swing.tree.TreeSelectionModel;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import org.w3c.dom.Document;
@@ -166,6 +169,25 @@ public class MainGUI extends javax.swing.JFrame {
             }
         });
         
+        SetDragDrop();
+    }
+    
+    private void SetDragDrop() {
+        ProyectosTree.setDragEnabled(true);
+        ProyectosTree.setDropMode(DropMode.ON_OR_INSERT);
+        ProyectosTree.setTransferHandler(new TreeTransferHandler());
+        ProyectosTree.getSelectionModel().setSelectionMode(TreeSelectionModel.CONTIGUOUS_TREE_SELECTION);
+        
+        DefaultMutableTreeNode root = (DefaultMutableTreeNode) ProyectosTree.getModel().getRoot();
+        Enumeration e = root.breadthFirstEnumeration();
+        while(e.hasMoreElements()) {
+            DefaultMutableTreeNode node = (DefaultMutableTreeNode) e.nextElement();
+            if(node.isLeaf()) {
+                continue;
+            }
+            int row = ProyectosTree.getRowForPath(new TreePath(node.getPath()));
+            ProyectosTree.expandRow(row);
+        }
     }
 
     /**
