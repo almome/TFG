@@ -4,6 +4,7 @@ package Main;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import javax.swing.ImageIcon;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -27,12 +28,36 @@ public class Console {
         Process process = Runtime.getRuntime().exec(command);                    
         BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()));  
         BufferedReader stdError = new BufferedReader(new InputStreamReader(process.getErrorStream()));
-        String s;                                                                
+        String s; 
+        Boolean errors = false;
         while ((s = reader.readLine()) != null) { 
             resultado = resultado+"\n"+ s; 
+            CustomMutableTreeNode nodeSelected = (CustomMutableTreeNode) WindowsInstances.mainGUI.ultimoNodoeleccionado();
+            TaskNode taskNode= (TaskNode) nodeSelected.getNodeType();
+            taskNode.icono = new ImageIcon("assets/TaskIconCorrecto.png");
+            WindowsInstances.mainGUI.renderer.setLeafIcon(taskNode.getIcon());
+            WindowsInstances.mainGUI.getProyectosTree().repaint();
+            WindowsInstances.mainGUI.expandAllNodes(WindowsInstances.mainGUI.getProyectosTree(), nodeSelected.getParent().getChildCount(), 0);
+
         }
         while ((s = stdError.readLine()) != null) { 
+            errors = true;
             resultado = resultado+"\n"+ s; 
+            CustomMutableTreeNode nodeSelected = (CustomMutableTreeNode) WindowsInstances.mainGUI.ultimoNodoeleccionado();
+            TaskNode taskNode= (TaskNode) nodeSelected.getNodeType();
+            taskNode.icono = new ImageIcon("assets/TaskIconIncorrecto.png");
+            WindowsInstances.mainGUI.renderer.setLeafIcon(taskNode.getIcon());
+            WindowsInstances.mainGUI.getProyectosTree().repaint();
+            WindowsInstances.mainGUI.expandAllNodes(WindowsInstances.mainGUI.getProyectosTree(), nodeSelected.getParent().getChildCount(), 0);
+            
+        }
+        if(errors == false){
+            CustomMutableTreeNode nodeSelected = (CustomMutableTreeNode) WindowsInstances.mainGUI.ultimoNodoeleccionado();
+            TaskNode taskNode= (TaskNode) nodeSelected.getNodeType();
+            taskNode.icono = new ImageIcon("assets/TaskIconCorrecto.png");
+            WindowsInstances.mainGUI.renderer.setLeafIcon(taskNode.getIcon());
+            WindowsInstances.mainGUI.getProyectosTree().repaint();
+            WindowsInstances.mainGUI.expandAllNodes(WindowsInstances.mainGUI.getProyectosTree(), nodeSelected.getParent().getChildCount(), 0);
         }
         return resultado;
     }

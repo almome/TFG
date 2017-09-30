@@ -40,6 +40,7 @@ import java.util.regex.Matcher;
 
 import javax.swing.BoxLayout;
 import javax.swing.DropMode;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JFileChooser;
@@ -739,11 +740,17 @@ public class MainGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonGuardarActionPerformed
 
     private void jButtonCambiarPlantillaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCambiarPlantillaActionPerformed
+        
         jPanel1.removeAll();
+        jPanel1.revalidate();
+        jPanel1.repaint();
+        jTabbedPane2.setTitleAt(0, "");
         String nuevaRuta = "";
         
         
         CustomMutableTreeNode hijo = (CustomMutableTreeNode) ProyectosTree.getLastSelectedPathComponent();
+        
+        
         if(hijo.getNodeType() instanceof TaskNode){
             
             JFileChooser jFileChooser1 = new JFileChooser();
@@ -762,6 +769,7 @@ public class MainGUI extends javax.swing.JFrame {
             
             
             TaskNode aux = (TaskNode) hijo.getNodeType();
+            aux.clearParametros();
             aux.setRutaPlantilla(nuevaRuta);
             StructXML cargar = new StructXML();
             aux.setPlantXML(cargar.CargarPlantillaXML(aux.getRutaPlantilla()));
@@ -790,6 +798,9 @@ public class MainGUI extends javax.swing.JFrame {
             for(Component param : taskNode.mostrar()){
                     jPanel1.add(param);
             }
+            jTabbedPane2.setTitleAt(0, aux.getComandoPrincipal());
+            jTabbedPane2.validate();
+            jTabbedPane2.repaint();
             jPanel1.validate();
             jPanel1.repaint();   
         }

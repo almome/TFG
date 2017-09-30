@@ -176,7 +176,7 @@ public class CreateDirectoryGUI extends javax.swing.JFrame {
         String sSistemaOperativo = System.getProperty("os.name");
         File directorio;
         if(sSistemaOperativo.equals("Linux")){   //Si es Linux
-            directorio = new File(ruta+"//"+NombreTextField.getText());
+            directorio = new File(ruta+"/"+NombreTextField.getText());
             
         }
         else{   //Si es Windows

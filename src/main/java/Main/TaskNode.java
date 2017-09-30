@@ -86,6 +86,10 @@ public class TaskNode implements INodeType{
         this.rutaPlantilla = rutaPlantilla;
     }
     
+    public void clearParametros(){
+        parametros.clear();
+    }
+    
     @Override
     public void crearHijo(CustomMutableTreeNode padre, int i) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
@@ -96,8 +100,10 @@ public class TaskNode implements INodeType{
         try {
             WindowsInstances.mainGUI.ejecutar(this);
         } catch (IOException ex) {
+            this.icono = new ImageIcon("assets/TaskIconIncorrecto.png");
             Logger.getLogger(TaskNode.class.getName()).log(Level.SEVERE, null, ex);
         } catch (PrinterException ex) {
+            this.icono = new ImageIcon("assets/TaskIconIncorrecto.png");
             Logger.getLogger(TaskNode.class.getName()).log(Level.SEVERE, null, ex);
         }
     }

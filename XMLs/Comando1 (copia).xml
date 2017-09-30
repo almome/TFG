@@ -1,0 +1,8 @@
+﻿<?xml version="1.0"?>
+<tarea nombre="EjemploXML">
+  <comando>mkdir pruebacorrecta</comando>
+  <parametros>
+      <parametro nombre="-p" tipo="fichero" obligatorio="no">
+      </parametro>
+  </parametros>
+</tarea>
