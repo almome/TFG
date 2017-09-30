@@ -128,7 +128,7 @@ class TreeTransferHandler extends TransferHandler {
             addSelectedNodes(copies, toRemove, childNode, nodeCopied, index);
         }
     }
-    private DefaultMutableTreeNode copy(TreeNode node) {
+    public DefaultMutableTreeNode copy(TreeNode node) {
         DefaultMutableTreeNode n = (DefaultMutableTreeNode) node;
         return (DefaultMutableTreeNode) n.clone();
     }

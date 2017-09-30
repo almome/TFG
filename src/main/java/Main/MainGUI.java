@@ -556,6 +556,11 @@ public class MainGUI extends javax.swing.JFrame {
         });
     }//GEN-LAST:event_tareajMenuActionPerformed
     
+    public TreeNode ultimoNodoeleccionado(){
+        TreeNode aux =  (TreeNode) ProyectosTree.getLastSelectedPathComponent();
+        return aux;
+    }
+            
     /*ACCIONES CUANDO SE ABRA LA VENTANA*/  
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         this.modelo = (DefaultTreeModel) this.ProyectosTree.getModel();

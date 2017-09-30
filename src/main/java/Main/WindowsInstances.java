@@ -17,5 +17,5 @@ public final class WindowsInstances {
     public static CreateTaskGUI createTareaGUI = new CreateTaskGUI();
     public static DialogoGuardarConsola dialogoGuardarConsola = new DialogoGuardarConsola();
     public static CambiarRutaExperimento cambiarRutaExperimento = new CambiarRutaExperimento();
-
+    public static TreeTransferHandler claseCopiar = new TreeTransferHandler();
 }

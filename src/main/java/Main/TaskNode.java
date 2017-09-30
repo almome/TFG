@@ -23,6 +23,7 @@ import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JMenuItem;
 import javax.swing.JPopupMenu;
+import javax.swing.tree.TreeNode;
 
 
 import org.w3c.dom.Document;
@@ -116,9 +117,8 @@ public class TaskNode implements INodeType{
                 
         JMenuItem jMenuItemEjecutar;
         JMenuItem jMenuItemEliminar;
+        JMenuItem jMenuItemClonar;
 
-        
-        
         jMenuItemEjecutar = new JMenuItem("Ejecutar Tarea");
         jMenuItemEjecutar.addActionListener(new ActionListener() {
             @Override
@@ -135,8 +135,21 @@ public class TaskNode implements INodeType{
             }
         });
         
+        jMenuItemClonar = new JMenuItem("Clonar Tarea");
+        jMenuItemClonar.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent ev) {
+                TreeNode nodoOriginal = WindowsInstances.mainGUI.ultimoNodoeleccionado();
+                CustomMutableTreeNode NodoPadre = (CustomMutableTreeNode) nodoOriginal.getParent();
+                CustomMutableTreeNode NodoCopia = (CustomMutableTreeNode) WindowsInstances.claseCopiar.copy(nodoOriginal);
+                WindowsInstances.mainGUI.modelo.insertNodeInto(NodoCopia, NodoPadre, nodoOriginal.getParent().getChildCount());
+                
+            }
+        });
+        
         menu.add (jMenuItemEjecutar);
         menu.add (jMenuItemEliminar);
+        menu.add (jMenuItemClonar);
         
         int mouseX =  MouseInfo.getPointerInfo().getLocation().x;
         int mouseY = MouseInfo.getPointerInfo().getLocation().y;
