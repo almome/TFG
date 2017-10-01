@@ -1,0 +1,55 @@
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="parametro">
+    <xs:complexType>
+      <xs:simpleContent>
+        <xs:extension base="xs:string">
+          <xs:attribute type="xs:string" name="nombre" use="optional"/>
+          <xs:attribute type="xs:string" name="valor" use="optional"/>
+        </xs:extension>
+      </xs:simpleContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="plantilla">
+    <xs:complexType>
+      <xs:simpleContent>
+        <xs:extension base="xs:string">
+          <xs:attribute type="xs:string" name="ruta" use="optional"/>
+        </xs:extension>
+      </xs:simpleContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="parametros">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="parametro" maxOccurs="unbounded" minOccurs="0"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="nodo">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="plantilla" minOccurs="0"/>
+        <xs:element ref="parametros" minOccurs="0"/>
+        <xs:element ref="nodos" minOccurs="0"/>
+      </xs:sequence>
+      <xs:attribute type="xs:string" name="nombre" use="optional"/>
+      <xs:attribute type="xs:string" name="tipo" use="optional"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="nodos">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="nodo" maxOccurs="unbounded" minOccurs="0"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="proyecto">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="nodo"/>
+      </xs:sequence>
+      <xs:attribute type="xs:string" name="nombre"/>
+      <xs:attribute type="xs:string" name="ruta"/>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

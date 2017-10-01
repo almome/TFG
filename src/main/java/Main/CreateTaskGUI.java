@@ -206,8 +206,14 @@ public class CreateTaskGUI extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void CrearButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CrearButtonActionPerformed
-
-        if(NombreTextField.getText() == null || NombreTextField.getText().equals("")){
+        String rutaEsquema = "/home/sandra/NetBeansProjects/TFG/assets/schemas/xmlschematarea.xsd";
+        Boolean valido = false;
+        Validacion v = new Validacion(rutaEsquema, PlantillaTextField.getText());
+        valido = v.validar();
+        if(valido == false){
+            showMessageDialog(new JFrame(), "El XML no cumple el esquema.","Error", JOptionPane.ERROR_MESSAGE);
+        }
+        else if(NombreTextField.getText() == null || NombreTextField.getText().equals("")){
             showMessageDialog(new JFrame(), "No se puede crear una tarea sin nombre.","Error", JOptionPane.ERROR_MESSAGE);
         }
         else if(PlantillaTextField.getText() == null || PlantillaTextField.getText().equals("")){

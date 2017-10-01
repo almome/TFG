@@ -740,7 +740,7 @@ public class MainGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonGuardarActionPerformed
 
     private void jButtonCambiarPlantillaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCambiarPlantillaActionPerformed
-        
+        String rutaEsquema = "/home/sandra/NetBeansProjects/TFG/assets/schemas/xmlschematarea.xsd";
         jPanel1.removeAll();
         jPanel1.revalidate();
         jPanel1.repaint();
@@ -767,42 +767,50 @@ public class MainGUI extends javax.swing.JFrame {
                 }
             }
             
-            
-            TaskNode aux = (TaskNode) hijo.getNodeType();
-            aux.clearParametros();
-            aux.setRutaPlantilla(nuevaRuta);
-            StructXML cargar = new StructXML();
-            aux.setPlantXML(cargar.CargarPlantillaXML(aux.getRutaPlantilla()));
-            //Metemos los parametros de la plantilla
-            StructXML xmlRead = new StructXML();
-            ArrayList<String> etiquetas = new ArrayList<>();
-            ArrayList<String> tipo = new ArrayList<>();
-            ArrayList<Boolean> obligatorio = new ArrayList<>();
-            ArrayList<String> comandoPrin = new ArrayList<>();
-            xmlRead.leerEtiquetas(comandoPrin, aux.getPlantXML(), etiquetas, tipo, obligatorio, aux);
-            aux.setComandoPrincipal(comandoPrin.get(0));
-            for(int i = 0; i < etiquetas.size(); i++){  //Creamos los objetos de la clase de parámetro 
-                if(tipo.get(i).equals("fichero")){
-                    FileParam parametro = new FileParam(etiquetas.get(i), (i+1)*50, obligatorio.get(i));
-                    aux.parametros.add(parametro);
-                }
-                else if(tipo.get(i).equals("string")){
-                    StringParam parametro = new StringParam(etiquetas.get(i), (i+1)*50, obligatorio.get(i));
-                    aux.parametros.add(parametro);
-                }
-            }
+            Boolean valido = false;
+            Validacion v = new Validacion(rutaEsquema, nuevaRuta);
+            valido = v.validar();
 
-            jPanel1.setLayout(null);
-            jTextFieldRutaPlantilla.setText(aux.rutaPlantilla);
-            TaskNode taskNode = (TaskNode) hijo.getNodeType();
-            for(Component param : taskNode.mostrar()){
-                    jPanel1.add(param);
+            if(valido){
+                TaskNode aux = (TaskNode) hijo.getNodeType();
+                aux.clearParametros();
+                aux.setRutaPlantilla(nuevaRuta);
+                StructXML cargar = new StructXML();
+                aux.setPlantXML(cargar.CargarPlantillaXML(aux.getRutaPlantilla()));
+                //Metemos los parametros de la plantilla
+                StructXML xmlRead = new StructXML();
+                ArrayList<String> etiquetas = new ArrayList<>();
+                ArrayList<String> tipo = new ArrayList<>();
+                ArrayList<Boolean> obligatorio = new ArrayList<>();
+                ArrayList<String> comandoPrin = new ArrayList<>();
+                xmlRead.leerEtiquetas(comandoPrin, aux.getPlantXML(), etiquetas, tipo, obligatorio, aux);
+                aux.setComandoPrincipal(comandoPrin.get(0));
+                for(int i = 0; i < etiquetas.size(); i++){  //Creamos los objetos de la clase de parámetro 
+                    if(tipo.get(i).equals("fichero")){
+                        FileParam parametro = new FileParam(etiquetas.get(i), (i+1)*50, obligatorio.get(i));
+                        aux.parametros.add(parametro);
+                    }
+                    else if(tipo.get(i).equals("string")){
+                        StringParam parametro = new StringParam(etiquetas.get(i), (i+1)*50, obligatorio.get(i));
+                        aux.parametros.add(parametro);
+                    }
+                }
+
+                jPanel1.setLayout(null);
+                jTextFieldRutaPlantilla.setText(aux.rutaPlantilla);
+                TaskNode taskNode = (TaskNode) hijo.getNodeType();
+                for(Component param : taskNode.mostrar()){
+                        jPanel1.add(param);
+                }
+                jTabbedPane2.setTitleAt(0, aux.getComandoPrincipal());
+                jTabbedPane2.validate();
+                jTabbedPane2.repaint();
+                jPanel1.validate();
+                jPanel1.repaint();
             }
-            jTabbedPane2.setTitleAt(0, aux.getComandoPrincipal());
-            jTabbedPane2.validate();
-            jTabbedPane2.repaint();
-            jPanel1.validate();
-            jPanel1.repaint();   
+            else{
+                JOptionPane.showMessageDialog(new JFrame(), "La estructura del XML no es válida.", "Error", JOptionPane.ERROR_MESSAGE);
+            }
         }
         
         
@@ -836,6 +844,8 @@ public class MainGUI extends javax.swing.JFrame {
 
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
         String rutaProyecto = "";
+        String rutaEsquema = "/home/sandra/NetBeansProjects/TFG/assets/schemas/xmlschemaproyecto.xsd";
+
         JFileChooser jFileChooser1 = new JFileChooser();
         jFileChooser1.setFileSelectionMode(jFileChooser1.FILES_ONLY);
         jFileChooser1.setFileFilter(new FileNameExtensionFilter("XML files (*.xml)", "xml"));
@@ -850,25 +860,34 @@ public class MainGUI extends javax.swing.JFrame {
               System.out.println("problem accessing file"+fichero.getAbsolutePath());
             }
         }
+        
+        Boolean valido = false;
+        Validacion v = new Validacion(rutaEsquema, rutaProyecto);
+        valido = v.validar();
  
-        StructXML proyectoXML = new StructXML();
-        Document proyecto = proyectoXML.CargarProyecto(rutaProyecto);
-        String rutaNueva = proyecto.getElementsByTagName("proyecto").item(0).getAttributes().getNamedItem("ruta").getNodeValue();
-        String nombreProyecto = proyecto.getElementsByTagName("proyecto").item(0).getAttributes().getNamedItem("nombre").getNodeValue();
-        
-        CustomJDialog jDialog = new CustomJDialog(rutaNueva);
-        jDialog.setModal(true);
-        jDialog.setVisible(true);
-        
-        File directorio = new File(jDialog.getRuta()+System.lineSeparator()+nombreProyecto);
-        directorio.mkdir();
-            
-        
-        
-        
-        Element nuevoNodo = (Element) proyecto.getElementsByTagName("nodo").item(0);
-        metodoCrearNodos(root, nuevoNodo, proyecto, jDialog.getRuta()+System.lineSeparator()+nombreProyecto );
-        this.modelo.reload();
+        if(valido){
+            StructXML proyectoXML = new StructXML();
+            Document proyecto = proyectoXML.CargarProyecto(rutaProyecto);
+            String rutaNueva = proyecto.getElementsByTagName("proyecto").item(0).getAttributes().getNamedItem("ruta").getNodeValue();
+            String nombreProyecto = proyecto.getElementsByTagName("proyecto").item(0).getAttributes().getNamedItem("nombre").getNodeValue();
+
+            CustomJDialog jDialog = new CustomJDialog(rutaNueva);
+            jDialog.setModal(true);
+            jDialog.setVisible(true);
+
+            File directorio = new File(jDialog.getRuta()+System.lineSeparator()+nombreProyecto);
+            directorio.mkdir();
+
+
+
+
+            Element nuevoNodo = (Element) proyecto.getElementsByTagName("nodo").item(0);
+            metodoCrearNodos(root, nuevoNodo, proyecto, jDialog.getRuta()+System.lineSeparator()+nombreProyecto );
+            this.modelo.reload();
+        }
+        else{
+            JOptionPane.showMessageDialog(new JFrame(), "La estructura del XML no es válida.", "Error", JOptionPane.ERROR_MESSAGE);
+        }
         
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 

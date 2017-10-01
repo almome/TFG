@@ -136,12 +136,24 @@ public class DialogoGuardarConsola extends javax.swing.JFrame {
     private void jButtonOKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonOKActionPerformed
         String nombre = jTextFieldNombre.getText();
         String ruta = jTextFieldRuta.getText();
-        try(PrintWriter out = new PrintWriter(ruta+"\\"+nombre)){
-            out.println( WindowsInstances.mainGUI.consolaText);
-        } catch (FileNotFoundException ex) {
-            showMessageDialog(new JFrame(), "Hubo un error. Compruebe la ruta especificada.","Error", JOptionPane.ERROR_MESSAGE);
-            Logger.getLogger(MainGUI.class.getName()).log(Level.SEVERE, null, ex);
+        String sSistemaOperativo = System.getProperty("os.name");
+        if(sSistemaOperativo.equals("Linux")){
+            try(PrintWriter out = new PrintWriter(ruta+"/"+nombre)){
+                out.println( WindowsInstances.mainGUI.consolaText);
+            } catch (FileNotFoundException ex) {
+                showMessageDialog(new JFrame(), "Hubo un error. Compruebe la ruta especificada.","Error", JOptionPane.ERROR_MESSAGE);
+                Logger.getLogger(MainGUI.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
+        else{
+            try(PrintWriter out = new PrintWriter(ruta+"\\"+nombre)){
+                out.println( WindowsInstances.mainGUI.consolaText);
+            } catch (FileNotFoundException ex) {
+                showMessageDialog(new JFrame(), "Hubo un error. Compruebe la ruta especificada.","Error", JOptionPane.ERROR_MESSAGE);
+                Logger.getLogger(MainGUI.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        
         jTextFieldNombre.setText("");
         jTextFieldRuta.setText("");
         dispose();
