@@ -210,12 +210,11 @@ public class MainGUI extends javax.swing.JFrame {
         jButtonLimpiar = new javax.swing.JButton();
         jButtonGuardar = new javax.swing.JButton();
         jSeparator1 = new javax.swing.JToolBar.Separator();
+        jButtonGuardarSalida = new javax.swing.JButton();
+        jSeparator2 = new javax.swing.JToolBar.Separator();
         jButtonCambiarPlantilla = new javax.swing.JButton();
         jTextFieldRutaPlantilla = new javax.swing.JTextField();
-        jSeparator2 = new javax.swing.JToolBar.Separator();
         jButtonEjecutar = new javax.swing.JButton();
-        jSeparator3 = new javax.swing.JToolBar.Separator();
-        jButtonGuardarSalida = new javax.swing.JButton();
         jTabbedPane2 = new javax.swing.JTabbedPane();
         jScrollPane3 = new javax.swing.JScrollPane();
         jPanel1 = new javax.swing.JPanel();
@@ -256,7 +255,7 @@ public class MainGUI extends javax.swing.JFrame {
         jTextAreaConsola.setRows(5);
         jScrollPane2.setViewportView(jTextAreaConsola);
 
-        jTabbedPane3.addTab("Consola", jScrollPane2);
+        jTabbedPane3.addTab("Console", jScrollPane2);
 
         javax.swing.tree.DefaultMutableTreeNode treeNode1 = new javax.swing.tree.DefaultMutableTreeNode("root");
         ProyectosTree.setModel(new javax.swing.tree.DefaultTreeModel(treeNode1));
@@ -269,12 +268,11 @@ public class MainGUI extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(ProyectosTree);
 
-        jTabbedPane1.addTab("Experimentos", jScrollPane1);
+        jTabbedPane1.addTab("Experiments", jScrollPane1);
 
         jToolBar1.setRollover(true);
 
-        jButtonLimpiar.setIcon(new javax.swing.ImageIcon("/home/sandra/NetBeansProjects/TFG/Imagenes/clean.png")); // NOI18N
-        jButtonLimpiar.setText("Limpiar");
+        jButtonLimpiar.setText("Clean");
         jButtonLimpiar.setBorderPainted(false);
         jButtonLimpiar.setContentAreaFilled(false);
         jButtonLimpiar.setEnabled(false);
@@ -288,8 +286,7 @@ public class MainGUI extends javax.swing.JFrame {
         });
         jToolBar1.add(jButtonLimpiar);
 
-        jButtonGuardar.setIcon(new javax.swing.ImageIcon("/home/sandra/NetBeansProjects/TFG/Imagenes/save.png")); // NOI18N
-        jButtonGuardar.setText("Guardar");
+        jButtonGuardar.setText("Save");
         jButtonGuardar.setBorderPainted(false);
         jButtonGuardar.setContentAreaFilled(false);
         jButtonGuardar.setEnabled(false);
@@ -304,8 +301,22 @@ public class MainGUI extends javax.swing.JFrame {
         jToolBar1.add(jButtonGuardar);
         jToolBar1.add(jSeparator1);
 
-        jButtonCambiarPlantilla.setIcon(new javax.swing.ImageIcon("/home/sandra/NetBeansProjects/TFG/Imagenes/folder.png")); // NOI18N
-        jButtonCambiarPlantilla.setText("Cambiar Plantilla");
+        jButtonGuardarSalida.setText("Save Console");
+        jButtonGuardarSalida.setBorderPainted(false);
+        jButtonGuardarSalida.setContentAreaFilled(false);
+        jButtonGuardarSalida.setEnabled(false);
+        jButtonGuardarSalida.setFocusable(false);
+        jButtonGuardarSalida.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jButtonGuardarSalida.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jButtonGuardarSalida.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonGuardarSalidaActionPerformed(evt);
+            }
+        });
+        jToolBar1.add(jButtonGuardarSalida);
+        jToolBar1.add(jSeparator2);
+
+        jButtonCambiarPlantilla.setText("Change Template");
         jButtonCambiarPlantilla.setBorderPainted(false);
         jButtonCambiarPlantilla.setContentAreaFilled(false);
         jButtonCambiarPlantilla.setEnabled(false);
@@ -319,12 +330,12 @@ public class MainGUI extends javax.swing.JFrame {
         });
         jToolBar1.add(jButtonCambiarPlantilla);
 
+        jTextFieldRutaPlantilla.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
+        jTextFieldRutaPlantilla.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         jTextFieldRutaPlantilla.setEnabled(false);
         jToolBar1.add(jTextFieldRutaPlantilla);
-        jToolBar1.add(jSeparator2);
 
-        jButtonEjecutar.setIcon(new javax.swing.ImageIcon("/home/sandra/NetBeansProjects/TFG/Imagenes/play-button.png")); // NOI18N
-        jButtonEjecutar.setText("Ejecutar");
+        jButtonEjecutar.setText("Run");
         jButtonEjecutar.setBorderPainted(false);
         jButtonEjecutar.setContentAreaFilled(false);
         jButtonEjecutar.setEnabled(false);
@@ -337,22 +348,6 @@ public class MainGUI extends javax.swing.JFrame {
             }
         });
         jToolBar1.add(jButtonEjecutar);
-        jToolBar1.add(jSeparator3);
-
-        jButtonGuardarSalida.setIcon(new javax.swing.ImageIcon("/home/sandra/NetBeansProjects/TFG/Imagenes/icon.png")); // NOI18N
-        jButtonGuardarSalida.setText("Guardar Salida");
-        jButtonGuardarSalida.setBorderPainted(false);
-        jButtonGuardarSalida.setContentAreaFilled(false);
-        jButtonGuardarSalida.setEnabled(false);
-        jButtonGuardarSalida.setFocusable(false);
-        jButtonGuardarSalida.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jButtonGuardarSalida.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        jButtonGuardarSalida.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonGuardarSalidaActionPerformed(evt);
-            }
-        });
-        jToolBar1.add(jButtonGuardarSalida);
 
         jScrollPane3.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
         jScrollPane3.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
@@ -375,9 +370,9 @@ public class MainGUI extends javax.swing.JFrame {
 
         jTabbedPane2.addTab("...", jScrollPane3);
 
-        archivosjMenu.setText("Archivos");
+        archivosjMenu.setText("File");
 
-        nuevojMenu.setText("Nuevo");
+        nuevojMenu.setText("New");
 
         experjMenu.setText("Experimento");
         experjMenu.addActionListener(new java.awt.event.ActionListener() {
@@ -405,7 +400,7 @@ public class MainGUI extends javax.swing.JFrame {
 
         archivosjMenu.add(nuevojMenu);
 
-        jMenuItem2.setText("Abrir Experimento");
+        jMenuItem2.setText("Open Experiment");
         jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem2ActionPerformed(evt);
@@ -413,7 +408,7 @@ public class MainGUI extends javax.swing.JFrame {
         });
         archivosjMenu.add(jMenuItem2);
 
-        jMenuItem1.setText("Guardar Todo");
+        jMenuItem1.setText("Save All");
         jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem1ActionPerformed(evt);
@@ -425,7 +420,7 @@ public class MainGUI extends javax.swing.JFrame {
 
         runjMenu.setText("Run");
 
-        jMenuItem3.setText("Ejecutar Todos");
+        jMenuItem3.setText("Run All");
         jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem3ActionPerformed(evt);
@@ -435,11 +430,11 @@ public class MainGUI extends javax.swing.JFrame {
 
         BarrajMenu.add(runjMenu);
 
-        herramientasjMenu.setText("Herramientas");
+        herramientasjMenu.setText("Tools");
 
-        crearScriptjMenu.setText("Crear Script");
+        crearScriptjMenu.setText("Create Script");
 
-        paraLinuxjMenuItem.setText("Para Linux");
+        paraLinuxjMenuItem.setText("For Linux");
         paraLinuxjMenuItem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 paraLinuxjMenuItemActionPerformed(evt);
@@ -447,7 +442,7 @@ public class MainGUI extends javax.swing.JFrame {
         });
         crearScriptjMenu.add(paraLinuxjMenuItem);
 
-        paraWindowsjMenuItem.setText("Para Windows");
+        paraWindowsjMenuItem.setText("For Windows");
         paraWindowsjMenuItem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 paraWindowsjMenuItemActionPerformed(evt);
@@ -459,9 +454,9 @@ public class MainGUI extends javax.swing.JFrame {
 
         BarrajMenu.add(herramientasjMenu);
 
-        consolajMenu.setText("Consola");
+        consolajMenu.setText("Console");
 
-        guardarSalidajMenuItem.setText("Guardar Salida");
+        guardarSalidajMenuItem.setText("Save Output");
         guardarSalidajMenuItem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 guardarSalidajMenuItemActionPerformed(evt);
@@ -469,7 +464,7 @@ public class MainGUI extends javax.swing.JFrame {
         });
         consolajMenu.add(guardarSalidajMenuItem);
 
-        limpiarConsolajMenuItem.setText("Limpiar Consola");
+        limpiarConsolajMenuItem.setText("Clean Console");
         limpiarConsolajMenuItem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 limpiarConsolajMenuItemActionPerformed(evt);
@@ -500,14 +495,14 @@ public class MainGUI extends javax.swing.JFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jToolBar1, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jToolBar1, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jTabbedPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jTabbedPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 242, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 604, Short.MAX_VALUE))
+                    .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 616, Short.MAX_VALUE))
                 .addGap(8, 8, 8))
         );
 
@@ -763,7 +758,7 @@ public class MainGUI extends javax.swing.JFrame {
                 try {
                   nuevaRuta = fichero.getAbsolutePath();
                 } catch (Exception ex) {
-                  System.out.println("Hubo un problema al intentar acceder al fichero "+fichero.getAbsolutePath());
+                  System.out.println("There was a problem when trying to access the file "+fichero.getAbsolutePath());
                 }
             }
             
@@ -794,6 +789,10 @@ public class MainGUI extends javax.swing.JFrame {
                         StringParam parametro = new StringParam(etiquetas.get(i), (i+1)*50, obligatorio.get(i));
                         aux.parametros.add(parametro);
                     }
+                    /*lse if(tipo.get(i).equals("booleano")){
+                        SParam parametro = new StringParam(etiquetas.get(i), (i+1)*50, obligatorio.get(i));
+                        aux.parametros.add(parametro);
+                    }*/
                 }
 
                 jPanel1.setLayout(null);
@@ -809,7 +808,7 @@ public class MainGUI extends javax.swing.JFrame {
                 jPanel1.repaint();
             }
             else{
-                JOptionPane.showMessageDialog(new JFrame(), "La estructura del XML no es válida.", "Error", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(new JFrame(), "The XML file structure is not correct.", "Error", JOptionPane.ERROR_MESSAGE);
             }
         }
         
@@ -886,7 +885,7 @@ public class MainGUI extends javax.swing.JFrame {
             this.modelo.reload();
         }
         else{
-            JOptionPane.showMessageDialog(new JFrame(), "La estructura del XML no es válida.", "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(new JFrame(), "The XML file structure is not correct.", "Error", JOptionPane.ERROR_MESSAGE);
         }
         
     }//GEN-LAST:event_jMenuItem2ActionPerformed
@@ -1355,10 +1354,10 @@ public class MainGUI extends javax.swing.JFrame {
         
         if(mensajeError.equals("")){
             Console cmd = new Console(comando);
-            jTextAreaConsola.setText(jTextAreaConsola.getText()+"\n\n > Tarea: "+taskNode.toString()+"\n "+comando +"\n " +cmd.ejecutarComando());
+            jTextAreaConsola.setText(jTextAreaConsola.getText()+"\n\n > Task: "+taskNode.toString()+"\n "+comando +"\n " +cmd.ejecutarComando());
         }
         else{
-            jTextAreaConsola.setText(jTextAreaConsola.getText()+"\n\n > Tarea: "+taskNode.toString()+"\n ERROR. Campos obligatorios vacios: "+mensajeError.substring(0, mensajeError.length()-2));
+            jTextAreaConsola.setText(jTextAreaConsola.getText()+"\n\n > Task: "+taskNode.toString()+"\n ERROR. Required fields empty: "+mensajeError.substring(0, mensajeError.length()-2));
         }
         
         
@@ -1393,7 +1392,6 @@ public class MainGUI extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JToolBar.Separator jSeparator1;
     private javax.swing.JToolBar.Separator jSeparator2;
-    private javax.swing.JToolBar.Separator jSeparator3;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTabbedPane jTabbedPane2;
     private javax.swing.JTabbedPane jTabbedPane3;

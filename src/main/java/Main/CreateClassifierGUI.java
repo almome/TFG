@@ -80,11 +80,11 @@ public class CreateClassifierGUI extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Nuevo Clasificador");
 
-        TituloLabel.setText("Crear nuevo nodo");
+        TituloLabel.setText("Create New Node");
 
-        ExperimentoLabel.setText("Experimento :");
+        ExperimentoLabel.setText("Experiment:");
 
-        NombreLabel.setText("Nombre :");
+        NombreLabel.setText("Name:");
 
         CrearButton.setText("Crear");
         CrearButton.addActionListener(new java.awt.event.ActionListener() {
@@ -107,10 +107,10 @@ public class CreateClassifierGUI extends javax.swing.JFrame {
         });
 
         NombreTextField.setHorizontalAlignment(javax.swing.JTextField.LEFT);
-        NombreTextField.setText("Inserte nombre del nodo...");
+        NombreTextField.setText("Insert name...");
         NombreTextField.setName(""); // NOI18N
 
-        jLabel1.setText("Nodo :");
+        jLabel1.setText("Node:");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);

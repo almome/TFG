@@ -6,12 +6,12 @@
       <SubComponents>
         <Menu class="javax.swing.JMenu" name="archivosjMenu">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Archivos"/>
+            <Property name="text" type="java.lang.String" value="File"/>
           </Properties>
           <SubComponents>
             <Menu class="javax.swing.JMenu" name="nuevojMenu">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Nuevo"/>
+                <Property name="text" type="java.lang.String" value="New"/>
               </Properties>
               <SubComponents>
                 <MenuItem class="javax.swing.JMenuItem" name="experjMenu">
@@ -42,7 +42,7 @@
             </Menu>
             <MenuItem class="javax.swing.JMenuItem" name="jMenuItem2">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Abrir Experimento"/>
+                <Property name="text" type="java.lang.String" value="Open Experiment"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItem2ActionPerformed"/>
@@ -50,7 +50,7 @@
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="jMenuItem1">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Guardar Todo"/>
+                <Property name="text" type="java.lang.String" value="Save All"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItem1ActionPerformed"/>
@@ -65,7 +65,7 @@
           <SubComponents>
             <MenuItem class="javax.swing.JMenuItem" name="jMenuItem3">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Ejecutar Todos"/>
+                <Property name="text" type="java.lang.String" value="Run All"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItem3ActionPerformed"/>
@@ -75,17 +75,17 @@
         </Menu>
         <Menu class="javax.swing.JMenu" name="herramientasjMenu">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Herramientas"/>
+            <Property name="text" type="java.lang.String" value="Tools"/>
           </Properties>
           <SubComponents>
             <Menu class="javax.swing.JMenu" name="crearScriptjMenu">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Crear Script"/>
+                <Property name="text" type="java.lang.String" value="Create Script"/>
               </Properties>
               <SubComponents>
                 <MenuItem class="javax.swing.JMenuItem" name="paraLinuxjMenuItem">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="Para Linux"/>
+                    <Property name="text" type="java.lang.String" value="For Linux"/>
                   </Properties>
                   <Events>
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="paraLinuxjMenuItemActionPerformed"/>
@@ -93,7 +93,7 @@
                 </MenuItem>
                 <MenuItem class="javax.swing.JMenuItem" name="paraWindowsjMenuItem">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="Para Windows"/>
+                    <Property name="text" type="java.lang.String" value="For Windows"/>
                   </Properties>
                   <Events>
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="paraWindowsjMenuItemActionPerformed"/>
@@ -105,12 +105,12 @@
         </Menu>
         <Menu class="javax.swing.JMenu" name="consolajMenu">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Consola"/>
+            <Property name="text" type="java.lang.String" value="Console"/>
           </Properties>
           <SubComponents>
             <MenuItem class="javax.swing.JMenuItem" name="guardarSalidajMenuItem">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Guardar Salida"/>
+                <Property name="text" type="java.lang.String" value="Save Output"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="guardarSalidajMenuItemActionPerformed"/>
@@ -118,7 +118,7 @@
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="limpiarConsolajMenuItem">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Limpiar Consola"/>
+                <Property name="text" type="java.lang.String" value="Clean Console"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="limpiarConsolajMenuItemActionPerformed"/>
@@ -178,15 +178,15 @@
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="1" attributes="0">
           <Group type="102" attributes="0">
-              <Component id="jToolBar1" min="-2" pref="54" max="-2" attributes="0"/>
-              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+              <Component id="jToolBar1" min="-2" pref="48" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" attributes="0">
                       <Component id="jTabbedPane2" pref="0" max="32767" attributes="0"/>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Component id="jTabbedPane3" min="-2" pref="242" max="-2" attributes="0"/>
                   </Group>
-                  <Component id="jTabbedPane1" pref="604" max="32767" attributes="0"/>
+                  <Component id="jTabbedPane1" pref="616" max="32767" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="8" max="-2" attributes="0"/>
           </Group>
@@ -207,8 +207,8 @@
           </AuxValues>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
-              <JTabbedPaneConstraints tabName="Consola">
-                <Property name="tabTitle" type="java.lang.String" value="Consola"/>
+              <JTabbedPaneConstraints tabName="Console">
+                <Property name="tabTitle" type="java.lang.String" value="Console"/>
               </JTabbedPaneConstraints>
             </Constraint>
           </Constraints>
@@ -245,8 +245,8 @@
           </AuxValues>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
-              <JTabbedPaneConstraints tabName="Experimentos">
-                <Property name="tabTitle" type="java.lang.String" value="Experimentos"/>
+              <JTabbedPaneConstraints tabName="Experiments">
+                <Property name="tabTitle" type="java.lang.String" value="Experiments"/>
               </JTabbedPaneConstraints>
             </Constraint>
           </Constraints>
@@ -278,10 +278,7 @@
       <SubComponents>
         <Component class="javax.swing.JButton" name="jButtonLimpiar">
           <Properties>
-            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="2" name="/home/sandra/NetBeansProjects/TFG/Imagenes/clean.png"/>
-            </Property>
-            <Property name="text" type="java.lang.String" value="Limpiar"/>
+            <Property name="text" type="java.lang.String" value="Clean"/>
             <Property name="borderPainted" type="boolean" value="false"/>
             <Property name="contentAreaFilled" type="boolean" value="false"/>
             <Property name="enabled" type="boolean" value="false"/>
@@ -295,10 +292,7 @@
         </Component>
         <Component class="javax.swing.JButton" name="jButtonGuardar">
           <Properties>
-            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="2" name="/home/sandra/NetBeansProjects/TFG/Imagenes/save.png"/>
-            </Property>
-            <Property name="text" type="java.lang.String" value="Guardar"/>
+            <Property name="text" type="java.lang.String" value="Save"/>
             <Property name="borderPainted" type="boolean" value="false"/>
             <Property name="contentAreaFilled" type="boolean" value="false"/>
             <Property name="enabled" type="boolean" value="false"/>
@@ -312,12 +306,25 @@
         </Component>
         <Component class="javax.swing.JToolBar$Separator" name="jSeparator1">
         </Component>
+        <Component class="javax.swing.JButton" name="jButtonGuardarSalida">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Save Console"/>
+            <Property name="borderPainted" type="boolean" value="false"/>
+            <Property name="contentAreaFilled" type="boolean" value="false"/>
+            <Property name="enabled" type="boolean" value="false"/>
+            <Property name="focusable" type="boolean" value="false"/>
+            <Property name="horizontalTextPosition" type="int" value="0"/>
+            <Property name="verticalTextPosition" type="int" value="3"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonGuardarSalidaActionPerformed"/>
+          </Events>
+        </Component>
+        <Component class="javax.swing.JToolBar$Separator" name="jSeparator2">
+        </Component>
         <Component class="javax.swing.JButton" name="jButtonCambiarPlantilla">
           <Properties>
-            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="2" name="/home/sandra/NetBeansProjects/TFG/Imagenes/folder.png"/>
-            </Property>
-            <Property name="text" type="java.lang.String" value="Cambiar Plantilla"/>
+            <Property name="text" type="java.lang.String" value="Change Template"/>
             <Property name="borderPainted" type="boolean" value="false"/>
             <Property name="contentAreaFilled" type="boolean" value="false"/>
             <Property name="enabled" type="boolean" value="false"/>
@@ -331,17 +338,16 @@
         </Component>
         <Component class="javax.swing.JTextField" name="jTextFieldRutaPlantilla">
           <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Dialog" size="18" style="0"/>
+            </Property>
+            <Property name="horizontalAlignment" type="int" value="0"/>
             <Property name="enabled" type="boolean" value="false"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JToolBar$Separator" name="jSeparator2">
-        </Component>
         <Component class="javax.swing.JButton" name="jButtonEjecutar">
           <Properties>
-            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="2" name="/home/sandra/NetBeansProjects/TFG/Imagenes/play-button.png"/>
-            </Property>
-            <Property name="text" type="java.lang.String" value="Ejecutar"/>
+            <Property name="text" type="java.lang.String" value="Run"/>
             <Property name="borderPainted" type="boolean" value="false"/>
             <Property name="contentAreaFilled" type="boolean" value="false"/>
             <Property name="enabled" type="boolean" value="false"/>
@@ -351,25 +357,6 @@
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonEjecutarActionPerformed"/>
-          </Events>
-        </Component>
-        <Component class="javax.swing.JToolBar$Separator" name="jSeparator3">
-        </Component>
-        <Component class="javax.swing.JButton" name="jButtonGuardarSalida">
-          <Properties>
-            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="2" name="/home/sandra/NetBeansProjects/TFG/Imagenes/icon.png"/>
-            </Property>
-            <Property name="text" type="java.lang.String" value="Guardar Salida"/>
-            <Property name="borderPainted" type="boolean" value="false"/>
-            <Property name="contentAreaFilled" type="boolean" value="false"/>
-            <Property name="enabled" type="boolean" value="false"/>
-            <Property name="focusable" type="boolean" value="false"/>
-            <Property name="horizontalTextPosition" type="int" value="0"/>
-            <Property name="verticalTextPosition" type="int" value="3"/>
-          </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonGuardarSalidaActionPerformed"/>
           </Events>
         </Component>
       </SubComponents>

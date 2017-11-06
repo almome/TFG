@@ -96,19 +96,19 @@
   <SubComponents>
     <Component class="javax.swing.JLabel" name="TituloLabel">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Crear nuevo nodo"/>
+        <Property name="text" type="java.lang.String" value="Create New Node"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JSeparator" name="jSeparator1">
     </Component>
     <Component class="javax.swing.JLabel" name="ExperimentoLabel">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Experimento :"/>
+        <Property name="text" type="java.lang.String" value="Experiment:"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="NombreLabel">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Nombre :"/>
+        <Property name="text" type="java.lang.String" value="Name:"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JButton" name="CrearButton">
@@ -138,13 +138,13 @@
     <Component class="javax.swing.JTextField" name="NombreTextField">
       <Properties>
         <Property name="horizontalAlignment" type="int" value="2"/>
-        <Property name="text" type="java.lang.String" value="Inserte nombre del nodo..."/>
+        <Property name="text" type="java.lang.String" value="Insert name..."/>
         <Property name="name" type="java.lang.String" value="" noResource="true"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel1">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Nodo :"/>
+        <Property name="text" type="java.lang.String" value="Node:"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JComboBox" name="ClasificadorComboBox">

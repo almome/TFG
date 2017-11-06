@@ -54,18 +54,18 @@ public class DialogoGuardarConsola extends javax.swing.JFrame {
             }
         });
 
-        jLabel1.setText("Nombre :");
+        jLabel1.setText("Name:");
 
-        jLabel2.setText("Ruta :");
+        jLabel2.setText("Location:");
 
-        jButtonExaminar.setText("Examinar");
+        jButtonExaminar.setText("Search...");
         jButtonExaminar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonExaminarActionPerformed(evt);
             }
         });
 
-        jButtonCancelar.setText("Cancelar");
+        jButtonCancelar.setText("Cancel");
         jButtonCancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonCancelarActionPerformed(evt);
@@ -94,7 +94,7 @@ public class DialogoGuardarConsola extends javax.swing.JFrame {
                                 .addComponent(jTextFieldRuta, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jButtonExaminar)))))
-                .addContainerGap(41, Short.MAX_VALUE))
+                .addContainerGap(44, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

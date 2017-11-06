@@ -91,15 +91,15 @@ public class CreateTaskGUI extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        TituloLabel.setText("Crear tarea");
+        TituloLabel.setText("Create Task");
 
-        ExperimentoLabel.setText("Experimento :");
+        ExperimentoLabel.setText("Experiment:");
 
-        ClasificadorLabel.setText("Nodo :");
+        ClasificadorLabel.setText("Node:");
 
-        NombreLabel.setText("Nombre :");
+        NombreLabel.setText("Name:");
 
-        PlantillaLabel.setText("Plantilla :");
+        PlantillaLabel.setText("Template:");
 
         ExperimentosComboBox.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -107,23 +107,23 @@ public class CreateTaskGUI extends javax.swing.JFrame {
             }
         });
 
-        NombreTextField.setText("Introduzca el nombre de la tarea");
+        NombreTextField.setText("Insert name...");
 
-        BuscarButton.setText("Buscar");
+        BuscarButton.setText("Search...");
         BuscarButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BuscarButtonActionPerformed(evt);
             }
         });
 
-        CrearButton.setText("Crear");
+        CrearButton.setText("Create");
         CrearButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 CrearButtonActionPerformed(evt);
             }
         });
 
-        CancelarButton.setText("Cancelar");
+        CancelarButton.setText("Cancel");
         CancelarButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 CancelarButtonActionPerformed(evt);

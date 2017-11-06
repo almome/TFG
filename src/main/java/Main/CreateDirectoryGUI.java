@@ -56,29 +56,29 @@ public class CreateDirectoryGUI extends javax.swing.JFrame {
         setTitle("Nuevo Experimento");
 
         TituloLabel.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        TituloLabel.setText("Nombre y Localización");
+        TituloLabel.setText("Name and Location");
 
         jSeparator1.setToolTipText("");
 
-        NombreLabel.setText("Nombre :");
+        NombreLabel.setText("Name:");
 
-        LocalizacionLabel.setText("Localización :");
+        LocalizacionLabel.setText("Location:");
 
-        BuscarButton.setText("Buscar...");
+        BuscarButton.setText("Search...");
         BuscarButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BuscarButtonActionPerformed(evt);
             }
         });
 
-        CrearButton.setText("Crear");
+        CrearButton.setText("Create");
         CrearButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 CrearButtonActionPerformed(evt);
             }
         });
 
-        CancelarButton.setText("Cancelar");
+        CancelarButton.setText("Cancel");
         CancelarButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 CancelarButtonActionPerformed(evt);
@@ -118,7 +118,7 @@ public class CreateDirectoryGUI extends javax.swing.JFrame {
                             .addComponent(NombreTextField))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(BuscarButton)))
-                .addContainerGap(26, Short.MAX_VALUE))
+                .addContainerGap(51, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

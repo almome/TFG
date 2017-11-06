@@ -124,29 +124,29 @@
   <SubComponents>
     <Component class="javax.swing.JLabel" name="TituloLabel">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Crear tarea"/>
+        <Property name="text" type="java.lang.String" value="Create Task"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JSeparator" name="jSeparator1">
     </Component>
     <Component class="javax.swing.JLabel" name="ExperimentoLabel">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Experimento :"/>
+        <Property name="text" type="java.lang.String" value="Experiment:"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="ClasificadorLabel">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Nodo :"/>
+        <Property name="text" type="java.lang.String" value="Node:"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="NombreLabel">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Nombre :"/>
+        <Property name="text" type="java.lang.String" value="Name:"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="PlantillaLabel">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Plantilla :"/>
+        <Property name="text" type="java.lang.String" value="Template:"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JComboBox" name="ExperimentosComboBox">
@@ -174,14 +174,14 @@
     </Component>
     <Component class="javax.swing.JTextField" name="NombreTextField">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Introduzca el nombre de la tarea"/>
+        <Property name="text" type="java.lang.String" value="Insert name..."/>
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="PlantillaTextField">
     </Component>
     <Component class="javax.swing.JButton" name="BuscarButton">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Buscar"/>
+        <Property name="text" type="java.lang.String" value="Search..."/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BuscarButtonActionPerformed"/>
@@ -189,7 +189,7 @@
     </Component>
     <Component class="javax.swing.JButton" name="CrearButton">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Crear"/>
+        <Property name="text" type="java.lang.String" value="Create"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="CrearButtonActionPerformed"/>
@@ -197,7 +197,7 @@
     </Component>
     <Component class="javax.swing.JButton" name="CancelarButton">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Cancelar"/>
+        <Property name="text" type="java.lang.String" value="Cancel"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="CancelarButtonActionPerformed"/>

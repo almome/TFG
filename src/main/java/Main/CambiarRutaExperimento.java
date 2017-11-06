@@ -46,21 +46,21 @@ public class CambiarRutaExperimento extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jButtonCambiar.setText("Cambiar de ruta...");
+        jButtonCambiar.setText("Change Path ...");
         jButtonCambiar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonCambiarActionPerformed(evt);
             }
         });
 
-        jButtonAceptar.setText("Aceptar");
+        jButtonAceptar.setText("OK");
         jButtonAceptar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonAceptarActionPerformed(evt);
             }
         });
 
-        jLabelmensage.setText("El proyecto se va a crearse en la siguiente ruta:");
+        jLabelmensage.setText("The proyect will be create on this path:");
 
         jLabelruta.setBackground(new java.awt.Color(0, 102, 102));
         jLabelruta.setText("...");
@@ -70,7 +70,7 @@ public class CambiarRutaExperimento extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(236, Short.MAX_VALUE)
+                .addContainerGap(280, Short.MAX_VALUE)
                 .addComponent(jButtonCambiar)
                 .addGap(41, 41, 41)
                 .addComponent(jButtonAceptar)
