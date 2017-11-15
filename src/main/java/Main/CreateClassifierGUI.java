@@ -215,7 +215,7 @@ public class CreateClassifierGUI extends javax.swing.JFrame {
                 ClassifierNode cn = (ClassifierNode) cm.getNodeType();
                 n.setRutaCarpeta(cn.getRutaCarpeta());
             }
-            NombreTextField.setText("Introduzca el nombre del clasificador...");
+            NombreTextField.setText("Insert name...");
             WindowsInstances.mainGUI.expandAllNodes(WindowsInstances.mainGUI.getProyectosTree(),  0, WindowsInstances.mainGUI.getProyectosTree().getRowCount());
             dispose();
         }
@@ -255,7 +255,7 @@ public class CreateClassifierGUI extends javax.swing.JFrame {
                     }
                     n.setRutaCarpeta(cn.getRutaCarpeta());
                 }
-                NombreTextField.setText("Introduzca el nombre del clasificador...");
+                NombreTextField.setText("Insert name...");
                 WindowsInstances.mainGUI.expandAllNodes(WindowsInstances.mainGUI.getProyectosTree(),  0, WindowsInstances.mainGUI.getProyectosTree().getRowCount());
                 dispose();
             }
@@ -268,7 +268,7 @@ public class CreateClassifierGUI extends javax.swing.JFrame {
 
     
     private void CancelarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CancelarButtonActionPerformed
-        NombreTextField.setText("Introduzca el nombre del clasificador...");
+        NombreTextField.setText("Insert name...");
         WindowsInstances.mainGUI.expandAllNodes(WindowsInstances.mainGUI.getProyectosTree(),  0, WindowsInstances.mainGUI.getProyectosTree().getRowCount());
         dispose();
     }//GEN-LAST:event_CancelarButtonActionPerformed
