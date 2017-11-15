@@ -219,6 +219,7 @@ public class MainGUI extends javax.swing.JFrame {
         jScrollPane3 = new javax.swing.JScrollPane();
         jPanel1 = new javax.swing.JPanel();
         jToolBar2 = new javax.swing.JToolBar();
+        stateLabel = new javax.swing.JLabel();
         BarrajMenu = new javax.swing.JMenuBar();
         archivosjMenu = new javax.swing.JMenu();
         nuevojMenu = new javax.swing.JMenu();
@@ -264,6 +265,16 @@ public class MainGUI extends javax.swing.JFrame {
         ProyectosTree.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 ProyectosTreeMousePressed(evt);
+            }
+        });
+        ProyectosTree.addTreeSelectionListener(new javax.swing.event.TreeSelectionListener() {
+            public void valueChanged(javax.swing.event.TreeSelectionEvent evt) {
+                ProyectosTreeValueChanged(evt);
+            }
+        });
+        ProyectosTree.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                ProyectosTreeKeyReleased(evt);
             }
         });
         jScrollPane1.setViewportView(ProyectosTree);
@@ -371,6 +382,8 @@ public class MainGUI extends javax.swing.JFrame {
         jTabbedPane2.addTab("...", jScrollPane3);
 
         jToolBar2.setRollover(true);
+        jToolBar2.add(stateLabel);
+        stateLabel.getAccessibleContext().setAccessibleName("stateLabel");
 
         archivosjMenu.setText("File");
 
@@ -1025,6 +1038,23 @@ public class MainGUI extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_paraWindowsjMenuItemActionPerformed
 
+    private void ProyectosTreeValueChanged(javax.swing.event.TreeSelectionEvent evt) {//GEN-FIRST:event_ProyectosTreeValueChanged
+        if(evt.getPath().getLastPathComponent() instanceof CustomMutableTreeNode) {
+            CustomMutableTreeNode customMutableTreeNode =  (CustomMutableTreeNode) evt.getPath().getLastPathComponent();
+            stateLabel.setText(customMutableTreeNode.getNombre() + " selected");
+        }
+        else {
+            stateLabel.setText("");
+        }
+    }//GEN-LAST:event_ProyectosTreeValueChanged
+
+    private void ProyectosTreeKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_ProyectosTreeKeyReleased
+        if(ProyectosTree.getSelectionPath().getLastPathComponent() instanceof CustomMutableTreeNode) {
+            CustomMutableTreeNode customMutableTreeNode = (CustomMutableTreeNode) ProyectosTree.getSelectionPath().getLastPathComponent();
+            stateLabel.setText(customMutableTreeNode.getNombre() + " selected");
+        }
+    }//GEN-LAST:event_ProyectosTreeKeyReleased
+
     public void metodoCrearNodos(DefaultMutableTreeNode padre, Element nuevoNodo,Document proyecto, String rutaPr ){
         if(nuevoNodo.getAttributes().getNamedItem("tipo").getNodeValue().equals("experimento")){
             
@@ -1409,6 +1439,7 @@ public class MainGUI extends javax.swing.JFrame {
     private javax.swing.JMenuItem paraLinuxjMenuItem;
     private javax.swing.JMenuItem paraWindowsjMenuItem;
     private javax.swing.JMenu runjMenu;
+    private javax.swing.JLabel stateLabel;
     private javax.swing.JMenuItem tareajMenu;
     // End of variables declaration//GEN-END:variables
 

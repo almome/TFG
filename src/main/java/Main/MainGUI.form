@@ -266,6 +266,8 @@
               </Properties>
               <Events>
                 <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="ProyectosTreeMousePressed"/>
+                <EventHandler event="valueChanged" listener="javax.swing.event.TreeSelectionListener" parameters="javax.swing.event.TreeSelectionEvent" handler="ProyectosTreeValueChanged"/>
+                <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="ProyectosTreeKeyReleased"/>
               </Events>
             </Component>
           </SubComponents>
@@ -415,6 +417,13 @@
       </Properties>
 
       <Layout class="org.netbeans.modules.form.compat2.layouts.DesignBoxLayout"/>
+      <SubComponents>
+        <Component class="javax.swing.JLabel" name="stateLabel">
+          <AccessibilityProperties>
+            <Property name="AccessibleContext.accessibleName" type="java.lang.String" value="stateLabel"/>
+          </AccessibilityProperties>
+        </Component>
+      </SubComponents>
     </Container>
   </SubComponents>
 </Form>
