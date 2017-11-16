@@ -95,7 +95,7 @@ public class ExperimentNode implements INodeType {
         JMenuItem jMenuItemEjecutar;
         JMenuItem jMenuItemEliminar;
 
-        jMenuItemCreaClasificador = new JMenuItem("Crear Nodo");
+        jMenuItemCreaClasificador = new JMenuItem("Create Node");
         jMenuItemCreaClasificador.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ev) {
@@ -103,7 +103,7 @@ public class ExperimentNode implements INodeType {
             }
         });
         
-        jMenuItemEjecutar = new JMenuItem("Ejecutar Experimento");
+        jMenuItemEjecutar = new JMenuItem("Run Experiment");
         jMenuItemEjecutar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ev) {
@@ -111,7 +111,7 @@ public class ExperimentNode implements INodeType {
             }
         });
         
-        jMenuItemEliminar = new JMenuItem("Eliminar");
+        jMenuItemEliminar = new JMenuItem("Remove");
         jMenuItemEliminar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ev) {
@@ -168,7 +168,7 @@ public class ExperimentNode implements INodeType {
 
     @Override
     public String getTipo() {
-         return "Experimento";
+         return "Experiment";
     }
 
    public void ejecutar_rec (CustomMutableTreeNode nodo){

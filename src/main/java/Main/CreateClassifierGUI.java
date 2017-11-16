@@ -78,7 +78,7 @@ public class CreateClassifierGUI extends javax.swing.JFrame {
         ClasificadorComboBox = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Nuevo Clasificador");
+        setTitle("New Node");
 
         TituloLabel.setText("Create New Node");
 
@@ -86,14 +86,14 @@ public class CreateClassifierGUI extends javax.swing.JFrame {
 
         NombreLabel.setText("Name:");
 
-        CrearButton.setText("Crear");
+        CrearButton.setText("Create");
         CrearButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 CrearButtonActionPerformed(evt);
             }
         });
 
-        CancelarButton.setText("Cancelar");
+        CancelarButton.setText("Cancel");
         CancelarButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 CancelarButtonActionPerformed(evt);
@@ -138,7 +138,7 @@ public class CreateClassifierGUI extends javax.swing.JFrame {
                             .addComponent(ClasificadorComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addGap(32, 32, 32))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(266, Short.MAX_VALUE)
+                .addContainerGap(272, Short.MAX_VALUE)
                 .addComponent(CancelarButton)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(CrearButton)

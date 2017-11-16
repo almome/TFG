@@ -16,7 +16,7 @@
               <SubComponents>
                 <MenuItem class="javax.swing.JMenuItem" name="experjMenu">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="Experimento"/>
+                    <Property name="text" type="java.lang.String" value="Experiment"/>
                   </Properties>
                   <Events>
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="experjMenuActionPerformed"/>
@@ -24,7 +24,7 @@
                 </MenuItem>
                 <MenuItem class="javax.swing.JMenuItem" name="clasificajMenu">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="Nodo"/>
+                    <Property name="text" type="java.lang.String" value="Node"/>
                   </Properties>
                   <Events>
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="clasificajMenuActionPerformed"/>
@@ -32,7 +32,7 @@
                 </MenuItem>
                 <MenuItem class="javax.swing.JMenuItem" name="tareajMenu">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="Tarea"/>
+                    <Property name="text" type="java.lang.String" value="Task"/>
                   </Properties>
                   <Events>
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="tareajMenuActionPerformed"/>

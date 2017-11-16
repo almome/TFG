@@ -34,6 +34,8 @@ import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.HashMap;
+import java.util.Locale;
+import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.regex.Matcher;
@@ -171,6 +173,10 @@ public class MainGUI extends javax.swing.JFrame {
         });
         
         SetDragDrop();
+        
+        // Se definen el idioma en los modales emergentes
+        JOptionPane.setDefaultLocale(Locale.ENGLISH);
+        JFileChooser.setDefaultLocale(Locale.ENGLISH);
     }
     
     private void SetDragDrop() {
@@ -389,7 +395,7 @@ public class MainGUI extends javax.swing.JFrame {
 
         nuevojMenu.setText("New");
 
-        experjMenu.setText("Experimento");
+        experjMenu.setText("Experiment");
         experjMenu.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 experjMenuActionPerformed(evt);
@@ -397,7 +403,7 @@ public class MainGUI extends javax.swing.JFrame {
         });
         nuevojMenu.add(experjMenu);
 
-        clasificajMenu.setText("Nodo");
+        clasificajMenu.setText("Node");
         clasificajMenu.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 clasificajMenuActionPerformed(evt);
@@ -405,7 +411,7 @@ public class MainGUI extends javax.swing.JFrame {
         });
         nuevojMenu.add(clasificajMenu);
 
-        tareajMenu.setText("Tarea");
+        tareajMenu.setText("Task");
         tareajMenu.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 tareajMenuActionPerformed(evt);
@@ -748,7 +754,7 @@ public class MainGUI extends javax.swing.JFrame {
             
         }
         guardarExp.guardarProyecto(modelo, exp);
-        JOptionPane.showMessageDialog(new JFrame(), "Experimento guardado.", "Guardado", JOptionPane.INFORMATION_MESSAGE);
+        JOptionPane.showMessageDialog(new JFrame(), "Experiment saved.", "Saved", JOptionPane.INFORMATION_MESSAGE);
 
     }//GEN-LAST:event_jButtonGuardarActionPerformed
 
@@ -1056,7 +1062,7 @@ public class MainGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_ProyectosTreeKeyReleased
 
     public void metodoCrearNodos(DefaultMutableTreeNode padre, Element nuevoNodo,Document proyecto, String rutaPr ){
-        if(nuevoNodo.getAttributes().getNamedItem("tipo").getNodeValue().equals("experimento")){
+        if(nuevoNodo.getAttributes().getNamedItem("tipo").getNodeValue().equals("experiment")){
             
             INodeType nodoExp = new ExperimentNode();  
             CustomMutableTreeNode nodo = new CustomMutableTreeNode(nuevoNodo.getAttributes().getNamedItem("nombre").getNodeValue());
