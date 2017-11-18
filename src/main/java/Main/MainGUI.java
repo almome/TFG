@@ -238,6 +238,8 @@ public class MainGUI extends javax.swing.JFrame {
         jTabbedPane2 = new javax.swing.JTabbedPane();
         jScrollPane3 = new javax.swing.JScrollPane();
         jPanel1 = new javax.swing.JPanel();
+        jToolBar2 = new javax.swing.JToolBar();
+        stateLabel = new javax.swing.JLabel();
         BarrajMenu = new javax.swing.JMenuBar();
         archivosjMenu = new javax.swing.JMenu();
         nuevojMenu = new javax.swing.JMenu();
@@ -258,7 +260,6 @@ public class MainGUI extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setModalExclusionType(null);
-        setResizable(false);
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowOpened(java.awt.event.WindowEvent evt) {
                 formWindowOpened(evt);
@@ -284,6 +285,16 @@ public class MainGUI extends javax.swing.JFrame {
         ProyectosTree.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 ProyectosTreeMousePressed(evt);
+            }
+        });
+        ProyectosTree.addTreeSelectionListener(new javax.swing.event.TreeSelectionListener() {
+            public void valueChanged(javax.swing.event.TreeSelectionEvent evt) {
+                ProyectosTreeValueChanged(evt);
+            }
+        });
+        ProyectosTree.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                ProyectosTreeKeyReleased(evt);
             }
         });
         jScrollPane1.setViewportView(ProyectosTree);
@@ -379,7 +390,7 @@ public class MainGUI extends javax.swing.JFrame {
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 879, Short.MAX_VALUE)
+            .addGap(0, 969, Short.MAX_VALUE)
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -389,6 +400,10 @@ public class MainGUI extends javax.swing.JFrame {
         jScrollPane3.setViewportView(jPanel1);
 
         jTabbedPane2.addTab("...", jScrollPane3);
+
+        jToolBar2.setRollover(true);
+        jToolBar2.add(stateLabel);
+        stateLabel.getAccessibleContext().setAccessibleName("stateLabel");
 
         archivosjMenu.setText("File");
 
@@ -500,17 +515,18 @@ public class MainGUI extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jToolBar1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jTabbedPane3)
+                    .addComponent(jToolBar2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jTabbedPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(24, 24, 24)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jTabbedPane3)
+                            .addComponent(jTabbedPane2))))
                 .addContainerGap())
-            .addComponent(jToolBar1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -520,10 +536,12 @@ public class MainGUI extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jTabbedPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jTabbedPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 242, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 616, Short.MAX_VALUE))
-                .addGap(8, 8, 8))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jTabbedPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 251, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 589, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jToolBar2, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
 
         jTabbedPane2.getAccessibleContext().setAccessibleName("");
@@ -1040,6 +1058,23 @@ public class MainGUI extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_paraWindowsjMenuItemActionPerformed
 
+    private void ProyectosTreeValueChanged(javax.swing.event.TreeSelectionEvent evt) {//GEN-FIRST:event_ProyectosTreeValueChanged
+        if(evt.getPath().getLastPathComponent() instanceof CustomMutableTreeNode) {
+            CustomMutableTreeNode customMutableTreeNode =  (CustomMutableTreeNode) evt.getPath().getLastPathComponent();
+            stateLabel.setText(customMutableTreeNode.getNombre() + " selected");
+        }
+        else {
+            stateLabel.setText("");
+        }
+    }//GEN-LAST:event_ProyectosTreeValueChanged
+
+    private void ProyectosTreeKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_ProyectosTreeKeyReleased
+        if(ProyectosTree.getSelectionPath().getLastPathComponent() instanceof CustomMutableTreeNode) {
+            CustomMutableTreeNode customMutableTreeNode = (CustomMutableTreeNode) ProyectosTree.getSelectionPath().getLastPathComponent();
+            stateLabel.setText(customMutableTreeNode.getNombre() + " selected");
+        }
+    }//GEN-LAST:event_ProyectosTreeKeyReleased
+
     public void metodoCrearNodos(DefaultMutableTreeNode padre, Element nuevoNodo,Document proyecto, String rutaPr ){
         if(nuevoNodo.getAttributes().getNamedItem("tipo").getNodeValue().equals("experimento")){
             
@@ -1430,11 +1465,13 @@ public class MainGUI extends javax.swing.JFrame {
     private javax.swing.JTextArea jTextAreaConsola;
     private javax.swing.JTextField jTextFieldRutaPlantilla;
     private javax.swing.JToolBar jToolBar1;
+    private javax.swing.JToolBar jToolBar2;
     private javax.swing.JMenuItem limpiarConsolajMenuItem;
     private javax.swing.JMenu nuevojMenu;
     private javax.swing.JMenuItem paraLinuxjMenuItem;
     private javax.swing.JMenuItem paraWindowsjMenuItem;
     private javax.swing.JMenu runjMenu;
+    private javax.swing.JLabel stateLabel;
     private javax.swing.JMenuItem tareajMenu;
     // End of variables declaration//GEN-END:variables
 
