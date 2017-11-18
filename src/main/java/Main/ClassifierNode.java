@@ -27,9 +27,15 @@ import javax.swing.tree.DefaultMutableTreeNode;
  */
 public class ClassifierNode implements INodeType{
     String rutaCarpeta;
-    Icon icono = new ImageIcon("assets/ClassifIcon.png");  //No pilla la imagen
+    Icon icono;
 
-    
+    public ClassifierNode() {
+        try {
+            icono = new ImageIcon(getClass().getResource("/assets/treeIcons/ClassifIcon.png"));
+        } catch(NullPointerException e) {
+            icono = new ImageIcon("assets/treeIcons/ClassifIcon.png");
+        }
+    }
 
     public String getRutaCarpeta() {
         return rutaCarpeta;

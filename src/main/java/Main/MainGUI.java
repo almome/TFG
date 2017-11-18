@@ -28,6 +28,7 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.OutputStreamWriter;
 import java.io.Writer;
 import java.nio.charset.Charset;
@@ -171,6 +172,25 @@ public class MainGUI extends javax.swing.JFrame {
         });
         
         SetDragDrop();
+        SetIcons();
+    }
+    
+    private void SetIcons() {
+        try {
+            System.out.println(getClass().getResource("/assets/schemas/xmlschematarea.xsd").toString());
+            jButtonLimpiar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/stateBar/clean.png")));
+            jButtonGuardar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/stateBar/save.png")));
+            jButtonGuardarSalida.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/stateBar/icon.png")));
+            jButtonCambiarPlantilla.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/stateBar/folder.png")));
+            jButtonEjecutar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/stateBar/play-button.png")));
+        } catch(NullPointerException e) {
+            System.out.println("assets/schemas/xmlschematarea.xsd");
+            jButtonLimpiar.setIcon(new javax.swing.ImageIcon("assets/stateBar/clean.png"));
+            jButtonGuardar.setIcon(new javax.swing.ImageIcon("assets/stateBar/save.png"));
+            jButtonGuardarSalida.setIcon(new javax.swing.ImageIcon("assets/stateBar/icon.png"));
+            jButtonCambiarPlantilla.setIcon(new javax.swing.ImageIcon("assets/stateBar/folder.png"));
+            jButtonEjecutar.setIcon(new javax.swing.ImageIcon("assets/stateBar/play-button.png"));
+        }
     }
     
     private void SetDragDrop() {
@@ -735,7 +755,7 @@ public class MainGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonGuardarActionPerformed
 
     private void jButtonCambiarPlantillaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCambiarPlantillaActionPerformed
-        String rutaEsquema = "/home/sandra/NetBeansProjects/TFG/assets/schemas/xmlschematarea.xsd";
+        String rutaEsquema = "assets/schemas/xmlschematarea.xsd";
         jPanel1.removeAll();
         jPanel1.revalidate();
         jPanel1.repaint();
@@ -843,7 +863,7 @@ public class MainGUI extends javax.swing.JFrame {
 
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
         String rutaProyecto = "";
-        String rutaEsquema = "/home/sandra/NetBeansProjects/TFG/assets/schemas/xmlschemaproyecto.xsd";
+        String rutaEsquema = "assets/schemas/xmlschemaproyecto.xsd";
 
         JFileChooser jFileChooser1 = new JFileChooser();
         jFileChooser1.setFileSelectionMode(jFileChooser1.FILES_ONLY);
@@ -1355,13 +1375,25 @@ public class MainGUI extends javax.swing.JFrame {
         if(mensajeError.equals("")){
             Console cmd = new Console(comando);
             jTextAreaConsola.setText(jTextAreaConsola.getText()+"\n\n > Task: "+taskNode.toString()+"\n "+comando +"\n " +cmd.ejecutarComando());
+            
+            try {
+                taskNode.icono = new ImageIcon(getClass().getResource("/assets/treeIcons/TaskIconCorrecto.png"));
+            } catch (NullPointerException e) {
+                taskNode.icono = new ImageIcon("assets/treeIcons/TaskIconCorrecto.png");
+            }
         }
         else{
             jTextAreaConsola.setText(jTextAreaConsola.getText()+"\n\n > Task: "+taskNode.toString()+"\n ERROR. Required fields empty: "+mensajeError.substring(0, mensajeError.length()-2));
+            
+            try {
+                taskNode.icono = new ImageIcon(getClass().getResource("/assets/treeIcons/TaskIconIncorrecto.png"));
+            } catch (NullPointerException e) {
+                taskNode.icono = new ImageIcon("assets/treeIcons/TaskIconIncorrecto.png");
+            }
         }
         
-        
-                
+        ProyectosTree.revalidate();
+        ProyectosTree.repaint();
     }
     
 

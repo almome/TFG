@@ -25,8 +25,16 @@ import javax.swing.JPopupMenu;
  * @author sandra
  */
 public class ExperimentNode implements INodeType {
-    Icon icono = new ImageIcon("assets/ExperimIcon.png");
+    Icon icono;
     String rutaCarpeta;
+    
+    public ExperimentNode() {
+        try {
+            icono = new ImageIcon(getClass().getResource("/assets/treeIcons/ExperimIcon.png"));
+        } catch (NullPointerException e) {
+            icono = new ImageIcon("assets/treeIcons/ExperimIcon.png");
+        }
+    }
 
     public String getRutaCarpeta() {
         return rutaCarpeta;

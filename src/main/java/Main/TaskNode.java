@@ -33,11 +33,22 @@ import org.w3c.dom.Document;
  * @author alexa
  */
 public class TaskNode implements INodeType{
-    Icon icono = new ImageIcon("assets/TaskIcon.png");
+    Icon icono;
     String rutaPlantilla;
     Document plantXML;
     List<TaskParam> parametros; 
     String comandoPrincipal;
+    
+    public TaskNode (String rutaPlantilla, Document plantXML){
+        this.plantXML = plantXML;
+        this.rutaPlantilla = rutaPlantilla;
+        parametros = new ArrayList<TaskParam>();
+        try {
+            icono = new ImageIcon(getClass().getResource("/assets/treeIcons/TaskIcon.png"));
+        } catch (NullPointerException e) {
+            icono = new ImageIcon("assets/treeIcons/TaskIcon.png");
+        }
+    }
 
     public String getComandoPrincipal() {
         return comandoPrincipal;
@@ -61,13 +72,6 @@ public class TaskNode implements INodeType{
 
     public void setParametros(List<TaskParam> parametros) {
         this.parametros = parametros;
-    }
-    
-    
-    public TaskNode (String rutaPlantilla, Document plantXML){
-        this.plantXML = plantXML;
-        this.rutaPlantilla = rutaPlantilla;
-        parametros = new ArrayList<TaskParam>();
     }
     
     public Document getPlantXML() {
@@ -100,10 +104,18 @@ public class TaskNode implements INodeType{
         try {
             WindowsInstances.mainGUI.ejecutar(this);
         } catch (IOException ex) {
-            this.icono = new ImageIcon("assets/TaskIconIncorrecto.png");
+            try {
+                icono = new ImageIcon(getClass().getResource("/assets/treeIcons/TaskIconIncorrecto.png"));
+            } catch (NullPointerException e) {
+                icono = new ImageIcon("assets/treeIcons/TaskIconIncorrecto.png");
+            }
             Logger.getLogger(TaskNode.class.getName()).log(Level.SEVERE, null, ex);
         } catch (PrinterException ex) {
-            this.icono = new ImageIcon("assets/TaskIconIncorrecto.png");
+            try {
+                icono = new ImageIcon(getClass().getResource("/assets/treeIcons/TaskIconIncorrecto.png"));
+            } catch (NullPointerException e) {
+                icono = new ImageIcon("assets/treeIcons/TaskIconIncorrecto.png");
+            }
             Logger.getLogger(TaskNode.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
