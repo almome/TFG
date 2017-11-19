@@ -55,7 +55,7 @@ public class CreateDirectoryGUI extends javax.swing.JFrame {
         NombreTextField = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Nuevo Experimento");
+        setTitle("New Experiment");
 
         TituloLabel.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         TituloLabel.setText("Name and Location");
@@ -151,7 +151,7 @@ public class CreateDirectoryGUI extends javax.swing.JFrame {
     //METODO QUE GENERA NOMBRE POR DEFECTO PARA EL EXPERIMENTO
     //SIEMPRE CREA UNO QUE NO SEA REPETIDO
     public String nombreExp(){
-        return ("Experimento"+this.nExp);
+        return ("Experiment"+this.nExp);
     }
     
     
@@ -200,7 +200,7 @@ public class CreateDirectoryGUI extends javax.swing.JFrame {
             String nombrenodo = CnodoExp.getUserObject().toString();
             WindowsInstances.createClasificadorGUI.setCombo(nombrenodo);
             WindowsInstances.createTareaGUI.setExpCombo(nombrenodo);  
-            NombreTextField.setText("Experimento"+this.nExp);
+            NombreTextField.setText("Experiment"+this.nExp);
             dispose();
         }
         else{

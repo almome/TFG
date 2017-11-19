@@ -108,7 +108,7 @@ public class ClassifierNode implements INodeType{
         JMenuItem jMenuItemEjecutar;
         JMenuItem jMenuItemEliminar;
 
-        jMenuItemCreaClasificador = new JMenuItem("Crear Nodo");
+        jMenuItemCreaClasificador = new JMenuItem("Create Node");
         jMenuItemCreaClasificador.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ev) {
@@ -116,7 +116,7 @@ public class ClassifierNode implements INodeType{
             }
         });
         
-        jMenuItemCreaTarea = new JMenuItem("Crear Tarea");
+        jMenuItemCreaTarea = new JMenuItem("Create Task");
         jMenuItemCreaTarea.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ev) {
@@ -124,7 +124,7 @@ public class ClassifierNode implements INodeType{
             }
         });
         
-        jMenuItemEjecutar = new JMenuItem("Ejecutar Nodo");
+        jMenuItemEjecutar = new JMenuItem("Run Node");
         jMenuItemEjecutar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ev) {
@@ -132,7 +132,7 @@ public class ClassifierNode implements INodeType{
             }
         });
         
-        jMenuItemEliminar = new JMenuItem("Eliminar");
+        jMenuItemEliminar = new JMenuItem("Remove");
         jMenuItemEliminar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ev) {

@@ -138,7 +138,7 @@ public class TaskNode implements INodeType{
         JMenuItem jMenuItemEliminar;
         JMenuItem jMenuItemClonar;
 
-        jMenuItemEjecutar = new JMenuItem("Ejecutar Tarea");
+        jMenuItemEjecutar = new JMenuItem("Run Task");
         jMenuItemEjecutar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ev) {
@@ -146,7 +146,7 @@ public class TaskNode implements INodeType{
             }
         });
         
-        jMenuItemEliminar = new JMenuItem("Eliminar");
+        jMenuItemEliminar = new JMenuItem("Remove");
         jMenuItemEliminar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ev) {
@@ -154,7 +154,7 @@ public class TaskNode implements INodeType{
             }
         });
         
-        jMenuItemClonar = new JMenuItem("Clonar Tarea");
+        jMenuItemClonar = new JMenuItem("Clone Task");
         jMenuItemClonar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ev) {

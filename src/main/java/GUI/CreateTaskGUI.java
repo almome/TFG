@@ -91,6 +91,7 @@ public class CreateTaskGUI extends javax.swing.JFrame {
         jButton1.setText("jButton1");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("New Task");
 
         TituloLabel.setText("Create Task");
 
@@ -212,13 +213,13 @@ public class CreateTaskGUI extends javax.swing.JFrame {
         Validacion v = new Validacion(rutaEsquema, PlantillaTextField.getText());
         valido = v.validar();
         if(valido == false){
-            showMessageDialog(new JFrame(), "El XML no cumple el esquema.","Error", JOptionPane.ERROR_MESSAGE);
+            showMessageDialog(new JFrame(), "The XML does not match with the scheme.","Error", JOptionPane.ERROR_MESSAGE);
         }
         else if(NombreTextField.getText() == null || NombreTextField.getText().equals("")){
-            showMessageDialog(new JFrame(), "No se puede crear una tarea sin nombre.","Error", JOptionPane.ERROR_MESSAGE);
+            showMessageDialog(new JFrame(), "You must set a name in a Task.","Error", JOptionPane.ERROR_MESSAGE);
         }
         else if(PlantillaTextField.getText() == null || PlantillaTextField.getText().equals("")){
-            showMessageDialog(new JFrame(), "Debe asignar una plantilla a la tarea.","Error", JOptionPane.ERROR_MESSAGE);
+            showMessageDialog(new JFrame(), "You must assign a template to the Task.","Error", JOptionPane.ERROR_MESSAGE);
         }
         else if(ExperimentosComboBox.getSelectedItem() != null && ClasificadorComboBox.getSelectedItem() != null){
             CustomMutableTreeNode nodo = new CustomMutableTreeNode(NombreTextField.getText());
@@ -263,7 +264,7 @@ public class CreateTaskGUI extends javax.swing.JFrame {
                 n.setRutaPlantilla(cln.getRutaCarpeta());
             }
             
-            NombreTextField.setText("Introduzca el nombre de la tarea...");
+            NombreTextField.setText("Insert name...");
             WindowsInstances.mainGUI.expandAllNodes(WindowsInstances.mainGUI.getProyectosTree(),  0, WindowsInstances.mainGUI.getProyectosTree().getRowCount());
             dispose();
         }
@@ -310,7 +311,7 @@ public class CreateTaskGUI extends javax.swing.JFrame {
                     ClassifierNode cln = (ClassifierNode) cn.getNodeType();
                     n.setRutaPlantilla(PlantillaTextField.getText());
                 }
-                NombreTextField.setText("Introduzca el nombre de la tarea...");
+                NombreTextField.setText("Insert name...");
                 WindowsInstances.mainGUI.expandAllNodes(WindowsInstances.mainGUI.getProyectosTree(),  0, WindowsInstances.mainGUI.getProyectosTree().getRowCount());
                 dispose();
             }
@@ -350,7 +351,7 @@ public class CreateTaskGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_BuscarButtonActionPerformed
 
     private void CancelarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CancelarButtonActionPerformed
-        NombreTextField.setText("Introduzca el nombre de la tarea...");
+        NombreTextField.setText("Insert name...");
         WindowsInstances.mainGUI.expandAllNodes(WindowsInstances.mainGUI.getProyectosTree(),  0, WindowsInstances.mainGUI.getProyectosTree().getRowCount());
         dispose();    }//GEN-LAST:event_CancelarButtonActionPerformed
 

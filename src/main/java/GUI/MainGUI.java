@@ -32,6 +32,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.regex.Matcher;
 
 import javax.swing.DropMode;
@@ -159,6 +160,10 @@ public class MainGUI extends javax.swing.JFrame {
                 }
             }
         });
+        
+        // Se definen el idioma en los modales emergentes
+        JOptionPane.setDefaultLocale(Locale.ENGLISH);
+        JFileChooser.setDefaultLocale(Locale.ENGLISH);
         
         SetDragDrop();
         SetIcons();
@@ -462,7 +467,7 @@ public class MainGUI extends javax.swing.JFrame {
 
         nuevojMenu.setText("New");
 
-        experjMenu.setText("Experimento");
+        experjMenu.setText("Experiment");
         experjMenu.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 experjMenuActionPerformed(evt);
@@ -470,7 +475,7 @@ public class MainGUI extends javax.swing.JFrame {
         });
         nuevojMenu.add(experjMenu);
 
-        clasificajMenu.setText("Nodo");
+        clasificajMenu.setText("Node");
         clasificajMenu.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 clasificajMenuActionPerformed(evt);
@@ -478,7 +483,7 @@ public class MainGUI extends javax.swing.JFrame {
         });
         nuevojMenu.add(clasificajMenu);
 
-        tareajMenu.setText("Tarea");
+        tareajMenu.setText("Task");
         tareajMenu.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 tareajMenuActionPerformed(evt);
@@ -821,7 +826,7 @@ public class MainGUI extends javax.swing.JFrame {
             
         }
         guardarExp.guardarProyecto(modelo, exp);
-        JOptionPane.showMessageDialog(new JFrame(), "Experimento guardado.", "Guardado", JOptionPane.INFORMATION_MESSAGE);
+        JOptionPane.showMessageDialog(new JFrame(), "Experiment saved.", "Saved", JOptionPane.INFORMATION_MESSAGE);
 
     }//GEN-LAST:event_jButtonGuardarActionPerformed
 
