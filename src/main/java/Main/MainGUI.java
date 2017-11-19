@@ -233,6 +233,7 @@ public class MainGUI extends javax.swing.JFrame {
         jButtonGuardarSalida = new javax.swing.JButton();
         jSeparator2 = new javax.swing.JToolBar.Separator();
         jButtonCambiarPlantilla = new javax.swing.JButton();
+        jPanel2 = new javax.swing.JPanel();
         jTextFieldRutaPlantilla = new javax.swing.JTextField();
         jButtonEjecutar = new javax.swing.JButton();
         jTabbedPane2 = new javax.swing.JTabbedPane();
@@ -361,10 +362,24 @@ public class MainGUI extends javax.swing.JFrame {
         });
         jToolBar1.add(jButtonCambiarPlantilla);
 
-        jTextFieldRutaPlantilla.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         jTextFieldRutaPlantilla.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         jTextFieldRutaPlantilla.setEnabled(false);
-        jToolBar1.add(jTextFieldRutaPlantilla);
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jTextFieldRutaPlantilla, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 904, Short.MAX_VALUE)
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(14, 14, 14)
+                .addComponent(jTextFieldRutaPlantilla, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(8, Short.MAX_VALUE))
+        );
+
+        jToolBar1.add(jPanel2);
 
         jButtonEjecutar.setText("Run");
         jButtonEjecutar.setBorderPainted(false);
@@ -390,7 +405,7 @@ public class MainGUI extends javax.swing.JFrame {
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 969, Short.MAX_VALUE)
+            .addGap(0, 998, Short.MAX_VALUE)
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1454,6 +1469,7 @@ public class MainGUI extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
