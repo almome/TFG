@@ -1,4 +1,4 @@
-package Main;
+package XML;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -6,19 +6,18 @@ package Main;
  * and open the template in the editor.
  */
 
+import TreeNodes.CustomMutableTreeNode;
+import TreeNodes.ClassifierNode;
+import TreeNodes.ExperimentNode;
+import TreeNodes.TaskNode;
 import java.io.File;
 import java.io.FileInputStream;
 import java.util.ArrayList;
 import java.util.Enumeration;
-import java.util.HashMap;
-import java.util.List;
 import javax.swing.JLabel;
-import javax.swing.JLayeredPane;
 import javax.swing.JTextField;
 import javax.swing.tree.DefaultMutableTreeNode;
-import javax.swing.tree.DefaultTreeModel;
 import javax.swing.tree.TreeModel;
-import javax.swing.tree.TreeNode;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
@@ -28,7 +27,6 @@ import javax.xml.transform.TransformerException;
 import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
-import jdk.nashorn.internal.runtime.regexp.joni.constants.NodeType;
 import org.w3c.dom.Attr;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;

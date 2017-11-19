@@ -1,4 +1,4 @@
-package Main;
+package TreeNodes;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -7,7 +7,6 @@ package Main;
  */
 
 import javax.swing.Icon;
-import javax.swing.JLayeredPane;
 
 /**
  *

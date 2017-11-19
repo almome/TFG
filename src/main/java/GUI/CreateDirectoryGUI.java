@@ -1,9 +1,11 @@
-package Main;
+package GUI;
 
 
+import TreeNodes.INodeType;
+import Utilities.WindowsInstances;
+import TreeNodes.CustomMutableTreeNode;
+import TreeNodes.ExperimentNode;
 import java.io.File;
-import javax.swing.Icon;
-import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import static javax.swing.JOptionPane.showMessageDialog;

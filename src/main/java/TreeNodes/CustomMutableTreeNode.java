@@ -1,4 +1,4 @@
-package Main;
+package TreeNodes;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -32,7 +32,7 @@ public class CustomMutableTreeNode extends DefaultMutableTreeNode {
         this.nodeType = nodeType;
     }
 
-    CustomMutableTreeNode() {}
+    public CustomMutableTreeNode() {}
     
-    CustomMutableTreeNode(String text) {super(text);}
+    public CustomMutableTreeNode(String text) {super(text);}
 }

@@ -1,4 +1,4 @@
-package Main;
+package TreeNodes;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -6,6 +6,8 @@ package Main;
  * and open the template in the editor.
  */
 
+import Utilities.ParClasificador;
+import Utilities.WindowsInstances;
 import java.awt.MouseInfo;
 import java.awt.Point;
 import java.awt.Rectangle;
@@ -13,10 +15,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Enumeration;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
-import javax.swing.JLayeredPane;
 import javax.swing.JMenuItem;
 import javax.swing.JPopupMenu;
 import javax.swing.tree.DefaultMutableTreeNode;

@@ -1,4 +1,4 @@
-package Main;
+package GUI;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -7,11 +7,15 @@ package Main;
  */
 
 
+import TreeNodes.INodeType;
+import Utilities.ParClasificador;
+import Utilities.WindowsInstances;
+import TreeNodes.CustomMutableTreeNode;
+import TreeNodes.ClassifierNode;
+import TreeNodes.ExperimentNode;
 import java.util.ArrayList;
 import javax.swing.ComboBoxModel;
 import javax.swing.DefaultComboBoxModel;
-import javax.swing.Icon;
-import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import static javax.swing.JOptionPane.showMessageDialog;
@@ -24,7 +28,7 @@ public class CreateClassifierGUI extends javax.swing.JFrame {
     
     String Padre;
     String ruta = "";
-    ArrayList<ParClasificador> paresExCL = new ArrayList<ParClasificador>();
+    public ArrayList<ParClasificador> paresExCL = new ArrayList<ParClasificador>();
     
     public String getPadre() {
         return Padre;

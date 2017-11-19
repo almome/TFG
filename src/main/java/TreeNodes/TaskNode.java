@@ -1,4 +1,4 @@
-package Main;
+package TreeNodes;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -6,6 +6,7 @@ package Main;
  * and open the template in the editor.
  */
 
+import Utilities.WindowsInstances;
 import TaskParam.TaskParam;
 import java.awt.Component;
 import java.awt.MouseInfo;
@@ -33,11 +34,11 @@ import org.w3c.dom.Document;
  * @author alexa
  */
 public class TaskNode implements INodeType{
-    Icon icono;
-    String rutaPlantilla;
     Document plantXML;
-    List<TaskParam> parametros; 
     String comandoPrincipal;
+    public Icon icono;
+    public String rutaPlantilla;
+    public List<TaskParam> parametros;
     
     public TaskNode (String rutaPlantilla, Document plantXML){
         this.plantXML = plantXML;

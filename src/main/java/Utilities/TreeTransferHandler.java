@@ -3,9 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Main;
+package Utilities;
 
-import java.awt.Component;
+import TreeNodes.CustomMutableTreeNode;
+import TreeNodes.ClassifierNode;
+import TreeNodes.ExperimentNode;
+import TreeNodes.TaskNode;
 import java.awt.datatransfer.DataFlavor;
 import java.awt.datatransfer.Transferable;
 import java.awt.datatransfer.UnsupportedFlavorException;
@@ -18,9 +21,8 @@ import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeModel;
 import javax.swing.tree.TreeNode;
 import javax.swing.tree.TreePath;
-import javax.swing.tree.TreeSelectionModel;
 
-class TreeTransferHandler extends TransferHandler {
+public class TreeTransferHandler extends TransferHandler {
 
     DataFlavor nodesFlavor;
     DataFlavor[] flavors = new DataFlavor[1];

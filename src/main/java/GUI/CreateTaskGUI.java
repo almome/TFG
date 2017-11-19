@@ -1,4 +1,4 @@
-package Main;
+package GUI;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -6,24 +6,25 @@ package Main;
  * and open the template in the editor.
  */
 
+import TreeNodes.INodeType;
+import XML.StructXML;
+import XML.Validacion;
+import Utilities.WindowsInstances;
+import TreeNodes.CustomMutableTreeNode;
+import TreeNodes.ClassifierNode;
+import TreeNodes.ExperimentNode;
+import TreeNodes.TaskNode;
 import TaskParam.FileParam;
 import TaskParam.StringParam;
 import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
 import javax.swing.ComboBoxModel;
 import javax.swing.DefaultComboBoxModel;
-import javax.swing.Icon;
-import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import static javax.swing.JOptionPane.showMessageDialog;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.parsers.ParserConfigurationException;
-import org.xml.sax.SAXException;
 
 import org.w3c.dom.Document;
 

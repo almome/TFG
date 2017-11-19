@@ -1,4 +1,4 @@
-package Main;
+package Utilities;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -11,8 +11,8 @@ package Main;
  * @author Alexandra Morón Méndez
  */
 public class ParClasificador {
-    String Experimento;
-    String Clasificador;
+    public String Experimento;
+    public String Clasificador;
 
     public ParClasificador() {
     }
