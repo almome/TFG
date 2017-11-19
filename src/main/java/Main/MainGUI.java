@@ -14,7 +14,9 @@ import java.awt.BorderLayout;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
+import java.awt.Image;
 import java.awt.Rectangle;
+import java.awt.Toolkit;
 import java.awt.dnd.DnDConstants;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -186,6 +188,18 @@ public class MainGUI extends javax.swing.JFrame {
         
         SetDragDrop();
         SetIcons();
+        SetApplicationIcon();
+    }
+    
+    private void SetApplicationIcon() {
+        Image image;
+        try {
+            image = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/assets/stateBar/save.png"));
+        } catch(NullPointerException e) {
+            image = Toolkit.getDefaultToolkit().getImage("assets/stateBar/save.png");
+        }
+        ImageIcon icon = new ImageIcon(image);
+        setIconImage(icon.getImage());
     }
     
     private void SetIcons() {
