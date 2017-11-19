@@ -1158,7 +1158,7 @@ public class MainGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonLimpiarSalidaActionPerformed
 
     public void metodoCrearNodos(DefaultMutableTreeNode padre, Element nuevoNodo,Document proyecto, String rutaPr ){
-        if(nuevoNodo.getAttributes().getNamedItem("tipo").getNodeValue().equals("experiment")){
+        if(nuevoNodo.getAttributes().getNamedItem("tipo").getNodeValue().equals("experimento")){
             
             INodeType nodoExp = new ExperimentNode();  
             CustomMutableTreeNode nodo = new CustomMutableTreeNode(nuevoNodo.getAttributes().getNamedItem("nombre").getNodeValue());

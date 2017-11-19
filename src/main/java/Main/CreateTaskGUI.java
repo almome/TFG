@@ -263,7 +263,7 @@ public class CreateTaskGUI extends javax.swing.JFrame {
                 n.setRutaPlantilla(cln.getRutaCarpeta());
             }
             
-            NombreTextField.setText("Introduzca el nombre de la tarea...");
+            NombreTextField.setText("Insert name...");
             WindowsInstances.mainGUI.expandAllNodes(WindowsInstances.mainGUI.getProyectosTree(),  0, WindowsInstances.mainGUI.getProyectosTree().getRowCount());
             dispose();
         }
@@ -310,7 +310,7 @@ public class CreateTaskGUI extends javax.swing.JFrame {
                     ClassifierNode cln = (ClassifierNode) cn.getNodeType();
                     n.setRutaPlantilla(PlantillaTextField.getText());
                 }
-                NombreTextField.setText("Introduzca el nombre de la tarea...");
+                NombreTextField.setText("Insert name...");
                 WindowsInstances.mainGUI.expandAllNodes(WindowsInstances.mainGUI.getProyectosTree(),  0, WindowsInstances.mainGUI.getProyectosTree().getRowCount());
                 dispose();
             }
@@ -350,7 +350,7 @@ public class CreateTaskGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_BuscarButtonActionPerformed
 
     private void CancelarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CancelarButtonActionPerformed
-        NombreTextField.setText("Introduzca el nombre de la tarea...");
+        NombreTextField.setText("Insert name...");
         WindowsInstances.mainGUI.expandAllNodes(WindowsInstances.mainGUI.getProyectosTree(),  0, WindowsInstances.mainGUI.getProyectosTree().getRowCount());
         dispose();    }//GEN-LAST:event_CancelarButtonActionPerformed
 

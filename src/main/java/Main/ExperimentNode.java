@@ -176,7 +176,7 @@ public class ExperimentNode implements INodeType {
 
     @Override
     public String getTipo() {
-         return "Experiment";
+         return "Experimento";
     }
 
    public void ejecutar_rec (CustomMutableTreeNode nodo){

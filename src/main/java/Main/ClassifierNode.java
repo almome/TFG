@@ -132,7 +132,7 @@ public class ClassifierNode implements INodeType{
             }
         });
         
-        jMenuItemEliminar = new JMenuItem("Eliminar");
+        jMenuItemEliminar = new JMenuItem("Remove");
         jMenuItemEliminar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ev) {

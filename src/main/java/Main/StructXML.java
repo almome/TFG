@@ -149,7 +149,7 @@ public class StructXML {
         attrName2.setNodeValue(treeNode.getNombre());
         experimentElement.getAttributes().setNamedItem(attrName2); 
         Attr attrName3 = doc.createAttribute("tipo");
-        attrName3.setNodeValue("experiment");
+        attrName3.setNodeValue("experimento");
         experimentElement.getAttributes().setNamedItem(attrName3); 
         rootElement.appendChild(experimentElement);
         
@@ -240,7 +240,7 @@ public class StructXML {
             parentElement.getAttributes().setNamedItem(attrName);
             
             Attr attrURL = doc.getOwnerDocument().createAttribute("tipo");
-            attrURL.setNodeValue("experiment");
+            attrURL.setNodeValue("experimento");
             parentElement.getAttributes().setNamedItem(attrURL);
             
             doc.appendChild(parentElement);
