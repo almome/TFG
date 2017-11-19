@@ -945,45 +945,40 @@ public class MainGUI extends javax.swing.JFrame {
         jFileChooser1.setFileSelectionMode(jFileChooser1.FILES_ONLY);
         jFileChooser1.setFileFilter(new FileNameExtensionFilter("XML files (*.xml)", "xml"));
         int boton = jFileChooser1.showOpenDialog(this);
-        if (boton == jFileChooser1.APPROVE_OPTION){ //Si el usuario ha pulsado la opción Aceptar
+        if (boton == jFileChooser1.APPROVE_OPTION) { //Si el usuario ha pulsado la opción Aceptar
             File fichero = jFileChooser1.getSelectedFile(); //Guardamos en la variable fichero el archivo seleccionado
             try {
-              // What to do with the file, e.g. display it in a TextArea
-              //CreateDirectoryGUI.LocalizacionTextField.setText.read( new FileReader( file.getAbsolutePath() ), null );
-              rutaProyecto = fichero.getAbsolutePath();
+                // What to do with the file, e.g. display it in a TextArea
+                //CreateDirectoryGUI.LocalizacionTextField.setText.read( new FileReader( file.getAbsolutePath() ), null );
+                rutaProyecto = fichero.getAbsolutePath();
             } catch (Exception ex) {
-              System.out.println("problem accessing file"+fichero.getAbsolutePath());
+                System.out.println("problem accessing file" + fichero.getAbsolutePath());
+            }
+
+            Boolean valido = false;
+            Validacion v = new Validacion(rutaEsquema, rutaProyecto);
+            valido = v.validar();
+
+            if (valido) {
+                StructXML proyectoXML = new StructXML();
+                Document proyecto = proyectoXML.CargarProyecto(rutaProyecto);
+                String rutaNueva = proyecto.getElementsByTagName("proyecto").item(0).getAttributes().getNamedItem("ruta").getNodeValue();
+                String nombreProyecto = proyecto.getElementsByTagName("proyecto").item(0).getAttributes().getNamedItem("nombre").getNodeValue();
+
+                CustomJDialog jDialog = new CustomJDialog(rutaNueva);
+                jDialog.setModal(true);
+                jDialog.setVisible(true);
+
+                File directorio = new File(jDialog.getRuta() + System.lineSeparator() + nombreProyecto);
+                directorio.mkdir();
+
+                Element nuevoNodo = (Element) proyecto.getElementsByTagName("nodo").item(0);
+                metodoCrearNodos(root, nuevoNodo, proyecto, jDialog.getRuta() + System.lineSeparator() + nombreProyecto);
+                this.modelo.reload();
+            } else {
+                JOptionPane.showMessageDialog(new JFrame(), "The XML file structure is not correct.", "Error", JOptionPane.ERROR_MESSAGE);
             }
         }
-        
-        Boolean valido = false;
-        Validacion v = new Validacion(rutaEsquema, rutaProyecto);
-        valido = v.validar();
- 
-        if(valido){
-            StructXML proyectoXML = new StructXML();
-            Document proyecto = proyectoXML.CargarProyecto(rutaProyecto);
-            String rutaNueva = proyecto.getElementsByTagName("proyecto").item(0).getAttributes().getNamedItem("ruta").getNodeValue();
-            String nombreProyecto = proyecto.getElementsByTagName("proyecto").item(0).getAttributes().getNamedItem("nombre").getNodeValue();
-
-            CustomJDialog jDialog = new CustomJDialog(rutaNueva);
-            jDialog.setModal(true);
-            jDialog.setVisible(true);
-
-            File directorio = new File(jDialog.getRuta()+System.lineSeparator()+nombreProyecto);
-            directorio.mkdir();
-
-
-
-
-            Element nuevoNodo = (Element) proyecto.getElementsByTagName("nodo").item(0);
-            metodoCrearNodos(root, nuevoNodo, proyecto, jDialog.getRuta()+System.lineSeparator()+nombreProyecto );
-            this.modelo.reload();
-        }
-        else{
-            JOptionPane.showMessageDialog(new JFrame(), "The XML file structure is not correct.", "Error", JOptionPane.ERROR_MESSAGE);
-        }
-        
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
     private void guardarSalidajMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_guardarSalidajMenuItemActionPerformed
