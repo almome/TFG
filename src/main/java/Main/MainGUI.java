@@ -28,6 +28,7 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.OutputStreamWriter;
 import java.io.Writer;
 import java.nio.charset.Charset;
@@ -107,19 +108,23 @@ public class MainGUI extends javax.swing.JFrame {
             public void valueChanged(TreeSelectionEvent e) {
                 if(ProyectosTree.getSelectionPath() == null){
                     jButtonGuardar.setEnabled(false);
+                    jButtonGuardarTodos.setEnabled(false);
                     jButtonLimpiar.setEnabled(false);
                     jButtonCambiarPlantilla.setEnabled(false);
                     
                     jButtonEjecutar.setEnabled(false);
                     if(!jTextAreaConsola.getText().equals("")){
                         jButtonGuardarSalida.setEnabled(true);
+                        jButtonLimpiarSalida.setEnabled(true);
                     }else{
                         jButtonGuardarSalida.setEnabled(false);
+                        jButtonLimpiarSalida.setEnabled(false);
                     }
                     
                 }
                 else{
                     jButtonGuardar.setEnabled(true);
+                    jButtonGuardarTodos.setEnabled(true);
                     jButtonEjecutar.setEnabled(true);
                     TreePath nodoAuxPath = ProyectosTree.getSelectionPath();
                     CustomMutableTreeNode nodoAux = (CustomMutableTreeNode) nodoAuxPath.getLastPathComponent();
@@ -143,12 +148,13 @@ public class MainGUI extends javax.swing.JFrame {
             @Override
             public void focusGained(FocusEvent e) {
                 jButtonGuardar.setEnabled(true);
-                
+                jButtonGuardarTodos.setEnabled(true);
             }
 
             @Override
             public void focusLost(FocusEvent e) {
                 jButtonGuardar.setEnabled(false);
+                jButtonGuardarTodos.setEnabled(false);
                 TreePath nodoAuxPath = ProyectosTree.getSelectionPath();
                 CustomMutableTreeNode nodoAux = (CustomMutableTreeNode) nodoAuxPath.getLastPathComponent();
                 if(nodoAux.getNodeType()  instanceof TaskNode){
@@ -165,18 +171,43 @@ public class MainGUI extends javax.swing.JFrame {
                 }
                 if(!jTextAreaConsola.getText().equals("")){
                     jButtonGuardarSalida.setEnabled(true);
+                    jButtonLimpiarSalida.setEnabled(true);
                 }
                 else{
                     jButtonGuardarSalida.setEnabled(false);
+                    jButtonLimpiarSalida.setEnabled(false);
                 }
             }
         });
         
-        SetDragDrop();
-        
         // Se definen el idioma en los modales emergentes
         JOptionPane.setDefaultLocale(Locale.ENGLISH);
         JFileChooser.setDefaultLocale(Locale.ENGLISH);
+        
+        SetDragDrop();
+        SetIcons();
+    }
+    
+    private void SetIcons() {
+        try {
+            System.out.println(getClass().getResource("/assets/schemas/xmlschematarea.xsd").toString());
+            jButtonLimpiar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/stateBar/clean.png")));
+            jButtonGuardar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/stateBar/save.png")));
+            jButtonGuardarTodos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/stateBar/save-all.png")));
+            jButtonLimpiarSalida.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/stateBar/clean-console.png")));
+            jButtonGuardarSalida.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/stateBar/icon.png")));
+            jButtonCambiarPlantilla.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/stateBar/folder.png")));
+            jButtonEjecutar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/stateBar/play-button.png")));
+        } catch(NullPointerException e) {
+            System.out.println("assets/schemas/xmlschematarea.xsd");
+            jButtonLimpiar.setIcon(new javax.swing.ImageIcon("assets/stateBar/clean.png"));
+            jButtonGuardar.setIcon(new javax.swing.ImageIcon("assets/stateBar/save.png"));
+            jButtonGuardarTodos.setIcon(new javax.swing.ImageIcon("assets/stateBar/save-all.png"));
+            jButtonLimpiarSalida.setIcon(new javax.swing.ImageIcon("assets/stateBar/clean-console.png"));
+            jButtonGuardarSalida.setIcon(new javax.swing.ImageIcon("assets/stateBar/icon.png"));
+            jButtonCambiarPlantilla.setIcon(new javax.swing.ImageIcon("assets/stateBar/folder.png"));
+            jButtonEjecutar.setIcon(new javax.swing.ImageIcon("assets/stateBar/play-button.png"));
+        }
     }
     
     private void SetDragDrop() {
@@ -213,12 +244,15 @@ public class MainGUI extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         ProyectosTree = new javax.swing.JTree();
         jToolBar1 = new javax.swing.JToolBar();
-        jButtonLimpiar = new javax.swing.JButton();
         jButtonGuardar = new javax.swing.JButton();
+        jButtonGuardarTodos = new javax.swing.JButton();
         jSeparator1 = new javax.swing.JToolBar.Separator();
+        jButtonLimpiarSalida = new javax.swing.JButton();
         jButtonGuardarSalida = new javax.swing.JButton();
         jSeparator2 = new javax.swing.JToolBar.Separator();
+        jButtonLimpiar = new javax.swing.JButton();
         jButtonCambiarPlantilla = new javax.swing.JButton();
+        jPanel2 = new javax.swing.JPanel();
         jTextFieldRutaPlantilla = new javax.swing.JTextField();
         jButtonEjecutar = new javax.swing.JButton();
         jTabbedPane2 = new javax.swing.JTabbedPane();
@@ -289,21 +323,7 @@ public class MainGUI extends javax.swing.JFrame {
 
         jToolBar1.setRollover(true);
 
-        jButtonLimpiar.setText("Clean");
-        jButtonLimpiar.setBorderPainted(false);
-        jButtonLimpiar.setContentAreaFilled(false);
-        jButtonLimpiar.setEnabled(false);
-        jButtonLimpiar.setFocusable(false);
-        jButtonLimpiar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jButtonLimpiar.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        jButtonLimpiar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonLimpiarActionPerformed(evt);
-            }
-        });
-        jToolBar1.add(jButtonLimpiar);
-
-        jButtonGuardar.setText("Save");
+        jButtonGuardar.setToolTipText("Save Experiment");
         jButtonGuardar.setBorderPainted(false);
         jButtonGuardar.setContentAreaFilled(false);
         jButtonGuardar.setEnabled(false);
@@ -316,9 +336,37 @@ public class MainGUI extends javax.swing.JFrame {
             }
         });
         jToolBar1.add(jButtonGuardar);
+
+        jButtonGuardarTodos.setToolTipText("Save All Experiments");
+        jButtonGuardarTodos.setBorderPainted(false);
+        jButtonGuardarTodos.setContentAreaFilled(false);
+        jButtonGuardarTodos.setEnabled(false);
+        jButtonGuardarTodos.setFocusable(false);
+        jButtonGuardarTodos.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jButtonGuardarTodos.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jButtonGuardarTodos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonGuardarTodosActionPerformed(evt);
+            }
+        });
+        jToolBar1.add(jButtonGuardarTodos);
         jToolBar1.add(jSeparator1);
 
-        jButtonGuardarSalida.setText("Save Console");
+        jButtonLimpiarSalida.setToolTipText("Clean Console");
+        jButtonLimpiarSalida.setBorderPainted(false);
+        jButtonLimpiarSalida.setContentAreaFilled(false);
+        jButtonLimpiarSalida.setEnabled(false);
+        jButtonLimpiarSalida.setFocusable(false);
+        jButtonLimpiarSalida.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jButtonLimpiarSalida.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jButtonLimpiarSalida.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonLimpiarSalidaActionPerformed(evt);
+            }
+        });
+        jToolBar1.add(jButtonLimpiarSalida);
+
+        jButtonGuardarSalida.setToolTipText("Save Console");
         jButtonGuardarSalida.setBorderPainted(false);
         jButtonGuardarSalida.setContentAreaFilled(false);
         jButtonGuardarSalida.setEnabled(false);
@@ -333,7 +381,21 @@ public class MainGUI extends javax.swing.JFrame {
         jToolBar1.add(jButtonGuardarSalida);
         jToolBar1.add(jSeparator2);
 
-        jButtonCambiarPlantilla.setText("Change Template");
+        jButtonLimpiar.setToolTipText("Clean Task Parameters");
+        jButtonLimpiar.setBorderPainted(false);
+        jButtonLimpiar.setContentAreaFilled(false);
+        jButtonLimpiar.setEnabled(false);
+        jButtonLimpiar.setFocusable(false);
+        jButtonLimpiar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jButtonLimpiar.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jButtonLimpiar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonLimpiarActionPerformed(evt);
+            }
+        });
+        jToolBar1.add(jButtonLimpiar);
+
+        jButtonCambiarPlantilla.setToolTipText("Change Task Template");
         jButtonCambiarPlantilla.setBorderPainted(false);
         jButtonCambiarPlantilla.setContentAreaFilled(false);
         jButtonCambiarPlantilla.setEnabled(false);
@@ -347,12 +409,29 @@ public class MainGUI extends javax.swing.JFrame {
         });
         jToolBar1.add(jButtonCambiarPlantilla);
 
-        jTextFieldRutaPlantilla.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         jTextFieldRutaPlantilla.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         jTextFieldRutaPlantilla.setEnabled(false);
-        jToolBar1.add(jTextFieldRutaPlantilla);
 
-        jButtonEjecutar.setText("Run");
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jTextFieldRutaPlantilla, javax.swing.GroupLayout.DEFAULT_SIZE, 1126, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(14, 14, 14)
+                .addComponent(jTextFieldRutaPlantilla, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(8, Short.MAX_VALUE))
+        );
+
+        jToolBar1.add(jPanel2);
+
+        jButtonEjecutar.setToolTipText("Run");
         jButtonEjecutar.setBorderPainted(false);
         jButtonEjecutar.setContentAreaFilled(false);
         jButtonEjecutar.setEnabled(false);
@@ -376,7 +455,7 @@ public class MainGUI extends javax.swing.JFrame {
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 969, Short.MAX_VALUE)
+            .addGap(0, 998, Short.MAX_VALUE)
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -501,7 +580,7 @@ public class MainGUI extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jToolBar1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jToolBar1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -759,7 +838,7 @@ public class MainGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonGuardarActionPerformed
 
     private void jButtonCambiarPlantillaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCambiarPlantillaActionPerformed
-        String rutaEsquema = "/home/sandra/NetBeansProjects/TFG/assets/schemas/xmlschematarea.xsd";
+        String rutaEsquema = "assets/schemas/xmlschematarea.xsd";
         jPanel1.removeAll();
         jPanel1.revalidate();
         jPanel1.repaint();
@@ -852,6 +931,7 @@ public class MainGUI extends javax.swing.JFrame {
             taskNode.ejecutar();
             if(!jTextAreaConsola.getText().equals("")){
                 jButtonGuardarSalida.setEnabled(true);
+                jButtonLimpiarSalida.setEnabled(true);
             }
         }
         
@@ -867,7 +947,7 @@ public class MainGUI extends javax.swing.JFrame {
 
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
         String rutaProyecto = "";
-        String rutaEsquema = "/home/sandra/NetBeansProjects/TFG/assets/schemas/xmlschemaproyecto.xsd";
+        String rutaEsquema = "assets/schemas/xmlschemaproyecto.xsd";
 
         JFileChooser jFileChooser1 = new JFileChooser();
         jFileChooser1.setFileSelectionMode(jFileChooser1.FILES_ONLY);
@@ -924,7 +1004,7 @@ public class MainGUI extends javax.swing.JFrame {
         jTextAreaConsola.repaint();
         consolaText = "";
         jButtonGuardarSalida.setEnabled(false);
-        
+        jButtonLimpiarSalida.setEnabled(false);
     }//GEN-LAST:event_limpiarConsolajMenuItemActionPerformed
 
     private void paraLinuxjMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_paraLinuxjMenuItemActionPerformed
@@ -1060,6 +1140,22 @@ public class MainGUI extends javax.swing.JFrame {
             stateLabel.setText(customMutableTreeNode.getNombre() + " selected");
         }
     }//GEN-LAST:event_ProyectosTreeKeyReleased
+
+    private void jButtonGuardarTodosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonGuardarTodosActionPerformed
+        StructXML proyecto = new StructXML();
+        for(int i = 0; i < root.getChildCount(); i++){
+            CustomMutableTreeNode exp = (CustomMutableTreeNode) modelo.getChild(root, i);
+            proyecto.guardarProyecto(modelo, exp);
+        }
+    }//GEN-LAST:event_jButtonGuardarTodosActionPerformed
+
+    private void jButtonLimpiarSalidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonLimpiarSalidaActionPerformed
+        jTextAreaConsola.setText("");
+        jTextAreaConsola.repaint();
+        consolaText = "";
+        jButtonGuardarSalida.setEnabled(false);
+        jButtonLimpiarSalida.setEnabled(false);
+    }//GEN-LAST:event_jButtonLimpiarSalidaActionPerformed
 
     public void metodoCrearNodos(DefaultMutableTreeNode padre, Element nuevoNodo,Document proyecto, String rutaPr ){
         if(nuevoNodo.getAttributes().getNamedItem("tipo").getNodeValue().equals("experiment")){
@@ -1396,13 +1492,25 @@ public class MainGUI extends javax.swing.JFrame {
         if(mensajeError.equals("")){
             Console cmd = new Console(comando);
             jTextAreaConsola.setText(jTextAreaConsola.getText()+"\n\n > Task: "+taskNode.toString()+"\n "+comando +"\n " +cmd.ejecutarComando());
+            
+            try {
+                taskNode.icono = new ImageIcon(getClass().getResource("/assets/treeIcons/TaskIconCorrecto.png"));
+            } catch (NullPointerException e) {
+                taskNode.icono = new ImageIcon("assets/treeIcons/TaskIconCorrecto.png");
+            }
         }
         else{
             jTextAreaConsola.setText(jTextAreaConsola.getText()+"\n\n > Task: "+taskNode.toString()+"\n ERROR. Required fields empty: "+mensajeError.substring(0, mensajeError.length()-2));
+            
+            try {
+                taskNode.icono = new ImageIcon(getClass().getResource("/assets/treeIcons/TaskIconIncorrecto.png"));
+            } catch (NullPointerException e) {
+                taskNode.icono = new ImageIcon("assets/treeIcons/TaskIconIncorrecto.png");
+            }
         }
         
-        
-                
+        ProyectosTree.revalidate();
+        ProyectosTree.repaint();
     }
     
 
@@ -1423,11 +1531,14 @@ public class MainGUI extends javax.swing.JFrame {
     private javax.swing.JButton jButtonEjecutar;
     private javax.swing.JButton jButtonGuardar;
     private javax.swing.JButton jButtonGuardarSalida;
+    private javax.swing.JButton jButtonGuardarTodos;
     private javax.swing.JButton jButtonLimpiar;
+    private javax.swing.JButton jButtonLimpiarSalida;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;

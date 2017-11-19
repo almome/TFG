@@ -207,7 +207,7 @@ public class CreateTaskGUI extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void CrearButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CrearButtonActionPerformed
-        String rutaEsquema = "/home/sandra/NetBeansProjects/TFG/assets/schemas/xmlschematarea.xsd";
+        String rutaEsquema = "assets/schemas/xmlschematarea.xsd";
         Boolean valido = false;
         Validacion v = new Validacion(rutaEsquema, PlantillaTextField.getText());
         valido = v.validar();

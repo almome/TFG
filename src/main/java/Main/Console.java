@@ -33,8 +33,12 @@ public class Console {
         while ((s = reader.readLine()) != null) { 
             resultado = resultado+"\n"+ s; 
             CustomMutableTreeNode nodeSelected = (CustomMutableTreeNode) WindowsInstances.mainGUI.ultimoNodoeleccionado();
-            TaskNode taskNode= (TaskNode) nodeSelected.getNodeType();
-            taskNode.icono = new ImageIcon("assets/TaskIconCorrecto.png");
+            TaskNode taskNode = (TaskNode) nodeSelected.getNodeType();
+            try {
+                taskNode.icono = new ImageIcon(getClass().getResource("/assets/treeIcons/TaskIconCorrecto.png"));
+            } catch (NullPointerException e) {
+                taskNode.icono = new ImageIcon("assets/treeIcons/TaskIconCorrecto.png");
+            }
             WindowsInstances.mainGUI.renderer.setLeafIcon(taskNode.getIcon());
             WindowsInstances.mainGUI.getProyectosTree().repaint();
             WindowsInstances.mainGUI.expandAllNodes(WindowsInstances.mainGUI.getProyectosTree(), nodeSelected.getParent().getChildCount(), 0);
@@ -45,7 +49,11 @@ public class Console {
             resultado = resultado+"\n"+ s; 
             CustomMutableTreeNode nodeSelected = (CustomMutableTreeNode) WindowsInstances.mainGUI.ultimoNodoeleccionado();
             TaskNode taskNode= (TaskNode) nodeSelected.getNodeType();
-            taskNode.icono = new ImageIcon("assets/TaskIconIncorrecto.png");
+            try {
+                taskNode.icono = new ImageIcon(getClass().getResource("/assets/treeIcons/TaskIconIncorrecto.png"));
+            } catch (NullPointerException e) {
+                taskNode.icono = new ImageIcon("assets/treeIcons/TaskIconIncorrecto.png");
+            }
             WindowsInstances.mainGUI.renderer.setLeafIcon(taskNode.getIcon());
             WindowsInstances.mainGUI.getProyectosTree().repaint();
             WindowsInstances.mainGUI.expandAllNodes(WindowsInstances.mainGUI.getProyectosTree(), nodeSelected.getParent().getChildCount(), 0);
@@ -54,7 +62,11 @@ public class Console {
         if(errors == false){
             CustomMutableTreeNode nodeSelected = (CustomMutableTreeNode) WindowsInstances.mainGUI.ultimoNodoeleccionado();
             TaskNode taskNode= (TaskNode) nodeSelected.getNodeType();
-            taskNode.icono = new ImageIcon("assets/TaskIconCorrecto.png");
+            try {
+                taskNode.icono = new ImageIcon(getClass().getResource("/assets/treeIcons/TaskIconCorrecto.png"));
+            } catch (NullPointerException e) {
+                taskNode.icono = new ImageIcon("assets/treeIcons/TaskIconCorrecto.png");
+            }
             WindowsInstances.mainGUI.renderer.setLeafIcon(taskNode.getIcon());
             WindowsInstances.mainGUI.getProyectosTree().repaint();
             WindowsInstances.mainGUI.expandAllNodes(WindowsInstances.mainGUI.getProyectosTree(), nodeSelected.getParent().getChildCount(), 0);

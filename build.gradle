@@ -1,7 +1,33 @@
 apply plugin: 'java'
 apply plugin: 'application'
 
+version = '1.0'
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
 mainClassName = 'Main/TFG'
+
+def assets =
+project.ext.assetsDir = new File("assets")
+
+// Create a single Jar with all dependencies
+task createJar(type: Jar) {
+    baseName = project.name
+    into(assets) {
+	       from files(project.assetsDir)
+    }
+    from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
+    with jar
+
+		manifest {
+        attributes 'Implementation-Title': 'Application Jar',
+        	'Implementation-Version': version,
+        	'Main-Class': mainClassName
+    }
+}
+configure(createJar) {
+    group = 'Build'
+    description = 'Assembles a jar archive containing all dependencies.'
+}
 
 repositories {
     jcenter()
