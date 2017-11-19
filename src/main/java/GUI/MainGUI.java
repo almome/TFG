@@ -931,6 +931,10 @@ public class MainGUI extends javax.swing.JFrame {
             ExperimentNode aux = (ExperimentNode) nodo.getNodeType();
             aux.ejecutar_rec(nodo);
         }
+        if (!jTextAreaConsola.getText().equals("")) {
+            jButtonGuardarSalida.setEnabled(true);
+            jButtonLimpiarSalida.setEnabled(true);
+        }
     }//GEN-LAST:event_jMenuItem3ActionPerformed
 
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
