@@ -31,7 +31,12 @@ public class Validacion {
 
     public Boolean validar() {
         Boolean valido = true;
-        File schemaFile = new File(esquema); // etc.
+        File schemaFile;
+        try {
+            schemaFile = new File(getClass().getResource(esquema).toString());
+        } catch(NullPointerException e) {
+            schemaFile = new File(esquema);
+        }
         Source xmlFile = new StreamSource(new File(xml));
         SchemaFactory schemaFactory = SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
         try {
