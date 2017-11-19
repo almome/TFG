@@ -141,7 +141,7 @@ public class DialogoGuardarConsola extends javax.swing.JFrame {
             try(PrintWriter out = new PrintWriter(ruta+"/"+nombre)){
                 out.println( WindowsInstances.mainGUI.consolaText);
             } catch (FileNotFoundException ex) {
-                showMessageDialog(new JFrame(), "Hubo un error. Compruebe la ruta especificada.","Error", JOptionPane.ERROR_MESSAGE);
+                showMessageDialog(new JFrame(), "Error. Try another path.","Error", JOptionPane.ERROR_MESSAGE);
                 Logger.getLogger(MainGUI.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
@@ -149,7 +149,7 @@ public class DialogoGuardarConsola extends javax.swing.JFrame {
             try(PrintWriter out = new PrintWriter(ruta+"\\"+nombre)){
                 out.println( WindowsInstances.mainGUI.consolaText);
             } catch (FileNotFoundException ex) {
-                showMessageDialog(new JFrame(), "Hubo un error. Compruebe la ruta especificada.","Error", JOptionPane.ERROR_MESSAGE);
+                showMessageDialog(new JFrame(), "Error. Try another path.","Error", JOptionPane.ERROR_MESSAGE);
                 Logger.getLogger(MainGUI.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
