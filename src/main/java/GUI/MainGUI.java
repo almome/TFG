@@ -173,9 +173,9 @@ public class MainGUI extends javax.swing.JFrame {
     private void SetApplicationIcon() {
         Image image;
         try {
-            image = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/assets/stateBar/save.png"));
+            image = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/assets/mainicon.png"));
         } catch(NullPointerException e) {
-            image = Toolkit.getDefaultToolkit().getImage("assets/stateBar/save.png");
+            image = Toolkit.getDefaultToolkit().getImage("assets/mainicon.png");
         }
         ImageIcon icon = new ImageIcon(image);
         setIconImage(icon.getImage());
