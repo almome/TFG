@@ -33,7 +33,7 @@ public class Validacion {
         Boolean valido = true;
         File schemaFile;
         try {
-            schemaFile = new File(getClass().getResource(esquema).toString());
+            schemaFile = new File(getClass().getResource(esquema).getFile());
         } catch(NullPointerException e) {
             schemaFile = new File(esquema);
         }

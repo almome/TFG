@@ -183,7 +183,6 @@ public class MainGUI extends javax.swing.JFrame {
     
     private void SetIcons() {
         try {
-            System.out.println(getClass().getResource("/assets/schemas/xmlschematarea.xsd").toString());
             jButtonLimpiar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/stateBar/clean.png")));
             jButtonGuardar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/stateBar/save.png")));
             jButtonGuardarTodos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/stateBar/save-all.png")));
@@ -192,7 +191,6 @@ public class MainGUI extends javax.swing.JFrame {
             jButtonCambiarPlantilla.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/stateBar/folder.png")));
             jButtonEjecutar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/stateBar/play-button.png")));
         } catch(NullPointerException e) {
-            System.out.println("assets/schemas/xmlschematarea.xsd");
             jButtonLimpiar.setIcon(new javax.swing.ImageIcon("assets/stateBar/clean.png"));
             jButtonGuardar.setIcon(new javax.swing.ImageIcon("assets/stateBar/save.png"));
             jButtonGuardarTodos.setIcon(new javax.swing.ImageIcon("assets/stateBar/save-all.png"));
