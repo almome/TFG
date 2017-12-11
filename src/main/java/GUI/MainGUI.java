@@ -854,7 +854,7 @@ public class MainGUI extends javax.swing.JFrame {
                 } catch (Exception ex) {
                   System.out.println("There was a problem when trying to access the file "+fichero.getAbsolutePath());
                 }
-            }
+            
             
             Boolean valido = false;
             Validacion v = new Validacion(rutaEsquema, nuevaRuta);
@@ -903,6 +903,10 @@ public class MainGUI extends javax.swing.JFrame {
             }
             else{
                 JOptionPane.showMessageDialog(new JFrame(), "The XML file structure is not correct.", "Error", JOptionPane.ERROR_MESSAGE);
+            }
+            }
+            else{
+                
             }
         }
         
